@@ -22,6 +22,9 @@ Fontes: Referências bibliográficas, links confiáveis e artigos complementares
 👥 Integrantes do Grupo
 
 Caio Porto Santos – ADS
+
 Erick Alves Bezerra – ADS
+
 Kayham Crasttofer G. de Oliveira – CCD
+
 Vitor Leonardo Vasconcelos – ADS
