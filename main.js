@@ -2,8 +2,7 @@
 
 // --- Importações de Módulos Firebase ---
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js';
-// Adicionadas importações para atualização de e-mail e senha
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword, EmailAuthProvider, reauthenticateWithCredential, updateEmail, updatePassword } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js';
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword, EmailAuthProvider, reauthenticateWithCredential, updateEmail, updatePassword, sendPasswordResetEmail, verifyPasswordResetCode, confirmPasswordReset } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js';
 import { getDatabase, ref, set, get, update } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js';
 
 // --- Importação da Configuração do Firebase ---
@@ -90,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const nome = userData.nome || 'Usuário';
                 const sobrenome = userData.sobrenome || '';
                 
-                // Armazena os valores originais
                 originalFirstName = userData.nome || '';
                 originalLastName = userData.sobrenome || '';
                 originalEmail = userData.email || user.email;
@@ -103,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
                   userNameDisplay.textContent = `${nome} ${sobrenome}`;
                 }
 
-                // Preencher formulário de edição de perfil (se estiver na página edit-profile.html)
                 const editProfileForm = document.getElementById('edit-profile-form');
                 if (editProfileForm) {
                     document.getElementById('firstName').value = originalFirstName;
@@ -113,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
               } else {
                 console.warn("Dados de perfil do usuário não encontrados no Realtime Database.");
-                // Armazena o e-mail do Auth como original
                 originalEmail = user.email;
 
                 if (heroTitle) heroTitle.textContent = `Bem-vindo ao Futuro Verde - ${user.email}`;
@@ -126,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
               }
             } catch (dbError) {
               console.error("Erro ao buscar dados do usuário no Realtime Database:", dbError);
-              // Armazena o e-mail do Auth como original
               originalEmail = user.email;
 
               if (heroTitle) heroTitle.textContent = `Bem-vindo ao Futuro Verde - ${user.email}`;
@@ -154,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (heroTitle) {
               heroTitle.textContent = `Bem-vindo ao Futuro Verde`;
             }
-            // Se o usuário não está logado E ESTIVER na página de edição, redirecionar
+            // Se o usuário não está logado E ESTIVER em uma página restrita, redirecionar
             if (window.location.pathname.includes('edit-profile.html')) {
                 window.location.href = 'login.html';
             }
@@ -359,8 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const confirmNewPassword = confirmNewPasswordInput.value.trim();
 
           let changesMade = false;
-          let needsReauth = false;
-          let promises = []; // Array para guardar todas as promessas de atualização
+          let promises = [];
 
           displayProfileMessage("Salvando alterações...", "blue");
 
@@ -386,23 +380,20 @@ document.addEventListener('DOMContentLoaded', () => {
                   displayProfileMessage("Para mudar o e-mail, por favor, informe sua senha atual.", "red");
                   return;
               }
-              if (!newEmail.includes('@') || !newEmail.includes('.')) { // Validação básica de e-mail
+              if (!newEmail.includes('@') || !newEmail.includes('.')) {
                   displayProfileMessage("Formato de e-mail inválido.", "red");
                   return;
               }
               
-              needsReauth = true; // Reautenticação necessária para mudança de e-mail
               promises.push(
                   reauthenticateAndThen(currentUser, currentPassword, async () => {
                       await updateEmail(currentUser, newEmail);
-                      // Se o email foi alterado no Auth, atualiza também no RTDB para consistência
                       await update(ref(database, 'users/' + currentUser.uid), { email: newEmail });
-                      originalEmail = newEmail; // Atualiza a variável original para futuras comparações
+                      originalEmail = newEmail;
                       changesMade = true;
                       console.log("E-mail atualizado no Auth e RTDB.");
                   }).catch(error => {
                       console.error("Erro ao mudar e-mail:", error);
-                      // Adapta mensagens de erro para e-mail
                       if (error.code === 'auth/email-already-in-use') {
                         throw new Error('Este e-mail já está em uso.');
                       } else if (error.code === 'auth/invalid-email') {
@@ -433,7 +424,6 @@ document.addEventListener('DOMContentLoaded', () => {
                   return;
               }
 
-              needsReauth = true; // Reautenticação necessária para mudança de senha
               promises.push(
                   reauthenticateAndThen(currentUser, currentPassword, async () => {
                       await updatePassword(currentUser, newPassword);
@@ -441,7 +431,6 @@ document.addEventListener('DOMContentLoaded', () => {
                       console.log("Senha atualizada no Auth.");
                   }).catch(error => {
                       console.error("Erro ao mudar senha:", error);
-                      // Adapta mensagens de erro para senha
                       if (error.code === 'auth/weak-password') {
                           throw new Error('A nova senha é muito fraca. Escolha uma senha mais forte.');
                       } else {
@@ -451,32 +440,27 @@ document.addEventListener('DOMContentLoaded', () => {
               );
           }
 
-          // Se nenhuma alteração foi feita, informar o usuário
           if (promises.length === 0) {
               displayProfileMessage("Nenhuma alteração detectada para salvar.", "orange");
               return;
           }
           
           try {
-              // Executar todas as promessas em paralelo
               await Promise.all(promises);
 
               displayProfileMessage("Perfil atualizado com sucesso!", "green");
-              // Limpar campos de senha após sucesso
               currentPasswordInput.value = '';
               newPasswordInput.value = '';
               confirmNewPasswordInput.value = '';
 
-              // Opcional: Redirecionar após sucesso, ou apenas deixar a mensagem
               setTimeout(() => { window.location.href = 'index.html'; }, 1500);
 
           } catch (error) {
               console.error("Erro geral no salvamento do perfil:", error);
-              // Adapta a mensagem de erro da reautenticação
               if (error.code === 'auth/wrong-password') {
                   displayProfileMessage('Senha atual incorreta.', 'red');
               } else if (error.code === 'auth/requires-recent-login') {
-                  displayProfileMessage('Esta operação é sensível e requer reautenticação. Por favor, faça login novamente e tente de novo.', 'red');
+                  displayProfileMessage('Esta operação é sensível e requer reautenticação recente. Por favor, faça login novamente e tente de novo.', 'red');
               } else {
                   displayProfileMessage(error.message || "Ocorreu um erro ao salvar as alterações.", "red");
               }
@@ -484,19 +468,18 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  // Função auxiliar para reautenticar e depois executar uma ação
   async function reauthenticateAndThen(user, password, action) {
-      if (!user.email) { // Se o usuário não tem e-mail (ex: logou com Google sem e-mail ou anonimamente)
+      if (!user.email) {
           throw new Error("Reautenticação por senha não suportada para este tipo de conta.");
       }
       try {
           const credential = EmailAuthProvider.credential(user.email, password);
           await reauthenticateWithCredential(user, credential);
           console.log("Reautenticação bem-sucedida.");
-          await action(); // Executa a ação (updateEmail ou updatePassword)
+          await action();
       } catch (error) {
           console.error("Falha na reautenticação ou na ação subsequente:", error);
-          throw error; // Propaga o erro para o catch principal
+          throw error;
       }
   }
 
@@ -504,6 +487,149 @@ document.addEventListener('DOMContentLoaded', () => {
       if (profileFeedbackMessage) {
           profileFeedbackMessage.textContent = message;
           profileFeedbackMessage.style.color = color;
+      }
+  }
+
+  // --- 5. Lógica para a Página de Recuperação de Senha (esqueceu-senha.html) ---
+  const forgotPasswordRequestForm = document.getElementById('forgot-password-request-form');
+  const requestFeedbackMessage = document.getElementById('requestFeedbackMessage');
+
+  const forgotPasswordResetForm = document.getElementById('forgot-password-reset-form');
+  const resetFeedbackMessage = document.getElementById('resetFeedbackMessage');
+  let oobCode = null; // Variável para armazenar o oobCode se vier da URL
+
+  if (forgotPasswordRequestForm || forgotPasswordResetForm) { // Verifica se estamos na página de recuperação de senha
+      const urlParams = new URLSearchParams(window.location.search);
+      const mode = urlParams.get('mode');
+      const actionCode = urlParams.get('oobCode'); // Firebase usa 'oobCode' para o código de ação
+
+      if (mode === 'resetPassword' && actionCode) {
+          // Usuário chegou via link de e-mail para redefinir a senha
+          oobCode = actionCode; // Armazena o código para uso posterior
+
+          forgotPasswordRequestForm.style.display = 'none'; // Esconde o formulário de solicitação
+          forgotPasswordResetForm.style.display = 'block';   // Mostra o formulário de nova senha
+
+          // Opcional: Verificar o código imediatamente para dar um feedback inicial
+          // Não é estritamente necessário aqui, pois confirmPasswordReset fará a verificação
+          verifyPasswordResetCode(auth, oobCode)
+              .then((email) => {
+                  console.log('Código de redefinição de senha válido para:', email);
+                  // Podemos pré-preencher o email, mas o Firebase não exige
+              })
+              .catch((error) => {
+                  console.error('Erro ao verificar código de redefinição:', error);
+                  resetFeedbackMessage.textContent = 'Link de redefinição inválido ou expirado. Por favor, solicite um novo e-mail.';
+                  resetFeedbackMessage.style.color = 'red';
+                  forgotPasswordResetForm.style.display = 'none'; // Oculta o formulário de senha
+                  forgotPasswordRequestForm.style.display = 'block'; // Mostra o formulário de solicitação novamente
+              });
+
+          // Adicionar listener ao formulário de nova senha
+          forgotPasswordResetForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+
+              const newPassword = document.getElementById('newPassword').value.trim();
+              const confirmNewPassword = document.getElementById('confirmNewPassword').value.trim();
+
+              if (newPassword === '' || confirmNewPassword === '') {
+                  displayResetMessage('Por favor, preencha os dois campos de senha.', 'red');
+                  return;
+              }
+              if (newPassword !== confirmNewPassword) {
+                  displayResetMessage('As senhas não coincidem. Tente novamente.', 'red');
+                  return;
+              }
+              if (newPassword.length < 6) {
+                  displayResetMessage('A senha deve ter no mínimo 6 caracteres.', 'red');
+                  return;
+              }
+
+              displayResetMessage("Salvando nova senha...", "blue");
+
+              try {
+                  await confirmPasswordReset(auth, oobCode, newPassword);
+                  displayResetMessage('Sua senha foi redefinida com sucesso! Redirecionando para o login...', 'green');
+                  
+                  // Limpar campos de senha
+                  document.getElementById('newPassword').value = '';
+                  document.getElementById('confirmNewPassword').value = '';
+
+                  setTimeout(() => {
+                      window.location.href = 'login.html'; // Redireciona para a página de login
+                  }, 2000);
+
+              } catch (error) {
+                  console.error("Erro ao redefinir a senha:", error);
+                  let errorMessage = 'Erro ao redefinir a senha. O link pode ser inválido ou já foi usado.';
+                  switch (error.code) {
+                      case 'auth/invalid-action-code':
+                          errorMessage = 'O link de redefinição é inválido ou expirou.';
+                          break;
+                      case 'auth/user-disabled':
+                          errorMessage = 'Sua conta foi desativada.';
+                          break;
+                      case 'auth/user-not-found':
+                          errorMessage = 'Não há usuário com este e-mail.';
+                          break;
+                      case 'auth/weak-password':
+                          errorMessage = 'A nova senha é muito fraca. Escolha uma senha mais forte.';
+                          break;
+                      default:
+                          break;
+                  }
+                  displayResetMessage(errorMessage, 'red');
+              }
+          });
+
+      } else if (forgotPasswordRequestForm) {
+          // Usuário chegou na página para solicitar o e-mail de redefinição
+          forgotPasswordRequestForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const email = document.getElementById('emailInput').value.trim();
+
+              if (email === '') {
+                  displayRequestMessage('Por favor, digite seu e-mail.', 'red');
+                  return;
+              }
+
+              displayRequestMessage("Enviando e-mail de recuperação...", "blue");
+
+              try {
+                  await sendPasswordResetEmail(auth, email);
+                  displayRequestMessage(`Um e-mail de redefinição de senha foi enviado para ${email}. Por favor, verifique sua caixa de entrada.`, 'green');
+                  document.getElementById('forgot-password-request-form').reset(); // Limpa o campo de e-mail
+              } catch (error) {
+                  console.error("Erro ao enviar e-mail de recuperação:", error);
+                  let errorMessage = 'Erro ao enviar e-mail de recuperação. Por favor, tente novamente.';
+                  switch (error.code) {
+                      case 'auth/invalid-email':
+                          errorMessage = 'E-mail inválido.';
+                          break;
+                      case 'auth/user-not-found':
+                          errorMessage = 'Não há usuário registrado com este e-mail.';
+                          break;
+                      default:
+                          break;
+                  }
+                  displayRequestMessage(errorMessage, 'red');
+              }
+          });
+      }
+  }
+
+  // Funções auxiliares para feedback
+  function displayRequestMessage(message, color) {
+      if (requestFeedbackMessage) {
+          requestFeedbackMessage.textContent = message;
+          requestFeedbackMessage.style.color = color;
+      }
+  }
+
+  function displayResetMessage(message, color) {
+      if (resetFeedbackMessage) {
+          resetFeedbackMessage.textContent = message;
+          resetFeedbackMessage.style.color = color;
       }
   }
 
