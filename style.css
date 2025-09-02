@@ -349,6 +349,22 @@ main {
 .menu-open .overlay {
   display: block;
 }
+.side-menu .auth-buttons #userNameMenuItem .user-name {
+    display: block; /* MUITO IMPORTANTE: Transforma o span em um elemento de bloco */
+    width: 350px;    /* Garante que ele ocupe 100% da largura do seu pai (o LI) */
+    box-sizing: border-box; /* Garante que padding e border sejam incluídos no cálculo da largura */
+    padding: 10px 15px; /* Ajuste para o padding que você usa nos seus botões */
+    text-align: center; /* Centraliza o texto do nome */
+    font-weight: bold;  /* Deixa o nome em negrito */
+    background-color: var(--primary-color, #55833d); /* Cor de fundo para destacar */
+    color: #fff; /* Cor do texto */
+    border-radius: 5px; /* Arredonda as bordas, se seus botões tiverem */
+    max-width: none;
+}
+
+.side-menu ul.auth-buttons:not(:first-child) {
+    margin-top: 10px; /* Adiciona um espaço acima da segunda UL auth-buttons */
+}
 
 .footer-wrapper {
   display: flex;

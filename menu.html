@@ -14,10 +14,17 @@
 
   <nav class="side-menu" id="sideMenu">
     <ul class="auth-buttons">
-      <li><a href="login.html" class="btn login">Login</a></li>
-      <li><a href="register.html" class="btn register">Registrar-se</a></li>
-      <li class="btn edit" style="display: none;">Editar</li>
-      <li class="btn logout" style="display: none;">Sair</li>
+        <li id="userNameMenuItem" style="display: none;"><span class="btn user-name"></span></li>
+    </ul>
+    <ul class="auth-buttons">
+      <!-- Itens para USUÁRIO NÃO LOGADO -->
+      <li id="loginMenuItem"><a href="login.html" class="btn login">Login</a></li>
+      <li id="registerMenuItem"><a href="register.html" class="btn register">Registrar-se</a></li>
+
+      <!-- NOVO ITEM: Nome do usuário logado (inicialmente oculto) -->
+      <!-- Itens para USUÁRIO LOGADO - inicialmente ocultos -->
+      <li id="editMenuItem" style="display: none;"><a href="edit-profile.html" class="btn edit">Editar Perfil</a></li>
+      <li id="logoutMenuItem" style="display: none;"><a href="index.html" class="btn logout">Sair</a></li>
     </ul>
     <ul>
       <li><a href="index.html">Início</a></li>

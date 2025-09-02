@@ -14,49 +14,38 @@
     <section class="login-section">
       <div class="form-wrapper">
         <h2 class="form-title">FAÇA SEU LOGIN</h2>
-        <form class="login-form">
+        <form class="login-form" id="login-form"> <!-- Adicionado id ao formulário -->
           <label class="form-label">
             <span class="label-text">E-MAIL</span><span class="required">*</span>
           </label>
-          <input class="form-input" type="email" placeholder="DIGITE SEU E-MAIL" />
+          <input class="form-input" type="email" id="loginEmail" placeholder="DIGITE SEU E-MAIL" required /> <!-- Adicionado id -->
 
           <label class="form-label">
             <span class="label-text">SENHA</span><span class="required">*</span>
           </label>
           <div class="password-wrapper">
-  <input id="password" class="form-input" type="password" placeholder="DIGITE SUA SENHA" />
-  <button type="button" class="toggle-password" onclick="togglePassword('password', this)">
-    <span class="eye-icon">👁️</span>
-  </button>
-</div>
-
+            <input id="loginPassword" class="form-input" type="password" placeholder="DIGITE SUA SENHA" required /> <!-- Adicionado id -->
+            <button type="button" class="toggle-password" onclick="togglePassword('loginPassword', this)">
+              <span class="eye-icon">👁️</span>
+            </button>
+          </div>
 
           <p class="forgot-link"><a href="esqueceu-senha.html">Esqueceu sua conta?</a></p>
 
           <div class="terms-box">
-            <label><input type="checkbox" class="terms-checkbox"> Concordo com os termos de serviço</label>
+            <label><input type="checkbox" id="loginTermsCheckbox" class="terms-checkbox"> Concordo com os termos de serviço</label> <!-- Adicionado id -->
           </div>
 
-          <button class="btn-login"><a href="index.html">ENTRAR</a></button>
+          <button type="submit" class="btn-login">ENTRAR</button> <!-- Removido href, tipo submit -->
+          <p id="loginFeedbackMessage" style="color: red; margin-top: 0.5rem;"></p> <!-- Mensagem de feedback -->
 
           <p class="create-account"><a href="register.html">Criar uma conta</a></p>
         </form>
       </div>
     </section>
   </main>
-  <script src="main.js"></script>
-  <script>
-    fetch('menu.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('menu-container').innerHTML = data;
 
-        // Carrega o script do menu depois que o HTML for inserido
-        const script = document.createElement('script');
-        script.src = 'menu.js';
-        document.body.appendChild(script);
-      });
-  </script>
+  <!-- Script para togglePassword pode ficar aqui ou num arquivo de utilitários -->
   <script>
     function togglePassword(id, btn) {
       const input = document.getElementById(id);
@@ -72,6 +61,8 @@
     }
   </script>
 
+  <!-- Seu script principal que vai lidar com o Firebase -->
+  <script src="main.js" type="module"></script>
 
 </body>
 

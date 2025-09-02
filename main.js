@@ -1,34 +1,510 @@
 // main.js
 
+// --- Importações de Módulos Firebase ---
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js';
-import { getAuth } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js';
-import { getDatabase } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js';
+// Adicionadas importações para atualização de e-mail e senha
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword, EmailAuthProvider, reauthenticateWithCredential, updateEmail, updatePassword } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js';
+import { getDatabase, ref, set, get, update } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js';
 
-// Importe o objeto de configuração do seu novo arquivo
-import { firebaseConfig } from './firebase_config.js'; // Caminho relativo ao seu main.js
+// --- Importação da Configuração do Firebase ---
+import { firebaseConfig } from './firebase-config.js';
 
-// Inicialize o Firebase com a configuração importada
+// --- Inicialização do Firebase ---
 const app = initializeApp(firebaseConfig);
-
-// Obtenha instâncias dos serviços
 const auth = getAuth(app);
 const database = getDatabase(app);
 
-// Agora você pode usar 'auth' e 'database' em todo o seu main.js
-// ... sua lógica de autenticação, leitura/escrita no DB, etc. ...
+// --- Variáveis para armazenar o estado original do perfil para comparação ---
+let originalFirstName = '';
+let originalLastName = '';
+let originalEmail = '';
 
-// Exemplo:
- const emailInput = document.getElementById('email');
- const passwordInput = document.getElementById('password');
- const signInButton = document.getElementById('sign-in-button');
+// --- Lógica Geral do Aplicativo (executada quando o DOM estiver pronto) ---
+document.addEventListener('DOMContentLoaded', () => {
 
- signInButton.addEventListener('click', async () => {
-     const email = emailInput.value;
-     const password = passwordInput.value;
-     try {
-         await signInWithEmailAndPassword(auth, email, password);
-         console.log("Usuário logado!");
-     } catch (error) {
-         console.error("Erro de login:", error.message);
-     }
- });
+  // --- Elementos que podem estar em qualquer página e precisam ser atualizados ---
+  const heroTitle = document.getElementById('heroTitle');
+  const heroRegisterBtn = document.getElementById('heroRegisterBtn');
+  const heroEditProfileBtn = document.getElementById('heroEditProfileBtn');
+
+  // --- 1. Lógica de Carregamento e Setup do Menu ---
+  fetch('menu.html')
+    .then(response => response.text())
+    .then(data => {
+      const menuContainer = document.getElementById('menu-container');
+      if (menuContainer) {
+        menuContainer.innerHTML = data;
+
+        const menuBtn = document.getElementById("menuBtn");
+        const body = document.body;
+
+        let overlay = document.getElementById("overlay");
+        if (!overlay) {
+          overlay = document.createElement("div");
+          overlay.id = "overlay";
+          overlay.className = "overlay";
+          document.body.appendChild(overlay);
+        }
+
+        if (menuBtn) {
+          menuBtn.addEventListener("click", () => {
+            body.classList.toggle("menu-open");
+          });
+        }
+
+        if (overlay) {
+          overlay.addEventListener("click", () => {
+            body.classList.remove("menu-open");
+          });
+        }
+
+        const loginMenuItem = document.getElementById('loginMenuItem');
+        const registerMenuItem = document.getElementById('registerMenuItem');
+        const userNameMenuItem = document.getElementById('userNameMenuItem');
+        const userNameDisplay = userNameMenuItem ? userNameMenuItem.querySelector('.user-name') : null;
+        const editMenuItem = document.getElementById('editMenuItem');
+        const logoutMenuItem = document.getElementById('logoutMenuItem');
+        const logoutButtonLink = logoutMenuItem ? logoutMenuItem.querySelector('a.logout') : null;
+
+        onAuthStateChanged(auth, async (user) => {
+          if (user) {
+            // Usuário está logado
+            if (loginMenuItem) loginMenuItem.style.display = 'none';
+            if (registerMenuItem) registerMenuItem.style.display = 'none';
+            
+            if (userNameMenuItem) userNameMenuItem.style.display = 'list-item';
+            if (editMenuItem) editMenuItem.style.display = 'list-item';
+            if (logoutMenuItem) logoutMenuItem.style.display = 'list-item';
+            
+            if (heroRegisterBtn) heroRegisterBtn.style.display = 'none';
+            if (heroEditProfileBtn) heroEditProfileBtn.style.display = 'block';
+
+            console.log("Usuário logado:", user.email, "UID:", user.uid);
+
+            try {
+              const userRef = ref(database, 'users/' + user.uid);
+              const snapshot = await get(userRef);
+
+              if (snapshot.exists()) {
+                const userData = snapshot.val();
+                const nome = userData.nome || 'Usuário';
+                const sobrenome = userData.sobrenome || '';
+                
+                // Armazena os valores originais
+                originalFirstName = userData.nome || '';
+                originalLastName = userData.sobrenome || '';
+                originalEmail = userData.email || user.email;
+
+                if (heroTitle) {
+                  heroTitle.textContent = `Bem-vindo ao Futuro Verde - ${nome} ${sobrenome}`;
+                }
+
+                if (userNameDisplay) {
+                  userNameDisplay.textContent = `${nome} ${sobrenome}`;
+                }
+
+                // Preencher formulário de edição de perfil (se estiver na página edit-profile.html)
+                const editProfileForm = document.getElementById('edit-profile-form');
+                if (editProfileForm) {
+                    document.getElementById('firstName').value = originalFirstName;
+                    document.getElementById('lastName').value = originalLastName;
+                    document.getElementById('email').value = originalEmail;
+                }
+
+              } else {
+                console.warn("Dados de perfil do usuário não encontrados no Realtime Database.");
+                // Armazena o e-mail do Auth como original
+                originalEmail = user.email;
+
+                if (heroTitle) heroTitle.textContent = `Bem-vindo ao Futuro Verde - ${user.email}`;
+                if (userNameDisplay) userNameDisplay.textContent = user.email;
+                
+                const editProfileForm = document.getElementById('edit-profile-form');
+                if (editProfileForm) {
+                    document.getElementById('email').value = user.email || '';
+                }
+              }
+            } catch (dbError) {
+              console.error("Erro ao buscar dados do usuário no Realtime Database:", dbError);
+              // Armazena o e-mail do Auth como original
+              originalEmail = user.email;
+
+              if (heroTitle) heroTitle.textContent = `Bem-vindo ao Futuro Verde - ${user.email}`;
+              if (userNameDisplay) userNameDisplay.textContent = user.email;
+              const editProfileForm = document.getElementById('edit-profile-form');
+                if (editProfileForm) {
+                    document.getElementById('email').value = user.email || '';
+                }
+            }
+
+          } else {
+            // Usuário não está logado
+            if (loginMenuItem) loginMenuItem.style.display = 'list-item';
+            if (registerMenuItem) registerMenuItem.style.display = 'list-item';
+            
+            if (userNameMenuItem) userNameMenuItem.style.display = 'none';
+            if (editMenuItem) editMenuItem.style.display = 'none';
+            if (logoutMenuItem) logoutMenuItem.style.display = 'none';
+
+            if (heroRegisterBtn) heroRegisterBtn.style.display = 'block';
+            if (heroEditProfileBtn) heroEditProfileBtn.style.display = 'none';
+            
+            console.log("Nenhum usuário logado.");
+
+            if (heroTitle) {
+              heroTitle.textContent = `Bem-vindo ao Futuro Verde`;
+            }
+            // Se o usuário não está logado E ESTIVER na página de edição, redirecionar
+            if (window.location.pathname.includes('edit-profile.html')) {
+                window.location.href = 'login.html';
+            }
+          }
+          body.classList.remove("menu-open");
+        });
+
+        if (logoutButtonLink) {
+          logoutButtonLink.addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+              await signOut(auth);
+              console.log("Usuário desconectado com sucesso!");
+            } catch (error) {
+              console.error("Erro ao desconectar:", error);
+            }
+          });
+        }
+      } else {
+        console.warn("Elemento 'menu-container' não encontrado no DOM. Verifique seu HTML.");
+      }
+    })
+    .catch(error => console.error('Erro ao carregar o menu:', error));
+
+
+  // --- 2. Lógica de Cadastro do Formulário (do register.html) ---
+  const registerForm = document.getElementById('register-form');
+  const feedbackMessage = document.getElementById('mensagem-feedback');
+
+  if (registerForm) {
+    registerForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const confirmPassword = document.getElementById('confirmPassword').value.trim();
+      const termsAccepted = document.getElementById('termsAccepted').checked;
+      const newsletter = document.getElementById('newsletter').checked;
+
+      if (!termsAccepted) {
+        displayMessage('Por favor, aceite os Termos de Uso e Política de Privacidade.', 'red');
+        return;
+      }
+
+      if (password === '' || confirmPassword === '') {
+        displayMessage('Por favor, preencha ambos os campos de senha.', 'red');
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        displayMessage('As senhas não coincidem. Tente novamente.', 'red');
+        return;
+      }
+
+      if (password.length < 6) {
+        displayMessage('A senha deve ter no mínimo 6 caracteres.', 'red');
+        return;
+      }
+
+      displayMessage('Criando sua conta...', 'blue');
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        const uid = user.uid;
+
+        await set(ref(database, 'users/' + uid), {
+          nome: firstName,
+          sobrenome: lastName,
+          email: email,
+          criado: new Date().toISOString(),
+          newsletterOptIn: newsletter
+        });
+
+        displayMessage('Conta criada com sucesso! Redirecionando para o login...', 'green');
+
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 2000);
+
+      } catch (error) {
+        const errorCode = error.code;
+        let errorMessage = 'Ocorreu um erro ao criar a conta. Por favor, tente novamente.';
+
+        switch (errorCode) {
+          case 'auth/email-already-in-use':
+            errorMessage = 'Este e-mail já está cadastrado. Tente outro ou faça login.';
+            break;
+          case 'auth/invalid-email':
+            errorMessage = 'O formato do e-mail é inválido.';
+            break;
+          case 'auth/weak-password':
+            errorMessage = 'A senha é muito fraca. Escolha uma senha mais forte.';
+            break;
+          default:
+            console.error("Erro inesperado ao criar conta:", error);
+            break;
+        }
+        displayMessage(errorMessage, 'red');
+      }
+    });
+  }
+
+  function displayMessage(message, color) {
+    if (feedbackMessage) {
+      feedbackMessage.textContent = message;
+      feedbackMessage.style.color = color;
+    }
+  }
+
+
+  // --- 3. Lógica do Formulário de Login (do login.html) ---
+  const loginForm = document.getElementById('login-form');
+  const loginFeedbackMessage = document.getElementById('loginFeedbackMessage');
+
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      const termsAccepted = document.getElementById('loginTermsCheckbox').checked;
+
+      if (!termsAccepted) {
+        displayLoginMessage('Por favor, aceite os termos de serviço.', 'red');
+        return;
+      }
+
+      displayLoginMessage('Entrando...', 'blue');
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+
+        displayLoginMessage('Login realizado com sucesso! Redirecionando...', 'green');
+
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1500);
+
+      } catch (error) {
+        const errorCode = error.code;
+        let errorMessage = 'Erro ao fazer login. Verifique seu e-mail e senha.';
+
+        switch (errorCode) {
+          case 'auth/invalid-email':
+            errorMessage = 'E-mail inválido.';
+            break;
+          case 'auth/user-disabled':
+            errorMessage = 'Sua conta foi desativada.';
+            break;
+          case 'auth/user-not-found':
+            errorMessage = 'Usuário não encontrado. Crie uma conta.';
+            break;
+          case 'auth/wrong-password':
+            errorMessage = 'Senha incorreta.';
+            break;
+          default:
+            console.error("Erro inesperado ao fazer login:", error);
+            break;
+        }
+        displayLoginMessage(errorMessage, 'red');
+      }
+    });
+  }
+
+  function displayLoginMessage(message, color) {
+    if (loginFeedbackMessage) {
+      loginFeedbackMessage.textContent = message;
+      loginFeedbackMessage.style.color = color;
+    }
+  }
+
+  // --- 4. Lógica para o Formulário de Edição de Perfil Unificado (edit-profile.html) ---
+  const editProfileForm = document.getElementById('edit-profile-form');
+  const profileFeedbackMessage = document.getElementById('profileFeedbackMessage');
+
+  if (editProfileForm) {
+      const firstNameInput = document.getElementById('firstName');
+      const lastNameInput = document.getElementById('lastName');
+      const emailInput = document.getElementById('email');
+      const currentPasswordInput = document.getElementById('currentPassword');
+      const newPasswordInput = document.getElementById('newPassword');
+      const confirmNewPasswordInput = document.getElementById('confirmNewPassword');
+
+      editProfileForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+
+          const currentUser = auth.currentUser;
+          if (!currentUser) {
+              displayProfileMessage("Você precisa estar logado para editar seu perfil.", "red");
+              setTimeout(() => { window.location.href = 'login.html'; }, 1500);
+              return;
+          }
+
+          const newFirstName = firstNameInput.value.trim();
+          const newLastName = lastNameInput.value.trim();
+          const newEmail = emailInput.value.trim();
+          const currentPassword = currentPasswordInput.value.trim();
+          const newPassword = newPasswordInput.value.trim();
+          const confirmNewPassword = confirmNewPasswordInput.value.trim();
+
+          let changesMade = false;
+          let needsReauth = false;
+          let promises = []; // Array para guardar todas as promessas de atualização
+
+          displayProfileMessage("Salvando alterações...", "blue");
+
+          // 1. Atualizar Nome e Sobrenome (Realtime Database)
+          if (newFirstName !== originalFirstName || newLastName !== originalLastName) {
+              promises.push(
+                  update(ref(database, 'users/' + currentUser.uid), {
+                      nome: newFirstName,
+                      sobrenome: newLastName
+                  }).then(() => {
+                      changesMade = true;
+                      console.log("Nome/Sobrenome atualizados no RTDB.");
+                  }).catch(error => {
+                      console.error("Erro ao atualizar nome/sobrenome:", error);
+                      throw new Error("Erro ao atualizar nome/sobrenome.");
+                  })
+              );
+          }
+
+          // 2. Mudar E-mail (Firebase Authentication)
+          if (newEmail !== originalEmail) {
+              if (currentPassword === '') {
+                  displayProfileMessage("Para mudar o e-mail, por favor, informe sua senha atual.", "red");
+                  return;
+              }
+              if (!newEmail.includes('@') || !newEmail.includes('.')) { // Validação básica de e-mail
+                  displayProfileMessage("Formato de e-mail inválido.", "red");
+                  return;
+              }
+              
+              needsReauth = true; // Reautenticação necessária para mudança de e-mail
+              promises.push(
+                  reauthenticateAndThen(currentUser, currentPassword, async () => {
+                      await updateEmail(currentUser, newEmail);
+                      // Se o email foi alterado no Auth, atualiza também no RTDB para consistência
+                      await update(ref(database, 'users/' + currentUser.uid), { email: newEmail });
+                      originalEmail = newEmail; // Atualiza a variável original para futuras comparações
+                      changesMade = true;
+                      console.log("E-mail atualizado no Auth e RTDB.");
+                  }).catch(error => {
+                      console.error("Erro ao mudar e-mail:", error);
+                      // Adapta mensagens de erro para e-mail
+                      if (error.code === 'auth/email-already-in-use') {
+                        throw new Error('Este e-mail já está em uso.');
+                      } else if (error.code === 'auth/invalid-email') {
+                        throw new Error('O formato do novo e-mail é inválido.');
+                      } else {
+                        throw new Error('Erro ao mudar e-mail. Verifique a senha atual e o novo e-mail.');
+                      }
+                  })
+              );
+          }
+
+          // 3. Mudar Senha (Firebase Authentication)
+          if (newPassword !== '') {
+              if (currentPassword === '') {
+                  displayProfileMessage("Para mudar a senha, por favor, informe sua senha atual.", "red");
+                  return;
+              }
+              if (newPassword !== confirmNewPassword) {
+                  displayProfileMessage('A nova senha e a confirmação não coincidem.', 'red');
+                  return;
+              }
+              if (newPassword.length < 6) {
+                  displayProfileMessage('A nova senha deve ter no mínimo 6 caracteres.', 'red');
+                  return;
+              }
+              if (newPassword === currentPassword) {
+                  displayProfileMessage('A nova senha não pode ser igual à senha atual.', 'red');
+                  return;
+              }
+
+              needsReauth = true; // Reautenticação necessária para mudança de senha
+              promises.push(
+                  reauthenticateAndThen(currentUser, currentPassword, async () => {
+                      await updatePassword(currentUser, newPassword);
+                      changesMade = true;
+                      console.log("Senha atualizada no Auth.");
+                  }).catch(error => {
+                      console.error("Erro ao mudar senha:", error);
+                      // Adapta mensagens de erro para senha
+                      if (error.code === 'auth/weak-password') {
+                          throw new Error('A nova senha é muito fraca. Escolha uma senha mais forte.');
+                      } else {
+                          throw new Error('Erro ao mudar senha. Verifique a senha atual e a nova senha.');
+                      }
+                  })
+              );
+          }
+
+          // Se nenhuma alteração foi feita, informar o usuário
+          if (promises.length === 0) {
+              displayProfileMessage("Nenhuma alteração detectada para salvar.", "orange");
+              return;
+          }
+          
+          try {
+              // Executar todas as promessas em paralelo
+              await Promise.all(promises);
+
+              displayProfileMessage("Perfil atualizado com sucesso!", "green");
+              // Limpar campos de senha após sucesso
+              currentPasswordInput.value = '';
+              newPasswordInput.value = '';
+              confirmNewPasswordInput.value = '';
+
+              // Opcional: Redirecionar após sucesso, ou apenas deixar a mensagem
+              setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+
+          } catch (error) {
+              console.error("Erro geral no salvamento do perfil:", error);
+              // Adapta a mensagem de erro da reautenticação
+              if (error.code === 'auth/wrong-password') {
+                  displayProfileMessage('Senha atual incorreta.', 'red');
+              } else if (error.code === 'auth/requires-recent-login') {
+                  displayProfileMessage('Esta operação é sensível e requer reautenticação. Por favor, faça login novamente e tente de novo.', 'red');
+              } else {
+                  displayProfileMessage(error.message || "Ocorreu um erro ao salvar as alterações.", "red");
+              }
+          }
+      });
+  }
+
+  // Função auxiliar para reautenticar e depois executar uma ação
+  async function reauthenticateAndThen(user, password, action) {
+      if (!user.email) { // Se o usuário não tem e-mail (ex: logou com Google sem e-mail ou anonimamente)
+          throw new Error("Reautenticação por senha não suportada para este tipo de conta.");
+      }
+      try {
+          const credential = EmailAuthProvider.credential(user.email, password);
+          await reauthenticateWithCredential(user, credential);
+          console.log("Reautenticação bem-sucedida.");
+          await action(); // Executa a ação (updateEmail ou updatePassword)
+      } catch (error) {
+          console.error("Falha na reautenticação ou na ação subsequente:", error);
+          throw error; // Propaga o erro para o catch principal
+      }
+  }
+
+  function displayProfileMessage(message, color) {
+      if (profileFeedbackMessage) {
+          profileFeedbackMessage.textContent = message;
+          profileFeedbackMessage.style.color = color;
+      }
+  }
+
+}); // Fim do DOMContentLoaded

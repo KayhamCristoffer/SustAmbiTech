@@ -17,10 +17,16 @@
         <section class="hero-section">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Bem-vindo ao Futuro Verde</h1>
+                    <!-- Adicionado id="heroTitle" aqui -->
+                    <h1 id="heroTitle">Bem-vindo ao Futuro Verde</h1>
                     <p>Explore soluções tecnológicas inovadoras para um mundo mais sustentável. Juntos, podemos construir um futuro melhor para as próximas gerações.</p>
                     <div class="hero-buttons">
-                        <a href="register.html" class="btn btn-primary" style="text-decoration: none;">Cadastre-se</a>
+                        <!-- Botão Cadastre-se (visível para não logados) -->
+                        <a id="heroRegisterBtn" href="register.html" class="btn btn-primary" style="text-decoration: none;">Cadastre-se</a>
+                        
+                        <!-- Botão Editar Perfil (visível para logados, inicialmente oculto) -->
+                        <a id="heroEditProfileBtn" href="edit-profile.html" class="btn btn-primary" style="text-decoration: none; display: none;">Editar Perfil</a>
+
                         <a href="sobre.html" class="btn btn-secondary" style="text-decoration: none;">Saiba Mais</a>
                     </div>
                 </div>
@@ -111,26 +117,20 @@
     
     <div id="footer-container"></div>
 
-    <script src="main.js"></script>
-    <script>
-        fetch('menu.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('menu-container').innerHTML = data;
-
-                // Carrega o script do menu depois que o HTML for inserido
-                const script = document.createElement('script');
-                script.src = 'menu.js';
-                document.body.appendChild(script);
-            });
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            });
-
-    </script>
+    <!-- Script principal do seu aplicativo, agora centralizado -->
     <script src="main.js" type="module"></script>
+    
+    <!-- Script para carregar o rodapé -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+                })
+                .catch(error => console.error('Erro ao carregar o rodapé:', error));
+        });
+    </script>
 </body>
 
 </html>

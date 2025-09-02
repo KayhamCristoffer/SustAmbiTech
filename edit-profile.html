@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editar Perfil 🌱</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id="menu-container"></div>
+  <main class="login-main">
+    <section class="login-section">
+      <div class="form-wrapper">
+        <h2 class="form-title">EDITAR SEU PERFIL</h2>
+        <form class="login-form" id="edit-profile-form">
+
+          <label class="form-label">
+            <span class="label-text">NOME</span><span class="required">*</span>
+          </label>
+          <input type="text" class="form-input" id="firstName" name="firstName" placeholder="Seu nome" required />
+
+          <label class="form-label">
+            <span class="label-text">SOBRENOME</span><span class="required">*</span>
+          </label>
+          <input type="text" class="form-input" id="lastName" name="lastName" placeholder="Seu sobrenome" required />
+
+          <label class="form-label">
+            <span class="label-text">E-MAIL</span><span class="required">*</span>
+          </label>
+          <!-- E-mail agora é editável -->
+          <input type="email" class="form-input" id="email" name="email" placeholder="Seu e-mail" required />
+
+          <h3 class="form-subtitle" style="margin-top: 1.5rem;">Mudar Senha (Opcional)</h3>
+          <p style="font-size: 0.9em; color: #666; margin-bottom: 1rem;">Preencha os campos abaixo APENAS se desejar mudar sua senha. Será necessário informar sua senha atual.</p>
+
+          <label class="form-label">
+            <span class="label-text">SENHA ATUAL</span>
+          </label>
+          <div class="password-wrapper">
+            <input type="password" class="form-input" id="currentPassword" placeholder="Sua senha atual" />
+            <button type="button" class="toggle-password" onclick="togglePassword('currentPassword', this)">
+              <span class="eye-icon">👁️</span>
+            </button>
+          </div>
+
+          <label class="form-label">
+            <span class="label-text">NOVA SENHA</span>
+          </label>
+          <div class="password-wrapper">
+            <input type="password" class="form-input" id="newPassword" placeholder="Crie uma nova senha forte" />
+            <button type="button" class="toggle-password" onclick="togglePassword('newPassword', this)">
+              <span class="eye-icon">👁️</span>
+            </button>
+          </div>
+
+          <label class="form-label">
+            <span class="label-text">CONFIRMAR NOVA SENHA</span>
+          </label>
+          <div class="password-wrapper">
+            <input type="password" class="form-input" id="confirmNewPassword" placeholder="Confirme sua nova senha" />
+            <button type="button" class="toggle-password" onclick="togglePassword('confirmNewPassword', this)">
+              <span class="eye-icon">👁️</span>
+            </button>
+          </div>
+
+          <button type="submit" class="btn-salvar-senha">SALVAR ALTERAÇÕES</button>
+          <p id="profileFeedbackMessage" style="color: red; margin-top: 0.5rem;"></p>
+
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="main.js" type="module"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          if (document.getElementById('footer-container')) {
+            document.getElementById('footer-container').innerHTML = data;
+          }
+        })
+        .catch(error => console.error('Erro ao carregar o rodapé:', error));
+    });
+  </script>
+
+  <!-- Função togglePassword (pode ser mantida aqui ou movida para um arquivo de utilitários) -->
+  <script>
+    function togglePassword(id, btn) {
+      const input = document.getElementById(id);
+      const icon = btn.querySelector('.eye-icon');
+
+      if (input.type === "password") {
+        input.type = "text";
+        icon.textContent = "🙈";
+      } else {
+        input.type = "password";
+        icon.textContent = "👁️";
+      }
+    }
+  </script>
+</body>
+
+</html>
