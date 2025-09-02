@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 originalEmail = userData.email || user.email;
 
                 if (heroTitle) {
-                  heroTitle.textContent = `Bem-vindo ao Futuro Verde - ${nome} ${sobrenome}`;
+                  heroTitle.textContent = `Bem-vindo ao Futuro Verde ${nome}`;
                 }
 
                 if (userNameDisplay) {
