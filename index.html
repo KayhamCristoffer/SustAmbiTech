@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustentabilidade Tech - Tecnologia para um Futuro Verde</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="loader-container"></div>
+    <div id="menu-container"></div>
+    
+<main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Bem-vindo ao Futuro Verde</h1>
+                    <p>Explore soluções tecnológicas inovadoras para um mundo mais sustentável. Juntos, podemos construir um futuro melhor para as próximas gerações.</p>
+                    <div class="hero-buttons">
+                        <a href="register.html" class="btn btn-primary" style="text-decoration: none;">Cadastre-se</a>
+                        <a href="sobre.html" class="btn btn-secondary" style="text-decoration: none;">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-visual">
+                        <div class="floating-element">🌱</div>
+                        <div class="floating-element">♻️</div>
+                        <div class="floating-element">🌍</div>
+                        <div class="floating-element">💚</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Nossas Soluções Sustentáveis</h2>
+                    <p>Tecnologia de ponta para um planeta mais verde</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🌿</div>
+                        <h3>Energia Renovável</h3>
+                        <p>Soluções inteligentes para otimização de energia solar, eólica e outras fontes renováveis.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">♻️</div>
+                        <h3>Gestão de Resíduos</h3>
+                        <p>Sistemas automatizados para reciclagem e redução de desperdícios industriais.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">💧</div>
+                        <h3>Conservação da Água</h3>
+                        <p>Tecnologias para monitoramento e otimização do uso de recursos hídricos.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3>Monitoramento Ambiental</h3>
+                        <p>IoT e sensores para acompanhamento em tempo real da qualidade ambiental.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Analytics Verde</h3>
+                        <p>Análise de dados para otimização de processos sustentáveis e redução de pegada de carbono.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🏭</div>
+                        <h3>Indústria 4.0 Verde</h3>
+                        <p>Automação industrial focada em sustentabilidade e eficiência energética.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Projetos Realizados</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">Redução de CO₂</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1M+</div>
+                        <div class="stat-label">kWh Economizados</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Empresas Parceiras</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+    <div id="footer-container"></div>
+
+    <script src="main.js"></script>
+    <script>
+        fetch('menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-container').innerHTML = data;
+
+                // Carrega o script do menu depois que o HTML for inserido
+                const script = document.createElement('script');
+                script.src = 'menu.js';
+                document.body.appendChild(script);
+            });
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+
+    </script>
+    <script src="main.js" type="module"></script>
+</body>
+
+</html>

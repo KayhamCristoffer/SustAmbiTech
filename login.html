@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login 🌱</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id="menu-container"></div>
+  <main class="login-main">
+    <section class="login-section">
+      <div class="form-wrapper">
+        <h2 class="form-title">FAÇA SEU LOGIN</h2>
+        <form class="login-form">
+          <label class="form-label">
+            <span class="label-text">E-MAIL</span><span class="required">*</span>
+          </label>
+          <input class="form-input" type="email" placeholder="DIGITE SEU E-MAIL" />
+
+          <label class="form-label">
+            <span class="label-text">SENHA</span><span class="required">*</span>
+          </label>
+          <div class="password-wrapper">
+  <input id="password" class="form-input" type="password" placeholder="DIGITE SUA SENHA" />
+  <button type="button" class="toggle-password" onclick="togglePassword('password', this)">
+    <span class="eye-icon">👁️</span>
+  </button>
+</div>
+
+
+          <p class="forgot-link"><a href="esqueceu-senha.html">Esqueceu sua conta?</a></p>
+
+          <div class="terms-box">
+            <label><input type="checkbox" class="terms-checkbox"> Concordo com os termos de serviço</label>
+          </div>
+
+          <button class="btn-login"><a href="index.html">ENTRAR</a></button>
+
+          <p class="create-account"><a href="register.html">Criar uma conta</a></p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <script src="main.js"></script>
+  <script>
+    fetch('menu.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('menu-container').innerHTML = data;
+
+        // Carrega o script do menu depois que o HTML for inserido
+        const script = document.createElement('script');
+        script.src = 'menu.js';
+        document.body.appendChild(script);
+      });
+  </script>
+  <script>
+    function togglePassword(id, btn) {
+      const input = document.getElementById(id);
+      const icon = btn.querySelector('.eye-icon');
+
+      if (input.type === "password") {
+        input.type = "text";
+        icon.textContent = "🙈"; // Ícone para senha visível
+      } else {
+        input.type = "password";
+        icon.textContent = "👁️"; // Ícone para senha oculta
+      }
+    }
+  </script>
+
+
+</body>
+
+</html>

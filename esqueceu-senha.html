@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recuperar Senha 🌱</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id="menu-container"></div>
+  <main class="login-main">
+    <section class="login-section">
+      <div class="form-wrapper">
+        <h2 class="form-title">RECUPERAR SENHA</h2>
+        <form class="login-form">
+  <!-- E-mail -->
+  <label class="form-label">
+    <span class="label-text">E-MAIL CADASTRADO</span><span class="required">*</span>
+  </label>
+  <input class="form-input" type="email" id="email" placeholder="DIGITE SEU E-MAIL" />
+
+  <!-- Botão de recuperação -->
+  <button type="button" class="btn-recuperar-senha">ENVIAR RECUPERAÇÃO</button>
+
+  <!-- Código enviado + timer -->
+  <div id="codigo-enviado" style="display: none; margin-top: 1rem;">
+    <p style="color: #aeea00;">Código enviado!</p>
+    <p id="timer" style="font-weight: bold;">Reenviar em 60s</p>
+    <p id="reenviar-container" style="display: none;">
+  <a href="#" onclick="reenviarCodigo()" style="text-decoration: none; color: #aeea00;">
+    Reenviar recuperação
+  </a>
+</p>
+
+  </div>
+
+  <!-- Digitar código -->
+  <div id="codigo-container" style="display: none; margin-top: 1rem;">
+    <label class="form-label">
+      <span class="label-text">CÓDIGO DE RECUPERAÇÃO</span><span class="required">*</span>
+    </label>
+    <input class="form-input" type="text" id="codigoInput" placeholder="DIGITE O CÓDIGO RECEBIDO" />
+
+    <button type="button" class="btn-verificar-codigo">VERIFICAR CÓDIGO</button>
+    <p id="mensagem-codigo" style="color: red; margin-top: 0.5rem;"></p>
+  </div>
+
+  <!-- Nova senha -->
+  <div id="nova-senha-container" style="display: none; margin-top: 1rem;">
+    <label class="form-label">
+      <span class="label-text">NOVA SENHA</span><span class="required">*</span>
+    </label>
+    <input class="form-input" type="password" id="novaSenha" placeholder="DIGITE SUA NOVA SENHA" />
+
+    <label class="form-label">
+      <span class="label-text">CONFIRMAR NOVA SENHA</span><span class="required">*</span>
+    </label>
+    <input class="form-input" type="password" id="confirmarSenha" placeholder="CONFIRME SUA NOVA SENHA" />
+
+    <button type="submit" class="btn-salvar-senha">SALVAR SENHA</button>
+    <p id="mensagem-senha" style="color: red; margin-top: 0.5rem;"></p>
+  </div>
+
+  <!-- Voltar ao login -->
+  <p class="create-account"><a href="login.html">Voltar ao login</a></p>
+</form>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Scripts -->
+  <script src="main.js"></script>
+  <script>
+    fetch('menu.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('menu-container').innerHTML = data;
+        const script = document.createElement('script');
+        script.src = 'menu.js';
+        document.body.appendChild(script);
+      });
+
+    // Mostrar campo de código ao clicar
+    document.querySelector('.btn-recuperar-senha').addEventListener('click', function () {
+      const container = document.getElementById('codigo-container');
+      container.style.display = 'block';
+      this.textContent = 'CÓDIGO ENVIADO';
+      this.disabled = true;
+      this.style.opacity = '0.7';
+    });
+
+    function togglePassword(id, btn) {
+      const input = document.getElementById(id);
+      const isPassword = input.type === 'password';
+      input.type = isPassword ? 'text' : 'password';
+      btn.querySelector('.eye-icon').textContent = isPassword ? '🙈' : '👁️';
+    }
+
+  </script>
+
+  <script>
+    document.querySelector('.btn-recuperar-senha').addEventListener('click', function () {
+      const container = document.getElementById('codigo-container');
+      container.style.display = 'block';
+      this.textContent = 'CÓDIGO ENVIADO';
+      this.disabled = true;
+      this.style.opacity = '0.7';
+    });
+  </script>
+  <script>
+    let tempoRestante = 60;
+    let intervalo;
+
+    document.querySelector('.btn-recuperar-senha').addEventListener('click', function () {
+      document.getElementById('codigo-enviado').style.display = 'block';
+      document.getElementById('codigo-container').style.display = 'block';
+      this.textContent = 'CÓDIGO ENVIADO';
+      this.disabled = true;
+      this.style.opacity = '0.7';
+      iniciarTimer();
+    });
+
+    function iniciarTimer() {
+      const timerEl = document.getElementById('timer');
+      timerEl.textContent = `Reenviar em ${tempoRestante}s`;
+
+      intervalo = setInterval(() => {
+        tempoRestante--;
+        timerEl.textContent = `Reenviar em ${tempoRestante}s`;
+
+        if (tempoRestante <= 0) {
+          clearInterval(intervalo);
+          timerEl.style.display = 'none';
+          document.getElementById('reenviar-container').style.display = 'block';
+        }
+      }, 1000);
+    }
+
+    function reenviarCodigo() {
+      tempoRestante = 60;
+      document.getElementById('reenviar-container').style.display = 'none';
+      document.getElementById('timer').style.display = 'block';
+      iniciarTimer();
+      alert('Novo código enviado!');
+    }
+
+    document.querySelector('.btn-verificar-codigo').addEventListener('click', function () {
+      const codigo = document.getElementById('codigoInput').value.trim();
+      const mensagem = document.getElementById('mensagem-codigo');
+      const novaSenhaContainer = document.getElementById('nova-senha-container');
+
+      if (codigo === 'c0d1g0') {
+        mensagem.style.color = "rgba(174, 234, 0, 0.8)";
+        mensagem.textContent = 'Código válido! Digite sua nova senha.';
+        novaSenhaContainer.style.display = 'block';
+      } else {
+        mensagem.style.color = 'red';
+        mensagem.textContent = 'Código inválido. Tente novamente.';
+        novaSenhaContainer.style.display = 'none';
+      }
+    });
+
+    document.querySelector('.btn-salvar-senha').addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const senha = document.getElementById('novaSenha').value.trim();
+      const confirmar = document.getElementById('confirmarSenha').value.trim();
+      const mensagem = document.getElementById('mensagem-senha');
+
+      if (senha === '' || confirmar === '') {
+        mensagem.style.color = 'red';
+        mensagem.textContent = 'Por favor, preencha os dois campos de senha.';
+        return;
+      }
+
+      if (senha !== confirmar) {
+        mensagem.style.color = 'red';
+        mensagem.textContent = 'As senhas não coincidem. Tente novamente.';
+        return;
+      }
+
+      mensagem.style.color = "rgba(174, 234, 0, 0.8)";      
+      mensagem.textContent = 'Senha salva com sucesso! Redirecionando para tela de Login...';
+
+      setTimeout(() => {
+        window.location.href = 'login.html'; // ou a URL correta da sua página de login
+      }, 5000);
+    });
+
+  </script>
+
+
+
+</body>
+
+</html>
