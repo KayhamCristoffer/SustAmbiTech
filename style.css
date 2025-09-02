@@ -271,7 +271,7 @@ main {
   height: 40px;
   cursor: pointer;
   position: relative;
-  z-index: 1001;
+  z-index: 1000px;
 }
 
 .menu-btn span {
