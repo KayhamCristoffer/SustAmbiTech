@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobilidade Sustentável - SustAmbiTech</title>
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="style.css">
+    <!-- CSS Específico para páginas de Serviço -->
+    <link rel="stylesheet" href="servicos.css"> 
+    <!-- Link para Font Awesome para os ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+    
+    <!-- Link para Chart.js - Biblioteca de Gráficos (necessário para os gráficos) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+    <div id="menu-container"></div>
+    
+    <main class="service-page-main">
+        <section class="service-hero">
+            <div class="container">
+                <h1>Mobilidade Sustentável</h1>
+                <p class="service-intro">Reduzir emissões, otimizar recursos e melhorar a qualidade de vida urbana através de alternativas de transporte eficientes.</p>
+            </div>
+        </section>
+
+        <!-- Seção de introdução e visão -->
+        <section class="service-section">
+            <div class="container grid-container text-image-layout">
+                <div class="text-content">
+                    <h2>Transformando Cidades com Mobilidade Sustentável</h2>
+                    <p>A mobilidade sustentável é essencial para a construção de cidades mais limpas, inteligentes e saudáveis. Ela busca alternativas de transporte que reduzam a emissão de poluentes, otimizem recursos energéticos e melhorem a qualidade de vida urbana.</p>
+                    <p>No SustAmbiTech, esse tema será desenvolvido em duas frentes principais: veículos elétricos e rotas otimizadas para bicicleta e transporte público.</p>
+                </div>
+                <div class="image-content">
+                    <img src="img/mobilidade_sustentavel_intro.jpg" alt="Pessoas utilizando transporte sustentável">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção: Veículos Elétricos -->
+        <section class="service-section">
+            <div class="container">
+                <h2 class="section-title">Veículos Elétricos</h2>
+                <p class="section-description">Entenda as categorias, vantagens, desafios e o cenário atual dos veículos elétricos no Brasil.</p>
+                
+                <div class="grid-container cards-2-col">
+                    <div class="grid-item service-card">
+                        <div class="icon-wrapper"><i class="fas fa-car-battery"></i></div>
+                        <h3>Fundamentos da Tecnologia</h3>
+                        <p>Os veículos elétricos utilizam motores movidos a baterias, substituindo ou complementando o uso de combustíveis fósseis. Existem três categorias principais:</p>
+                        <ul>
+                            <li><strong>BEV (Battery Electric Vehicle):</strong> 100% elétrico, movido apenas por bateria.</li>
+                            <li><strong>HEV (Hybrid Electric Vehicle):</strong> híbrido, com motor a combustão e elétrico combinados.</li>
+                            <li><strong>PHEV (Plug-in Hybrid Electric Vehicle):</strong> híbrido recarregável em tomadas.</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item service-card">
+                        <div class="icon-wrapper"><i class="fas fa-hand-holding-usd"></i></div>
+                        <h3>Vantagens</h3>
+                        <ul>
+                            <li>Economia de energia em relação à gasolina e etanol.</li>
+                            <li>Manutenção mais simples e com menos peças de desgaste.</li>
+                            <li>Redução de emissões de poluentes locais.</li>
+                            <li>Incentivos governamentais (isenção de IPVA, dispensa do rodízio em SP).</li>
+                            <li>Condução silenciosa e confortável.</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item service-card">
+                        <div class="icon-wrapper"><i class="fas fa-exclamation-triangle"></i></div>
+                        <h3>Desafios</h3>
+                        <ul>
+                            <li>Custo inicial de aquisição mais elevado.</li>
+                            <li>Autonomia limitada, exigindo planejamento de viagens.</li>
+                            <li>Tempo de recarga maior em comparação ao abastecimento tradicional.</li>
+                            <li>Rede de eletropostos em expansão, mas ainda insuficiente.</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item service-card">
+                        <div class="icon-wrapper"><i class="fas fa-brazil"></i></div>
+                        <h3>Cenário no Brasil</h3>
+                        <ul>
+                            <li>A frota de veículos eletrificados cresceu 179% entre março e agosto de 2024 (ABVE).</li>
+                            <li>Mais de 10.600 eletropostos instalados no país, sendo 84% de recarga lenta (AC).</li>
+                            <li>Vendas de veículos 100% elétricos (BEV) cresceram 156,8% em setembro de 2024.</li>
+                            <li>São Paulo lidera o número de veículos elétricos emplacados.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Gráficos -->
+        <section class="service-section">
+            <div class="container">
+                <h2 class="section-title">Análise de Crescimento no Brasil (2020-2024)</h2>
+                <div class="grid-container cards-2-col">
+                    <div class="grid-item service-card">
+                        <h3>Gráfico 1 – Crescimento de Veículos Elétricos</h3>
+                        <canvas id="evGrowthChart"></canvas>
+                    </div>
+                    <div class="grid-item service-card">
+                        <h3>Gráfico 2 – Expansão de Eletropostos</h3>
+                        <canvas id="chargingStationChart"></canvas>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">Tabela 1 – Indicadores de Mobilidade Sustentável no Brasil</h3>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Ano</th>
+                                <th>Veículos Elétricos (Brasil)</th>
+                                <th>Eletropostos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>2020</td><td>5000</td><td>1500</td></tr>
+                            <tr><td>2021</td><td>12000</td><td>3000</td></tr>
+                            <tr><td>2022</td><td>28000</td><td>5000</td></tr>
+                            <tr><td>2023</td><td>60000</td><td>8000</td></tr>
+                            <tr><td>2024</td><td>167000</td><td>10600</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Rotas Otimizadas para Bicicleta e Transporte Público -->
+        <section class="service-section">
+            <div class="container">
+                <h2 class="section-title">Rotas Otimizadas para Bicicleta e Transporte Público</h2>
+                <p class="section-description">Descubra como se locomover de forma eficiente e ecológica nas cidades.</p>
+                
+                <div class="grid-container cards-2-col">
+                    <div class="grid-item service-card">
+                        <div class="icon-wrapper"><i class="fas fa-bicycle"></i></div>
+                        <h3>Bicicletas</h3>
+                        <p>O uso da bicicleta é uma das soluções mais sustentáveis para deslocamentos urbanos curtos e médios. Avalie topografia, ciclovias e distância com ferramentas como Google Maps.</p>
+                        <ul>
+                            <li>Avaliar topografia, ciclovias e distância.</li>
+                            <li>Ferramentas como Google Maps ajudam a planejar rotas seguras.</li>
+                            <li>Sistemas de bike sharing (Itaú, Tembici) estão presentes em várias capitais.</li>
+                        </ul>
+                        <p><strong>Exemplo em São Paulo:</strong> trajeto até a sede do Google Brasil pode levar 1h45min, cobrindo cerca de 30 km.</p>
+                    </div>
+                    <div class="grid-item service-card">
+                        <div class="icon-wrapper"><i class="fas fa-bus-alt"></i></div>
+                        <h3>Transporte Público</h3>
+                        <p>O transporte coletivo é essencial para reduzir congestionamentos e emissões. Integração entre ônibus, trens e metrô, com aplicativos para acompanhamento em tempo real.</p>
+                        <ul>
+                            <li>Integração entre ônibus, trens e metrô.</li>
+                            <li>Aplicativos facilitam o acompanhamento em tempo real.</li>
+                            <li>O Bilhete Único em São Paulo permite integração de diferentes modais.</li>
+                        </ul>
+                        <p><strong>Exemplo em São Paulo:</strong> trajeto até a sede do Google Brasil pode levar 2h03min, combinando ônibus e metrô.</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">Integração de Modais</h3>
+                <div class="grid-container cards-1-col">
+                    <div class="grid-item service-card">
+                        <div class="icon-wrapper"><i class="fas fa-exchange-alt"></i></div>
+                        <p>Combine bicicleta com metrô ou ônibus, e utilize patinetes e bikes compartilhadas em trajetos curtos para otimizar seus deslocamentos e contribuir com o meio ambiente.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Conclusão -->
+        <section class="service-section">
+            <div class="container grid-container cards-1-col">
+                <div class="grid-item service-card">
+                    <h2 class="section-title">Conclusão</h2>
+                    <p>A mobilidade sustentável vai além da escolha individual de transporte: trata-se de uma transformação social e tecnológica. A transição para veículos elétricos, o incentivo ao uso da bicicleta e o fortalecimento do transporte público são pilares fundamentais para reduzir a poluição, melhorar o trânsito e promover cidades mais humanas.</p>
+                    <p>O SustAmbiTech tem como missão reunir essas informações de forma prática, interativa e confiável, tornando-se uma ferramenta útil para quem deseja adotar hábitos de mobilidade mais conscientes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Referências Bibliográficas -->
+        <section class="service-section">
+            <div class="container grid-container cards-1-col">
+                <div class="grid-item service-card">
+                    <h2 class="section-title">Referências Bibliográficas</h2>
+                    <ul class="references-list">
+                        <li>ABVE – Associação Brasileira do Veículo Elétrico. Relatório de mercado 2024. Disponível em: <a href="https://abve.org.br" target="_blank">https://abve.org.br</a></li>
+                        <li>CNT – Confederação Nacional do Transporte. Relatório de Mobilidade Urbana, 2023. Disponível em: <a href="https://cnt.org.br" target="_blank">https://cnt.org.br</a></li>
+                        <li>Prefeitura de São Paulo. Plano de Mobilidade Urbana, 2023. Disponível em: <a href="https://prefeitura.sp.gov.br" target="_blank">https://prefeitura.sp.gov.br</a></li>
+                        <li>IEA – International Energy Agency. Global EV Outlook 2024. Paris: IEA, 2024. Disponível em: <a href="https://www.iea.org" target="_blank">https://www.iea.org</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-container"></div>
+
+    <!-- Janela Modal (oculta por padrão) -->
+    <div class="modal-overlay" id="serviceModalOverlay">
+        <div class="modal-content">
+            <button class="modal-close-button" id="modalCloseButton">&times;</button>
+            <h2 id="modalTitle"></h2>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Script principal do seu aplicativo (carrega menu e rodapé) -->
+    <script src="main.js" type="module"></script>
+    <!-- Script específico para esta página (gráficos, modais, etc.) -->
+    <script src="mobilidade.js" type="module"></script> 
+</body>
+
+</html>
