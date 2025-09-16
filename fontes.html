@@ -1,3 +1,97 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fontes e Referências - SustAmbiTech</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="menu-container"></div>
+
+    <main class="main-content">
+        <section class="sources-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Fontes e Referências</h2>
+                    <p style="max-width: 1200px;">A transparência é a base da inovação. Conheça as fontes de pesquisa
+                        que embasam nossas soluções.</p>
+                </div>
+
+                <div class="table-container">
+                    <table class="sources-table">
+                        <thead>
+                            <tr>
+                                <th>Tema</th>
+                                <th>Onde foi colocado</th>
+                                <th>Local de Pesquisa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Energia Renovável e Otimização</td>
+                                <td>Página inicial, seção "Nossas Soluções"</td>
+                                <td>
+                                    <ul>
+                                        <li><a href="#">Artigo Científico: "Advances in Solar Energy Harvesting",
+                                                Journal of Renewable Energy.</a></li>
+                                        <li><a href="#">Relatório: "Global Energy Outlook 2024", Agência Internacional
+                                                de Energia.</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Gestão Inteligente de Resíduos</td>
+                                <td>Página de serviços, seção "Gestão de Resíduos"</td>
+                                <td>
+                                    <ul>
+                                        <li><a href="#">Estudo de Caso: "Smart Bins Project - A City Pilot",
+                                                Universidade de Tecnologia de Sydney.</a></li>
+                                        <li><a href="#">Livro: "The Circular Economy Handbook", de Peter Laybourn.</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Internet das Coisas (IoT)</td>
+                                <td>Seção "Monitoramento Ambiental"</td>
+                                <td>
+                                    <ul>
+                                        <li><a href="#">Documentação da Google IoT Core</a></li>
+                                        <li><a href="#">Artigo: "A Comprehensive Review of IoT for Environmental
+                                                Monitoring", IEEE Sensors Journal.</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="footer-container"></div>
+
+    <script src="main.js" type="module"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+                })
+                .catch(error => console.error('Erro ao carregar o rodapé:', error));
+        });
+    </script>
+</body>
+
+=======
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -80,4 +174,5 @@
         });
     </script>
 </body>
+>>>>>>> 2b32f5cde681c0fea87c8c458c0cd693cb13f6aa
 </html>
