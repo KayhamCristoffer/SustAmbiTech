@@ -1096,8 +1096,6 @@ section.Equipe {
     transform: rotate(360deg);
   }
 }
->>>>>>> 2b32f5cde681c0fea87c8c458c0cd693cb13f6aa
-
 /* --- Estilos da Seção Hero (para páginas de serviço) --- */
 .service-hero {
   background-color: var(--color-theme-bg-medium);
