@@ -1,6 +1,6 @@
+# main.py
 from datetime import datetime, timedelta
 from typing import Optional, List
-
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel, EmailStr
@@ -8,6 +8,9 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
 from jose import JWTError, jwt
 from passlib.context import CryptContext
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
+from pathlib import Path  # Use pathlib for modern path handling
 
 # -------------------- Configs/JWT --------------------
 SECRET_KEY = "ABFD-EFG-HIJ"  
@@ -84,8 +87,18 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -
 def get_user_by_username(db: Session, username: str) -> Optional[UsuarioDB]:
     return db.query(UsuarioDB).filter(UsuarioDB.usuario == username).first()
 
-def authenticate_user(db: Session, username: str, password: str) -> Optional[UsuarioDB]:
-    user = get_user_by_username(db, username)
+def authenticate_user(db: Session, username_or_email: str, password: str) -> Optional[UsuarioDB]:
+    """
+    Tenta autenticar o usuario usando nome de usuario ou e-mail.
+    """
+    # Tenta encontrar o usuário pelo campo 'usuario'
+    user = db.query(UsuarioDB).filter(UsuarioDB.usuario == username_or_email).first()
+    
+    # Se não encontrar, tenta pelo campo 'email'
+    if not user:
+        user = db.query(UsuarioDB).filter(UsuarioDB.email == username_or_email).first()
+
+    # Se o usuário não existe ou a senha está incorreta, retorna None
     if not user or not verify_password(password, user.hashed_password):
         return None
     return user
@@ -110,26 +123,38 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
     return user
 
 # -------------------- FastAPI App --------------------
-app = FastAPI(title="API de Usuários")
+app = FastAPI(title="API de Usuarios")
+
+# Adicionado para servir arquivos estáticos
+BASE_DIR = Path(__file__).parent.parent
+PAGES_DIR = BASE_DIR / 'paginas'
+
+@app.get("/", response_class=HTMLResponse, summary="Retorna a pagina de login")
+async def read_root():
+    """Rota raiz para servir o `index.html`."""
+    with open(PAGES_DIR / "index.html", "r") as f:
+        html_content = f.read()
+    return HTMLResponse(content=html_content)
+
+app.mount("/paginas", StaticFiles(directory=PAGES_DIR), name="paginas")
 
 # --------- Auth: obter token (login) ----------
 @app.post("/token", response_model=Token, summary="Login e obtenção de token JWT")
 def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    # OAuth2PasswordRequestForm usa campos: username, password
     user = authenticate_user(db, form_data.username, form_data.password)
     if not user:
-        raise HTTPException(status_code=400, detail="Usuário ou senha inválidos")
+        raise HTTPException(status_code=400, detail="Usuario ou senha invalidos")
     access_token = create_access_token(data={"sub": user.usuario})
     return {"access_token": access_token, "token_type": "bearer"}
 
 # --------- Cadastro (público) ----------
-@app.post("/usuarios/", response_model=UsuarioOut, status_code=201, summary="Criar novo usuário")
+@app.post("/criar_usuario", response_model=UsuarioOut, status_code=201, summary="Criar novo usuario")
 def criar_usuario(payload: UsuarioCreate, db: Session = Depends(get_db)):
     if db.query(UsuarioDB).filter(UsuarioDB.usuario == payload.usuario).first():
-        raise HTTPException(status_code=400, detail="Usuário já existe")
+        raise HTTPException(status_code=400, detail="Usuario ja existe")
     if db.query(UsuarioDB).filter(UsuarioDB.email == payload.email).first():
-        raise HTTPException(status_code=400, detail="E-mail já cadastrado")
-
+        raise HTTPException(status_code=400, detail="E-mail ja cadastrado")
+    
     user = UsuarioDB(
         usuario=payload.usuario,
         nome=payload.nome,
@@ -142,7 +167,7 @@ def criar_usuario(payload: UsuarioCreate, db: Session = Depends(get_db)):
     return user
 
 # --------- Rotas protegidas ----------
-@app.get("/usuarios/", response_model=List[UsuarioOut], summary="Listar usuários (protegido)")
+@app.get("/usuarios/", response_model=List[UsuarioOut], summary="Listar usuarios (protegido)")
 def listar_usuarios(current_user: UsuarioDB = Depends(get_current_user), db: Session = Depends(get_db)):
     return db.query(UsuarioDB).all()
 
@@ -150,26 +175,25 @@ def listar_usuarios(current_user: UsuarioDB = Depends(get_current_user), db: Ses
 def meu_perfil(current_user: UsuarioDB = Depends(get_current_user)):
     return current_user
 
-@app.get("/usuarios/{user_id}", response_model=UsuarioOut, summary="Buscar usuário por ID (protegido)")
+@app.get("/usuarios/{user_id}", response_model=UsuarioOut, summary="Buscar usuario por ID (protegido)")
 def buscar_usuario(user_id: int, current_user: UsuarioDB = Depends(get_current_user), db: Session = Depends(get_db)):
     user = db.query(UsuarioDB).filter(UsuarioDB.id == user_id).first()
     if not user:
-        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+        raise HTTPException(status_code=404, detail="Usuario não encontrado")
     return user
 
-@app.put("/usuarios/{user_id}", response_model=UsuarioOut, summary="Atualizar usuário (protegido)")
+@app.put("/usuarios/{user_id}", response_model=UsuarioOut, summary="Atualizar usuario (protegido)")
 def atualizar_usuario(user_id: int, payload: UsuarioUpdate, current_user: UsuarioDB = Depends(get_current_user), db: Session = Depends(get_db)):
     user = db.query(UsuarioDB).filter(UsuarioDB.id == user_id).first()
     if not user:
-        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+        raise HTTPException(status_code=404, detail="Usuario não encontrado")
 
     if payload.nome is not None:
         user.nome = payload.nome
     if payload.email is not None:
-        # checar duplicidade de email
         exists = db.query(UsuarioDB).filter(UsuarioDB.email == payload.email, UsuarioDB.id != user_id).first()
         if exists:
-            raise HTTPException(status_code=400, detail="E-mail já cadastrado por outro usuário")
+            raise HTTPException(status_code=400, detail="E-mail ja cadastrado por outro usuario")
         user.email = payload.email
     if payload.senha is not None:
         user.hashed_password = get_password_hash(payload.senha)
@@ -178,11 +202,11 @@ def atualizar_usuario(user_id: int, payload: UsuarioUpdate, current_user: Usuari
     db.refresh(user)
     return user
 
-@app.delete("/usuarios/{user_id}", summary="Deletar usuário (protegido)")
+@app.delete("/usuarios/{user_id}", summary="Deletar usuario (protegido)")
 def deletar_usuario(user_id: int, current_user: UsuarioDB = Depends(get_current_user), db: Session = Depends(get_db)):
     user = db.query(UsuarioDB).filter(UsuarioDB.id == user_id).first()
     if not user:
-        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+        raise HTTPException(status_code=404, detail="Usuario não encontrado")
     db.delete(user)
     db.commit()
-    return {"message": "Usuário deletado com sucesso"}
+    return {"message": "Usuario deletado com sucesso"}

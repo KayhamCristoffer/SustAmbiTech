@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Principal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e9f5e9;
+            color: #218838;
+            text-align: center;
+        }
+        .content-container {
+            background-color: #fff;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+        h1 {
+            color: #28a745;
+        }
+        #user-info, #user-list {
+            text-align: left;
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+        #logout-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #logout-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-container">
+        <h1>Bem-vindo!</h1>
+        <p>Você foi autenticado com sucesso e chegou à pagina principal.</p>
+
+        <div id="user-info">
+            <h2>Seu Perfil</h2>
+            <p>Carregando...</p>
+        </div>
+
+        <div id="user-list">
+            <h2>Todos os Usuarios</h2>
+            <p>Carregando...</p>
+        </div>
+
+        <button id="logout-button">Sair</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('access_token');
+            const userInfoDiv = document.getElementById('user-info');
+            const userListDiv = document.getElementById('user-list');
+            const logoutButton = document.getElementById('logout-button');
+
+            if (!token) {
+                window.location.href = '/';
+                return;
+            }
+
+            async function fetchMyProfile() {
+                try {
+                    const response = await fetch('/usuarios/me', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+
+                    if (!response.ok) {
+                        if (response.status === 401) {
+                            throw new Error('Não autenticado. Seu token pode ter expirado.');
+                        }
+                        const errorData = await response.json();
+                        throw new Error(errorData.detail || 'Falha ao buscar seu perfil.');
+                    }
+
+                    const user = await response.json();
+                    userInfoDiv.innerHTML = `
+                        <h2>Seu Perfil</h2>
+                        <p><strong>Nome de Usuario:</strong> ${user.usuario}</p>
+                        <p><strong>Nome:</strong> ${user.nome}</p>
+                        <p><strong>E-mail:</strong> ${user.email}</p>
+                    `;
+                } catch (error) {
+                    userInfoDiv.innerHTML = `<p class="error-message">Erro: ${error.message}</p>`;
+                    console.error("Erro ao buscar perfil:", error);
+                }
+            }
+
+            async function fetchAllUsers() {
+                try {
+                    const response = await fetch('/usuarios/', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.detail || 'Falha ao buscar a lista de usuarios.');
+                    }
+
+                    const users = await response.json();
+                    let usersHtml = '<ul>';
+                    users.forEach(user => {
+                        usersHtml += `<li><strong>${user.usuario}</strong> - ${user.nome} (${user.email})</li>`;
+                    });
+                    usersHtml += '</ul>';
+                    userListDiv.innerHTML = `
+                        <h2>Todos os Usuarios</h2>
+                        ${usersHtml}
+                    `;
+                } catch (error) {
+                    userListDiv.innerHTML = `<p class="error-message">Erro: ${error.message}</p>`;
+                    console.error("Erro ao buscar lista de usuarios:", error);
+                }
+            }
+
+            logoutButton.addEventListener('click', () => {
+                localStorage.removeItem('access_token');
+                window.location.href = '/';
+            });
+
+            fetchMyProfile();
+            fetchAllUsers();
+        });
+    </script>
+</body>
+</html>
