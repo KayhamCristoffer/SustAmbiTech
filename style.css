@@ -42,7 +42,6 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: 'Segoe UI', 'ProximaNW01-Reg', sans-serif;
 }
 
@@ -53,16 +52,16 @@ html {
 }
 
 body {
-  width: 100%;
+  max-width: 96%;
   min-height: 100vh;
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background-color: rgba(59, 87, 4, 0.85);
   color: var(--color-text-dark);
+  overflow-x: hidden; /* esconde barra horizontal */
 }
 
 main, .main-content {
-  margin-top: 80px;
   padding: 2rem 1rem;
   min-height: calc(100vh - 80px);
 }
@@ -118,7 +117,7 @@ main, .main-content {
 .topbar::after {
   content: "";
   top: -10px;
-  right: 20px;
+  right: 100px;
   background-image: url('./img/folha-1.png');
   transform: rotate(230deg);
 }
@@ -135,9 +134,11 @@ main, .main-content {
   position: relative;
   font-family: 'Segoe UI', sans-serif;
   color: var(--color-text-light);
-  background-color: transparent;
+  background-color: var(--color-theme-bg-dark);
   z-index: 0;
   padding: 2rem;
+  bottom: 0px;
+  width: calc(100%);
 }
 
 .main-footer::before {
@@ -192,7 +193,7 @@ main, .main-content {
 
 .logo-text {
   display: inline-block;
-  padding-right: 30px;
+  padding-right: 100px;
 }
 
 .logo-icon {
@@ -279,7 +280,7 @@ main, .main-content {
 
 .side-menu .auth-buttons #userNameMenuItem .user-name {
   display: block;
-  width: 309px;
+  width: 350px;
   box-sizing: border-box;
   padding: 10px 15px;
   text-align: center;
@@ -696,7 +697,7 @@ main, .main-content {
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: var(--spacing-xl);
   max-width: auto;
   margin: 0 auto;
@@ -791,7 +792,6 @@ main, .main-content {
 
 /* === Seção de Projeto === */
 .project-details {
-  width: 100%;
   padding: 50px 8%;
 }
 
@@ -855,7 +855,6 @@ section.Equipe {
 }
 
 .instructor-container {
-  width: 100%;
   padding: 70px 8%;
   background-color: var(--color-theme-bg-medium);
   border-radius: 0px 100px 0px 100px;
@@ -882,10 +881,10 @@ section.Equipe {
 }
 
 .course-card {
-  flex-basis: calc(calc(100% / 2) - 15px);
+  flex-basis: calc(calc(100% / 2) - 35px);
   border: 1px solid #eee;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 20px;
   cursor: pointer;
   transition: all 0.3s;
@@ -913,15 +912,19 @@ section.Equipe {
 }
 
 .course-card .category .subject {
-  padding: 8px 15px;
+  padding: 8px;
   background-color: #8cc342;
   border-radius: 5px;
+  width: 100%;
+  
 }
 
 .course-card .category .subject h3 {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
   color: var(--color-text-light);
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .course-card .course-title {
@@ -1103,6 +1106,7 @@ section.Equipe {
   margin-top: 60px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   color: var(--color-text-light);
+  
 }
 
 .service-hero h1 {
@@ -1395,8 +1399,8 @@ section.Equipe {
   flex-direction: column;
   gap: 10px;
   z-index: 999;
-  padding: 10px;
-  background-color: var(--color-theme-bg-medium);
+  padding: 20px;
+  background-color: #3b5704;
   border-radius: 8px 0 0 8px;
   box-shadow: -4px 0 10px rgba(0, 0, 0, 0.15);
   transition: transform 0.4s ease-in-out;
@@ -1540,6 +1544,12 @@ section.Equipe {
     left: -35px;
     transform: translate(0, -50%);
   }
+    .development-process .process-step,
+    .development-process .process-step.reverse,.step-image {
+      flex-direction: column;
+      align-items: center;
+      flex: 0 0 0;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1568,6 +1578,7 @@ section.Equipe {
     padding: 20px;
     width: 95%;
   }
+
 }
 
 @media (max-width: 300px) {
