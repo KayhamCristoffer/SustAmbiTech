@@ -1,0 +1,223 @@
+<section id="form-clima">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap');
+
+        #container2 {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            flex-direction: column;
+            padding: 18px;
+        }
+
+        #search {
+            background-color: #f0f8ff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #bdbdbd;
+            border-radius: 10px;
+            padding: 4px 12px;
+        }
+
+        #search input {
+            border: none;
+            background-color: transparent;
+            font-size: 20px;
+            width: 100%;
+        }
+
+        #search input:focus-visible {
+            outline: none;
+        }
+
+        #search button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        #weather {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #weather.show {
+            display: block;
+        }
+
+        #weather #title {
+            text-align: center;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        #temp {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 20px;
+            background: linear-gradient(90deg, #73aa24, #78a831);
+            color: #fff;
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        #temp_img {
+            filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
+        }
+
+        #temp_value {
+            font-weight: bold;
+            font-size: 50px;
+            line-height: 55px;
+        }
+
+        #temp_description {
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+
+        #other_infos {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        #other_infos .info {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            padding: 4px 10px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+            background-color: #78a831;
+            gap: 10px;
+        }
+
+        #other_infos .info h2 {
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        #other_infos .info i {
+            text-align: center;
+            font-size: 20px;
+            width: 20%;
+        }
+
+        #temp_max_icon {
+            color: #af0d1a;
+        }
+
+        #temp_min_icon {
+            color: #31d2f7;
+        }
+
+        #humidity_icon {
+            color: #0078d7;
+        }
+
+        #wind_icon {
+            color: #00cea6;
+        }
+
+        #local_icon, #pesquisa_icon{
+            color:#73aa24
+        }
+        #alert {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #alert img {
+            width: 200px;
+            margin-top: 20px;
+        }
+    </style>
+    <div id="container2">
+        <form id="search">
+            <i id="local_icon" class="fa-solid fa-location-dot"></i>
+            <input type="search" name="city_name" id="city_name" placeholder="Buscar cidade">
+            <button type="submit">
+                <i id="pesquisa_icon" class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+
+        <div id="weather">
+            <h1 id="title">Cidade, Pais</h1>
+            
+            <div id="infos">
+                <div id="temp">
+                    <img id="temp_img" src="http://openweathermap.org/img/wn/04d@2x.png" alt="">
+
+                    <div>
+                        <p id="temp_value">
+                            32
+                        </p>
+                        <p id="temp_description">
+                            Ensolarado
+                        </p>
+                    </div>
+                </div>
+
+                <div id="other_infos">
+                    <div class="info">
+                        <i id="temp_max_icon" class="fa-solid fa-temperature-high"></i>
+
+                        <div>
+                            <h2>Temp. max</h2>
+
+                            <p id="temp_max">
+                                32 <sup>C°</sup>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <i id="temp_min_icon" class="fa-solid fa-temperature-low"></i>
+
+                        <div>
+                            <h2>Temp. min</h2>
+
+                            <p id="temp_min">
+                                12 <sup>C°</sup>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <i id="humidity_icon" class="fa-solid fa-droplet"></i>
+
+                        <div>
+                            <h2>Humidade</h2>
+
+                            <p id="humidity">
+                                50%
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <i id="wind_icon" class="fa-solid fa-wind"></i>
+
+                        <div>
+                            <h2>Vento</h2>
+
+                            <p id="wind">
+                                50 km/h
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="alert"></div>
+    </div>
+    
+</section>
