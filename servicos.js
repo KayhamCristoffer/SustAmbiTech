@@ -10,269 +10,128 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalContentData = {
     "topico1-monitoramento-ambiental": {
         "title": "T\u00f3pico 1: Monitoramento Ambiental",
-        "body": `<h1>Tópico 1: Monitoramento Ambiental</h1>
-<h2>O que é Monitoramento Ambiental?</h2>
-<p>Monitoramento ambiental refere-se à coleta sistemática de dados sobre o estado do meio ambiente, incluindo ar, água, solo e biodiversidade. O objetivo é avaliar a qualidade ambiental, identificar tendências, prever impactos e fornecer informações para a tomada de decisões e implementação de políticas de proteção ambiental. É uma ferramenta essencial para a gestão sustentável dos recursos naturais e para a saúde pública.</p>
-<h2>Como a tecnologia pode ajudar no Monitoramento Ambiental?</h2>
-<p>A tecnologia desempenha um papel crucial no aprimoramento do monitoramento ambiental, tornando-o mais eficiente, preciso e abrangente. Sensores avançados, plataformas de coleta de dados em tempo real, inteligência artificial e análise de big data permitem a detecção precoce de problemas, a modelagem de cenários e a comunicação eficaz de informações. Isso facilita a resposta rápida a desastres ambientais e a implementação de medidas preventivas.</p>
-<h2>Tipos de sensores e suas aplicações:</h2>
-<p>Diversos tipos de sensores são utilizados para coletar dados ambientais, cada um com aplicações específicas:</p>
-<h3>Sensores de Qualidade do Ar</h3>
-<p>Estes sensores medem a concentração de poluentes como material particulado (PM2.5, PM10), dióxido de carbono (CO2), monóxido de carbono (CO), dióxido de enxofre (SO2), óxidos de nitrogênio (NOx) e ozônio (O3). São cruciais para monitorar a poluição atmosférica em áreas urbanas e industriais, alertando sobre níveis perigosos e ajudando a formular estratégias de controle da poluição.</p>
-<h3>Sensores de Qualidade da Água</h3>
-<p>Utilizados para avaliar parâmetros como pH, turbidez, oxigênio dissolvido, condutividade elétrica, temperatura e presença de contaminantes químicos e biológicos em rios, lagos e oceanos. Essenciais para a gestão de recursos hídricos, detecção de poluição e proteção de ecossistemas aquáticos.</p>
-<h3>Sensores de Temperatura e Umidade</h3>
-<p>Monitoram as condições climáticas, sendo fundamentais para estudos meteorológicos, agricultura de precisão, previsão de eventos extremos e avaliação das mudanças climáticas. Podem ser encontrados em estações meteorológicas, dispositivos IoT e sistemas de automação.</p>
-<h3>Sensores de Gases de Efeito Estufa</h3>
-<p>Focados na medição de gases como metano (CH4) e dióxido de carbono (CO2) para entender suas concentrações na atmosfera e seu impacto no aquecimento global. São usados em pesquisas climáticas e no monitoramento de emissões industriais.</p>
-<h3>Outros Sensores</h3>
-<p>Incluem sensores de solo (umidade, nutrientes), radiação solar (para energia solar e agricultura) e ruído (para monitoramento da poluição sonora em cidades).</p>
-<p><strong>Como funciona, onde pode se encontrar radares de sensores e aplicativos que mostram:</strong></p>
-<p>Sensores ambientais podem ser encontrados em estações de monitoramento fixas, dispositivos móveis, drones e satélites. Em cidades como São Paulo, redes de sensores são instaladas em pontos estratégicos para fornecer dados em tempo real. Aplicativos móveis e plataformas web integram esses dados, permitindo que cidadãos e autoridades visualizem a qualidade do ar, da água e outras informações ambientais. Muitos desses sistemas utilizam APIs para compartilhar dados e integrar-se com outras plataformas.</p>
-<p><strong>Alertas e Notificações:</strong></p>
-<p>Sistemas de monitoramento ambiental frequentemente incluem funcionalidades de alerta e notificação, que informam usuários e autoridades sobre condições ambientais que excedem limites seguros ou indicam eventos críticos. Isso permite uma resposta rápida a emergências e a implementação de medidas de mitigação.</p>
-<h2>Impacto e Soluções Tecnológicas</h2>
-<p>O monitoramento ambiental tecnológico tem um impacto significativo na capacidade de proteger o planeta. Por exemplo, em diversas cidades, a instalação de redes de sensores de qualidade do ar permitiu identificar fontes de poluição e implementar restrições de tráfego, resultando em melhorias na saúde respiratória da população. A detecção precoce de vazamentos em oleodutos por sensores de solo também evitou desastres ecológicos maiores.</p>
-<h3>API de Clima (Sugestão de Código)</h3>
-<p>Para integrar dados de clima em aplicações, uma excelente opção gratuita e de código aberto é a API Open-Meteo. Ela não requer chave de API para uso não comercial e oferece uma vasta gama de dados meteorológicos. Abaixo, um exemplo de como acessar a API Open-Meteo usando Python para obter a previsão do tempo para São Paulo usando Python:</p>
-<p>\`\`\`python
-import requests</p>
-<p>def get_open_meteo_data(latitude, longitude):
-    base_url = "https://api.open-meteo.com/v1/forecast"
-    params = {
-        "latitude": latitude,
-        "longitude": longitude,
-        "hourly": "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,weather_code,wind_speed_10m",
-        "daily": "weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max",
-        "timezone": "America/Sao_Paulo"
-    }
-    try:
-        response = requests.get(base_url, params=params)
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins (4xx ou 5xx)
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao conectar à API Open-Meteo: {e}")
-        return None</p>
-<h1>Coordenadas para São Paulo</h1>
-<p>lat_sp = -23.5505
-lon_sp = -46.6333</p>
-<p>weather_data = get_open_meteo_data(lat_sp, lon_sp)</p>
-<p>if weather_data:
-    print("Previsão do tempo para São Paulo (via Open-Meteo):")
-    # Exemplo de como acessar um dado diário
-    print(f"Temperatura Máxima Hoje: {weather_data['daily']['temperature_2m_max'][0]}°C")
-    # Exemplo de como acessar um dado horário
-    print(f"Temperatura Agora: {weather_data['hourly']['temperature_2m'][0]}°C")
-else:
-    print("Não foi possível obter os dados do clima.")
-\`\`\`</p>
-<p><strong>Observação:</strong> Este código busca dados de temperatura, umidade, chance de precipitação e vento. A API Open-Meteo é altamente customizável, permitindo a consulta de dezenas de outras variáveis. Para dados específicos de <strong>qualidade do ar</strong>, a Open-Meteo também oferece um endpoint dedicado, que pode ser explorado em sua documentação.</p>
-<h3>Fatos Reais em que os sensores ajudaram:</h3>
-<ul>
-<li><strong>Redução da Poluição do Ar em Pequim:</strong> Durante os Jogos Olímpicos de 2008, Pequim implementou uma vasta rede de sensores de qualidade do ar, que ajudou as autoridades a monitorar e controlar as emissões, resultando em uma melhoria significativa da qualidade do ar durante o evento.</li>
-<li><strong>Monitoramento de Vazamentos de Petróleo:</strong> Sensores acústicos e químicos submarinos são usados para detectar vazamentos em oleodutos e plataformas de petróleo, permitindo uma resposta rápida para minimizar o impacto ambiental.</li>
-<li><strong>Previsão de Inundações:</strong> Em várias regiões, sensores de nível de água em rios e pluviômetros conectados a sistemas de alerta precoce ajudam a prever inundações, dando tempo para a evacuação e proteção de bens.</li>
-</ul>
-<p>[achei um vídeo, editar para colocar no site] - Esta parte será tratada na fase de compilação final, onde o vídeo será incorporado ou referenciado no documento.</p>`
+        "body": `
+            <h3>O que é Monitoramento Ambiental?</h3>
+            <h3>Como a tecnologia pode ajudar no Monitoramento Ambiental?</h3>
+            <h3>Tipos de sensores e suas aplicações:</h3>
+            <h3>Sensores de Qualidade do Ar</h3>
+            <h3>Sensores de Qualidade da Água</h3>
+            <h3>Sensores de Temperatura e Umidade</h3>
+            <h3>Sensores de Gases de Efeito Estufa</h3>
+            <h3>Outros Sensores</h3>
+            <h3>Impacto e Soluções Tecnológicas</h3>
+            <h3>API de Clima (Sugestão de Código)</h3>
+        `
     },
     "topico1-monitoramento-ambiental-o-que-monitoramento-ambiental-": {
         "title": "O que \u00e9 Monitoramento Ambiental?",
-        "body": `<h2>O que é Monitoramento Ambiental?</h2>
-<p>Monitoramento ambiental refere-se à coleta sistemática de dados sobre o estado do meio ambiente, incluindo ar, água, solo e biodiversidade. O objetivo é avaliar a qualidade ambiental, identificar tendências, prever impactos e fornecer informações para a tomada de decisões e implementação de políticas de proteção ambiental. É uma ferramenta essencial para a gestão sustentável dos recursos naturais e para a saúde pública.</p>
-`
+        "body": `
+            <p>Monitoramento ambiental refere-se à coleta sistemática de dados sobre o estado do meio ambiente, incluindo ar, água, solo e biodiversidade. O objetivo é avaliar a qualidade ambiental, identificar tendências, prever impactos e fornecer informações para a tomada de decisões e implementação de políticas de proteção ambiental. É uma ferramenta essencial para a gestão sustentável dos recursos naturais e para a saúde pública.</p>
+        `
     },
     "topico1-monitoramento-ambiental-como-a-tecnologia-pode-ajudar-no-monitoramento-ambiental-": {
         "title": "Como a tecnologia pode ajudar no Monitoramento Ambiental?",
-        "body": `<h2>Como a tecnologia pode ajudar no Monitoramento Ambiental?</h2>
-<p>A tecnologia desempenha um papel crucial no aprimoramento do monitoramento ambiental, tornando-o mais eficiente, preciso e abrangente. Sensores avançados, plataformas de coleta de dados em tempo real, inteligência artificial e análise de big data permitem a detecção precoce de problemas, a modelagem de cenários e a comunicação eficaz de informações. Isso facilita a resposta rápida a desastres ambientais e a implementação de medidas preventivas.</p>
-`
+        "body": `
+            <p>A tecnologia desempenha um papel crucial no aprimoramento do monitoramento ambiental, tornando-o mais eficiente, preciso e abrangente. Sensores avançados, plataformas de coleta de dados em tempo real, inteligência artificial e análise de big data permitem a detecção precoce de problemas, a modelagem de cenários e a comunicação eficaz de informações. Isso facilita a resposta rápida a desastres ambientais e a implementação de medidas preventivas.</p>
+        `
     },
     "topico1-monitoramento-ambiental-tipos-de-sensores-e-suas-aplica-es-": {
         "title": "Tipos de sensores e suas aplica\u00e7\u00f5es:",
-        "body": `<h2>Tipos de sensores e suas aplicações:</h2>
-<p>Diversos tipos de sensores são utilizados para coletar dados ambientais, cada um com aplicações específicas:</p>
-`
+        "body": `
+            <p>Diversos tipos de sensores são utilizados para coletar dados ambientais, cada um com aplicações específicas:</p>
+        `
     },
     "topico1-monitoramento-ambiental-sensores-de-qualidade-do-ar": {
         "title": "Sensores de Qualidade do Ar",
-        "body": `<h3>Sensores de Qualidade do Ar</h3>
-<p>Estes sensores medem a concentração de poluentes como material particulado (PM2.5, PM10), dióxido de carbono (CO2), monóxido de carbono (CO), dióxido de enxofre (SO2), óxidos de nitrogênio (NOx) e ozônio (O3). São cruciais para monitorar a poluição atmosférica em áreas urbanas e industriais, alertando sobre níveis perigosos e ajudando a formular estratégias de controle da poluição.</p>
-`
+        "body": `
+            <p>Estes sensores medem a concentração de poluentes como material particulado (PM2.5, PM10), dióxido de carbono (CO2), monóxido de carbono (CO), dióxido de enxofre (SO2), óxidos de nitrogênio (NOx) e ozônio (O3). São cruciais para monitorar a poluição atmosférica em áreas urbanas e industriais, alertando sobre níveis perigosos e ajudando a formular estratégias de controle da poluição.</p>
+        `
     },
     "topico1-monitoramento-ambiental-sensores-de-qualidade-da-gua": {
         "title": "Sensores de Qualidade da \u00c1gua",
-        "body": `<h3>Sensores de Qualidade da Água</h3>
-<p>Utilizados para avaliar parâmetros como pH, turbidez, oxigênio dissolvido, condutividade elétrica, temperatura e presença de contaminantes químicos e biológicos em rios, lagos e oceanos. Essenciais para a gestão de recursos hídricos, detecção de poluição e proteção de ecossistemas aquáticos.</p>
-`
+        "body": `
+            <p>Utilizados para avaliar parâmetros como pH, turbidez, oxigênio dissolvido, condutividade elétrica, temperatura e presença de contaminantes químicos e biológicos em rios, lagos e oceanos. Essenciais para a gestão de recursos hídricos, detecção de poluição e proteção de ecossistemas aquáticos.</p>
+        `
     },
     "topico1-monitoramento-ambiental-sensores-de-temperatura-e-umidade": {
         "title": "Sensores de Temperatura e Umidade",
-        "body": `<h3>Sensores de Temperatura e Umidade</h3>
-<p>Monitoram as condições climáticas, sendo fundamentais para estudos meteorológicos, agricultura de precisão, previsão de eventos extremos e avaliação das mudanças climáticas. Podem ser encontrados em estações meteorológicas, dispositivos IoT e sistemas de automação.</p>
-`
+        "body": `
+            <p>Monitoram as condições climáticas, sendo fundamentais para estudos meteorológicos, agricultura de precisão, previsão de eventos extremos e avaliação das mudanças climáticas. Podem ser encontrados em estações meteorológicas, dispositivos IoT e sistemas de automação.</p>
+        `
     },
     "topico1-monitoramento-ambiental-sensores-de-gases-de-efeito-estufa": {
         "title": "Sensores de Gases de Efeito Estufa",
-        "body": `<h3>Sensores de Gases de Efeito Estufa</h3>
-<p>Focados na medição de gases como metano (CH4) e dióxido de carbono (CO2) para entender suas concentrações na atmosfera e seu impacto no aquecimento global. São usados em pesquisas climáticas e no monitoramento de emissões industriais.</p>
-`
+        "body": `
+            <p>Focados na medição de gases como metano (CH4) e dióxido de carbono (CO2) para entender suas concentrações na atmosfera e seu impacto no aquecimento global. São usados em pesquisas climáticas e no monitoramento de emissões industriais.</p>
+        `
     },
     "topico1-monitoramento-ambiental-outros-sensores": {
         "title": "Outros Sensores",
-        "body": `<h3>Outros Sensores</h3>
-<p>Incluem sensores de solo (umidade, nutrientes), radiação solar (para energia solar e agricultura) e ruído (para monitoramento da poluição sonora em cidades).</p>
-<p><strong>Como funciona, onde pode se encontrar radares de sensores e aplicativos que mostram:</strong></p>
-<p>Sensores ambientais podem ser encontrados em estações de monitoramento fixas, dispositivos móveis, drones e satélites. Em cidades como São Paulo, redes de sensores são instaladas em pontos estratégicos para fornecer dados em tempo real. Aplicativos móveis e plataformas web integram esses dados, permitindo que cidadãos e autoridades visualizem a qualidade do ar, da água e outras informações ambientais. Muitos desses sistemas utilizam APIs para compartilhar dados e integrar-se com outras plataformas.</p>
-<p><strong>Alertas e Notificações:</strong></p>
-<p>Sistemas de monitoramento ambiental frequentemente incluem funcionalidades de alerta e notificação, que informam usuários e autoridades sobre condições ambientais que excedem limites seguros ou indicam eventos críticos. Isso permite uma resposta rápida a emergências e a implementação de medidas de mitigação.</p>
-`
+        "body": `
+            <p>Incluem sensores de solo (umidade, nutrientes), radiação solar (para energia solar e agricultura) e ruído (para monitoramento da poluição sonora em cidades).</p>
+            <p><strong>Como funciona, onde pode se encontrar radares de sensores e aplicativos que mostram:</strong></p>
+            <p>Sensores ambientais podem ser encontrados em estações de monitoramento fixas, dispositivos móveis, drones e satélites. Em cidades como São Paulo, redes de sensores são instaladas em pontos estratégicos para fornecer dados em tempo real. Aplicativos móveis e plataformas web integram esses dados, permitindo que cidadãos e autoridades visualizem a qualidade do ar, da água e outras informações ambientais. Muitos desses sistemas utilizam APIs para compartilhar dados e integrar-se com outras plataformas.</p>
+            <p><strong>Alertas e Notificações:</strong></p>
+            <p>Sistemas de monitoramento ambiental frequentemente incluem funcionalidades de alerta e notificação, que informam usuários e autoridades sobre condições ambientais que excedem limites seguros ou indicam eventos críticos. Isso permite uma resposta rápida a emergências e a implementação de medidas de mitigação.</p>
+        `
     },
     "topico1-monitoramento-ambiental-impacto-e-solu-es-tecnol-gicas": {
         "title": "Impacto e Solu\u00e7\u00f5es Tecnol\u00f3gicas",
-        "body": `<h2>Impacto e Soluções Tecnológicas</h2>
-<p>O monitoramento ambiental tecnológico tem um impacto significativo na capacidade de proteger o planeta. Por exemplo, em diversas cidades, a instalação de redes de sensores de qualidade do ar permitiu identificar fontes de poluição e implementar restrições de tráfego, resultando em melhorias na saúde respiratória da população. A detecção precoce de vazamentos em oleodutos por sensores de solo também evitou desastres ecológicos maiores.</p>
-`
-    },
-    "topico1-monitoramento-ambiental-api-de-clima-sugest-o-de-c-digo-": {
-        "title": "API de Clima (Sugest\u00e3o de C\u00f3digo)",
-        "body": `<h3>API de Clima (Sugestão de Código)</h3>
-<p>Para integrar dados de clima em aplicações, uma excelente opção gratuita e de código aberto é a API Open-Meteo. Ela não requer chave de API para uso não comercial e oferece uma vasta gama de dados meteorológicos. Abaixo, um exemplo de como acessar a API Open-Meteo usando Python para obter a previsão do tempo para São Paulo usando Python:</p>
-<p>\`\`\`python
-import requests</p>
-<p>def get_open_meteo_data(latitude, longitude):
-    base_url = "https://api.open-meteo.com/v1/forecast"
-    params = {
-        "latitude": latitude,
-        "longitude": longitude,
-        "hourly": "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,weather_code,wind_speed_10m",
-        "daily": "weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max",
-        "timezone": "America/Sao_Paulo"
-    }
-    try:
-        response = requests.get(base_url, params=params)
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins (4xx ou 5xx)
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao conectar à API Open-Meteo: {e}")
-        return None</p>
-<h1>Coordenadas para São Paulo</h1>
-<p>lat_sp = -23.5505
-lon_sp = -46.6333</p>
-<p>weather_data = get_open_meteo_data(lat_sp, lon_sp)</p>
-<p>if weather_data:
-    print("Previsão do tempo para São Paulo (via Open-Meteo):")
-    # Exemplo de como acessar um dado diário
-    print(f"Temperatura Máxima Hoje: {weather_data['daily']['temperature_2m_max'][0]}°C")
-    # Exemplo de como acessar um dado horário
-    print(f"Temperatura Agora: {weather_data['hourly']['temperature_2m'][0]}°C")
-else:
-    print("Não foi possível obter os dados do clima.")
-\`\`\`</p>
-<p><strong>Observação:</strong> Este código busca dados de temperatura, umidade, chance de precipitação e vento. A API Open-Meteo é altamente customizável, permitindo a consulta de dezenas de outras variáveis. Para dados específicos de <strong>qualidade do ar</strong>, a Open-Meteo também oferece um endpoint dedicado, que pode ser explorado em sua documentação.</p>
-`
+        "body": `
+            <p>O monitoramento ambiental tecnológico tem um impacto significativo na capacidade de proteger o planeta. Por exemplo, em diversas cidades, a instalação de redes de sensores de qualidade do ar permitiu identificar fontes de poluição e implementar restrições de tráfego, resultando em melhorias na saúde respiratória da população. A detecção precoce de vazamentos em oleodutos por sensores de solo também evitou desastres ecológicos maiores.</p>
+        `
     },
     "topico1-monitoramento-ambiental-fatos-reais-em-que-os-sensores-ajudaram-": {
         "title": "Fatos Reais em que os sensores ajudaram:",
-        "body": `<h3>Fatos Reais em que os sensores ajudaram:</h3>
-<ul>
-<li><strong>Redução da Poluição do Ar em Pequim:</strong> Durante os Jogos Olímpicos de 2008, Pequim implementou uma vasta rede de sensores de qualidade do ar, que ajudou as autoridades a monitorar e controlar as emissões, resultando em uma melhoria significativa da qualidade do ar durante o evento.</li>
-<li><strong>Monitoramento de Vazamentos de Petróleo:</strong> Sensores acústicos e químicos submarinos são usados para detectar vazamentos em oleodutos e plataformas de petróleo, permitindo uma resposta rápida para minimizar o impacto ambiental.</li>
-<li><strong>Previsão de Inundações:</strong> Em várias regiões, sensores de nível de água em rios e pluviômetros conectados a sistemas de alerta precoce ajudam a prever inundações, dando tempo para a evacuação e proteção de bens.</li>
-</ul>
-<p>[achei um vídeo, editar para colocar no site] - Esta parte será tratada na fase de compilação final, onde o vídeo será incorporado ou referenciado no documento.</p>`
+        "body": `
+            <ul>
+            <li><strong>Redução da Poluição do Ar em Pequim:</strong> Durante os Jogos Olímpicos de 2008, Pequim implementou uma vasta rede de sensores de qualidade do ar, que ajudou as autoridades a monitorar e controlar as emissões, resultando em uma melhoria significativa da qualidade do ar durante o evento.</li>
+            <li><strong>Monitoramento de Vazamentos de Petróleo:</strong> Sensores acústicos e químicos submarinos são usados para detectar vazamentos em oleodutos e plataformas de petróleo, permitindo uma resposta rápida para minimizar o impacto ambiental.</li>
+            <li><strong>Previsão de Inundações:</strong> Em várias regiões, sensores de nível de água em rios e pluviômetros conectados a sistemas de alerta precoce ajudam a prever inundações, dando tempo para a evacuação e proteção de bens.</li>
+            </ul>
+            <p>[achei um vídeo, editar para colocar no site] - Esta parte será tratada na fase de compilação final, onde o vídeo será incorporado ou referenciado no documento.</p>
+        `
     },
     "topico2-energia-limpa": {
         "title": "T\u00f3pico 2: Energia Limpa",
-        "body": `<h1>Tópico 2: Energia Limpa</h1>
-<h2>O que é Energia Limpa?</h2>
-<p>Energia limpa, também conhecida como energia renovável, refere-se a fontes de energia que não liberam poluentes na atmosfera ou que têm um impacto ambiental mínimo. Ao contrário dos combustíveis fósseis, que são finitos e contribuem para as mudanças climáticas, as fontes de energia limpa são naturalmente reabastecidas e sustentáveis a longo prazo. Elas são cruciais para a transição energética global e para a redução da pegada de carbono.</p>
-<h2>Como a tecnologia pode ajudar na Energia Limpa?</h2>
-<p>A tecnologia é a força motriz por trás do avanço e da viabilidade da energia limpa. Inovações em materiais, eletrônica, inteligência artificial e engenharia têm permitido o desenvolvimento de sistemas mais eficientes para captação, conversão, armazenamento e distribuição de energia renovável. A tecnologia também facilita a integração dessas fontes na rede elétrica existente e a otimização do consumo de energia.</p>
-<h2>Soluções de sistema de energia limpa e renovável:</h2>
-<h3>Energia Solar</h3>
-<p>Utiliza a luz do sol para gerar eletricidade (fotovoltaica) ou calor (térmica). A tecnologia fotovoltaica, com painéis solares cada vez mais eficientes e acessíveis, é uma das soluções mais populares para residências, empresas e grandes usinas. O avanço em baterias também permite o armazenamento da energia solar para uso noturno ou em dias nublados.</p>
-<h3>Energia Eólica</h3>
-<p>Converte a força do vento em eletricidade através de turbinas eólicas. Parques eólicos, tanto em terra (onshore) quanto no mar (offshore), são capazes de gerar grandes quantidades de energia. A tecnologia tem focado em turbinas maiores e mais eficientes, capazes de operar em diferentes condições de vento.</p>
-<h3>Energia Hidrelétrica</h3>
-<p>Produz eletricidade a partir da força da água em movimento, geralmente em rios, através de barragens e turbinas. É uma fonte de energia renovável estabelecida, mas seu impacto ambiental (alteração de ecossistemas fluviais) requer planejamento cuidadoso.</p>
-<h3>Biomassa e Biogás</h3>
-<p>Biomassa é matéria orgânica (como resíduos agrícolas, florestais ou urbanos) que pode ser queimada para gerar calor e eletricidade, ou convertida em biocombustíveis. Biogás é produzido pela decomposição anaeróbica de matéria orgânica, gerando um gás combustível que pode ser usado para energia. São soluções que aproveitam resíduos, reduzindo o descarte e gerando energia.</p>
-<h3>Energia das Marés e Ondas</h3>
-<p>Aproveita a energia cinética das marés e das ondas oceânicas para gerar eletricidade. Embora ainda em estágios iniciais de desenvolvimento comercial, essas tecnologias têm um grande potencial em regiões costeiras com condições favoráveis.</p>
-<h3>Energia Geotérmica</h3>
-<p>Utiliza o calor do interior da Terra para aquecimento ou geração de eletricidade. É uma fonte constante e confiável, mas sua viabilidade depende da localização geográfica.</p>
-<h3>Armazenamento e Integração</h3>
-<p>O armazenamento de energia, principalmente através de baterias (como as de íon-lítio), é fundamental para superar a intermitência de fontes como solar e eólica. A integração dessas fontes na rede elétrica é otimizada por sistemas inteligentes que gerenciam o fluxo de energia e garantem a estabilidade do fornecimento.</p>
-<h3>Redes Inteligentes (Smart Grids)</h3>
-<p>São redes elétricas avançadas que utilizam tecnologia digital para monitorar, controlar e gerenciar o fluxo de eletricidade de todas as fontes de geração para atender à demanda variável dos consumidores. Elas permitem uma maior integração de energias renováveis, otimizam a distribuição e aumentam a resiliência do sistema.</p>
-<h2>Dicas para Reduzir Consumo de Energia (Soluções para casa doméstica)</h2>
-<ul>
-<li><strong>Iluminação Eficiente:</strong> Substituir lâmpadas incandescentes por LEDs, que consomem significativamente menos energia e têm vida útil mais longa.</li>
-<li><strong>Eletrodomésticos Eficientes:</strong> Optar por aparelhos com selo Procel A (no Brasil) ou ENERGY STAR (internacional), que indicam alta eficiência energética.</li>
-<li><strong>Isolamento Térmico:</strong> Melhorar o isolamento de residências para reduzir a necessidade de aquecimento ou refrigeração.</li>
-<li><strong>Uso Consciente:</strong> Desligar luzes e aparelhos eletrônicos quando não estiverem em uso, tirar da tomada carregadores e dispositivos em stand-by.</li>
-</ul>
-<h2>Como aplicar Automação Residencial e Exemplos.</h2>
-<p>A automação residencial, ou casa inteligente, permite controlar e programar dispositivos eletrônicos e sistemas da casa para otimizar o consumo de energia e aumentar o conforto. Exemplos incluem:</p>
-<ul>
-<li><strong>Termostatos Inteligentes:</strong> Ajustam a temperatura automaticamente com base na presença de pessoas, horários e preferências, economizando energia com aquecimento e ar condicionado.</li>
-<li><strong>Iluminação Inteligente:</strong> Lâmpadas e sistemas de iluminação que podem ser controlados remotamente, programados para ligar/desligar ou ajustar a intensidade, e até mesmo reagir à luz natural.</li>
-<li><strong>Tomadas Inteligentes:</strong> Permitem ligar/desligar aparelhos conectados a elas remotamente ou por programação, evitando o consumo de energia em stand-by.</li>
-<li><strong>Sensores de Presença e Abertura:</strong> Acionam luzes ou sistemas de climatização apenas quando há pessoas no ambiente ou quando portas/janelas são abertas, evitando desperdício.</li>
-</ul>
-<h3>Exemplo de Integração com API (Conceitual para Automação Residencial)</h3>
-<p>Para automação residencial, muitas plataformas oferecem APIs para integração. Um exemplo notável de plataforma de código aberto é o Home Assistant, que permite um controle local e privado de dispositivos inteligentes. Abaixo, um exemplo conceitual de como você poderia interagir com um dispositivo inteligente (como uma lâmpada) via uma API hipotética, inspirada em conceitos de automação residencial:</p>
-<p>\`\`\`python
-import requests
-import json</p>
-<p>def control_smart_device(device_id, action, value, auth_token):
-    # URL e endpoints seriam específicos da plataforma (ex: Home Assistant, Tuya, etc.)
-    base_url = "https://api.smarthome.com/v1/devices" # Exemplo de URL base
-    headers = {
-        "Authorization": f"Bearer {auth_token}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "device_id": device_id,
-        "action": action,
-        "value": value
-    }
-    try:
-        # O endpoint e o método HTTP podem variar (GET, POST, PUT)
-        response = requests.post(f"{base_url}/{device_id}/control", headers=headers, data=json.dumps(payload))
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao controlar dispositivo: {e}")
-        return None</p>
-<h1>Substitua pelos seus dados reais e pela lógica de autenticação da plataforma</h1>
-<p>auth_token = "SEU_TOKEN_DE_AUTENTICACAO" # Token gerado pela plataforma de automação
-lamp_id = "lamp_sala_estar_001" # ID do dispositivo na plataforma</p>
-<p>print("\n--- Exemplo de Controle de Lâmpada Inteligente ---")</p>
-<h1>Exemplo: Ligar a lâmpada</h1>
-<p>print(f"Tentando ligar a lâmpada {lamp_id}...")
-result_on = control_smart_device(lamp_id, "turn_on", True, auth_token)
-if result_on:
-    print(f"Lâmpada {lamp_id} ligada com sucesso: {result_on}")
-else:
-    print(f"Falha ao ligar a lâmpada {lamp_id}.")</p>
-<h1>Exemplo: Ajustar brilho da lâmpada (se suportado pela API e dispositivo)</h1>
-<p>print(f"\nTentando ajustar o brilho da lâmpada {lamp_id} para 80%...")
-result_brightness = control_smart_device(lamp_id, "set_brightness", 80, auth_token)
-if result_brightness:
-    print(f"Brilho da lâmpada {lamp_id} ajustado com sucesso: {result_brightness}")
-else:
-    print(f"Falha ao ajustar o brilho da lâmpada {lamp_id}.")</p>
-<h1>Exemplo: Desligar a lâmpada</h1>
-<p>print(f"\nTentando desligar a lâmpada {lamp_id}...")
-result_off = control_smart_device(lamp_id, "turn_off", False, auth_token)
-if result_off:
-    print(f"Lâmpada {lamp_id} desligada com sucesso: {result_off}")
-else:
-    print(f"Falha ao desligar a lâmpada {lamp_id}.")
-\`\`\`</p>
-<p><strong>Observação:</strong> A implementação real de controle de dispositivos inteligentes varia muito entre fabricantes e plataformas. Este é um exemplo simplificado para ilustrar o conceito de interação via API. Para um projeto real, seria necessário consultar a documentação específica da plataforma ou dos dispositivos a serem controlados. Plataformas como Home Assistant (código aberto) e Tuya (com plano gratuito para desenvolvedores) são boas opções para explorar.</p>
-<p>[Pex da Luciana] - Esta parte será tratada na fase de compilação final, onde o conteúdo da Luciana será incorporado ou referenciado no documento.</p>`
+        "body": `
+            <h2>O que é Energia Limpa?</h2>
+            <p>Energia limpa, também conhecida como energia renovável, refere-se a fontes de energia que não liberam poluentes na atmosfera ou que têm um impacto ambiental mínimo. Ao contrário dos combustíveis fósseis, que são finitos e contribuem para as mudanças climáticas, as fontes de energia limpa são naturalmente reabastecidas e sustentáveis a longo prazo. Elas são cruciais para a transição energética global e para a redução da pegada de carbono.</p>
+            <h2>Como a tecnologia pode ajudar na Energia Limpa?</h2>
+            <p>A tecnologia é a força motriz por trás do avanço e da viabilidade da energia limpa. Inovações em materiais, eletrônica, inteligência artificial e engenharia têm permitido o desenvolvimento de sistemas mais eficientes para captação, conversão, armazenamento e distribuição de energia renovável. A tecnologia também facilita a integração dessas fontes na rede elétrica existente e a otimização do consumo de energia.</p>
+            <h2>Soluções de sistema de energia limpa e renovável:</h2>
+            <h3>Energia Solar</h3>
+            <p>Utiliza a luz do sol para gerar eletricidade (fotovoltaica) ou calor (térmica). A tecnologia fotovoltaica, com painéis solares cada vez mais eficientes e acessíveis, é uma das soluções mais populares para residências, empresas e grandes usinas. O avanço em baterias também permite o armazenamento da energia solar para uso noturno ou em dias nublados.</p>
+            <h3>Energia Eólica</h3>
+            <p>Converte a força do vento em eletricidade através de turbinas eólicas. Parques eólicos, tanto em terra (onshore) quanto no mar (offshore), são capazes de gerar grandes quantidades de energia. A tecnologia tem focado em turbinas maiores e mais eficientes, capazes de operar em diferentes condições de vento.</p>
+            <h3>Energia Hidrelétrica</h3>
+            <p>Produz eletricidade a partir da força da água em movimento, geralmente em rios, através de barragens e turbinas. É uma fonte de energia renovável estabelecida, mas seu impacto ambiental (alteração de ecossistemas fluviais) requer planejamento cuidadoso.</p>
+            <h3>Biomassa e Biogás</h3>
+            <p>Biomassa é matéria orgânica (como resíduos agrícolas, florestais ou urbanos) que pode ser queimada para gerar calor e eletricidade, ou convertida em biocombustíveis. Biogás é produzido pela decomposição anaeróbica de matéria orgânica, gerando um gás combustível que pode ser usado para energia. São soluções que aproveitam resíduos, reduzindo o descarte e gerando energia.</p>
+            <h3>Energia das Marés e Ondas</h3>
+            <p>Aproveita a energia cinética das marés e das ondas oceânicas para gerar eletricidade. Embora ainda em estágios iniciais de desenvolvimento comercial, essas tecnologias têm um grande potencial em regiões costeiras com condições favoráveis.</p>
+            <h3>Energia Geotérmica</h3>
+            <p>Utiliza o calor do interior da Terra para aquecimento ou geração de eletricidade. É uma fonte constante e confiável, mas sua viabilidade depende da localização geográfica.</p>
+            <h3>Armazenamento e Integração</h3>
+            <p>O armazenamento de energia, principalmente através de baterias (como as de íon-lítio), é fundamental para superar a intermitência de fontes como solar e eólica. A integração dessas fontes na rede elétrica é otimizada por sistemas inteligentes que gerenciam o fluxo de energia e garantem a estabilidade do fornecimento.</p>
+            <h3>Redes Inteligentes (Smart Grids)</h3>
+            <p>São redes elétricas avançadas que utilizam tecnologia digital para monitorar, controlar e gerenciar o fluxo de eletricidade de todas as fontes de geração para atender à demanda variável dos consumidores. Elas permitem uma maior integração de energias renováveis, otimizam a distribuição e aumentam a resiliência do sistema.</p>
+            <h2>Dicas para Reduzir Consumo de Energia (Soluções para casa doméstica)</h2>
+            <ul>
+                <li><strong>Iluminação Eficiente:</strong> Substituir lâmpadas incandescentes por LEDs, que consomem significativamente menos energia e têm vida útil mais longa.</li>
+                <li><strong>Eletrodomésticos Eficientes:</strong> Optar por aparelhos com selo Procel A (no Brasil) ou ENERGY STAR (internacional), que indicam alta eficiência energética.</li>
+                <li><strong>Isolamento Térmico:</strong> Melhorar o isolamento de residências para reduzir a necessidade de aquecimento ou refrigeração.</li>
+                <li><strong>Uso Consciente:</strong> Desligar luzes e aparelhos eletrônicos quando não estiverem em uso, tirar da tomada carregadores e dispositivos em stand-by.</li>
+                </ul>
+            <h2>Como aplicar Automação Residencial e Exemplos.</h2>
+            <p>A automação residencial, ou casa inteligente, permite controlar e programar dispositivos eletrônicos e sistemas da casa para otimizar o consumo de energia e aumentar o conforto. Exemplos incluem:</p>
+            <ul>
+                <li><strong>Termostatos Inteligentes:</strong> Ajustam a temperatura automaticamente com base na presença de pessoas, horários e preferências, economizando energia com aquecimento e ar condicionado.</li>
+                <li><strong>Iluminação Inteligente:</strong> Lâmpadas e sistemas de iluminação que podem ser controlados remotamente, programados para ligar/desligar ou ajustar a intensidade, e até mesmo reagir à luz natural.</li>
+                <li><strong>Tomadas Inteligentes:</strong> Permitem ligar/desligar aparelhos conectados a elas remotamente ou por programação, evitando o consumo de energia em stand-by.</li>
+                <li><strong>Sensores de Presença e Abertura:</strong> Acionam luzes ou sistemas de climatização apenas quando há pessoas no ambiente ou quando portas/janelas são abertas, evitando desperdício.</li>
+            </ul>
+        `
     },
     "topico2-energia-limpa-o-que-energia-limpa-": {
         "title": "O que \u00e9 Energia Limpa?",
