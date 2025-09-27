@@ -99,9 +99,17 @@ document.addEventListener('DOMContentLoaded', () => {
         "title": "Outros Sensores",
         "body": `
             <p>Incluem sensores de solo (umidade, nutrientes), radiação solar (para energia solar e agricultura) e ruído (para monitoramento da poluição sonora em cidades).</p>
-            <p><strong>Como funciona, onde pode se encontrar radares de sensores e aplicativos que mostram:</strong></p>
+        `
+    },
+    "topico1-monitoramento-ambiental-outros-sensores-1": {
+        "title": "Como funciona, onde pode se encontrar radares de sensores e aplicativos que mostram",
+        "body": `
             <p>Sensores ambientais podem ser encontrados em estações de monitoramento fixas, dispositivos móveis, drones e satélites. Em cidades como São Paulo, redes de sensores são instaladas em pontos estratégicos para fornecer dados em tempo real. Aplicativos móveis e plataformas web integram esses dados, permitindo que cidadãos e autoridades visualizem a qualidade do ar, da água e outras informações ambientais. Muitos desses sistemas utilizam APIs para compartilhar dados e integrar-se com outras plataformas.</p>
-            <p><strong>Alertas e Notificações:</strong></p>
+        `
+    },
+    "topico1-monitoramento-ambiental-outros-sensores-2": {
+        "title": "Alertas e Notificações",
+        "body": `
             <p>Sistemas de monitoramento ambiental frequentemente incluem funcionalidades de alerta e notificação, que informam usuários e autoridades sobre condições ambientais que excedem limites seguros ou indicam eventos críticos. Isso permite uma resposta rápida a emergências e a implementação de medidas de mitigação.</p>
         `
     },
