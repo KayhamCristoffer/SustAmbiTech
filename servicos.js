@@ -9,18 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Conteúdo detalhado para cada modal
     const modalContentData = {
     "topico1-monitoramento-ambiental": {
-        "title": "T\u00f3pico 1: Monitoramento Ambiental",
+        "title": "Monitoramento Ambiental",
         "body": `
             <h3>O que é Monitoramento Ambiental?</h3>
             <h3>Como a tecnologia pode ajudar no Monitoramento Ambiental?</h3>
-            <h3>Tipos de sensores e suas aplicações:</h3>
-            <h3>Sensores de Qualidade do Ar</h3>
-            <h3>Sensores de Qualidade da Água</h3>
-            <h3>Sensores de Temperatura e Umidade</h3>
-            <h3>Sensores de Gases de Efeito Estufa</h3>
-            <h3>Outros Sensores</h3>
-            <h3>Impacto e Soluções Tecnológicas</h3>
-            <h3>API de Clima (Sugestão de Código)</h3>
+            <h3>Quais tipos de sensores e suas aplicações?</h3>
+            <h3>- Sensores de Qualidade do Ar</h3>
+            <h3>- Sensores de Qualidade da Água</h3>
+            <h3>- Sensores de Temperatura e Umidade</h3>
+            <h3>- Sensores de Gases de Efeito Estufa</h3>
+            <h3>- Outros Sensores</h3>
+            <h3>Qual o Impacto e Soluções Tecnológicas</h3>
+            <h3>Veja como está o claimo em sua Cidade!</h3>
         `
     },
     "topico1-monitoramento-ambiental-o-que-monitoramento-ambiental-": {
@@ -85,45 +85,125 @@ document.addEventListener('DOMContentLoaded', () => {
         "title": "Fatos Reais em que os sensores ajudaram:",
         "body": `
             <ul>
-            <li><strong>Redução da Poluição do Ar em Pequim:</strong> Durante os Jogos Olímpicos de 2008, Pequim implementou uma vasta rede de sensores de qualidade do ar, que ajudou as autoridades a monitorar e controlar as emissões, resultando em uma melhoria significativa da qualidade do ar durante o evento.</li>
-            <li><strong>Monitoramento de Vazamentos de Petróleo:</strong> Sensores acústicos e químicos submarinos são usados para detectar vazamentos em oleodutos e plataformas de petróleo, permitindo uma resposta rápida para minimizar o impacto ambiental.</li>
-            <li><strong>Previsão de Inundações:</strong> Em várias regiões, sensores de nível de água em rios e pluviômetros conectados a sistemas de alerta precoce ajudam a prever inundações, dando tempo para a evacuação e proteção de bens.</li>
+                <li>Pequim reduziu a poluição atmosférica mortal em 20% em menos de um ano, usando aprendizado de máquina e big data para direcionar as políticas. 
+                    <a href="https://apolitical.co/solution-articles/pt/pequim-usa-maquina-aprendizado-big-data-alvo-poluicao-controles">Saiba Mais.</a></li>
+                <li>As tecnologias de Monitoramento de Integridade Estrutural auxiliam na verificação ideal de instalações infraestruturais, sistemas de transportadores, estações de compressão, poços e tubulações para medição de fadiga e carga.
+                    <a href="https://www.hbm.com/pt/3951/monitoramento-industria-de-petroleo-e-gas/">Saiba Mais.</a></li>
+                <li><strong>Previsão de Inundações:</strong> Em várias regiões, sensores de nível de água em rios e pluviômetros conectados a sistemas de alerta precoce ajudam a prever inundações, dando tempo para a evacuação e proteção de bens. 
+                    <a href="">Saiba Mais.</a></li>
+                </ul>
+            <p>Aplicativos para monitoramento:</p>
+            <ul>
+                <li><a href="https://www.boletimaomar.com.br/">
+                    Boletim ao Mar.</a></li>
+                <li><a href="index.html#clima-index">
+                    Veja o Clima em sua região</a></li>
             </ul>
-            <p>[achei um vídeo, editar para colocar no site] - Esta parte será tratada na fase de compilação final, onde o vídeo será incorporado ou referenciado no documento.</p>
         `
     },
     "topico2-energia-limpa": {
-        "title": "T\u00f3pico 2: Energia Limpa",
+        "title": "Energia Limpa",
         "body": `
-            <h2>O que é Energia Limpa?</h2>
-            <p>Energia limpa, também conhecida como energia renovável, refere-se a fontes de energia que não liberam poluentes na atmosfera ou que têm um impacto ambiental mínimo. Ao contrário dos combustíveis fósseis, que são finitos e contribuem para as mudanças climáticas, as fontes de energia limpa são naturalmente reabastecidas e sustentáveis a longo prazo. Elas são cruciais para a transição energética global e para a redução da pegada de carbono.</p>
-            <h2>Como a tecnologia pode ajudar na Energia Limpa?</h2>
-            <p>A tecnologia é a força motriz por trás do avanço e da viabilidade da energia limpa. Inovações em materiais, eletrônica, inteligência artificial e engenharia têm permitido o desenvolvimento de sistemas mais eficientes para captação, conversão, armazenamento e distribuição de energia renovável. A tecnologia também facilita a integração dessas fontes na rede elétrica existente e a otimização do consumo de energia.</p>
-            <h2>Soluções de sistema de energia limpa e renovável:</h2>
-            <h3>Energia Solar</h3>
-            <p>Utiliza a luz do sol para gerar eletricidade (fotovoltaica) ou calor (térmica). A tecnologia fotovoltaica, com painéis solares cada vez mais eficientes e acessíveis, é uma das soluções mais populares para residências, empresas e grandes usinas. O avanço em baterias também permite o armazenamento da energia solar para uso noturno ou em dias nublados.</p>
-            <h3>Energia Eólica</h3>
-            <p>Converte a força do vento em eletricidade através de turbinas eólicas. Parques eólicos, tanto em terra (onshore) quanto no mar (offshore), são capazes de gerar grandes quantidades de energia. A tecnologia tem focado em turbinas maiores e mais eficientes, capazes de operar em diferentes condições de vento.</p>
-            <h3>Energia Hidrelétrica</h3>
-            <p>Produz eletricidade a partir da força da água em movimento, geralmente em rios, através de barragens e turbinas. É uma fonte de energia renovável estabelecida, mas seu impacto ambiental (alteração de ecossistemas fluviais) requer planejamento cuidadoso.</p>
-            <h3>Biomassa e Biogás</h3>
-            <p>Biomassa é matéria orgânica (como resíduos agrícolas, florestais ou urbanos) que pode ser queimada para gerar calor e eletricidade, ou convertida em biocombustíveis. Biogás é produzido pela decomposição anaeróbica de matéria orgânica, gerando um gás combustível que pode ser usado para energia. São soluções que aproveitam resíduos, reduzindo o descarte e gerando energia.</p>
-            <h3>Energia das Marés e Ondas</h3>
-            <p>Aproveita a energia cinética das marés e das ondas oceânicas para gerar eletricidade. Embora ainda em estágios iniciais de desenvolvimento comercial, essas tecnologias têm um grande potencial em regiões costeiras com condições favoráveis.</p>
-            <h3>Energia Geotérmica</h3>
-            <p>Utiliza o calor do interior da Terra para aquecimento ou geração de eletricidade. É uma fonte constante e confiável, mas sua viabilidade depende da localização geográfica.</p>
+            <h3>O que é Energia Limpa?</h3>
+            <h3>Como a tecnologia pode ajudar na Energia Limpa?</h3>
+            <h3>Soluções de sistema de energia limpa e renovável:</h3>
+            <h3>- Energia Solar</h3>
+            <h3>- Energia Eólica</h3>
+            <h3>- Energia Hidrelétrica</h3>
+            <h3>- Biomassa e Biogás</h3>
+            <h3>- Energia das Marés e Ondas</h3>
+            <h3>- Energia Geotérmica</h3>
             <h3>Armazenamento e Integração</h3>
-            <p>O armazenamento de energia, principalmente através de baterias (como as de íon-lítio), é fundamental para superar a intermitência de fontes como solar e eólica. A integração dessas fontes na rede elétrica é otimizada por sistemas inteligentes que gerenciam o fluxo de energia e garantem a estabilidade do fornecimento.</p>
             <h3>Redes Inteligentes (Smart Grids)</h3>
+            <h3>Dicas para Reduzir Consumo de Energia (Soluções para casa doméstica)</h3>
+            <h3>Como aplicar Automação Residencial e Exemplos.</h3>
+        `
+    },
+    "topico2-energia-limpa-o-que-energia-limpa-": {
+        "title": "O que \u00e9 Energia Limpa?",
+        "body": `
+            <p>Energia limpa, também conhecida como energia renovável, refere-se a fontes de energia que não liberam poluentes na atmosfera ou que têm um impacto ambiental mínimo. Ao contrário dos combustíveis fósseis, que são finitos e contribuem para as mudanças climáticas, as fontes de energia limpa são naturalmente reabastecidas e sustentáveis a longo prazo. Elas são cruciais para a transição energética global e para a redução da pegada de carbono.</p>
+        `
+    },
+    "topico2-energia-limpa-como-a-tecnologia-pode-ajudar-na-energia-limpa-": {
+        "title": "Como a tecnologia pode ajudar na Energia Limpa?",
+        "body": `
+            <p>A tecnologia é a força motriz por trás do avanço e da viabilidade da energia limpa. Inovações em materiais, eletrônica, inteligência artificial e engenharia têm permitido o desenvolvimento de sistemas mais eficientes para captação, conversão, armazenamento e distribuição de energia renovável. A tecnologia também facilita a integração dessas fontes na rede elétrica existente e a otimização do consumo de energia.</p>
+        `
+    },
+    "topico2-energia-limpa-solu-es-de-sistema-de-energia-limpa-e-renov-vel-": {
+        "title": "Solu\u00e7\u00f5es de sistema de energia limpa e renov\u00e1vel:",
+        "body": `
+            <h3>Energia SOlar</h3>
+            <h3>Energia Eólica</h3>    
+            <h3>Energia Hidrelétrica</h3>
+            <h3>Biomassa e Biogás</h3>
+            <h3>Energia das Marés e Ondas</h3>
+            <h3>Energia Geotérmica</h3>
+        `
+    },
+    "topico2-energia-limpa-energia-solar": {
+        "title": "Energia Solar",
+        "body": `
+            <p>Utiliza a luz do sol para gerar eletricidade (fotovoltaica) ou calor (térmica). A tecnologia fotovoltaica, com painéis solares cada vez mais eficientes e acessíveis, é uma das soluções mais populares para residências, empresas e grandes usinas. O avanço em baterias também permite o armazenamento da energia solar para uso noturno ou em dias nublados.</p>
+        `
+    },
+    "topico2-energia-limpa-energia-e-lica": {
+        "title": "Energia E\u00f3lica",
+        "body": `
+            <p>Converte a força do vento em eletricidade através de turbinas eólicas. Parques eólicos, tanto em terra (onshore) quanto no mar (offshore), são capazes de gerar grandes quantidades de energia. A tecnologia tem focado em turbinas maiores e mais eficientes, capazes de operar em diferentes condições de vento.</p>
+        `
+    },
+    "topico2-energia-limpa-energia-hidrel-trica": {
+        "title": "Energia Hidrel\u00e9trica",
+        "body": `
+            <p>Produz eletricidade a partir da força da água em movimento, geralmente em rios, através de barragens e turbinas. É uma fonte de energia renovável estabelecida, mas seu impacto ambiental (alteração de ecossistemas fluviais) requer planejamento cuidadoso.</p>
+        `
+    },
+    "topico2-energia-limpa-biomassa-e-biog-s": {
+        "title": "Biomassa e Biog\u00e1s",
+        "body": `
+            <p>Biomassa é matéria orgânica (como resíduos agrícolas, florestais ou urbanos) que pode ser queimada para gerar calor e eletricidade, ou convertida em biocombustíveis. Biogás é produzido pela decomposição anaeróbica de matéria orgânica, gerando um gás combustível que pode ser usado para energia. São soluções que aproveitam resíduos, reduzindo o descarte e gerando energia.</p>
+        `
+    },
+    "topico2-energia-limpa-energia-das-mar-s-e-ondas": {
+        "title": "Energia das Mar\u00e9s e Ondas",
+        "body": `
+            <p>Aproveita a energia cinética das marés e das ondas oceânicas para gerar eletricidade. Embora ainda em estágios iniciais de desenvolvimento comercial, essas tecnologias têm um grande potencial em regiões costeiras com condições favoráveis.</p>
+        `
+    },
+    "topico2-energia-limpa-energia-geot-rmica": {
+        "title": "Energia Geot\u00e9rmica",
+        "body": `
+            <p>Utiliza o calor do interior da Terra para aquecimento ou geração de eletricidade. É uma fonte constante e confiável, mas sua viabilidade depende da localização geográfica.</p>
+        `
+    },
+    "topico2-energia-limpa-armazenamento-e-integra-o": {
+        "title": "Armazenamento e Integra\u00e7\u00e3o",
+        "body": `
+            <p>O armazenamento de energia, principalmente através de baterias (como as de íon-lítio), é fundamental para superar a intermitência de fontes como solar e eólica. A integração dessas fontes na rede elétrica é otimizada por sistemas inteligentes que gerenciam o fluxo de energia e garantem a estabilidade do fornecimento.</p>
+        `
+    },
+    "topico2-energia-limpa-redes-inteligentes-smart-grids-": {
+        "title": "Redes Inteligentes (Smart Grids)",
+        "body": `
             <p>São redes elétricas avançadas que utilizam tecnologia digital para monitorar, controlar e gerenciar o fluxo de eletricidade de todas as fontes de geração para atender à demanda variável dos consumidores. Elas permitem uma maior integração de energias renováveis, otimizam a distribuição e aumentam a resiliência do sistema.</p>
-            <h2>Dicas para Reduzir Consumo de Energia (Soluções para casa doméstica)</h2>
+        `
+    },
+    "topico2-energia-limpa-dicas-para-reduzir-consumo-de-energia-solu-es-para-casa-dom-stica-": {
+        "title": "Dicas para Reduzir Consumo de Energia (Solu\u00e7\u00f5es para casa dom\u00e9stica)",
+        "body": `
             <ul>
                 <li><strong>Iluminação Eficiente:</strong> Substituir lâmpadas incandescentes por LEDs, que consomem significativamente menos energia e têm vida útil mais longa.</li>
                 <li><strong>Eletrodomésticos Eficientes:</strong> Optar por aparelhos com selo Procel A (no Brasil) ou ENERGY STAR (internacional), que indicam alta eficiência energética.</li>
                 <li><strong>Isolamento Térmico:</strong> Melhorar o isolamento de residências para reduzir a necessidade de aquecimento ou refrigeração.</li>
                 <li><strong>Uso Consciente:</strong> Desligar luzes e aparelhos eletrônicos quando não estiverem em uso, tirar da tomada carregadores e dispositivos em stand-by.</li>
-                </ul>
-            <h2>Como aplicar Automação Residencial e Exemplos.</h2>
+            </ul>
+        `
+    },
+    "topico2-energia-limpa-como-aplicar-automa-o-residencial-e-exemplos-": {
+        "title": "Como aplicar Automa\u00e7\u00e3o Residencial e Exemplos.",
+        "body": `
             <p>A automação residencial, ou casa inteligente, permite controlar e programar dispositivos eletrônicos e sistemas da casa para otimizar o consumo de energia e aumentar o conforto. Exemplos incluem:</p>
             <ul>
                 <li><strong>Termostatos Inteligentes:</strong> Ajustam a temperatura automaticamente com base na presença de pessoas, horários e preferências, economizando energia com aquecimento e ar condicionado.</li>
@@ -133,320 +213,93 @@ document.addEventListener('DOMContentLoaded', () => {
             </ul>
         `
     },
-    "topico2-energia-limpa-o-que-energia-limpa-": {
-        "title": "O que \u00e9 Energia Limpa?",
-        "body": `<h2>O que é Energia Limpa?</h2>
-<p>Energia limpa, também conhecida como energia renovável, refere-se a fontes de energia que não liberam poluentes na atmosfera ou que têm um impacto ambiental mínimo. Ao contrário dos combustíveis fósseis, que são finitos e contribuem para as mudanças climáticas, as fontes de energia limpa são naturalmente reabastecidas e sustentáveis a longo prazo. Elas são cruciais para a transição energética global e para a redução da pegada de carbono.</p>
-`
-    },
-    "topico2-energia-limpa-como-a-tecnologia-pode-ajudar-na-energia-limpa-": {
-        "title": "Como a tecnologia pode ajudar na Energia Limpa?",
-        "body": `<h2>Como a tecnologia pode ajudar na Energia Limpa?</h2>
-<p>A tecnologia é a força motriz por trás do avanço e da viabilidade da energia limpa. Inovações em materiais, eletrônica, inteligência artificial e engenharia têm permitido o desenvolvimento de sistemas mais eficientes para captação, conversão, armazenamento e distribuição de energia renovável. A tecnologia também facilita a integração dessas fontes na rede elétrica existente e a otimização do consumo de energia.</p>
-`
-    },
-    "topico2-energia-limpa-solu-es-de-sistema-de-energia-limpa-e-renov-vel-": {
-        "title": "Solu\u00e7\u00f5es de sistema de energia limpa e renov\u00e1vel:",
-        "body": `<h2>Soluções de sistema de energia limpa e renovável:</h2>
-`
-    },
-    "topico2-energia-limpa-energia-solar": {
-        "title": "Energia Solar",
-        "body": `<h3>Energia Solar</h3>
-<p>Utiliza a luz do sol para gerar eletricidade (fotovoltaica) ou calor (térmica). A tecnologia fotovoltaica, com painéis solares cada vez mais eficientes e acessíveis, é uma das soluções mais populares para residências, empresas e grandes usinas. O avanço em baterias também permite o armazenamento da energia solar para uso noturno ou em dias nublados.</p>
-`
-    },
-    "topico2-energia-limpa-energia-e-lica": {
-        "title": "Energia E\u00f3lica",
-        "body": `<h3>Energia Eólica</h3>
-<p>Converte a força do vento em eletricidade através de turbinas eólicas. Parques eólicos, tanto em terra (onshore) quanto no mar (offshore), são capazes de gerar grandes quantidades de energia. A tecnologia tem focado em turbinas maiores e mais eficientes, capazes de operar em diferentes condições de vento.</p>
-`
-    },
-    "topico2-energia-limpa-energia-hidrel-trica": {
-        "title": "Energia Hidrel\u00e9trica",
-        "body": `<h3>Energia Hidrelétrica</h3>
-<p>Produz eletricidade a partir da força da água em movimento, geralmente em rios, através de barragens e turbinas. É uma fonte de energia renovável estabelecida, mas seu impacto ambiental (alteração de ecossistemas fluviais) requer planejamento cuidadoso.</p>
-`
-    },
-    "topico2-energia-limpa-biomassa-e-biog-s": {
-        "title": "Biomassa e Biog\u00e1s",
-        "body": `<h3>Biomassa e Biogás</h3>
-<p>Biomassa é matéria orgânica (como resíduos agrícolas, florestais ou urbanos) que pode ser queimada para gerar calor e eletricidade, ou convertida em biocombustíveis. Biogás é produzido pela decomposição anaeróbica de matéria orgânica, gerando um gás combustível que pode ser usado para energia. São soluções que aproveitam resíduos, reduzindo o descarte e gerando energia.</p>
-`
-    },
-    "topico2-energia-limpa-energia-das-mar-s-e-ondas": {
-        "title": "Energia das Mar\u00e9s e Ondas",
-        "body": `<h3>Energia das Marés e Ondas</h3>
-<p>Aproveita a energia cinética das marés e das ondas oceânicas para gerar eletricidade. Embora ainda em estágios iniciais de desenvolvimento comercial, essas tecnologias têm um grande potencial em regiões costeiras com condições favoráveis.</p>
-`
-    },
-    "topico2-energia-limpa-energia-geot-rmica": {
-        "title": "Energia Geot\u00e9rmica",
-        "body": `<h3>Energia Geotérmica</h3>
-<p>Utiliza o calor do interior da Terra para aquecimento ou geração de eletricidade. É uma fonte constante e confiável, mas sua viabilidade depende da localização geográfica.</p>
-`
-    },
-    "topico2-energia-limpa-armazenamento-e-integra-o": {
-        "title": "Armazenamento e Integra\u00e7\u00e3o",
-        "body": `<h3>Armazenamento e Integração</h3>
-<p>O armazenamento de energia, principalmente através de baterias (como as de íon-lítio), é fundamental para superar a intermitência de fontes como solar e eólica. A integração dessas fontes na rede elétrica é otimizada por sistemas inteligentes que gerenciam o fluxo de energia e garantem a estabilidade do fornecimento.</p>
-`
-    },
-    "topico2-energia-limpa-redes-inteligentes-smart-grids-": {
-        "title": "Redes Inteligentes (Smart Grids)",
-        "body": `<h3>Redes Inteligentes (Smart Grids)</h3>
-<p>São redes elétricas avançadas que utilizam tecnologia digital para monitorar, controlar e gerenciar o fluxo de eletricidade de todas as fontes de geração para atender à demanda variável dos consumidores. Elas permitem uma maior integração de energias renováveis, otimizam a distribuição e aumentam a resiliência do sistema.</p>
-`
-    },
-    "topico2-energia-limpa-dicas-para-reduzir-consumo-de-energia-solu-es-para-casa-dom-stica-": {
-        "title": "Dicas para Reduzir Consumo de Energia (Solu\u00e7\u00f5es para casa dom\u00e9stica)",
-        "body": `<h2>Dicas para Reduzir Consumo de Energia (Soluções para casa doméstica)</h2>
-<ul>
-<li><strong>Iluminação Eficiente:</strong> Substituir lâmpadas incandescentes por LEDs, que consomem significativamente menos energia e têm vida útil mais longa.</li>
-<li><strong>Eletrodomésticos Eficientes:</strong> Optar por aparelhos com selo Procel A (no Brasil) ou ENERGY STAR (internacional), que indicam alta eficiência energética.</li>
-<li><strong>Isolamento Térmico:</strong> Melhorar o isolamento de residências para reduzir a necessidade de aquecimento ou refrigeração.</li>
-<li><strong>Uso Consciente:</strong> Desligar luzes e aparelhos eletrônicos quando não estiverem em uso, tirar da tomada carregadores e dispositivos em stand-by.</li>
-</ul>
-`
-    },
-    "topico2-energia-limpa-como-aplicar-automa-o-residencial-e-exemplos-": {
-        "title": "Como aplicar Automa\u00e7\u00e3o Residencial e Exemplos.",
-        "body": `<h2>Como aplicar Automação Residencial e Exemplos.</h2>
-<p>A automação residencial, ou casa inteligente, permite controlar e programar dispositivos eletrônicos e sistemas da casa para otimizar o consumo de energia e aumentar o conforto. Exemplos incluem:</p>
-<ul>
-<li><strong>Termostatos Inteligentes:</strong> Ajustam a temperatura automaticamente com base na presença de pessoas, horários e preferências, economizando energia com aquecimento e ar condicionado.</li>
-<li><strong>Iluminação Inteligente:</strong> Lâmpadas e sistemas de iluminação que podem ser controlados remotamente, programados para ligar/desligar ou ajustar a intensidade, e até mesmo reagir à luz natural.</li>
-<li><strong>Tomadas Inteligentes:</strong> Permitem ligar/desligar aparelhos conectados a elas remotamente ou por programação, evitando o consumo de energia em stand-by.</li>
-<li><strong>Sensores de Presença e Abertura:</strong> Acionam luzes ou sistemas de climatização apenas quando há pessoas no ambiente ou quando portas/janelas são abertas, evitando desperdício.</li>
-</ul>
-`
-    },
     "topico2-energia-limpa-exemplo-de-integra-o-com-api-conceitual-para-automa-o-residencial-": {
         "title": "Exemplo de Integra\u00e7\u00e3o com API (Conceitual para Automa\u00e7\u00e3o Residencial)",
-        "body": `<h3>Exemplo de Integração com API (Conceitual para Automação Residencial)</h3>
-<p>Para automação residencial, muitas plataformas oferecem APIs para integração. Um exemplo notável de plataforma de código aberto é o Home Assistant, que permite um controle local e privado de dispositivos inteligentes. Abaixo, um exemplo conceitual de como você poderia interagir com um dispositivo inteligente (como uma lâmpada) via uma API hipotética, inspirada em conceitos de automação residencial:</p>
-<p>\`\`\`python
-import requests
-import json</p>
-<p>def control_smart_device(device_id, action, value, auth_token):
-    # URL e endpoints seriam específicos da plataforma (ex: Home Assistant, Tuya, etc.)
-    base_url = "https://api.smarthome.com/v1/devices" # Exemplo de URL base
-    headers = {
-        "Authorization": f"Bearer {auth_token}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "device_id": device_id,
-        "action": action,
-        "value": value
-    }
-    try:
-        # O endpoint e o método HTTP podem variar (GET, POST, PUT)
-        response = requests.post(f"{base_url}/{device_id}/control", headers=headers, data=json.dumps(payload))
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao controlar dispositivo: {e}")
-        return None</p>
-<h1>Substitua pelos seus dados reais e pela lógica de autenticação da plataforma</h1>
-<p>auth_token = "SEU_TOKEN_DE_AUTENTICACAO" # Token gerado pela plataforma de automação
-lamp_id = "lamp_sala_estar_001" # ID do dispositivo na plataforma</p>
-<p>print("\n--- Exemplo de Controle de Lâmpada Inteligente ---")</p>
-<h1>Exemplo: Ligar a lâmpada</h1>
-<p>print(f"Tentando ligar a lâmpada {lamp_id}...")
-result_on = control_smart_device(lamp_id, "turn_on", True, auth_token)
-if result_on:
-    print(f"Lâmpada {lamp_id} ligada com sucesso: {result_on}")
-else:
-    print(f"Falha ao ligar a lâmpada {lamp_id}.")</p>
-<h1>Exemplo: Ajustar brilho da lâmpada (se suportado pela API e dispositivo)</h1>
-<p>print(f"\nTentando ajustar o brilho da lâmpada {lamp_id} para 80%...")
-result_brightness = control_smart_device(lamp_id, "set_brightness", 80, auth_token)
-if result_brightness:
-    print(f"Brilho da lâmpada {lamp_id} ajustado com sucesso: {result_brightness}")
-else:
-    print(f"Falha ao ajustar o brilho da lâmpada {lamp_id}.")</p>
-<h1>Exemplo: Desligar a lâmpada</h1>
-<p>print(f"\nTentando desligar a lâmpada {lamp_id}...")
-result_off = control_smart_device(lamp_id, "turn_off", False, auth_token)
-if result_off:
-    print(f"Lâmpada {lamp_id} desligada com sucesso: {result_off}")
-else:
-    print(f"Falha ao desligar a lâmpada {lamp_id}.")
-\`\`\`</p>
-<p><strong>Observação:</strong> A implementação real de controle de dispositivos inteligentes varia muito entre fabricantes e plataformas. Este é um exemplo simplificado para ilustrar o conceito de interação via API. Para um projeto real, seria necessário consultar a documentação específica da plataforma ou dos dispositivos a serem controlados. Plataformas como Home Assistant (código aberto) e Tuya (com plano gratuito para desenvolvedores) são boas opções para explorar.</p>
-<p>[Pex da Luciana] - Esta parte será tratada na fase de compilação final, onde o conteúdo da Luciana será incorporado ou referenciado no documento.</p>`
-    },
+        "body": `
+            <p>Para automação residencial, muitas plataformas oferecem APIs para integração. Um exemplo notável de plataforma de código aberto é o Home Assistant, que permite um controle local e privado de dispositivos inteligentes. Abaixo, um exemplo conceitual de como você poderia interagir com um dispositivo inteligente (como uma lâmpada) via uma API hipotética, inspirada em conceitos de automação residencial:</p>
+            <p>Video de vcs apresentando e.e</p>
+            <p><strong>Observação:</strong> A implementação real de controle de dispositivos inteligentes varia muito entre fabricantes e plataformas. Este é um exemplo simplificado para ilustrar o conceito de interação via API. Para um projeto real, seria necessário consultar a documentação específica da plataforma ou dos dispositivos a serem controlados. Plataformas como Home Assistant (código aberto) e Tuya (com plano gratuito para desenvolvedores) são boas opções para explorar.</p>
+            `    
+        },
     "topico3-consumo-economia-consciente": {
-        "title": "T\u00f3pico 3: Consumo e Economia Consciente",
-        "body": `<h1>Tópico 3: Consumo e Economia Consciente</h1>
-<h2>O que é Consumo e Economia Consciente?</h2>
-<p>Consumo e economia consciente referem-se a um estilo de vida e a um conjunto de práticas que visam a utilização de recursos de forma mais responsável, minimizando o impacto ambiental e social, e otimizando o uso de bens e serviços. Isso envolve fazer escolhas informadas sobre o que comprar, como usar e como descartar, considerando a origem, o processo de produção, a durabilidade e o destino final dos produtos. O objetivo é promover um equilíbrio entre as necessidades individuais, o bem-estar social e a saúde do planeta.</p>
-<h2>Como a tecnologia pode ajudar no Consumo e Economia Consciente?</h2>
-<p>A tecnologia desempenha um papel fundamental na promoção do consumo e da economia consciente, oferecendo ferramentas e soluções que capacitam os indivíduos a tomar decisões mais sustentáveis. Desde aplicativos que monitoram o consumo de energia até plataformas que facilitam a reciclagem e a compra de produtos sustentáveis, a tecnologia torna mais fácil para as pessoas entenderem seu impacto, encontrarem alternativas e adotarem hábitos mais responsáveis. Ela também permite a automação de processos que reduzem o desperdício e otimizam o uso de recursos.</p>
-<h2>Soluções para reduzir custos e promover o consumo consciente:</h2>
-<h3>Iluminação LED</h3>
-<p>A substituição de lâmpadas incandescentes e fluorescentes por lâmpadas LED é uma das maneiras mais eficazes de reduzir o consumo de energia em residências e empresas. As LEDs são significativamente mais eficientes, duram muito mais tempo e oferecem melhor qualidade de luz, resultando em economia na conta de luz e menor necessidade de substituição.</p>
-<h3>Tecnologia e Automação</h3>
-<p>A automação residencial e o uso de tecnologias inteligentes podem otimizar o consumo de energia e recursos. Isso inclui:</p>
-<ul>
-<li><strong>Assistentes Virtuais:</strong> Dispositivos como Amazon Echo ou Google Home podem ser integrados a sistemas de casa inteligente para controlar luzes, termostatos e outros aparelhos, permitindo um gerenciamento mais eficiente do consumo.</li>
-<li><strong>Aplicativos de Monitoramento de Energia:</strong> Existem diversos aplicativos que se conectam a medidores inteligentes ou dispositivos plug-and-play para fornecer dados em tempo real sobre o consumo de energia, ajudando os usuários a identificar padrões de desperdício e a tomar medidas corretivas.</li>
-</ul>
-<h3>Tomadas Inteligentes</h3>
-<p>As tomadas inteligentes permitem ligar e desligar aparelhos eletrônicos remotamente ou programar seu funcionamento. Isso é particularmente útil para eliminar o consumo de energia em modo stand-by (phantom load), que pode representar uma parcela significativa do consumo total de uma residência.</p>
-<h3>Sensores de Presença ou Temporizadores</h3>
-<p>Instalar sensores de presença em ambientes como corredores, banheiros e áreas de serviço garante que as luzes sejam acesas apenas quando necessário e desligadas automaticamente após um período de inatividade. Temporizadores podem ser usados para controlar o funcionamento de sistemas de irrigação, aquecedores de água e outros aparelhos, evitando o uso desnecessário.</p>
-<h3>Equipamentos Domésticos com Selo Procel A/ENERGY STAR</h3>
-<p>Ao adquirir novos eletrodomésticos, é fundamental verificar os selos de eficiência energética, como o Procel A no Brasil ou o ENERGY STAR internacional. Esses selos indicam que o aparelho consome menos energia para realizar a mesma função, resultando em economia a longo prazo e menor impacto ambiental.</p>
-<h2>Aplicativos para Escanear produtos (Sugestão de Código para API)</h2>
-<p>Existem aplicativos que permitem escanear códigos de barras de produtos para obter informações sobre sua origem, composição, impacto ambiental e certificações de sustentabilidade. Para desenvolver uma funcionalidade similar, pode-se utilizar APIs de bancos de dados de produtos ou de organizações que fornecem dados de sustentabilidade. Um excelente exemplo é a API do Open Food Facts, que oferece dados abertos sobre produtos alimentícios. Abaixo, um exemplo de como acessar a API do Open Food Facts usando Python para obter informações de um produto:</p>
-<p>\`\`\`python
-import requests</p>
-<p>def get_openfoodfacts_product_info(barcode):
-    # A API do Open Food Facts não requer chave para leitura de dados públicos
-    base_url = f"https://world.openfoodfacts.org/api/v2/product/{barcode}.json"
-    headers = {
-        "User-Agent": "SustAmbiTechApp/1.0 (contact@sustambitech.com)" # É importante identificar sua aplicação
-    }
-    try:
-        response = requests.get(base_url, headers=headers)
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins
-        data = response.json()</p>
-<pre><code>    if data.get("status") == 1 and "product" in data:
-        product = data["product"]
-        return {
-            "name": product.get("product_name", "N/A"),
-            "brand": product.get("brands", "N/A"),
-            "ingredients": product.get("ingredients_text_pt", product.get("ingredients_text", "N/A")),
-            "nutriscore_grade": product.get("nutriscore_grade", "N/A"),
-            "ecoscore_grade": product.get("ecoscore_grade", "N/A"),
-            "nova_group": product.get("nova_group", "N/A")
-        }
-    else:
-        print(f"Produto com código de barras {barcode} não encontrado ou dados incompletos.")
-        return None
-except requests.exceptions.RequestException as e:
-    print(f"Erro ao obter informações do produto do Open Food Facts: {e}")
-    return None
-</code></pre>
-<h1>Exemplo de código de barras de um produto real (ex: água mineral)</h1>
-<p>barcode_example = "7894900011517" </p>
-<p>product_details = get_openfoodfacts_product_info(barcode_example)</p>
-<p>if product_details:
-    print(f"\n--- Informações do Produto (Código de Barras: {barcode_example}) ---")
-    print(f"Nome: {product_details["name"]}")
-    print(f"Marca: {product_details["brand"]}")
-    print(f"Ingredientes: {product_details["ingredients"]}")
-    print(f"Nutri-Score: {product_details["nutriscore_grade"].upper()}")
-    print(f"Eco-Score: {product_details["ecoscore_grade"].upper()}")
-    print(f"Grupo NOVA (Processamento): {product_details["nova_group"]}")
-else:
-    print("Não foi possível obter informações do produto.")
-\`\`\`</p>
-<p><strong>Observação:</strong> A API do Open Food Facts é gratuita para uso não comercial e não exige chave de API para leitura de dados. Para operações de escrita (como adicionar novos produtos), é necessário autenticação e um <code>User-Agent</code> personalizado. Este exemplo demonstra como a tecnologia pode ser usada para fornecer transparência e auxiliar o consumo consciente, permitindo que os usuários acessem informações detalhadas sobre os produtos que consomem.</p>
-<p>[encaminhar para o Play Storage] - Esta parte será tratada na fase de compilação final, onde links para lojas de aplicativos serão incorporados ou referenciados no documento.</p>`
+        "title": "Consumo e Economia Consciente",
+        "body": `
+            <h3>O que é Consumo e Economia Consciente?</h3>
+            <h3>Como a tecnologia pode ajudar no Consumo e Economia Consciente?</h3>
+            <h3>Soluções para reduzir custos e promover o consumo consciente:</h3>
+            <h3>Iluminação LED</h3>
+            <h3>Tecnologia e Automação</h3>
+            <h3>Tomadas Inteligentes</h3>
+            <h3>Sensores de Presença ou Temporizadores</h3>
+            <h3>Equipamentos Domésticos com Selo Procel A/ENERGY STAR</h3>
+            <h3>Aplicativos para Escanear produtos (Sugestão de Código para API)</h3>
+            <h3>Exemplo de código de barras de um produto real (ex: água mineral)</h3>
+`
     },
     "topico3-consumo-economia-consciente-o-que-consumo-e-economia-consciente-": {
         "title": "O que \u00e9 Consumo e Economia Consciente?",
-        "body": `<h2>O que é Consumo e Economia Consciente?</h2>
-<p>Consumo e economia consciente referem-se a um estilo de vida e a um conjunto de práticas que visam a utilização de recursos de forma mais responsável, minimizando o impacto ambiental e social, e otimizando o uso de bens e serviços. Isso envolve fazer escolhas informadas sobre o que comprar, como usar e como descartar, considerando a origem, o processo de produção, a durabilidade e o destino final dos produtos. O objetivo é promover um equilíbrio entre as necessidades individuais, o bem-estar social e a saúde do planeta.</p>
-`
+        "body": `
+            <p>Consumo e economia consciente referem-se a um estilo de vida e a um conjunto de práticas que visam a utilização de recursos de forma mais responsável, minimizando o impacto ambiental e social, e otimizando o uso de bens e serviços. Isso envolve fazer escolhas informadas sobre o que comprar, como usar e como descartar, considerando a origem, o processo de produção, a durabilidade e o destino final dos produtos. O objetivo é promover um equilíbrio entre as necessidades individuais, o bem-estar social e a saúde do planeta.</p>
+        `
     },
     "topico3-consumo-economia-consciente-como-a-tecnologia-pode-ajudar-no-consumo-e-economia-consciente-": {
         "title": "Como a tecnologia pode ajudar no Consumo e Economia Consciente?",
-        "body": `<h2>Como a tecnologia pode ajudar no Consumo e Economia Consciente?</h2>
-<p>A tecnologia desempenha um papel fundamental na promoção do consumo e da economia consciente, oferecendo ferramentas e soluções que capacitam os indivíduos a tomar decisões mais sustentáveis. Desde aplicativos que monitoram o consumo de energia até plataformas que facilitam a reciclagem e a compra de produtos sustentáveis, a tecnologia torna mais fácil para as pessoas entenderem seu impacto, encontrarem alternativas e adotarem hábitos mais responsáveis. Ela também permite a automação de processos que reduzem o desperdício e otimizam o uso de recursos.</p>
-`
+        "body": `
+            <p>A tecnologia desempenha um papel fundamental na promoção do consumo e da economia consciente, oferecendo ferramentas e soluções que capacitam os indivíduos a tomar decisões mais sustentáveis. Desde aplicativos que monitoram o consumo de energia até plataformas que facilitam a reciclagem e a compra de produtos sustentáveis, a tecnologia torna mais fácil para as pessoas entenderem seu impacto, encontrarem alternativas e adotarem hábitos mais responsáveis. Ela também permite a automação de processos que reduzem o desperdício e otimizam o uso de recursos.</p>
+        `
     },
     "topico3-consumo-economia-consciente-solu-es-para-reduzir-custos-e-promover-o-consumo-consciente-": {
         "title": "Solu\u00e7\u00f5es para reduzir custos e promover o consumo consciente:",
-        "body": `<h2>Soluções para reduzir custos e promover o consumo consciente:</h2>
+        "body": `
+
 `
     },
     "topico3-consumo-economia-consciente-ilumina-o-led": {
         "title": "Ilumina\u00e7\u00e3o LED",
-        "body": `<h3>Iluminação LED</h3>
-<p>A substituição de lâmpadas incandescentes e fluorescentes por lâmpadas LED é uma das maneiras mais eficazes de reduzir o consumo de energia em residências e empresas. As LEDs são significativamente mais eficientes, duram muito mais tempo e oferecem melhor qualidade de luz, resultando em economia na conta de luz e menor necessidade de substituição.</p>
-`
+        "body": `
+            <p>A substituição de lâmpadas incandescentes e fluorescentes por lâmpadas LED é uma das maneiras mais eficazes de reduzir o consumo de energia em residências e empresas. As LEDs são significativamente mais eficientes, duram muito mais tempo e oferecem melhor qualidade de luz, resultando em economia na conta de luz e menor necessidade de substituição.</p>
+        `
     },
     "topico3-consumo-economia-consciente-tecnologia-e-automa-o": {
         "title": "Tecnologia e Automa\u00e7\u00e3o",
-        "body": `<h3>Tecnologia e Automação</h3>
-<p>A automação residencial e o uso de tecnologias inteligentes podem otimizar o consumo de energia e recursos. Isso inclui:</p>
-<ul>
-<li><strong>Assistentes Virtuais:</strong> Dispositivos como Amazon Echo ou Google Home podem ser integrados a sistemas de casa inteligente para controlar luzes, termostatos e outros aparelhos, permitindo um gerenciamento mais eficiente do consumo.</li>
-<li><strong>Aplicativos de Monitoramento de Energia:</strong> Existem diversos aplicativos que se conectam a medidores inteligentes ou dispositivos plug-and-play para fornecer dados em tempo real sobre o consumo de energia, ajudando os usuários a identificar padrões de desperdício e a tomar medidas corretivas.</li>
-</ul>
-`
+        "body": `
+            <p>A automação residencial e o uso de tecnologias inteligentes podem otimizar o consumo de energia e recursos. Isso inclui:</p>
+            <ul>
+                <li><strong>Assistentes Virtuais:</strong> Dispositivos como Amazon Echo ou Google Home podem ser integrados a sistemas de casa inteligente para controlar luzes, termostatos e outros aparelhos, permitindo um gerenciamento mais eficiente do consumo.</li>
+                <li><strong>Aplicativos de Monitoramento de Energia:</strong> Existem diversos aplicativos que se conectam a medidores inteligentes ou dispositivos plug-and-play para fornecer dados em tempo real sobre o consumo de energia, ajudando os usuários a identificar padrões de desperdício e a tomar medidas corretivas.</li>
+            </ul>
+        `
     },
     "topico3-consumo-economia-consciente-tomadas-inteligentes": {
         "title": "Tomadas Inteligentes",
-        "body": `<h3>Tomadas Inteligentes</h3>
-<p>As tomadas inteligentes permitem ligar e desligar aparelhos eletrônicos remotamente ou programar seu funcionamento. Isso é particularmente útil para eliminar o consumo de energia em modo stand-by (phantom load), que pode representar uma parcela significativa do consumo total de uma residência.</p>
-`
+        "body": `
+            <p>As tomadas inteligentes permitem ligar e desligar aparelhos eletrônicos remotamente ou programar seu funcionamento. Isso é particularmente útil para eliminar o consumo de energia em modo stand-by (phantom load), que pode representar uma parcela significativa do consumo total de uma residência.</p>
+        `
     },
     "topico3-consumo-economia-consciente-sensores-de-presen-a-ou-temporizadores": {
         "title": "Sensores de Presen\u00e7a ou Temporizadores",
-        "body": `<h3>Sensores de Presença ou Temporizadores</h3>
-<p>Instalar sensores de presença em ambientes como corredores, banheiros e áreas de serviço garante que as luzes sejam acesas apenas quando necessário e desligadas automaticamente após um período de inatividade. Temporizadores podem ser usados para controlar o funcionamento de sistemas de irrigação, aquecedores de água e outros aparelhos, evitando o uso desnecessário.</p>
-`
+        "body": `
+            <p>Instalar sensores de presença em ambientes como corredores, banheiros e áreas de serviço garante que as luzes sejam acesas apenas quando necessário e desligadas automaticamente após um período de inatividade. Temporizadores podem ser usados para controlar o funcionamento de sistemas de irrigação, aquecedores de água e outros aparelhos, evitando o uso desnecessário.</p>
+        `
     },
     "topico3-consumo-economia-consciente-equipamentos-dom-sticos-com-selo-procel-a-energy-star": {
         "title": "Equipamentos Dom\u00e9sticos com Selo Procel A/ENERGY STAR",
-        "body": `<h3>Equipamentos Domésticos com Selo Procel A/ENERGY STAR</h3>
-<p>Ao adquirir novos eletrodomésticos, é fundamental verificar os selos de eficiência energética, como o Procel A no Brasil ou o ENERGY STAR internacional. Esses selos indicam que o aparelho consome menos energia para realizar a mesma função, resultando em economia a longo prazo e menor impacto ambiental.</p>
-`
+        "body": `
+            <p>Ao adquirir novos eletrodomésticos, é fundamental verificar os selos de eficiência energética, como o Procel A no Brasil ou o ENERGY STAR internacional. Esses selos indicam que o aparelho consome menos energia para realizar a mesma função, resultando em economia a longo prazo e menor impacto ambiental.</p>
+        `
     },
     "topico3-consumo-economia-consciente-aplicativos-para-escanear-produtos-sugest-o-de-c-digo-para-api-": {
         "title": "Aplicativos para Escanear produtos (Sugest\u00e3o de C\u00f3digo para API)",
-        "body": `<h2>Aplicativos para Escanear produtos (Sugestão de Código para API)</h2>
-<p>Existem aplicativos que permitem escanear códigos de barras de produtos para obter informações sobre sua origem, composição, impacto ambiental e certificações de sustentabilidade. Para desenvolver uma funcionalidade similar, pode-se utilizar APIs de bancos de dados de produtos ou de organizações que fornecem dados de sustentabilidade. Um excelente exemplo é a API do Open Food Facts, que oferece dados abertos sobre produtos alimentícios. Abaixo, um exemplo de como acessar a API do Open Food Facts usando Python para obter informações de um produto:</p>
-<p>\`\`\`python
-import requests</p>
-<p>def get_openfoodfacts_product_info(barcode):
-    # A API do Open Food Facts não requer chave para leitura de dados públicos
-    base_url = f"https://world.openfoodfacts.org/api/v2/product/{barcode}.json"
-    headers = {
-        "User-Agent": "SustAmbiTechApp/1.0 (contact@sustambitech.com)" # É importante identificar sua aplicação
-    }
-    try:
-        response = requests.get(base_url, headers=headers)
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins
-        data = response.json()</p>
-<pre><code>    if data.get("status") == 1 and "product" in data:
-        product = data["product"]
-        return {
-            "name": product.get("product_name", "N/A"),
-            "brand": product.get("brands", "N/A"),
-            "ingredients": product.get("ingredients_text_pt", product.get("ingredients_text", "N/A")),
-            "nutriscore_grade": product.get("nutriscore_grade", "N/A"),
-            "ecoscore_grade": product.get("ecoscore_grade", "N/A"),
-            "nova_group": product.get("nova_group", "N/A")
-        }
-    else:
-        print(f"Produto com código de barras {barcode} não encontrado ou dados incompletos.")
-        return None
-except requests.exceptions.RequestException as e:
-    print(f"Erro ao obter informações do produto do Open Food Facts: {e}")
-    return None
-</code></pre>
-<h1>Exemplo de código de barras de um produto real (ex: água mineral)</h1>
-<p>barcode_example = "7894900011517" </p>
-<p>product_details = get_openfoodfacts_product_info(barcode_example)</p>
-<p>if product_details:
-    print(f"\n--- Informações do Produto (Código de Barras: {barcode_example}) ---")
-    print(f"Nome: {product_details["name"]}")
-    print(f"Marca: {product_details["brand"]}")
-    print(f"Ingredientes: {product_details["ingredients"]}")
-    print(f"Nutri-Score: {product_details["nutriscore_grade"].upper()}")
-    print(f"Eco-Score: {product_details["ecoscore_grade"].upper()}")
-    print(f"Grupo NOVA (Processamento): {product_details["nova_group"]}")
-else:
-    print("Não foi possível obter informações do produto.")
-\`\`\`</p>
-<p><strong>Observação:</strong> A API do Open Food Facts é gratuita para uso não comercial e não exige chave de API para leitura de dados. Para operações de escrita (como adicionar novos produtos), é necessário autenticação e um <code>User-Agent</code> personalizado. Este exemplo demonstra como a tecnologia pode ser usada para fornecer transparência e auxiliar o consumo consciente, permitindo que os usuários acessem informações detalhadas sobre os produtos que consomem.</p>
-<p>[encaminhar para o Play Storage] - Esta parte será tratada na fase de compilação final, onde links para lojas de aplicativos serão incorporados ou referenciados no documento.</p>`
+        "body": `
+            <p>Existem aplicativos que permitem escanear códigos de barras de produtos para obter informações sobre sua origem, composição, impacto ambiental e certificações de sustentabilidade. Para desenvolver uma funcionalidade similar, pode-se utilizar APIs de bancos de dados de produtos ou de organizações que fornecem dados de sustentabilidade. Um excelente exemplo é a API do Open Food Facts, que oferece dados abertos sobre produtos alimentícios. Abaixo, um exemplo de como acessar a API do Open Food Facts usando Python para obter informações de um produto:</p>
+            <ul>
+                <li><a href=""></a>Aplicativo 1</li>
+                <li><a href=""></a>Aplicativo 2</li>
+                <li><a href=""></a>Aplicativo 3</li>
+            </ul>
+            <p>Exemplo de código de barras de um produto real (ex: água mineral)</p>
+            <p><strong>Observação:</strong> A API do Open Food Facts é gratuita para uso não comercial e não exige chave de API para leitura de dados. Para operações de escrita (como adicionar novos produtos), é necessário autenticação e um <code>User-Agent</code> personalizado. Este exemplo demonstra como a tecnologia pode ser usada para fornecer transparência e auxiliar o consumo consciente, permitindo que os usuários acessem informações detalhadas sobre os produtos que consomem.</p>
+        `
     },
     "topico4-reciclagem-inteligente": {
         "title": "T\u00f3pico 4: Reciclagem Inteligente",
