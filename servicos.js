@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `
     },
     "topico1-monitoramento-ambiental-o-que-monitoramento-ambiental-": {
+        "title": "O que \u00e9 Monitoramento Ambiental?",
         "body": `
             <p>Monitoramento ambiental refere-se à coleta sistemática de dados sobre o estado do meio ambiente, incluindo ar, água, solo e biodiversidade. O objetivo é avaliar a qualidade ambiental, identificar tendências, prever impactos e fornecer informações para a tomada de decisões e implementação de políticas de proteção ambiental. É uma ferramenta essencial para a gestão sustentável dos recursos naturais e para a saúde pública.</p>
             <a href="https://ambisis.com.br/blog/gestao-ambiental/monitoramento-ambiental/"
@@ -53,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `
     },
     "topico1-monitoramento-ambiental-como-a-tecnologia-pode-ajudar-no-monitoramento-ambiental-": {
+        "title": "Como a tecnologia pode ajudar no Monitoramento Ambiental?",
         "body": `
             <p>A tecnologia desempenha um papel crucial no aprimoramento do monitoramento ambiental, tornando-o mais eficiente, preciso e abrangente. Sensores avançados, plataformas de coleta de dados em tempo real, inteligência artificial e análise de big data permitem a detecção precoce de problemas, a modelagem de cenários e a comunicação eficaz de informações. Isso facilita a resposta rápida a desastres ambientais e a implementação de medidas preventivas.</p>
             <a href="https://manejebem.com/tecnologias-para-monitoramento-ambiental/">Saiba Mais.</a>
