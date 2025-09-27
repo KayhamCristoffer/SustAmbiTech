@@ -14,55 +14,62 @@ document.addEventListener('DOMContentLoaded', () => {
             <h3>O que é Monitoramento Ambiental?</h3>
             <h3>Como a tecnologia pode ajudar no Monitoramento Ambiental?</h3>
             <h3>Quais tipos de sensores e suas aplicações?</h3>
-            <h3>- Sensores de Qualidade do Ar</h3>
-            <h3>- Sensores de Qualidade da Água</h3>
-            <h3>- Sensores de Temperatura e Umidade</h3>
-            <h3>- Sensores de Gases de Efeito Estufa</h3>
-            <h3>- Outros Sensores</h3>
-            <h3>Qual o Impacto e Soluções Tecnológicas</h3>
-            <h3>Veja como está o claimo em sua Cidade!</h3>
+            <h3>- Sensores de Qualidade do Ar.</h3>
+            <h3>- Sensores de Qualidade da Água.</h3>
+            <h3>- Sensores de Temperatura e Umidade.</h3>
+            <h3>- Sensores de Gases de Efeito Estufa.</h3>
+            <h3>- Outros Sensores.</h3>
+            <h3>Qual o Impacto e Soluções Tecnológicas?</h3>
+            <h3>Veja como está o clima em sua Cidade!</h3>
         `
     },
     "topico1-monitoramento-ambiental-o-que-monitoramento-ambiental-": {
         "title": "O que \u00e9 Monitoramento Ambiental?",
         "body": `
             <p>Monitoramento ambiental refere-se à coleta sistemática de dados sobre o estado do meio ambiente, incluindo ar, água, solo e biodiversidade. O objetivo é avaliar a qualidade ambiental, identificar tendências, prever impactos e fornecer informações para a tomada de decisões e implementação de políticas de proteção ambiental. É uma ferramenta essencial para a gestão sustentável dos recursos naturais e para a saúde pública.</p>
+            <a href="https://ambisis.com.br/blog/gestao-ambiental/monitoramento-ambiental/">Saiba Mais.</a>
         `
     },
     "topico1-monitoramento-ambiental-como-a-tecnologia-pode-ajudar-no-monitoramento-ambiental-": {
         "title": "Como a tecnologia pode ajudar no Monitoramento Ambiental?",
         "body": `
             <p>A tecnologia desempenha um papel crucial no aprimoramento do monitoramento ambiental, tornando-o mais eficiente, preciso e abrangente. Sensores avançados, plataformas de coleta de dados em tempo real, inteligência artificial e análise de big data permitem a detecção precoce de problemas, a modelagem de cenários e a comunicação eficaz de informações. Isso facilita a resposta rápida a desastres ambientais e a implementação de medidas preventivas.</p>
+            <a href="https://manejebem.com/tecnologias-para-monitoramento-ambiental/">Saiba Mais.</a>
         `
     },
     "topico1-monitoramento-ambiental-tipos-de-sensores-e-suas-aplica-es-": {
         "title": "Tipos de sensores e suas aplica\u00e7\u00f5es:",
         "body": `
             <p>Diversos tipos de sensores são utilizados para coletar dados ambientais, cada um com aplicações específicas:</p>
+            <a href=""></a>
         `
     },
     "topico1-monitoramento-ambiental-sensores-de-qualidade-do-ar": {
         "title": "Sensores de Qualidade do Ar",
         "body": `
             <p>Estes sensores medem a concentração de poluentes como material particulado (PM2.5, PM10), dióxido de carbono (CO2), monóxido de carbono (CO), dióxido de enxofre (SO2), óxidos de nitrogênio (NOx) e ozônio (O3). São cruciais para monitorar a poluição atmosférica em áreas urbanas e industriais, alertando sobre níveis perigosos e ajudando a formular estratégias de controle da poluição.</p>
+            <a href=""></a>
         `
     },
     "topico1-monitoramento-ambiental-sensores-de-qualidade-da-gua": {
         "title": "Sensores de Qualidade da \u00c1gua",
         "body": `
             <p>Utilizados para avaliar parâmetros como pH, turbidez, oxigênio dissolvido, condutividade elétrica, temperatura e presença de contaminantes químicos e biológicos em rios, lagos e oceanos. Essenciais para a gestão de recursos hídricos, detecção de poluição e proteção de ecossistemas aquáticos.</p>
+            <a href=""></a>
         `
     },
     "topico1-monitoramento-ambiental-sensores-de-temperatura-e-umidade": {
         "title": "Sensores de Temperatura e Umidade",
         "body": `
             <p>Monitoram as condições climáticas, sendo fundamentais para estudos meteorológicos, agricultura de precisão, previsão de eventos extremos e avaliação das mudanças climáticas. Podem ser encontrados em estações meteorológicas, dispositivos IoT e sistemas de automação.</p>
+            <a href=""></a>
         `
     },
     "topico1-monitoramento-ambiental-sensores-de-gases-de-efeito-estufa": {
         "title": "Sensores de Gases de Efeito Estufa",
         "body": `
             <p>Focados na medição de gases como metano (CH4) e dióxido de carbono (CO2) para entender suas concentrações na atmosfera e seu impacto no aquecimento global. São usados em pesquisas climáticas e no monitoramento de emissões industriais.</p>
+            <a href=""></a>
         `
     },
     "topico1-monitoramento-ambiental-outros-sensores": {
@@ -302,296 +309,116 @@ document.addEventListener('DOMContentLoaded', () => {
         `
     },
     "topico4-reciclagem-inteligente": {
-        "title": "T\u00f3pico 4: Reciclagem Inteligente",
-        "body": `<h1>Tópico 4: Reciclagem Inteligente</h1>
-<h2>O que é Reciclagem Inteligente?</h2>
-<p>Reciclagem inteligente é a aplicação de tecnologias avançadas para otimizar e tornar mais eficiente o processo de coleta, triagem e reprocessamento de resíduos. Ela vai além da reciclagem tradicional, utilizando ferramentas digitais, automação e análise de dados para melhorar a taxa de recuperação de materiais, reduzir custos operacionais, aumentar a transparência e engajar os cidadãos de forma mais eficaz. O objetivo é criar um sistema de gestão de resíduos mais sustentável e circular.</p>
-<h2>Como a tecnologia pode ajudar na Reciclagem Inteligente?</h2>
-<p>A tecnologia é um pilar fundamental para a reciclagem inteligente, transformando a maneira como lidamos com o lixo. Ela oferece soluções para desafios como a baixa adesão da população, a contaminação de materiais recicláveis e a ineficiência logística. Através de aplicativos, sensores, inteligência artificial e robótica, a tecnologia permite:</p>
-<ul>
-<li><strong>Engajamento Cidadão:</strong> Facilitar a participação dos indivíduos no processo de reciclagem.</li>
-<li><strong>Otimização da Coleta:</strong> Tornar a coleta de resíduos mais eficiente e econômica.</li>
-<li><strong>Melhora da Triagem:</strong> Aumentar a precisão na separação dos materiais.</li>
-<li><strong>Rastreabilidade:</strong> Monitorar o fluxo dos resíduos do descarte ao reprocessamento.</li>
-<li><strong>Análise de Dados:</strong> Gerar insights para aprimorar continuamente o sistema de reciclagem.</li>
-</ul>
-<h2>Soluções para reciclagem inteligente:</h2>
-<h3>Aplicativos para Escanear produtos</h3>
-<p>Assim como no consumo consciente, aplicativos podem ser usados para escanear códigos de barras de produtos e fornecer informações sobre como descartá-los corretamente, quais partes são recicláveis e onde podem ser entregues. Isso educa o consumidor e simplifica o processo de separação de resíduos em casa.</p>
-<h3>Coleta Inteligente</h3>
-<p>Sistemas de coleta inteligente utilizam sensores em lixeiras e contêineres para monitorar o nível de enchimento em tempo real. Com base nesses dados, rotas de coleta são otimizadas, garantindo que os caminhões só coletem lixo quando os contêineres estão cheios, reduzindo o consumo de combustível, emissões e custos operacionais. Isso também evita o transbordamento de lixeiras e melhora a higiene urbana.</p>
-<h3>Triagem Automatizada</h3>
-<p>Centros de triagem modernos empregam tecnologias como inteligência artificial, visão computacional e robótica para identificar e separar diferentes tipos de materiais recicláveis (plásticos, metais, papéis, vidros) com alta velocidade e precisão. Isso minimiza a necessidade de mão de obra manual em tarefas repetitivas e perigosas, e aumenta a pureza dos materiais reciclados, tornando-os mais valiosos para a indústria.</p>
-<h3>Cidades Inteligentes</h3>
-<p>No contexto de cidades inteligentes, a reciclagem inteligente é integrada a uma infraestrutura urbana mais ampla. Isso pode incluir a instalação de pontos de coleta automatizados, programas de incentivo à reciclagem baseados em recompensas digitais e a utilização de dados para planejar políticas públicas de gestão de resíduos mais eficazes.</p>
-<h2>Locais para coleta de aparelhos tecnológicos</h2>
-<p>O descarte correto de lixo eletrônico (e-lixo) é crucial devido aos componentes tóxicos e valiosos que contém. Muitos fabricantes, varejistas e municípios oferecem pontos de coleta específicos para esses materiais. A tecnologia pode ajudar a localizar esses pontos.</p>
-<h3>API para Localização de Pontos de Coleta Próximos (Sugestão de Código)</h3>
-<p>Para ajudar os usuários a encontrar locais de coleta de lixo eletrônico ou outros materiais recicláveis, pode-se desenvolver uma funcionalidade que utilize uma API de geolocalização (como Google Maps Platform, OpenStreetMap Nominatim) combinada com um banco de dados de pontos de coleta. Abaixo, um exemplo conceitual de como uma API para encontrar pontos de coleta próximos poderia ser acessada usando Python:</p>
-<p>\`\`\`python
-import requests
-import json</p>
-<h1>Exemplo de uso de uma API de localização de pontos de coleta (substitua pela URL e chave da API real)</h1>
-<p>def find_collection_points(latitude, longitude, material_type, api_key):
-    base_url = "https://api.recyclingpoints.com/v1/points"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-    params = {
-        "lat": latitude,
-        "lon": longitude,
-        "material": material_type,
-        "radius": 10000  # Raio de busca em metros (ex: 10 km)
-    }
-    try:
-        response = requests.get(base_url, headers=headers, params=params)
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins
-        data = response.json()
-        return data
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao buscar pontos de coleta: {e}")
-        return None</p>
-<h1>Substitua pelos seus dados reais</h1>
-<p>api_key = "SUA_CHAVE_API_DE_RECICLAGEM"
-user_lat = -23.550520
-user_lon = -46.633308  # Exemplo: Coordenadas de São Paulo
-material = "eletronicos" # ou "plastico", "vidro", "papel"</p>
-<p>collection_points = find_collection_points(user_lat, user_lon, material, api_key)</p>
-<p>if collection_points and collection_points.get("points"):
-    print(f"Pontos de coleta de {material} próximos:")
-    for point in collection_points["points"]:
-        print(f"- {point.get("name", "Ponto de Coleta")}: {point.get("address", "N/A")}")
-        print(f"  Horário de Funcionamento: {point.get("hours", "N/A")}")
-        print(f"  Contato: {point.get("contact", "N/A")}")
-else:
-    print(f"Nenhum ponto de coleta de {material} encontrado próximo.")
-\`\`\`</p>
-<p><strong>Observação:</strong> Não existe uma API universal para todos os pontos de coleta de reciclagem. Geralmente, é necessário integrar com APIs de serviços de mapas (para geolocalização) e manter um banco de dados próprio de pontos de coleta, ou integrar com APIs de iniciativas locais/governamentais. O exemplo acima é conceitual e ilustra a lógica de busca por proximidade.</p>
-<p>[encaminhar para o Play Storage] - Esta parte será tratada na fase de compilação final, onde links para lojas de aplicativos serão incorporados ou referenciados no documento.</p>`
+        "title": "Reciclagem Inteligente",
+        "body": `
+            <h2>O que é Reciclagem Inteligente?</h2>
+            <h2>Como a tecnologia pode ajudar na Reciclagem Inteligente?</h2>
+            <h2>Soluções para reciclagem inteligente:</h2>
+            <h3>Aplicativos para Escanear produtos</h3>
+            <h3>Coleta Inteligente</h3>
+            <h3>Triagem Automatizada</h3>
+            <h3>Cidades Inteligentes</h3>
+            <h2>Locais para coleta de aparelhos tecnológicos</h2>
+        `
     },
     "topico4-reciclagem-inteligente-o-que-reciclagem-inteligente-": {
         "title": "O que \u00e9 Reciclagem Inteligente?",
-        "body": `<h2>O que é Reciclagem Inteligente?</h2>
-<p>Reciclagem inteligente é a aplicação de tecnologias avançadas para otimizar e tornar mais eficiente o processo de coleta, triagem e reprocessamento de resíduos. Ela vai além da reciclagem tradicional, utilizando ferramentas digitais, automação e análise de dados para melhorar a taxa de recuperação de materiais, reduzir custos operacionais, aumentar a transparência e engajar os cidadãos de forma mais eficaz. O objetivo é criar um sistema de gestão de resíduos mais sustentável e circular.</p>
-`
+        "body": `
+            <p>Reciclagem inteligente é a aplicação de tecnologias avançadas para otimizar e tornar mais eficiente o processo de coleta, triagem e reprocessamento de resíduos. Ela vai além da reciclagem tradicional, utilizando ferramentas digitais, automação e análise de dados para melhorar a taxa de recuperação de materiais, reduzir custos operacionais, aumentar a transparência e engajar os cidadãos de forma mais eficaz. O objetivo é criar um sistema de gestão de resíduos mais sustentável e circular.</p>
+        `
     },
     "topico4-reciclagem-inteligente-como-a-tecnologia-pode-ajudar-na-reciclagem-inteligente-": {
         "title": "Como a tecnologia pode ajudar na Reciclagem Inteligente?",
-        "body": `<h2>Como a tecnologia pode ajudar na Reciclagem Inteligente?</h2>
-<p>A tecnologia é um pilar fundamental para a reciclagem inteligente, transformando a maneira como lidamos com o lixo. Ela oferece soluções para desafios como a baixa adesão da população, a contaminação de materiais recicláveis e a ineficiência logística. Através de aplicativos, sensores, inteligência artificial e robótica, a tecnologia permite:</p>
-<ul>
-<li><strong>Engajamento Cidadão:</strong> Facilitar a participação dos indivíduos no processo de reciclagem.</li>
-<li><strong>Otimização da Coleta:</strong> Tornar a coleta de resíduos mais eficiente e econômica.</li>
-<li><strong>Melhora da Triagem:</strong> Aumentar a precisão na separação dos materiais.</li>
-<li><strong>Rastreabilidade:</strong> Monitorar o fluxo dos resíduos do descarte ao reprocessamento.</li>
-<li><strong>Análise de Dados:</strong> Gerar insights para aprimorar continuamente o sistema de reciclagem.</li>
-</ul>
-`
+        "body": `
+            <p>A tecnologia é um pilar fundamental para a reciclagem inteligente, transformando a maneira como lidamos com o lixo. Ela oferece soluções para desafios como a baixa adesão da população, a contaminação de materiais recicláveis e a ineficiência logística. Através de aplicativos, sensores, inteligência artificial e robótica, a tecnologia permite:</p>
+            <ul>
+                <li><strong>Engajamento Cidadão:</strong> Facilitar a participação dos indivíduos no processo de reciclagem.</li>
+                <li><strong>Otimização da Coleta:</strong> Tornar a coleta de resíduos mais eficiente e econômica.</li>
+                <li><strong>Melhora da Triagem:</strong> Aumentar a precisão na separação dos materiais.</li>
+                <li><strong>Rastreabilidade:</strong> Monitorar o fluxo dos resíduos do descarte ao reprocessamento.</li>
+                <li><strong>Análise de Dados:</strong> Gerar insights para aprimorar continuamente o sistema de reciclagem.</li>
+            </ul>
+        `
     },
     "topico4-reciclagem-inteligente-solu-es-para-reciclagem-inteligente-": {
         "title": "Solu\u00e7\u00f5es para reciclagem inteligente:",
-        "body": `<h2>Soluções para reciclagem inteligente:</h2>
-`
+        "body": `
+        `
     },
     "topico4-reciclagem-inteligente-aplicativos-para-escanear-produtos": {
         "title": "Aplicativos para Escanear produtos",
-        "body": `<h3>Aplicativos para Escanear produtos</h3>
-<p>Assim como no consumo consciente, aplicativos podem ser usados para escanear códigos de barras de produtos e fornecer informações sobre como descartá-los corretamente, quais partes são recicláveis e onde podem ser entregues. Isso educa o consumidor e simplifica o processo de separação de resíduos em casa.</p>
-`
+        "body": `
+            <p>Assim como no consumo consciente, aplicativos podem ser usados para escanear códigos de barras de produtos e fornecer informações sobre como descartá-los corretamente, quais partes são recicláveis e onde podem ser entregues. Isso educa o consumidor e simplifica o processo de separação de resíduos em casa.</p>
+        `
     },
     "topico4-reciclagem-inteligente-coleta-inteligente": {
         "title": "Coleta Inteligente",
-        "body": `<h3>Coleta Inteligente</h3>
-<p>Sistemas de coleta inteligente utilizam sensores em lixeiras e contêineres para monitorar o nível de enchimento em tempo real. Com base nesses dados, rotas de coleta são otimizadas, garantindo que os caminhões só coletem lixo quando os contêineres estão cheios, reduzindo o consumo de combustível, emissões e custos operacionais. Isso também evita o transbordamento de lixeiras e melhora a higiene urbana.</p>
-`
+        "body": `
+            <p>Sistemas de coleta inteligente utilizam sensores em lixeiras e contêineres para monitorar o nível de enchimento em tempo real. Com base nesses dados, rotas de coleta são otimizadas, garantindo que os caminhões só coletem lixo quando os contêineres estão cheios, reduzindo o consumo de combustível, emissões e custos operacionais. Isso também evita o transbordamento de lixeiras e melhora a higiene urbana.</p>
+        `
     },
     "topico4-reciclagem-inteligente-triagem-automatizada": {
         "title": "Triagem Automatizada",
-        "body": `<h3>Triagem Automatizada</h3>
-<p>Centros de triagem modernos empregam tecnologias como inteligência artificial, visão computacional e robótica para identificar e separar diferentes tipos de materiais recicláveis (plásticos, metais, papéis, vidros) com alta velocidade e precisão. Isso minimiza a necessidade de mão de obra manual em tarefas repetitivas e perigosas, e aumenta a pureza dos materiais reciclados, tornando-os mais valiosos para a indústria.</p>
-`
+        "body": `
+            <p>Centros de triagem modernos empregam tecnologias como inteligência artificial, visão computacional e robótica para identificar e separar diferentes tipos de materiais recicláveis (plásticos, metais, papéis, vidros) com alta velocidade e precisão. Isso minimiza a necessidade de mão de obra manual em tarefas repetitivas e perigosas, e aumenta a pureza dos materiais reciclados, tornando-os mais valiosos para a indústria.</p>
+        `
     },
     "topico4-reciclagem-inteligente-cidades-inteligentes": {
         "title": "Cidades Inteligentes",
-        "body": `<h3>Cidades Inteligentes</h3>
-<p>No contexto de cidades inteligentes, a reciclagem inteligente é integrada a uma infraestrutura urbana mais ampla. Isso pode incluir a instalação de pontos de coleta automatizados, programas de incentivo à reciclagem baseados em recompensas digitais e a utilização de dados para planejar políticas públicas de gestão de resíduos mais eficazes.</p>
-`
+        "body": `
+            <p>No contexto de cidades inteligentes, a reciclagem inteligente é integrada a uma infraestrutura urbana mais ampla. Isso pode incluir a instalação de pontos de coleta automatizados, programas de incentivo à reciclagem baseados em recompensas digitais e a utilização de dados para planejar políticas públicas de gestão de resíduos mais eficazes.</p>
+        `
     },
     "topico4-reciclagem-inteligente-locais-para-coleta-de-aparelhos-tecnol-gicos": {
         "title": "Locais para coleta de aparelhos tecnol\u00f3gicos",
-        "body": `<h2>Locais para coleta de aparelhos tecnológicos</h2>
-<p>O descarte correto de lixo eletrônico (e-lixo) é crucial devido aos componentes tóxicos e valiosos que contém. Muitos fabricantes, varejistas e municípios oferecem pontos de coleta específicos para esses materiais. A tecnologia pode ajudar a localizar esses pontos.</p>
-`
-    },
-    "topico4-reciclagem-inteligente-api-para-localiza-o-de-pontos-de-coleta-pr-ximos-sugest-o-de-c-digo-": {
-        "title": "API para Localiza\u00e7\u00e3o de Pontos de Coleta Pr\u00f3ximos (Sugest\u00e3o de C\u00f3digo)",
-        "body": `<h3>API para Localização de Pontos de Coleta Próximos (Sugestão de Código)</h3>
-<p>Para ajudar os usuários a encontrar locais de coleta de lixo eletrônico ou outros materiais recicláveis, pode-se desenvolver uma funcionalidade que utilize uma API de geolocalização (como Google Maps Platform, OpenStreetMap Nominatim) combinada com um banco de dados de pontos de coleta. Abaixo, um exemplo conceitual de como uma API para encontrar pontos de coleta próximos poderia ser acessada usando Python:</p>
-<p>\`\`\`python
-import requests
-import json</p>
-<h1>Exemplo de uso de uma API de localização de pontos de coleta (substitua pela URL e chave da API real)</h1>
-<p>def find_collection_points(latitude, longitude, material_type, api_key):
-    base_url = "https://api.recyclingpoints.com/v1/points"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-    params = {
-        "lat": latitude,
-        "lon": longitude,
-        "material": material_type,
-        "radius": 10000  # Raio de busca em metros (ex: 10 km)
-    }
-    try:
-        response = requests.get(base_url, headers=headers, params=params)
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins
-        data = response.json()
-        return data
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao buscar pontos de coleta: {e}")
-        return None</p>
-<h1>Substitua pelos seus dados reais</h1>
-<p>api_key = "SUA_CHAVE_API_DE_RECICLAGEM"
-user_lat = -23.550520
-user_lon = -46.633308  # Exemplo: Coordenadas de São Paulo
-material = "eletronicos" # ou "plastico", "vidro", "papel"</p>
-<p>collection_points = find_collection_points(user_lat, user_lon, material, api_key)</p>
-<p>if collection_points and collection_points.get("points"):
-    print(f"Pontos de coleta de {material} próximos:")
-    for point in collection_points["points"]:
-        print(f"- {point.get("name", "Ponto de Coleta")}: {point.get("address", "N/A")}")
-        print(f"  Horário de Funcionamento: {point.get("hours", "N/A")}")
-        print(f"  Contato: {point.get("contact", "N/A")}")
-else:
-    print(f"Nenhum ponto de coleta de {material} encontrado próximo.")
-\`\`\`</p>
-<p><strong>Observação:</strong> Não existe uma API universal para todos os pontos de coleta de reciclagem. Geralmente, é necessário integrar com APIs de serviços de mapas (para geolocalização) e manter um banco de dados próprio de pontos de coleta, ou integrar com APIs de iniciativas locais/governamentais. O exemplo acima é conceitual e ilustra a lógica de busca por proximidade.</p>
-<p>[encaminhar para o Play Storage] - Esta parte será tratada na fase de compilação final, onde links para lojas de aplicativos serão incorporados ou referenciados no documento.</p>`
+        "body": `
+            <p>O descarte correto de lixo eletrônico (e-lixo) é crucial devido aos componentes tóxicos e valiosos que contém. Muitos fabricantes, varejistas e municípios oferecem pontos de coleta específicos para esses materiais. A tecnologia pode ajudar a localizar esses pontos.</p>
+        `
     },
     "topico5-mobilidade-sustentavel": {
-        "title": "T\u00f3pico 5: Mobilidade Sustent\u00e1vel",
-        "body": `<h1>Tópico 5: Mobilidade Sustentável</h1>
-<h2>O que é Mobilidade Sustentável?</h2>
-<p>Mobilidade sustentável refere-se a um conjunto de práticas e tecnologias que visam facilitar o deslocamento de pessoas e bens de forma a minimizar os impactos ambientais, sociais e econômicos negativos. Isso inclui a promoção de meios de transporte com baixa emissão de carbono, como caminhada, ciclismo, transporte público eficiente e veículos elétricos, além do planejamento urbano que reduza a necessidade de longos deslocamentos. O objetivo é criar sistemas de transporte que sejam acessíveis, equitativos, seguros e ecologicamente responsáveis a longo prazo.</p>
-<h2>Como a tecnologia pode ajudar na Mobilidade Sustentável?</h2>
-<p>A tecnologia é um catalisador fundamental para a mobilidade sustentável, oferecendo soluções inovadoras para tornar o transporte mais limpo, eficiente e inteligente. Desde o desenvolvimento de veículos elétricos e infraestruturas de carregamento até aplicativos de planejamento de rotas e sistemas de gerenciamento de tráfego, a tecnologia permite otimizar o uso de recursos, reduzir a poluição e melhorar a experiência do usuário. Ela também facilita a integração de diferentes modais de transporte e a coleta de dados para aprimorar políticas públicas.</p>
-<h2>Tipos de transportes sustentáveis:</h2>
-<h3>Carros (Elétricos, Bateria, Híbridos)</h3>
-<ul>
-<li><strong>Carros Elétricos (EVs):</strong> Veículos movidos exclusivamente por motores elétricos, alimentados por baterias recarregáveis. Não emitem poluentes diretamente do escapamento, contribuindo para a melhoria da qualidade do ar nas cidades.</li>
-<li><strong>Carros Híbridos:</strong> Combinam um motor a combustão interna com um motor elétrico. Podem ser híbridos convencionais (HEV), híbridos plug-in (PHEV) ou híbridos leves (MHEV), oferecendo maior eficiência de combustível e menor emissão em comparação com veículos puramente a combustão.</li>
-</ul>
-<p><strong>Tabela de Fabricante, Modelos, Descrição (Exemplo Conceitual):</strong></p>
-<p>| Fabricante | Modelo Principal | Tipo | Descrição Breve |
-| :--------- | :--------------- | :--- | :-------------- |
-| Tesla      | Model 3          | Elétrico | Sedã de alta performance e autonomia, líder de mercado. |
-| Chevrolet  | Bolt EV          | Elétrico | Hatchback compacto com boa autonomia e custo-benefício. |
-| Toyota     | Prius            | Híbrido | Pioneiro entre os híbridos, conhecido pela economia de combustível. |
-| Volvo      | XC60 Recharge    | Híbrido Plug-in | SUV premium com opção de rodar em modo totalmente elétrico. |</p>
-<h3>Transporte Público (Ônibus elétricos, ônibus, trem, metrô)</h3>
-<p>O transporte público é intrinsecamente mais sustentável do que o transporte individual, pois transporta um grande número de pessoas com menor pegada de carbono por passageiro. A eletrificação de frotas de ônibus e a expansão de redes de metrô e trem são cruciais para cidades mais verdes. Ônibus elétricos, por exemplo, eliminam emissões locais e reduzem a poluição sonora.</p>
-<h3>Bicicletas</h3>
-<p>A bicicleta é um meio de transporte de emissão zero, promovendo saúde e reduzindo o congestionamento. A tecnologia contribui com bicicletas elétricas (e-bikes), sistemas de compartilhamento de bicicletas (bike-sharing) e infraestrutura cicloviária inteligente.</p>
-<h2>Vantagens e Desafios (Benefícios a longo prazo)</h2>
-<p><strong>Vantagens:</strong></p>
-<ul>
-<li><strong>Redução da Poluição:</strong> Menos emissões de gases de efeito estufa e poluentes atmosféricos.</li>
-<li><strong>Melhora da Saúde Pública:</strong> Ar mais limpo e incentivo à atividade física.</li>
-<li><strong>Economia de Recursos:</strong> Menor dependência de combustíveis fósseis.</li>
-<li><strong>Redução do Congestionamento:</strong> Cidades mais fluidas e com menos tempo perdido no trânsito.</li>
-<li><strong>Cidades Mais Habitáveis:</strong> Espaços urbanos mais agradáveis e seguros para pedestres e ciclistas.</li>
-</ul>
-<p><strong>Desafios:</strong></p>
-<ul>
-<li><strong>Infraestrutura:</strong> Necessidade de mais estações de carregamento para EVs, ciclovias seguras e expansão do transporte público.</li>
-<li><strong>Custo Inicial:</strong> Veículos elétricos e infraestrutura podem ter um custo inicial mais alto.</li>
-<li><strong>Aceitação Cultural:</strong> Mudança de hábitos e preferência pelo carro particular.</li>
-<li><strong>Geração de Energia:</strong> A sustentabilidade dos EVs depende da fonte de energia utilizada para gerar a eletricidade que os alimenta.</li>
-</ul>
-<h3>API de Rotas para Transporte Verde na Cidade (Sugestão de Código)</h3>
-<p>Para promover a mobilidade sustentável, aplicativos podem oferecer rotas que priorizam o transporte público, ciclismo ou caminhada, ou que considerem a menor emissão de carbono. Isso pode ser feito integrando-se a APIs de mapas e transporte que forneçam dados sobre diferentes modais e suas características. Abaixo, um exemplo conceitual de como uma API de rotas sustentáveis poderia ser acessada usando Python:</p>
-<p>\`\`\`python
-import requests
-import json</p>
-<h1>Exemplo de uso de uma API de rotas sustentáveis (substitua pela URL e chave da API real)</h1>
-<p>def get_sustainable_route(origin, destination, mode, api_key):
-    base_url = "https://api.greenroutes.com/v1/route"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-    params = {
-        "origin": origin,
-        "destination": destination,
-        "mode": mode,  # Ex: "walking", "bicycling", "transit", "ev_car"
-        "optimize": "eco" # Otimizar para menor emissão/consumo
-    }
-    try:
-        response = requests.get(base_url, headers=headers, params=params)
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins
-        data = response.json()
-        return data
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao buscar rota sustentável: {e}")
-        return None</p>
-<h1>Substitua pelos seus dados reais</h1>
-<p>api_key = "SUA_CHAVE_API_DE_ROTAS"
-origem = "Rua da Consolação, 2000, São Paulo"
-destino = "Avenida Paulista, 1578, São Paulo"</p>
-<h1>Exemplo: Rota de bicicleta</h1>
-<p>bike_route = get_sustainable_route(origem, destino, "bicycling", api_key)
-if bike_route:
-    print("Rota de Bicicleta Sustentável:")
-    for step in bike_route.get("steps", []):
-        print(f"- {step.get("instruction")}")
-    print(f"Distância: {bike_route.get("distance")}")
-    print(f"Tempo Estimado: {bike_route.get("duration")}")</p>
-<h1>Exemplo: Rota de carro elétrico</h1>
-<p>ev_car_route = get_sustainable_route(origem, destino, "ev_car", api_key)
-if ev_car_route:
-    print("\nRota de Carro Elétrico Sustentável:")
-    for step in ev_car_route.get("steps", []):
-        print(f"- {step.get("instruction")}")
-    print(f"Distância: {ev_car_route.get("distance")}")
-    print(f"Tempo Estimado: {ev_car_route.get("duration")}")
-    print(f"Emissão de CO2 Estimada: {ev_car_route.get("co2_emission")}")
-\`\`\`</p>
-<p><strong>Observação:</strong> APIs de mapas como Google Maps Platform, HERE Technologies ou Mapbox oferecem funcionalidades de roteamento que podem ser adaptadas para priorizar opções sustentáveis ou calcular emissões. O exemplo acima é conceitual e ilustra a ideia de uma API focada em rotas verdes. A implementação real exigiria a integração com uma dessas plataformas e a lógica para calcular a "sustentabilidade" da rota.</p>`
+        "title": "Mobilidade Sustent\u00e1vel",
+        "body": `
+            <h3>O que é Mobilidade Sustentável?</h3>
+            <h3>Como a tecnologia pode ajudar na Mobilidade Sustentável?</h3>
+            <h3>Tipos de transportes sustentáveis:</h3>
+            <h3>- Carros (Elétricos, Bateria, Híbridos)</h3>
+            <h3>- Transporte Público (Ônibus elétricos, ônibus, trem, metrô)</h3>
+            <h3>- Bicicletas</h3>
+            <h3>Vantagens e Desafios (Benefícios a longo prazo)</h3>
+        `
     },
     "topico5-mobilidade-sustentavel-o-que-mobilidade-sustent-vel-": {
         "title": "O que \u00e9 Mobilidade Sustent\u00e1vel?",
-        "body": `<h2>O que é Mobilidade Sustentável?</h2>
-<p>Mobilidade sustentável refere-se a um conjunto de práticas e tecnologias que visam facilitar o deslocamento de pessoas e bens de forma a minimizar os impactos ambientais, sociais e econômicos negativos. Isso inclui a promoção de meios de transporte com baixa emissão de carbono, como caminhada, ciclismo, transporte público eficiente e veículos elétricos, além do planejamento urbano que reduza a necessidade de longos deslocamentos. O objetivo é criar sistemas de transporte que sejam acessíveis, equitativos, seguros e ecologicamente responsáveis a longo prazo.</p>
-`
+        "body": `
+            <p>Mobilidade sustentável refere-se a um conjunto de práticas e tecnologias que visam facilitar o deslocamento de pessoas e bens de forma a minimizar os impactos ambientais, sociais e econômicos negativos. Isso inclui a promoção de meios de transporte com baixa emissão de carbono, como caminhada, ciclismo, transporte público eficiente e veículos elétricos, além do planejamento urbano que reduza a necessidade de longos deslocamentos. O objetivo é criar sistemas de transporte que sejam acessíveis, equitativos, seguros e ecologicamente responsáveis a longo prazo.</p>
+        `
     },
     "topico5-mobilidade-sustentavel-como-a-tecnologia-pode-ajudar-na-mobilidade-sustent-vel-": {
         "title": "Como a tecnologia pode ajudar na Mobilidade Sustent\u00e1vel?",
-        "body": `<h2>Como a tecnologia pode ajudar na Mobilidade Sustentável?</h2>
-<p>A tecnologia é um catalisador fundamental para a mobilidade sustentável, oferecendo soluções inovadoras para tornar o transporte mais limpo, eficiente e inteligente. Desde o desenvolvimento de veículos elétricos e infraestruturas de carregamento até aplicativos de planejamento de rotas e sistemas de gerenciamento de tráfego, a tecnologia permite otimizar o uso de recursos, reduzir a poluição e melhorar a experiência do usuário. Ela também facilita a integração de diferentes modais de transporte e a coleta de dados para aprimorar políticas públicas.</p>
-`
+        "body": `
+            <p>A tecnologia é um catalisador fundamental para a mobilidade sustentável, oferecendo soluções inovadoras para tornar o transporte mais limpo, eficiente e inteligente. Desde o desenvolvimento de veículos elétricos e infraestruturas de carregamento até aplicativos de planejamento de rotas e sistemas de gerenciamento de tráfego, a tecnologia permite otimizar o uso de recursos, reduzir a poluição e melhorar a experiência do usuário. Ela também facilita a integração de diferentes modais de transporte e a coleta de dados para aprimorar políticas públicas.</p>
+        `
     },
     "topico5-mobilidade-sustentavel-tipos-de-transportes-sustent-veis-": {
         "title": "Tipos de transportes sustent\u00e1veis:",
-        "body": `<h2>Tipos de transportes sustentáveis:</h2>
-`
+        "body": `
+        `
     },
     "topico5-mobilidade-sustentavel-carros-el-tricos-bateria-h-bridos-": {
         "title": "Carros (El\u00e9tricos, Bateria, H\u00edbridos)",
-        "body": `<h3>Carros (Elétricos, Bateria, Híbridos)</h3>
-<ul>
-<li><strong>Carros Elétricos (EVs):</strong> Veículos movidos exclusivamente por motores elétricos, alimentados por baterias recarregáveis. Não emitem poluentes diretamente do escapamento, contribuindo para a melhoria da qualidade do ar nas cidades.</li>
-<li><strong>Carros Híbridos:</strong> Combinam um motor a combustão interna com um motor elétrico. Podem ser híbridos convencionais (HEV), híbridos plug-in (PHEV) ou híbridos leves (MHEV), oferecendo maior eficiência de combustível e menor emissão em comparação com veículos puramente a combustão.</li>
-</ul>
-<p><strong>Tabela de Fabricante, Modelos, Descrição (Exemplo Conceitual):</strong></p>
-<p>| Fabricante | Modelo Principal | Tipo | Descrição Breve |
-| :--------- | :--------------- | :--- | :-------------- |
-| Tesla      | Model 3          | Elétrico | Sedã de alta performance e autonomia, líder de mercado. |
-| Chevrolet  | Bolt EV          | Elétrico | Hatchback compacto com boa autonomia e custo-benefício. |
-| Toyota     | Prius            | Híbrido | Pioneiro entre os híbridos, conhecido pela economia de combustível. |
-| Volvo      | XC60 Recharge    | Híbrido Plug-in | SUV premium com opção de rodar em modo totalmente elétrico. |</p>
-`
+        "body": `
+            <ul>
+                <li><strong>Carros Elétricos (EVs):</strong> Veículos movidos exclusivamente por motores elétricos, alimentados por baterias recarregáveis. Não emitem poluentes diretamente do escapamento, contribuindo para a melhoria da qualidade do ar nas cidades.</li>
+                <li><strong>Carros Híbridos:</strong> Combinam um motor a combustão interna com um motor elétrico. Podem ser híbridos convencionais (HEV), híbridos plug-in (PHEV) ou híbridos leves (MHEV), oferecendo maior eficiência de combustível e menor emissão em comparação com veículos puramente a combustão.</li>
+            </ul>
+            <p><strong>Tabela de Fabricante, Modelos, Descrição (Exemplo Conceitual):</strong></p>
+            <p>| Fabricante | Modelo Principal | Tipo | Descrição Breve |
+               | :--------- | :--------------- | :--- | :-------------- |
+               | Tesla      | Model 3          | Elétrico | Sedã de alta performance e autonomia, líder de mercado. |
+               | Chevrolet  | Bolt EV          | Elétrico | Hatchback compacto com boa autonomia e custo-benefício. |
+               | Toyota     | Prius            | Híbrido | Pioneiro entre os híbridos, conhecido pela economia de combustível. |
+               | Volvo      | XC60 Recharge    | Híbrido Plug-in | SUV premium com opção de rodar em modo totalmente elétrico. |</p>
+        `
     },
     "topico5-mobilidade-sustentavel-transporte-p-blico-nibus-el-tricos-nibus-trem-metr-": {
         "title": "Transporte P\u00fablico (\u00d4nibus el\u00e9tricos, \u00f4nibus, trem, metr\u00f4)",
