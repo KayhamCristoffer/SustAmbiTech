@@ -52,6 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 target="_blank" rel="noopener noreferrer">
                 Saiba Mais
             </a>
+                                                            <br><br><br>
+
         `
     },
     "topico1-monitoramento-ambiental-como-a-tecnologia-pode-ajudar-no-monitoramento-ambiental-": {
@@ -66,6 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "body": `
             <p>Diversos tipos de sensores são utilizados para coletar dados ambientais, cada um com aplicações específicas:</p>
             <a href=""></a>
+                                                            <br><br><br>
+
         `
     },
     "topico1-monitoramento-ambiental-sensores-de-qualidade-do-ar": {
