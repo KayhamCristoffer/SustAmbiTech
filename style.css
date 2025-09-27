@@ -1651,3 +1651,58 @@
       list-style-position: inside;
       padding-left: 0;
   }
+
+/* Estilos para o conteúdo expansível */
+.expandable-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 15px;
+    color: var(--color-text-dark);
+}
+
+.service-card.expanded .expandable-content {
+    max-height: 1000px; /* Valor grande o suficiente para a maioria dos conteúdos */
+    transition: max-height 0.5s ease-in;
+    padding: 15px;
+}
+
+.expand-icon {
+    transition: transform 0.3s ease;
+}
+
+.service-card.expanded .expand-icon {
+    transform: rotate(45deg);
+}
+
+.service-card h4 {
+    color: var(--primary-green);
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.service-card ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.service-card li {
+    margin-bottom: 5px;
+}
+
+.service-card a {
+    color: var(--accent-green);
+    text-decoration: none;
+}
+
+.service-card a:hover {
+    text-decoration: underline;
+}
+
+

@@ -1,10 +1,31 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-    const serviceCards = document.querySelectorAll('.grid-item[data-modal-target]');
-    const modalOverlay = document.getElementById('serviceModalOverlay');
-    const modalCloseButton = document.getElementById('modalCloseButton');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalBody = document.getElementById('modalBody');
+    const serviceCards = document.querySelectorAll('.grid-item[data-expand-target]');
+
+    serviceCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const targetId = card.getAttribute('data-expand-target');
+            const content = modalContentData[targetId];
+            const expandableContent = card.querySelector('.expandable-content');
+            const icon = card.querySelector('.expand-icon');
+
+            if (card.classList.contains('expanded')) {
+                // Recolher o conteúdo
+                expandableContent.style.maxHeight = '0';
+                expandableContent.innerHTML = '';
+                card.classList.remove('expanded');
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            } else {
+                // Expandir o conteúdo
+                expandableContent.innerHTML = `<h4>${content.title}</h4>${content.body}`;
+                expandableContent.style.maxHeight = expandableContent.scrollHeight + 'px';
+                card.classList.add('expanded');
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            }
+        });
+    });
 
     // Conteúdo detalhado para cada modal
     const modalContentData = {
