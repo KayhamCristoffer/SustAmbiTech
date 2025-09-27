@@ -1391,13 +1391,6 @@
     color: var(--color-text-dark);
     line-height: 1.5;
   }
-#modal-body a {
-    position: relative;
-    z-index: 10;
-}
-.modal-overlay {
-    pointer-events: none; /* Se tiver overlay bloqueando */
-}
 
   /* --- Ícones laterais fixos --- */
   .floating-buttons-container {
