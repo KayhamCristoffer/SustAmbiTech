@@ -139,24 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </ul>
         `
     },
-    "topico2-energia-limpa": {
-        "title": "Energia Limpa",
-        "body": `
-            <h3>O que é Energia Limpa?</h3>
-            <h3>Como a tecnologia pode ajudar na Energia Limpa?</h3>
-            <h3>Soluções de sistema de energia limpa e renovável:</h3>
-            <h3>- Energia Solar</h3>
-            <h3>- Energia Eólica</h3>
-            <h3>- Energia Hidrelétrica</h3>
-            <h3>- Biomassa e Biogás</h3>
-            <h3>- Energia das Marés e Ondas</h3>
-            <h3>- Energia Geotérmica</h3>
-            <h3>Armazenamento e Integração</h3>
-            <h3>Redes Inteligentes (Smart Grids)</h3>
-            <h3>Dicas para Reduzir Consumo de Energia (Soluções para casa doméstica)</h3>
-            <h3>Como aplicar Automação Residencial e Exemplos.</h3>
-        `
-    },
     "topico2-energia-limpa-o-que-energia-limpa-": {
         "title": "O que \u00e9 Energia Limpa?",
         "body": `
@@ -168,18 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "body": `
             <p>A tecnologia é a força motriz por trás do avanço e da viabilidade da energia limpa. Inovações em materiais, eletrônica, inteligência artificial e engenharia têm permitido o desenvolvimento de sistemas mais eficientes para captação, conversão, armazenamento e distribuição de energia renovável. A tecnologia também facilita a integração dessas fontes na rede elétrica existente e a otimização do consumo de energia.</p>
         `
-    },
-    "topico2-energia-limpa-solu-es-de-sistema-de-energia-limpa-e-renov-vel-": {
-        "title": "Solu\u00e7\u00f5es de sistema de energia limpa e renov\u00e1vel:",
-        "body": `
-            <h3>Energia SOlar</h3>
-            <h3>Energia Eólica</h3>    
-            <h3>Energia Hidrelétrica</h3>
-            <h3>Biomassa e Biogás</h3>
-            <h3>Energia das Marés e Ondas</h3>
-            <h3>Energia Geotérmica</h3>
-        `
-    },
+    }, 
     "topico2-energia-limpa-energia-solar": {
         "title": "Energia Solar",
         "body": `
@@ -371,11 +342,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </ul>
         `
     },
-    "topico4-reciclagem-inteligente-solu-es-para-reciclagem-inteligente-": {
-        "title": "Solu\u00e7\u00f5es para reciclagem inteligente:",
-        "body": `
-        `
-    },
     "topico4-reciclagem-inteligente-aplicativos-para-escanear-produtos": {
         "title": "Aplicativos para Escanear produtos",
         "body": `
@@ -406,18 +372,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>O descarte correto de lixo eletrônico (e-lixo) é crucial devido aos componentes tóxicos e valiosos que contém. Muitos fabricantes, varejistas e municípios oferecem pontos de coleta específicos para esses materiais. A tecnologia pode ajudar a localizar esses pontos.</p>
         `
     },
-    "topico5-mobilidade-sustentavel": {
-        "title": "Mobilidade Sustent\u00e1vel",
-        "body": `
-            <h3>O que é Mobilidade Sustentável?</h3>
-            <h3>Como a tecnologia pode ajudar na Mobilidade Sustentável?</h3>
-            <h3>Tipos de transportes sustentáveis:</h3>
-            <h3>- Carros (Elétricos, Bateria, Híbridos)</h3>
-            <h3>- Transporte Público (Ônibus elétricos, ônibus, trem, metrô)</h3>
-            <h3>- Bicicletas</h3>
-            <h3>Vantagens e Desafios (Benefícios a longo prazo)</h3>
-        `
-    },
     "topico5-mobilidade-sustentavel-o-que-mobilidade-sustent-vel-": {
         "title": "O que \u00e9 Mobilidade Sustent\u00e1vel?",
         "body": `
@@ -443,181 +397,154 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><strong>Carros Híbridos:</strong> Combinam um motor a combustão interna com um motor elétrico. Podem ser híbridos convencionais (HEV), híbridos plug-in (PHEV) ou híbridos leves (MHEV), oferecendo maior eficiência de combustível e menor emissão em comparação com veículos puramente a combustão.</li>
             </ul>
             <p><strong>Tabela de Fabricante, Modelos, Descrição (Exemplo Conceitual):</strong></p>
-            <p>| Fabricante | Modelo Principal | Tipo | Descrição Breve |
-               | :--------- | :--------------- | :--- | :-------------- |
-               | Tesla      | Model 3          | Elétrico | Sedã de alta performance e autonomia, líder de mercado. |
-               | Chevrolet  | Bolt EV          | Elétrico | Hatchback compacto com boa autonomia e custo-benefício. |
-               | Toyota     | Prius            | Híbrido | Pioneiro entre os híbridos, conhecido pela economia de combustível. |
-               | Volvo      | XC60 Recharge    | Híbrido Plug-in | SUV premium com opção de rodar em modo totalmente elétrico. |</p>
+            <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse; text-align:left;">
+  <thead style="background-color:#f2f2f2;">
+    <tr>
+      <th>Fabricante</th>
+      <th>Descrição</th>
+      <th>Exemplos de Modelos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BYD (China)</td>
+      <td>Gigante chinesa de veículos elétricos, maior market share no Brasil; possui fábrica em Camaçari (BA).</td>
+      <td>Dolphin, Dolphin Mini, Song Plus, Seal, Yuan Plus</td>
+    </tr>
+    <tr>
+      <td>Volvo (Suécia)</td>
+      <td>Pioneira em eletrificação premium no Brasil, foco em SUVs elétricos e híbridos.</td>
+      <td>XC40 Recharge, C40 Recharge, EX30</td>
+    </tr>
+    <tr>
+      <td>JAC Motors (China)</td>
+      <td>Montadora chinesa que trouxe alguns dos primeiros elétricos acessíveis ao Brasil.</td>
+      <td>e-JS1, iEV40, iEV750V</td>
+    </tr>
+    <tr>
+      <td>GWM (China)</td>
+      <td>Montadora chinesa que investe em híbridos plug-in e elétricos no Brasil.</td>
+      <td>Haval H6 PHEV, Ora 03</td>
+    </tr>
+    <tr>
+      <td>Nissan (Japão)</td>
+      <td>Pioneira com carros elétricos no mundo, trouxe seu modelo global ao Brasil.</td>
+      <td>Leaf</td>
+    </tr>
+    <tr>
+      <td>BMW (Alemanha)</td>
+      <td>Marca premium com portfólio crescente de elétricos no Brasil.</td>
+      <td>iX, i4, iX3</td>
+    </tr>
+    <tr>
+      <td>Mini (Reino Unido/Alemanha)</td>
+      <td>Compactos elétricos de luxo.</td>
+      <td>Mini Cooper SE</td>
+    </tr>
+    <tr>
+      <td>Renault (França)</td>
+      <td>Uma das primeiras a vender elétricos no país.</td>
+      <td>Zoe, Kwid E-Tech</td>
+    </tr>
+    <tr>
+      <td>Peugeot (França)</td>
+      <td>Atuação crescente em eletrificação no Brasil.</td>
+      <td>e-2008, e-208 GT</td>
+    </tr>
+    <tr>
+      <td>Chevrolet (EUA)</td>
+      <td>GM aposta em eletrificação global, com planos para o Brasil.</td>
+      <td>Bolt EV, Bolt EUV</td>
+    </tr>
+    <tr>
+      <td>Toyota (Japão)</td>
+      <td>Líder em híbridos; amplia portfólio para o Brasil.</td>
+      <td>Corolla Cross Hybrid, Prius, RAV4 Hybrid</td>
+    </tr>
+    <tr>
+      <td>Volkswagen (Alemanha)</td>
+      <td>Investe em eletrificação e prepara modelos para o mercado brasileiro.</td>
+      <td>ID.4, Golf GTE</td>
+    </tr>
+    <tr>
+      <td>Stellantis (Europa/EUA)</td>
+      <td>Controla Fiat, Jeep, Peugeot e Citroën, todas com projetos de eletrificação no Brasil.</td>
+      <td>Fiat 500e, Jeep Compass 4xe, Peugeot e-2008</td>
+    </tr>
+    <tr>
+      <td>Audi (Alemanha)</td>
+      <td>Premium com linha e-tron no Brasil.</td>
+      <td>Q8 e-tron, e-tron GT</td>
+    </tr>
+    <tr>
+      <td>Neta Auto (China)</td>
+      <td>Entrante chinesa recém-chegada ao Brasil com modelos 100% elétricos.</td>
+      <td>Neta Aya, Neta U, Neta GT</td>
+    </tr>
+    <tr>
+      <td>Lecar (Brasil)</td>
+      <td>Montadora nacional, fábrica em construção no ES para híbridos e elétricos.</td>
+      <td>Protótipos de SUV e utilitários</td>
+    </tr>
+    <tr>
+      <td>FNM (Brasil)</td>
+      <td>Tradicional FNM renascida focada em caminhões elétricos.</td>
+      <td>FNM 832e, FNM 833e</td>
+    </tr>
+  </tbody>
+</table>
+
         `
     },
     "topico5-mobilidade-sustentavel-transporte-p-blico-nibus-el-tricos-nibus-trem-metr-": {
         "title": "Transporte P\u00fablico (\u00d4nibus el\u00e9tricos, \u00f4nibus, trem, metr\u00f4)",
-        "body": `<h3>Transporte Público (Ônibus elétricos, ônibus, trem, metrô)</h3>
-<p>O transporte público é intrinsecamente mais sustentável do que o transporte individual, pois transporta um grande número de pessoas com menor pegada de carbono por passageiro. A eletrificação de frotas de ônibus e a expansão de redes de metrô e trem são cruciais para cidades mais verdes. Ônibus elétricos, por exemplo, eliminam emissões locais e reduzem a poluição sonora.</p>
-`
+        "body": `
+            <p>O transporte público é intrinsecamente mais sustentável do que o transporte individual, pois transporta um grande número de pessoas com menor pegada de carbono por passageiro. A eletrificação de frotas de ônibus e a expansão de redes de metrô e trem são cruciais para cidades mais verdes. Ônibus elétricos, por exemplo, eliminam emissões locais e reduzem a poluição sonora.</p>
+        `
     },
     "topico5-mobilidade-sustentavel-bicicletas": {
         "title": "Bicicletas",
-        "body": `<h3>Bicicletas</h3>
-<p>A bicicleta é um meio de transporte de emissão zero, promovendo saúde e reduzindo o congestionamento. A tecnologia contribui com bicicletas elétricas (e-bikes), sistemas de compartilhamento de bicicletas (bike-sharing) e infraestrutura cicloviária inteligente.</p>
-`
+        "body": `
+            <p>A bicicleta é um meio de transporte de emissão zero, promovendo saúde e reduzindo o congestionamento. A tecnologia contribui com bicicletas elétricas (e-bikes), sistemas de compartilhamento de bicicletas (bike-sharing) e infraestrutura cicloviária inteligente.</p>
+        `
     },
     "topico5-mobilidade-sustentavel-vantagens-e-desafios-benef-cios-a-longo-prazo-": {
         "title": "Vantagens e Desafios (Benef\u00edcios a longo prazo)",
-        "body": `<h2>Vantagens e Desafios (Benefícios a longo prazo)</h2>
-<p><strong>Vantagens:</strong></p>
-<ul>
-<li><strong>Redução da Poluição:</strong> Menos emissões de gases de efeito estufa e poluentes atmosféricos.</li>
-<li><strong>Melhora da Saúde Pública:</strong> Ar mais limpo e incentivo à atividade física.</li>
-<li><strong>Economia de Recursos:</strong> Menor dependência de combustíveis fósseis.</li>
-<li><strong>Redução do Congestionamento:</strong> Cidades mais fluidas e com menos tempo perdido no trânsito.</li>
-<li><strong>Cidades Mais Habitáveis:</strong> Espaços urbanos mais agradáveis e seguros para pedestres e ciclistas.</li>
-</ul>
-<p><strong>Desafios:</strong></p>
-<ul>
-<li><strong>Infraestrutura:</strong> Necessidade de mais estações de carregamento para EVs, ciclovias seguras e expansão do transporte público.</li>
-<li><strong>Custo Inicial:</strong> Veículos elétricos e infraestrutura podem ter um custo inicial mais alto.</li>
-<li><strong>Aceitação Cultural:</strong> Mudança de hábitos e preferência pelo carro particular.</li>
-<li><strong>Geração de Energia:</strong> A sustentabilidade dos EVs depende da fonte de energia utilizada para gerar a eletricidade que os alimenta.</li>
-</ul>
-`
-    },
-    "topico5-mobilidade-sustentavel-api-de-rotas-para-transporte-verde-na-cidade-sugest-o-de-c-digo-": {
-        "title": "API de Rotas para Transporte Verde na Cidade (Sugest\u00e3o de C\u00f3digo)",
-        "body": `<h3>API de Rotas para Transporte Verde na Cidade (Sugestão de Código)</h3>
-<p>Para promover a mobilidade sustentável, aplicativos podem oferecer rotas que priorizam o transporte público, ciclismo ou caminhada, ou que considerem a menor emissão de carbono. Isso pode ser feito integrando-se a APIs de mapas e transporte que forneçam dados sobre diferentes modais e suas características. Abaixo, um exemplo conceitual de como uma API de rotas sustentáveis poderia ser acessada usando Python:</p>
-<p>\`\`\`python
-import requests
-import json</p>
-<h1>Exemplo de uso de uma API de rotas sustentáveis (substitua pela URL e chave da API real)</h1>
-<p>def get_sustainable_route(origin, destination, mode, api_key):
-    base_url = "https://api.greenroutes.com/v1/route"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-    params = {
-        "origin": origin,
-        "destination": destination,
-        "mode": mode,  # Ex: "walking", "bicycling", "transit", "ev_car"
-        "optimize": "eco" # Otimizar para menor emissão/consumo
-    }
-    try:
-        response = requests.get(base_url, headers=headers, params=params)
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins
-        data = response.json()
-        return data
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao buscar rota sustentável: {e}")
-        return None</p>
-<h1>Substitua pelos seus dados reais</h1>
-<p>api_key = "SUA_CHAVE_API_DE_ROTAS"
-origem = "Rua da Consolação, 2000, São Paulo"
-destino = "Avenida Paulista, 1578, São Paulo"</p>
-<h1>Exemplo: Rota de bicicleta</h1>
-<p>bike_route = get_sustainable_route(origem, destino, "bicycling", api_key)
-if bike_route:
-    print("Rota de Bicicleta Sustentável:")
-    for step in bike_route.get("steps", []):
-        print(f"- {step.get("instruction")}")
-    print(f"Distância: {bike_route.get("distance")}")
-    print(f"Tempo Estimado: {bike_route.get("duration")}")</p>
-<h1>Exemplo: Rota de carro elétrico</h1>
-<p>ev_car_route = get_sustainable_route(origem, destino, "ev_car", api_key)
-if ev_car_route:
-    print("\nRota de Carro Elétrico Sustentável:")
-    for step in ev_car_route.get("steps", []):
-        print(f"- {step.get("instruction")}")
-    print(f"Distância: {ev_car_route.get("distance")}")
-    print(f"Tempo Estimado: {ev_car_route.get("duration")}")
-    print(f"Emissão de CO2 Estimada: {ev_car_route.get("co2_emission")}")
-\`\`\`</p>
-<p><strong>Observação:</strong> APIs de mapas como Google Maps Platform, HERE Technologies ou Mapbox oferecem funcionalidades de roteamento que podem ser adaptadas para priorizar opções sustentáveis ou calcular emissões. O exemplo acima é conceitual e ilustra a ideia de uma API focada em rotas verdes. A implementação real exigiria a integração com uma dessas plataformas e a lógica para calcular a "sustentabilidade" da rota.</p>`
-    },
-    "topico6-politicas-legislacao": {
-        "title": "T\u00f3pico 6: Pol\u00edticas &amp; Legisla\u00e7\u00e3o",
-        "body": `<h1>Tópico 6: Políticas &amp; Legislação</h1>
-<h2>O que são Políticas &amp; Legislação?</h2>
-<p>Políticas e legislação ambiental e tecnológica referem-se ao conjunto de leis, regulamentos, normas e diretrizes estabelecidas por governos e órgãos internacionais para proteger o meio ambiente, regular o uso da tecnologia e promover o desenvolvimento sustentável. Elas servem como um arcabouço legal para a gestão de recursos naturais, controle da poluição, incentivo a práticas sustentáveis e garantia de que as inovações tecnológicas sejam utilizadas de forma ética e responsável. Essas políticas são essenciais para criar um ambiente de governança que suporte a sustentabilidade e a inovação.</p>
-<h2>Como a tecnologia pode ajudar nas Políticas &amp; Legislação?</h2>
-<p>A tecnologia desempenha um papel cada vez mais importante no desenvolvimento, implementação e fiscalização de políticas e legislação. Ferramentas digitais podem auxiliar na coleta e análise de dados para informar a criação de leis, monitorar a conformidade, automatizar processos de licenciamento e fiscalização, e aumentar a transparência. Além disso, a tecnologia pode facilitar a comunicação entre cidadãos, empresas e órgãos governamentais, tornando a participação pública mais acessível e eficaz.</p>
-<h2>Quais as Normas, Nacionais e Internacionais?</h2>
-<h3>Normas Nacionais</h3>
-<p>No Brasil, a legislação ambiental é robusta e inclui marcos como a Política Nacional do Meio Ambiente (Lei nº 6.938/81), que estabelece o Sistema Nacional do Meio Ambiente (SISNAMA) e o licenciamento ambiental. Outras leis importantes abrangem a gestão de resíduos sólidos (Lei nº 12.305/10), proteção da flora e fauna, recursos hídricos e unidades de conservação. A tecnologia também é regulamentada por leis de proteção de dados (LGPD), marcos civis da internet e políticas de inovação.</p>
-<h3>Normas Internacionais</h3>
-<p>Em nível internacional, acordos como o Acordo de Paris sobre mudanças climáticas, a Convenção sobre Diversidade Biológica e a Agenda 2030 para o Desenvolvimento Sustentável (com seus 17 Objetivos de Desenvolvimento Sustentável - ODS) estabelecem metas e diretrizes para a ação global. Organizações como a ISO (International Organization for Standardization) também desenvolvem normas técnicas (ex: ISO 14001 para gestão ambiental) que empresas e governos podem adotar voluntariamente.</p>
-<h2>Políticas Públicas</h2>
-<p>Políticas públicas são as ações e programas implementados pelo governo para resolver problemas sociais e ambientais. No contexto da sustentabilidade e tecnologia, elas podem incluir:</p>
-<ul>
-<li><strong>Incentivos Fiscais:</strong> Para empresas que investem em tecnologias limpas ou práticas sustentáveis.</li>
-<li><strong>Regulamentação:</strong> Estabelecimento de limites de emissão, padrões de qualidade ambiental e requisitos para o descarte de resíduos.</li>
-<li><strong>Investimento em P&amp;D:</strong> Apoio à pesquisa e desenvolvimento de novas tecnologias verdes.</li>
-<li><strong>Educação Ambiental:</strong> Programas para conscientizar a população sobre questões ambientais e o uso responsável da tecnologia.</li>
-</ul>
-<h2>Leis Ambientais e Tecnológicas</h2>
-<p>As leis ambientais visam proteger os ecossistemas e a saúde humana, enquanto as leis tecnológicas regulam o uso de novas tecnologias, garantindo a segurança, a privacidade e a ética. A interseção dessas áreas é crescente, com leis que abordam, por exemplo, a responsabilidade ambiental de empresas de tecnologia, a gestão de e-lixo e a segurança de dados em sistemas de monitoramento ambiental.</p>
-<h2>Como e onde fazer denúncias</h2>
-<p>Para denúncias relacionadas a crimes ambientais ou infrações tecnológicas, a tecnologia pode facilitar o processo. Muitos órgãos governamentais oferecem canais online para denúncias, como sites, aplicativos e ouvidorias digitais. A capacidade de anexar fotos, vídeos e geolocalização torna as denúncias mais eficazes.</p>
-<h3>API para Registro de Denúncias Ambientais (Sugestão de Código)</h3>
-<p>Um sistema de denúncias pode ser aprimorado com uma API que permita o envio de informações de forma estruturada, facilitando o registro e o encaminhamento para os órgãos competentes. Abaixo, um exemplo conceitual de como uma API de denúncias poderia ser acessada usando Python:</p>
-<p>\`\`\`python
-import requests
-import json</p>
-<h1>Exemplo de uso de uma API de denúncias (substitua pela URL e chave da API real)</h1>
-<p>def register_environmental_complaint(title, description, location, media_url, contact_info, api_key):
-    base_url = "https://api.environmentalcomplaints.gov/v1/complaints"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "title": title,
-        "description": description,
-        "latitude": location["lat"],
-        "longitude": location["lon"],
-        "media_url": media_url, # URL de uma imagem ou vídeo anexado
-        "contact": contact_info
-    }
-    try:
-        response = requests.post(base_url, headers=headers, data=json.dumps(payload))
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao registrar denúncia: {e}")
-        return None</p>
-<h1>Substitua pelos seus dados reais</h1>
-<p>api_key = "SUA_CHAVE_API_DE_DENUNCIAS"</p>
-<p>complaint_title = "Descarte irregular de lixo"
-complaint_description = "Grande quantidade de lixo doméstico e entulho descartado em área de preservação."
-complaint_location = {"lat": -23.561356, "lon": -46.656596} # Exemplo: Coordenadas de um local em SP
-complaint_media = "https://example.com/image_of_dump.jpg"
-complaint_contact = {"name": "João Silva", "email": "joao.silva@example.com"}</p>
-<p>registration_result = register_environmental_complaint(complaint_title, complaint_description, complaint_location, complaint_media, complaint_contact, api_key)</p>
-<p>if registration_result:
-    print(f"Denúncia registrada com sucesso! ID: {registration_result.get("complaint_id")}")
-else:
-    print("Falha ao registrar a denúncia.")
-\`\`\`</p>
-<p><strong>Observação:</strong> A maioria dos governos e órgãos ambientais possui seus próprios sistemas e APIs para denúncias. O exemplo acima é conceitual e demonstra como a tecnologia pode simplificar e padronizar o processo de denúncia, tornando-o mais acessível e eficiente para os cidadãos. É importante consultar os canais oficiais de cada localidade para informações precisas sobre como e onde fazer denúncias.</p>
-<p>[Enviar para Pex da Amanda] - Esta parte será tratada na fase de compilação final, onde o conteúdo da Amanda será incorporado ou referenciado no documento.</p>`
+        "body": `
+            <p><strong>Vantagens:</strong></p>
+            <ul>
+                <li><strong>Redução da Poluição:</strong> Menos emissões de gases de efeito estufa e poluentes atmosféricos.</li>
+                <li><strong>Melhora da Saúde Pública:</strong> Ar mais limpo e incentivo à atividade física.</li>
+                <li><strong>Economia de Recursos:</strong> Menor dependência de combustíveis fósseis.</li>
+                <li><strong>Redução do Congestionamento:</strong> Cidades mais fluidas e com menos tempo perdido no trânsito.</li>
+                <li><strong>Cidades Mais Habitáveis:</strong> Espaços urbanos mais agradáveis e seguros para pedestres e ciclistas.</li>
+            </ul>
+            <p><strong>Desafios:</strong></p>
+            <ul>
+                <li><strong>Infraestrutura:</strong> Necessidade de mais estações de carregamento para EVs, ciclovias seguras e expansão do transporte público.</li>
+                <li><strong>Custo Inicial:</strong> Veículos elétricos e infraestrutura podem ter um custo inicial mais alto.</li>
+                <li><strong>Aceitação Cultural:</strong> Mudança de hábitos e preferência pelo carro particular.</li>
+                <li><strong>Geração de Energia:</strong> A sustentabilidade dos EVs depende da fonte de energia utilizada para gerar a eletricidade que os alimenta.</li>
+            </ul>
+        `
     },
     "topico6-politicas-legislacao-o-que-s-o-pol-ticas-amp-legisla-o-": {
         "title": "O que s\u00e3o Pol\u00edticas &amp; Legisla\u00e7\u00e3o?",
-        "body": `<h2>O que são Políticas &amp; Legislação?</h2>
-<p>Políticas e legislação ambiental e tecnológica referem-se ao conjunto de leis, regulamentos, normas e diretrizes estabelecidas por governos e órgãos internacionais para proteger o meio ambiente, regular o uso da tecnologia e promover o desenvolvimento sustentável. Elas servem como um arcabouço legal para a gestão de recursos naturais, controle da poluição, incentivo a práticas sustentáveis e garantia de que as inovações tecnológicas sejam utilizadas de forma ética e responsável. Essas políticas são essenciais para criar um ambiente de governança que suporte a sustentabilidade e a inovação.</p>
-`
+        "body": `
+            <p>Políticas e legislação ambiental e tecnológica referem-se ao conjunto de leis, regulamentos, normas e diretrizes estabelecidas por governos e órgãos internacionais para proteger o meio ambiente, regular o uso da tecnologia e promover o desenvolvimento sustentável. Elas servem como um arcabouço legal para a gestão de recursos naturais, controle da poluição, incentivo a práticas sustentáveis e garantia de que as inovações tecnológicas sejam utilizadas de forma ética e responsável. Essas políticas são essenciais para criar um ambiente de governança que suporte a sustentabilidade e a inovação.</p>
+        `
     },
     "topico6-politicas-legislacao-como-a-tecnologia-pode-ajudar-nas-pol-ticas-amp-legisla-o-": {
         "title": "Como a tecnologia pode ajudar nas Pol\u00edticas &amp; Legisla\u00e7\u00e3o?",
-        "body": `<h2>Como a tecnologia pode ajudar nas Políticas &amp; Legislação?</h2>
-<p>A tecnologia desempenha um papel cada vez mais importante no desenvolvimento, implementação e fiscalização de políticas e legislação. Ferramentas digitais podem auxiliar na coleta e análise de dados para informar a criação de leis, monitorar a conformidade, automatizar processos de licenciamento e fiscalização, e aumentar a transparência. Além disso, a tecnologia pode facilitar a comunicação entre cidadãos, empresas e órgãos governamentais, tornando a participação pública mais acessível e eficaz.</p>
-`
+        "body": `
+            <p>A tecnologia desempenha um papel cada vez mais importante no desenvolvimento, implementação e fiscalização de políticas e legislação. Ferramentas digitais podem auxiliar na coleta e análise de dados para informar a criação de leis, monitorar a conformidade, automatizar processos de licenciamento e fiscalização, e aumentar a transparência. Além disso, a tecnologia pode facilitar a comunicação entre cidadãos, empresas e órgãos governamentais, tornando a participação pública mais acessível e eficaz.</p>
+        `
     },
     "topico6-politicas-legislacao-quais-as-normas-nacionais-e-internacionais-": {
         "title": "Quais as Normas, Nacionais e Internacionais?",
-        "body": `<h2>Quais as Normas, Nacionais e Internacionais?</h2>
-`
+        "body": `
+
+        `
     },
     "topico6-politicas-legislacao-normas-nacionais": {
         "title": "Normas Nacionais",
