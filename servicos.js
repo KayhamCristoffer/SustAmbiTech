@@ -300,29 +300,15 @@ document.addEventListener('DOMContentLoaded', () => {
     "topico3-consumo-economia-consciente-aplicativos-para-escanear-produtos-sugest-o-de-c-digo-para-api-": {
         "title": "Aplicativos para Escanear produtos (Sugest\u00e3o de C\u00f3digo para API)",
         "body": `
-            <p>Existem aplicativos que permitem escanear códigos de barras de produtos para obter informações sobre sua origem, composição, impacto ambiental e certificações de sustentabilidade. Para desenvolver uma funcionalidade similar, pode-se utilizar APIs de bancos de dados de produtos ou de organizações que fornecem dados de sustentabilidade. Um excelente exemplo é a API do Open Food Facts, que oferece dados abertos sobre produtos alimentícios. Abaixo, um exemplo de como acessar a API do Open Food Facts usando Python para obter informações de um produto:</p>
+            <p>Existem aplicativos que permitem escanear códigos de barras de produtos para obter informações sobre sua origem, composição, impacto ambiental e certificações de sustentabilidade. Para desenvolver uma funcionalidade similar, pode-se utilizar APIs de bancos de dados de produtos ou de organizações que fornecem dados de sustentabilidade. Um excelente exemplo é a API do Open Food Facts, que oferece dados abertos sobre produtos alimentícios.</p>
             <ul>
                 <li><a href=""></a>Aplicativo 1</li>
                 <li><a href=""></a>Aplicativo 2</li>
                 <li><a href=""></a>Aplicativo 3</li>
             </ul>
-            <p>Exemplo de código de barras de um produto real (ex: água mineral)</p>
-            <p><strong>Observação:</strong> A API do Open Food Facts é gratuita para uso não comercial e não exige chave de API para leitura de dados. Para operações de escrita (como adicionar novos produtos), é necessário autenticação e um <code>User-Agent</code> personalizado. Este exemplo demonstra como a tecnologia pode ser usada para fornecer transparência e auxiliar o consumo consciente, permitindo que os usuários acessem informações detalhadas sobre os produtos que consomem.</p>
         `
     },
-    "topico4-reciclagem-inteligente": {
-        "title": "Reciclagem Inteligente",
-        "body": `
-            <h2>O que é Reciclagem Inteligente?</h2>
-            <h2>Como a tecnologia pode ajudar na Reciclagem Inteligente?</h2>
-            <h2>Soluções para reciclagem inteligente:</h2>
-            <h3>Aplicativos para Escanear produtos</h3>
-            <h3>Coleta Inteligente</h3>
-            <h3>Triagem Automatizada</h3>
-            <h3>Cidades Inteligentes</h3>
-            <h2>Locais para coleta de aparelhos tecnológicos</h2>
-        `
-    },
+    
     "topico4-reciclagem-inteligente-o-que-reciclagem-inteligente-": {
         "title": "O que \u00e9 Reciclagem Inteligente?",
         "body": `
@@ -398,102 +384,101 @@ document.addEventListener('DOMContentLoaded', () => {
             </ul>
             <p><strong>Tabela de Fabricante, Modelos, Descrição (Exemplo Conceitual):</strong></p>
             <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse; text-align:left;">
-  <thead style="background-color:#f2f2f2;">
-    <tr>
-      <th>Fabricante</th>
-      <th>Descrição</th>
-      <th>Exemplos de Modelos</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>BYD (China)</td>
-      <td>Gigante chinesa de veículos elétricos, maior market share no Brasil; possui fábrica em Camaçari (BA).</td>
-      <td>Dolphin, Dolphin Mini, Song Plus, Seal, Yuan Plus</td>
-    </tr>
-    <tr>
-      <td>Volvo (Suécia)</td>
-      <td>Pioneira em eletrificação premium no Brasil, foco em SUVs elétricos e híbridos.</td>
-      <td>XC40 Recharge, C40 Recharge, EX30</td>
-    </tr>
-    <tr>
-      <td>JAC Motors (China)</td>
-      <td>Montadora chinesa que trouxe alguns dos primeiros elétricos acessíveis ao Brasil.</td>
-      <td>e-JS1, iEV40, iEV750V</td>
-    </tr>
-    <tr>
-      <td>GWM (China)</td>
-      <td>Montadora chinesa que investe em híbridos plug-in e elétricos no Brasil.</td>
-      <td>Haval H6 PHEV, Ora 03</td>
-    </tr>
-    <tr>
-      <td>Nissan (Japão)</td>
-      <td>Pioneira com carros elétricos no mundo, trouxe seu modelo global ao Brasil.</td>
-      <td>Leaf</td>
-    </tr>
-    <tr>
-      <td>BMW (Alemanha)</td>
-      <td>Marca premium com portfólio crescente de elétricos no Brasil.</td>
-      <td>iX, i4, iX3</td>
-    </tr>
-    <tr>
-      <td>Mini (Reino Unido/Alemanha)</td>
-      <td>Compactos elétricos de luxo.</td>
-      <td>Mini Cooper SE</td>
-    </tr>
-    <tr>
-      <td>Renault (França)</td>
-      <td>Uma das primeiras a vender elétricos no país.</td>
-      <td>Zoe, Kwid E-Tech</td>
-    </tr>
-    <tr>
-      <td>Peugeot (França)</td>
-      <td>Atuação crescente em eletrificação no Brasil.</td>
-      <td>e-2008, e-208 GT</td>
-    </tr>
-    <tr>
-      <td>Chevrolet (EUA)</td>
-      <td>GM aposta em eletrificação global, com planos para o Brasil.</td>
-      <td>Bolt EV, Bolt EUV</td>
-    </tr>
-    <tr>
-      <td>Toyota (Japão)</td>
-      <td>Líder em híbridos; amplia portfólio para o Brasil.</td>
-      <td>Corolla Cross Hybrid, Prius, RAV4 Hybrid</td>
-    </tr>
-    <tr>
-      <td>Volkswagen (Alemanha)</td>
-      <td>Investe em eletrificação e prepara modelos para o mercado brasileiro.</td>
-      <td>ID.4, Golf GTE</td>
-    </tr>
-    <tr>
-      <td>Stellantis (Europa/EUA)</td>
-      <td>Controla Fiat, Jeep, Peugeot e Citroën, todas com projetos de eletrificação no Brasil.</td>
-      <td>Fiat 500e, Jeep Compass 4xe, Peugeot e-2008</td>
-    </tr>
-    <tr>
-      <td>Audi (Alemanha)</td>
-      <td>Premium com linha e-tron no Brasil.</td>
-      <td>Q8 e-tron, e-tron GT</td>
-    </tr>
-    <tr>
-      <td>Neta Auto (China)</td>
-      <td>Entrante chinesa recém-chegada ao Brasil com modelos 100% elétricos.</td>
-      <td>Neta Aya, Neta U, Neta GT</td>
-    </tr>
-    <tr>
-      <td>Lecar (Brasil)</td>
-      <td>Montadora nacional, fábrica em construção no ES para híbridos e elétricos.</td>
-      <td>Protótipos de SUV e utilitários</td>
-    </tr>
-    <tr>
-      <td>FNM (Brasil)</td>
-      <td>Tradicional FNM renascida focada em caminhões elétricos.</td>
-      <td>FNM 832e, FNM 833e</td>
-    </tr>
-  </tbody>
-</table>
-
+                <thead">
+                    <tr>
+                        <th>Fabricante</th>
+                        <th>Descrição</th>
+                        <th>Exemplos de Modelos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>BYD (China)</td>
+                        <td>Gigante chinesa de veículos elétricos, maior market share no Brasil; possui fábrica em Camaçari (BA).</td>
+                        <td>Dolphin, Dolphin Mini, Song Plus, Seal, Yuan Plus</td>
+                    </tr>
+                    <tr>
+                        <td>Volvo (Suécia)</td>
+                        <td>Pioneira em eletrificação premium no Brasil, foco em SUVs elétricos e híbridos.</td>
+                        <td>XC40 Recharge, C40 Recharge, EX30</td>
+                    </tr>
+                    <tr>
+                        <td>JAC Motors (China)</td>
+                        <td>Montadora chinesa que trouxe alguns dos primeiros elétricos acessíveis ao Brasil.</td>
+                        <td>e-JS1, iEV40, iEV750V</td>
+                    </tr>
+                    <tr>
+                        <td>GWM (China)</td>
+                        <td>Montadora chinesa que investe em híbridos plug-in e elétricos no Brasil.</td>
+                        <td>Haval H6 PHEV, Ora 03</td>
+                    </tr>
+                    <tr>
+                        <td>Nissan (Japão)</td>
+                        <td>Pioneira com carros elétricos no mundo, trouxe seu modelo global ao Brasil.</td>
+                        <td>Leaf</td>
+                    </tr>
+                    <tr>
+                        <td>BMW (Alemanha)</td>
+                        <td>Marca premium com portfólio crescente de elétricos no Brasil.</td>
+                        <td>iX, i4, iX3</td>
+                    </tr>
+                    <tr>
+                        <td>Mini (Reino Unido/Alemanha)</td>
+                        <td>Compactos elétricos de luxo.</td>
+                        <td>Mini Cooper SE</td>
+                    </tr>
+                    <tr>
+                        <td>Renault (França)</td>
+                        <td>Uma das primeiras a vender elétricos no país.</td>
+                        <td>Zoe, Kwid E-Tech</td>
+                    </tr>
+                    <tr>
+                        <td>Peugeot (França)</td>
+                        <td>Atuação crescente em eletrificação no Brasil.</td>
+                        <td>e-2008, e-208 GT</td>
+                    </tr>
+                    <tr>
+                        <td>Chevrolet (EUA)</td>
+                        <td>GM aposta em eletrificação global, com planos para o Brasil.</td>
+                        <td>Bolt EV, Bolt EUV</td>
+                    </tr>
+                    <tr>
+                        <td>Toyota (Japão)</td>
+                        <td>Líder em híbridos; amplia portfólio para o Brasil.</td>
+                        <td>Corolla Cross Hybrid, Prius, RAV4 Hybrid</td>
+                    </tr>
+                    <tr>
+                        <td>Volkswagen (Alemanha)</td>
+                        <td>Investe em eletrificação e prepara modelos para o mercado brasileiro.</td>
+                        <td>ID.4, Golf GTE</td>
+                    </tr>
+                    <tr>
+                        <td>Stellantis (Europa/EUA)</td>
+                        <td>Controla Fiat, Jeep, Peugeot e Citroën, todas com projetos de eletrificação no Brasil.</td>
+                        <td>Fiat 500e, Jeep Compass 4xe, Peugeot e-2008</td>
+                    </tr>
+                    <tr>
+                        <td>Audi (Alemanha)</td>
+                        <td>Premium com linha e-tron no Brasil.</td>
+                        <td>Q8 e-tron, e-tron GT</td>
+                    </tr>
+                    <tr>
+                        <td>Neta Auto (China)</td>
+                        <td>Entrante chinesa recém-chegada ao Brasil com modelos 100% elétricos.</td>
+                        <td>Neta Aya, Neta U, Neta GT</td>
+                    </tr>
+                    <tr>
+                        <td>Lecar (Brasil)</td>
+                        <td>Montadora nacional, fábrica em construção no ES para híbridos e elétricos.</td>
+                        <td>Protótipos de SUV e utilitários</td>
+                    </tr>
+                    <tr>
+                        <td>FNM (Brasil)</td>
+                        <td>Tradicional FNM renascida focada em caminhões elétricos.</td>
+                        <td>FNM 832e, FNM 833e</td>
+                    </tr>   
+                </tbody>
+            </table>
         `
     },
     "topico5-mobilidade-sustentavel-transporte-p-blico-nibus-el-tricos-nibus-trem-metr-": {
@@ -511,21 +496,36 @@ document.addEventListener('DOMContentLoaded', () => {
     "topico5-mobilidade-sustentavel-vantagens-e-desafios-benef-cios-a-longo-prazo-": {
         "title": "Vantagens e Desafios (Benef\u00edcios a longo prazo)",
         "body": `
-            <p><strong>Vantagens:</strong></p>
-            <ul>
-                <li><strong>Redução da Poluição:</strong> Menos emissões de gases de efeito estufa e poluentes atmosféricos.</li>
-                <li><strong>Melhora da Saúde Pública:</strong> Ar mais limpo e incentivo à atividade física.</li>
-                <li><strong>Economia de Recursos:</strong> Menor dependência de combustíveis fósseis.</li>
-                <li><strong>Redução do Congestionamento:</strong> Cidades mais fluidas e com menos tempo perdido no trânsito.</li>
-                <li><strong>Cidades Mais Habitáveis:</strong> Espaços urbanos mais agradáveis e seguros para pedestres e ciclistas.</li>
-            </ul>
-            <p><strong>Desafios:</strong></p>
-            <ul>
-                <li><strong>Infraestrutura:</strong> Necessidade de mais estações de carregamento para EVs, ciclovias seguras e expansão do transporte público.</li>
-                <li><strong>Custo Inicial:</strong> Veículos elétricos e infraestrutura podem ter um custo inicial mais alto.</li>
-                <li><strong>Aceitação Cultural:</strong> Mudança de hábitos e preferência pelo carro particular.</li>
-                <li><strong>Geração de Energia:</strong> A sustentabilidade dos EVs depende da fonte de energia utilizada para gerar a eletricidade que os alimenta.</li>
-            </ul>
+            <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse; text-align:left;">
+            <thead">
+                <tr>
+                <th>Vantagens</th>
+                <th>Desafios</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td><strong>Redução da Poluição:</strong> Menos emissões de gases de efeito estufa e poluentes atmosféricos.</td>
+                <td><strong>Infraestrutura:</strong> Necessidade de mais estações de carregamento para EVs, ciclovias seguras e expansão do transporte público.</td>
+                </tr>
+                <tr>
+                <td><strong>Melhora da Saúde Pública:</strong> Ar mais limpo e incentivo à atividade física.</td>
+                <td><strong>Custo Inicial:</strong> Veículos elétricos e infraestrutura podem ter um custo inicial mais alto.</td>
+                </tr>
+                <tr>
+                <td><strong>Economia de Recursos:</strong> Menor dependência de combustíveis fósseis.</td>
+                <td><strong>Aceitação Cultural:</strong> Mudança de hábitos e preferência pelo carro particular.</td>
+                </tr>
+                <tr>
+                <td><strong>Redução do Congestionamento:</strong> Cidades mais fluidas e com menos tempo perdido no trânsito.</td>
+                <td><strong>Geração de Energia:</strong> A sustentabilidade dos EVs depende da fonte de energia utilizada para gerar a eletricidade que os alimenta.</td>
+                </tr>
+                <tr>
+                <td><strong>Cidades Mais Habitáveis:</strong> Espaços urbanos mais agradáveis e seguros para pedestres e ciclistas.</td>
+                <td><!-- sem desafio correspondente direto --></td>
+                </tr>
+            </tbody>
+            </table>
         `
     },
     "topico6-politicas-legislacao-o-que-s-o-pol-ticas-amp-legisla-o-": {
