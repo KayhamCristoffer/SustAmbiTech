@@ -27,7 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
         "title": "O que \u00e9 Monitoramento Ambiental?",
         "body": `
             <p>Monitoramento ambiental refere-se à coleta sistemática de dados sobre o estado do meio ambiente, incluindo ar, água, solo e biodiversidade. O objetivo é avaliar a qualidade ambiental, identificar tendências, prever impactos e fornecer informações para a tomada de decisões e implementação de políticas de proteção ambiental. É uma ferramenta essencial para a gestão sustentável dos recursos naturais e para a saúde pública.</p>
-            <a href="https://ambisis.com.br/blog/gestao-ambiental/monitoramento-ambiental/">Saiba Mais.</a>
+            <a href="https://ambisis.com.br/blog/gestao-ambiental/monitoramento-ambiental/"
+                target="_blank" rel="noopener noreferrer">
+                Saiba Mais
+            </a>
         `
     },
     "topico1-monitoramento-ambiental-como-a-tecnologia-pode-ajudar-no-monitoramento-ambiental-": {
@@ -221,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `
     },
     "topico2-energia-limpa-exemplo-de-integra-o-com-api-conceitual-para-automa-o-residencial-": {
-        "title": "Exemplo de Integra\u00e7\u00e3o com API (Conceitual para Automa\u00e7\u00e3o Residencial)",
+        "title": "Exemplo de Integra\u00e7\u00e3o (Conceitual para Automa\u00e7\u00e3o Residencial)",
         "body": `
             <p>Para automação residencial, muitas plataformas oferecem APIs para integração. Um exemplo notável de plataforma de código aberto é o Home Assistant, que permite um controle local e privado de dispositivos inteligentes. Abaixo, um exemplo conceitual de como você poderia interagir com um dispositivo inteligente (como uma lâmpada) via uma API hipotética, inspirada em conceitos de automação residencial:</p>
             <p>Video de vcs apresentando e.e</p>
