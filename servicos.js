@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `
     },
     "topico1-monitoramento-ambiental-outros-sensores-1": {
-        "title": "Como funciona, onde pode se encontrar radares de sensores e aplicativos que mostram",
+        "title": "Como funciona, onde pode se encontrar",
         "body": `
             <p>Sensores ambientais podem ser encontrados em estações de monitoramento fixas, dispositivos móveis, drones e satélites. Em cidades como São Paulo, redes de sensores são instaladas em pontos estratégicos para fornecer dados em tempo real. Aplicativos móveis e plataformas web integram esses dados, permitindo que cidadãos e autoridades visualizem a qualidade do ar, da água e outras informações ambientais. Muitos desses sistemas utilizam APIs para compartilhar dados e integrar-se com outras plataformas.</p>
         `
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><strong>Previsão de Inundações:</strong> Em várias regiões, sensores de nível de água em rios e pluviômetros conectados a sistemas de alerta precoce ajudam a prever inundações, dando tempo para a evacuação e proteção de bens. 
                     <a href="">Saiba Mais.</a></li>
                 </ul>
-            <p>Aplicativos para monitoramento:</p>
+            <p><strong>Aplicativos para monitoramento:</strong></p>
             <ul>
                 <li><a href="https://www.boletimaomar.com.br/">
                     Boletim ao Mar.</a></li>
