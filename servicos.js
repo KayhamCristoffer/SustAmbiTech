@@ -499,48 +499,48 @@ document.addEventListener('DOMContentLoaded', () => {
             <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse; text-align:left;">
             <thead">
                 <tr>
-                <th>Vantagens</th>
-                <th>Desafios</th>
+                    <th>Vantagens</th>
+                    <th>Desafios</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                <td><strong>Redução da Poluição:</strong> Menos emissões de gases de efeito estufa e poluentes atmosféricos.</td>
-                <td><strong>Infraestrutura:</strong> Necessidade de mais estações de carregamento para EVs, ciclovias seguras e expansão do transporte público.</td>
+                    <td><strong>Redução da Poluição:</strong> Menos emissões de gases de efeito estufa e poluentes atmosféricos.</td>
+                    <td><strong>Infraestrutura:</strong> Necessidade de mais estações de carregamento para EVs, ciclovias seguras e expansão do transporte público.</td>
                 </tr>
                 <tr>
-                <td><strong>Melhora da Saúde Pública:</strong> Ar mais limpo e incentivo à atividade física.</td>
-                <td><strong>Custo Inicial:</strong> Veículos elétricos e infraestrutura podem ter um custo inicial mais alto.</td>
+                    <td><strong>Melhora da Saúde Pública:</strong> Ar mais limpo e incentivo à atividade física.</td>
+                    <td><strong>Custo Inicial:</strong> Veículos elétricos e infraestrutura podem ter um custo inicial mais alto.</td>
                 </tr>
                 <tr>
-                <td><strong>Economia de Recursos:</strong> Menor dependência de combustíveis fósseis.</td>
-                <td><strong>Aceitação Cultural:</strong> Mudança de hábitos e preferência pelo carro particular.</td>
+                    <td><strong>Economia de Recursos:</strong> Menor dependência de combustíveis fósseis.</td>
+                    <td><strong>Aceitação Cultural:</strong> Mudança de hábitos e preferência pelo carro particular.</td>
                 </tr>
                 <tr>
-                <td><strong>Redução do Congestionamento:</strong> Cidades mais fluidas e com menos tempo perdido no trânsito.</td>
-                <td><strong>Geração de Energia:</strong> A sustentabilidade dos EVs depende da fonte de energia utilizada para gerar a eletricidade que os alimenta.</td>
+                    <td><strong>Redução do Congestionamento:</strong> Cidades mais fluidas e com menos tempo perdido no trânsito.</td>
+                    <td><strong>Geração de Energia:</strong> A sustentabilidade dos EVs depende da fonte de energia utilizada para gerar a eletricidade que os alimenta.</td>
                 </tr>
                 <tr>
-                <td><strong>Cidades Mais Habitáveis:</strong> Espaços urbanos mais agradáveis e seguros para pedestres e ciclistas.</td>
-                <td><!-- sem desafio correspondente direto --></td>
+                    <td><strong>Cidades Mais Habitáveis:</strong> Espaços urbanos mais agradáveis e seguros para pedestres e ciclistas.</td>
+                    <td><!-- sem desafio correspondente direto --></td>
                 </tr>
             </tbody>
             </table>
         `
     },
-    "topico6-politicas-legislacao-o-que-s-o-pol-ticas-amp-legisla-o-": {
+    "topico6-politicas-legislacao-1": {
         "title": "O que s\u00e3o Pol\u00edticas &amp; Legisla\u00e7\u00e3o?",
         "body": `
             <p>Políticas e legislação ambiental e tecnológica referem-se ao conjunto de leis, regulamentos, normas e diretrizes estabelecidas por governos e órgãos internacionais para proteger o meio ambiente, regular o uso da tecnologia e promover o desenvolvimento sustentável. Elas servem como um arcabouço legal para a gestão de recursos naturais, controle da poluição, incentivo a práticas sustentáveis e garantia de que as inovações tecnológicas sejam utilizadas de forma ética e responsável. Essas políticas são essenciais para criar um ambiente de governança que suporte a sustentabilidade e a inovação.</p>
         `
     },
-    "topico6-politicas-legislacao-como-a-tecnologia-pode-ajudar-nas-pol-ticas-amp-legisla-o-": {
+    "topico6-politicas-legislacao-2": {
         "title": "Como a tecnologia pode ajudar nas Pol\u00edticas &amp; Legisla\u00e7\u00e3o?",
         "body": `
             <p>A tecnologia desempenha um papel cada vez mais importante no desenvolvimento, implementação e fiscalização de políticas e legislação. Ferramentas digitais podem auxiliar na coleta e análise de dados para informar a criação de leis, monitorar a conformidade, automatizar processos de licenciamento e fiscalização, e aumentar a transparência. Além disso, a tecnologia pode facilitar a comunicação entre cidadãos, empresas e órgãos governamentais, tornando a participação pública mais acessível e eficaz.</p>
         `
     },
-    "topico6-politicas-legislacao-quais-as-normas-nacionais-e-internacionais-": {
+    "topico6-politicas-legislacao-3": {
         "title": "Quais as Normas, Nacionais e Internacionais?",
         "body": `
 
