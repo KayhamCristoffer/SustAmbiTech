@@ -29,20 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Conteúdo detalhado para cada modal
     const modalContentData = {
-    "topico1-monitoramento-ambiental": {
-        "body": `
-            <h3>O que é Monitoramento Ambiental?</h3>
-            <h3>Como a tecnologia pode ajudar no Monitoramento Ambiental?</h3>
-            <h3>Quais tipos de sensores e suas aplicações?</h3>
-            <h3>- Sensores de Qualidade do Ar.</h3>
-            <h3>- Sensores de Qualidade da Água.</h3>
-            <h3>- Sensores de Temperatura e Umidade.</h3>
-            <h3>- Sensores de Gases de Efeito Estufa.</h3>
-            <h3>- Outros Sensores.</h3>
-            <h3>Qual o Impacto e Soluções Tecnológicas?</h3>
-            <h3>Veja como está o clima em sua Cidade!</h3>
-        `
-    },
     "topico1-monitoramento-ambiental-o-que-monitoramento-ambiental-": {
         "title": "O que \u00e9 Monitoramento Ambiental?",
         "body": `
@@ -230,21 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <p><strong>Observação:</strong> A implementação real de controle de dispositivos inteligentes varia muito entre fabricantes e plataformas. Este é um exemplo simplificado para ilustrar o conceito de interação via API. Para um projeto real, seria necessário consultar a documentação específica da plataforma ou dos dispositivos a serem controlados. Plataformas como Home Assistant (código aberto) e Tuya (com plano gratuito para desenvolvedores) são boas opções para explorar.</p>
             `    
         },
-    "topico3-consumo-economia-consciente": {
-        "title": "Consumo e Economia Consciente",
-        "body": `
-            <h3>O que é Consumo e Economia Consciente?</h3>
-            <h3>Como a tecnologia pode ajudar no Consumo e Economia Consciente?</h3>
-            <h3>Soluções para reduzir custos e promover o consumo consciente:</h3>
-            <h3>Iluminação LED</h3>
-            <h3>Tecnologia e Automação</h3>
-            <h3>Tomadas Inteligentes</h3>
-            <h3>Sensores de Presença ou Temporizadores</h3>
-            <h3>Equipamentos Domésticos com Selo Procel A/ENERGY STAR</h3>
-            <h3>Aplicativos para Escanear produtos (Sugestão de Código para API)</h3>
-            <h3>Exemplo de código de barras de um produto real (ex: água mineral)</h3>
-`
-    },
     "topico3-consumo-economia-consciente-o-que-consumo-e-economia-consciente-": {
         "title": "O que \u00e9 Consumo e Economia Consciente?",
         "body": `
@@ -308,7 +279,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </ul>
         `
     },
-    
     "topico4-reciclagem-inteligente-o-que-reciclagem-inteligente-": {
         "title": "O que \u00e9 Reciclagem Inteligente?",
         "body": `
@@ -548,351 +518,110 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     "topico6-politicas-legislacao-normas-nacionais": {
         "title": "Normas Nacionais",
-        "body": `<h3>Normas Nacionais</h3>
-<p>No Brasil, a legislação ambiental é robusta e inclui marcos como a Política Nacional do Meio Ambiente (Lei nº 6.938/81), que estabelece o Sistema Nacional do Meio Ambiente (SISNAMA) e o licenciamento ambiental. Outras leis importantes abrangem a gestão de resíduos sólidos (Lei nº 12.305/10), proteção da flora e fauna, recursos hídricos e unidades de conservação. A tecnologia também é regulamentada por leis de proteção de dados (LGPD), marcos civis da internet e políticas de inovação.</p>
-`
+        "body": `
+            <p>No Brasil, a legislação ambiental é robusta e inclui marcos como a Política Nacional do Meio Ambiente (Lei nº 6.938/81), que estabelece o Sistema Nacional do Meio Ambiente (SISNAMA) e o licenciamento ambiental. Outras leis importantes abrangem a gestão de resíduos sólidos (Lei nº 12.305/10), proteção da flora e fauna, recursos hídricos e unidades de conservação. A tecnologia também é regulamentada por leis de proteção de dados (LGPD), marcos civis da internet e políticas de inovação.</p>
+        `
     },
     "topico6-politicas-legislacao-normas-internacionais": {
         "title": "Normas Internacionais",
-        "body": `<h3>Normas Internacionais</h3>
-<p>Em nível internacional, acordos como o Acordo de Paris sobre mudanças climáticas, a Convenção sobre Diversidade Biológica e a Agenda 2030 para o Desenvolvimento Sustentável (com seus 17 Objetivos de Desenvolvimento Sustentável - ODS) estabelecem metas e diretrizes para a ação global. Organizações como a ISO (International Organization for Standardization) também desenvolvem normas técnicas (ex: ISO 14001 para gestão ambiental) que empresas e governos podem adotar voluntariamente.</p>
-`
+        "body": `
+            <p>Em nível internacional, acordos como o Acordo de Paris sobre mudanças climáticas, a Convenção sobre Diversidade Biológica e a Agenda 2030 para o Desenvolvimento Sustentável (com seus 17 Objetivos de Desenvolvimento Sustentável - ODS) estabelecem metas e diretrizes para a ação global. Organizações como a ISO (International Organization for Standardization) também desenvolvem normas técnicas (ex: ISO 14001 para gestão ambiental) que empresas e governos podem adotar voluntariamente.</p>
+        `
     },
     "topico6-politicas-legislacao-pol-ticas-p-blicas": {
         "title": "Pol\u00edticas P\u00fablicas",
-        "body": `<h2>Políticas Públicas</h2>
-<p>Políticas públicas são as ações e programas implementados pelo governo para resolver problemas sociais e ambientais. No contexto da sustentabilidade e tecnologia, elas podem incluir:</p>
-<ul>
-<li><strong>Incentivos Fiscais:</strong> Para empresas que investem em tecnologias limpas ou práticas sustentáveis.</li>
-<li><strong>Regulamentação:</strong> Estabelecimento de limites de emissão, padrões de qualidade ambiental e requisitos para o descarte de resíduos.</li>
-<li><strong>Investimento em P&amp;D:</strong> Apoio à pesquisa e desenvolvimento de novas tecnologias verdes.</li>
-<li><strong>Educação Ambiental:</strong> Programas para conscientizar a população sobre questões ambientais e o uso responsável da tecnologia.</li>
-</ul>
-`
+        "body": `
+            <p>Políticas públicas são as ações e programas implementados pelo governo para resolver problemas sociais e ambientais. No contexto da sustentabilidade e tecnologia, elas podem incluir:</p>
+            <ul>
+                <li><strong>Incentivos Fiscais:</strong> Para empresas que investem em tecnologias limpas ou práticas sustentáveis.</li>
+                <li><strong>Regulamentação:</strong> Estabelecimento de limites de emissão, padrões de qualidade ambiental e requisitos para o descarte de resíduos.</li>
+                <li><strong>Investimento em P&amp;D:</strong> Apoio à pesquisa e desenvolvimento de novas tecnologias verdes.</li>
+                <li><strong>Educação Ambiental:</strong> Programas para conscientizar a população sobre questões ambientais e o uso responsável da tecnologia.</li>
+            </ul>
+        `
     },
     "topico6-politicas-legislacao-leis-ambientais-e-tecnol-gicas": {
         "title": "Leis Ambientais e Tecnol\u00f3gicas",
-        "body": `<h2>Leis Ambientais e Tecnológicas</h2>
-<p>As leis ambientais visam proteger os ecossistemas e a saúde humana, enquanto as leis tecnológicas regulam o uso de novas tecnologias, garantindo a segurança, a privacidade e a ética. A interseção dessas áreas é crescente, com leis que abordam, por exemplo, a responsabilidade ambiental de empresas de tecnologia, a gestão de e-lixo e a segurança de dados em sistemas de monitoramento ambiental.</p>
-`
+        "body": `
+            <p>As leis ambientais visam proteger os ecossistemas e a saúde humana, enquanto as leis tecnológicas regulam o uso de novas tecnologias, garantindo a segurança, a privacidade e a ética. A interseção dessas áreas é crescente, com leis que abordam, por exemplo, a responsabilidade ambiental de empresas de tecnologia, a gestão de e-lixo e a segurança de dados em sistemas de monitoramento ambiental.</p>
+        `
     },
     "topico6-politicas-legislacao-como-e-onde-fazer-den-ncias": {
         "title": "Como e onde fazer den\u00fancias",
-        "body": `<h2>Como e onde fazer denúncias</h2>
-<p>Para denúncias relacionadas a crimes ambientais ou infrações tecnológicas, a tecnologia pode facilitar o processo. Muitos órgãos governamentais oferecem canais online para denúncias, como sites, aplicativos e ouvidorias digitais. A capacidade de anexar fotos, vídeos e geolocalização torna as denúncias mais eficazes.</p>
-`
-    },
-    "topico6-politicas-legislacao-api-para-registro-de-den-ncias-ambientais-sugest-o-de-c-digo-": {
-        "title": "API para Registro de Den\u00fancias Ambientais (Sugest\u00e3o de C\u00f3digo)",
-        "body": `<h3>API para Registro de Denúncias Ambientais (Sugestão de Código)</h3>
-<p>Um sistema de denúncias pode ser aprimorado com uma API que permita o envio de informações de forma estruturada, facilitando o registro e o encaminhamento para os órgãos competentes. Abaixo, um exemplo conceitual de como uma API de denúncias poderia ser acessada usando Python:</p>
-<p>\`\`\`python
-import requests
-import json</p>
-<h1>Exemplo de uso de uma API de denúncias (substitua pela URL e chave da API real)</h1>
-<p>def register_environmental_complaint(title, description, location, media_url, contact_info, api_key):
-    base_url = "https://api.environmentalcomplaints.gov/v1/complaints"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "title": title,
-        "description": description,
-        "latitude": location["lat"],
-        "longitude": location["lon"],
-        "media_url": media_url, # URL de uma imagem ou vídeo anexado
-        "contact": contact_info
-    }
-    try:
-        response = requests.post(base_url, headers=headers, data=json.dumps(payload))
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao registrar denúncia: {e}")
-        return None</p>
-<h1>Substitua pelos seus dados reais</h1>
-<p>api_key = "SUA_CHAVE_API_DE_DENUNCIAS"</p>
-<p>complaint_title = "Descarte irregular de lixo"
-complaint_description = "Grande quantidade de lixo doméstico e entulho descartado em área de preservação."
-complaint_location = {"lat": -23.561356, "lon": -46.656596} # Exemplo: Coordenadas de um local em SP
-complaint_media = "https://example.com/image_of_dump.jpg"
-complaint_contact = {"name": "João Silva", "email": "joao.silva@example.com"}</p>
-<p>registration_result = register_environmental_complaint(complaint_title, complaint_description, complaint_location, complaint_media, complaint_contact, api_key)</p>
-<p>if registration_result:
-    print(f"Denúncia registrada com sucesso! ID: {registration_result.get("complaint_id")}")
-else:
-    print("Falha ao registrar a denúncia.")
-\`\`\`</p>
-<p><strong>Observação:</strong> A maioria dos governos e órgãos ambientais possui seus próprios sistemas e APIs para denúncias. O exemplo acima é conceitual e demonstra como a tecnologia pode simplificar e padronizar o processo de denúncia, tornando-o mais acessível e eficiente para os cidadãos. É importante consultar os canais oficiais de cada localidade para informações precisas sobre como e onde fazer denúncias.</p>
-<p>[Enviar para Pex da Amanda] - Esta parte será tratada na fase de compilação final, onde o conteúdo da Amanda será incorporado ou referenciado no documento.</p>`
-    },
-    "topico7-educacao-verde": {
-        "title": "T\u00f3pico 7: Educa\u00e7\u00e3o Verde",
-        "body": `<h1>Tópico 7: Educação Verde</h1>
-<h2>O que é Educação Verde?</h2>
-<p>Educação Verde, ou Educação Ambiental, é um processo contínuo e permanente que busca formar indivíduos conscientes e críticos sobre as questões ambientais, incentivando a participação ativa na construção de sociedades sustentáveis. Ela abrange a compreensão das inter-relações entre o ser humano e o meio ambiente, a valorização da biodiversidade, a promoção de hábitos de consumo responsáveis e a defesa da justiça socioambiental. Seu objetivo é desenvolver conhecimentos, habilidades, atitudes e valores que levem à conservação do meio ambiente e à melhoria da qualidade de vida.</p>
-<h2>Como a tecnologia pode ajudar na Educação Verde?</h2>
-<p>A tecnologia é uma ferramenta poderosa para a Educação Verde, tornando o aprendizado mais acessível, interativo e engajador. Ela permite a criação de conteúdos multimídia ricos, simulações de ecossistemas, jogos educativos, plataformas de e-learning e a disseminação de informações em larga escala. Além disso, a tecnologia pode conectar estudantes e educadores de diferentes partes do mundo, facilitando a troca de experiências e a colaboração em projetos ambientais. Realidade virtual e aumentada, por exemplo, podem transportar os alunos para ambientes naturais ou cenários de impacto ambiental, proporcionando uma experiência imersiva e impactante.</p>
-<h2>Quais os objetivos e métodos da Educação Verde?</h2>
-<h3>Objetivos</h3>
-<ul>
-<li><strong>Conscientização:</strong> Desenvolver a percepção e a sensibilidade sobre os problemas ambientais e suas causas.</li>
-<li><strong>Conhecimento:</strong> Fornecer informações e compreensão sobre o meio ambiente e a relação humana com ele.</li>
-<li><strong>Atitudes:</strong> Promover valores e sentimentos de preocupação com o meio ambiente e motivação para melhorá-lo.</li>
-<li><strong>Habilidades:</strong> Desenvolver a capacidade de identificar e resolver problemas ambientais.</li>
-<li><strong>Participação:</strong> Incentivar a ação individual e coletiva na resolução de questões ambientais.</li>
-</ul>
-<h3>Métodos</h3>
-<ul>
-<li><strong>Aprendizagem Baseada em Projetos:</strong> Envolver os alunos em projetos práticos que abordem problemas ambientais reais.</li>
-<li><strong>Aulas de Campo:</strong> Visitas a parques, reservas, estações de tratamento ou empresas com práticas sustentáveis.</li>
-<li><strong>Recursos Multimídia:</strong> Utilização de vídeos, documentários, infográficos e plataformas interativas.</li>
-<li><strong>Gamificação:</strong> Criação de jogos e desafios que tornem o aprendizado sobre sustentabilidade divertido e competitivo.</li>
-<li><strong>Debates e Discussões:</strong> Promover o pensamento crítico e a troca de ideias sobre temas ambientais complexos.</li>
-</ul>
-<h2>Projetos, Histórias e Workshops</h2>
-<ul>
-<li><strong>Projetos de Horta Escolar:</strong> Ensinam sobre cultivo orgânico, ciclo da água e alimentação saudável.</li>
-<li><strong>Campanhas de Reciclagem:</strong> Envolvem a comunidade na separação e destinação correta de resíduos.</li>
-<li><strong>Workshops de Reuso e Upcycling:</strong> Ensinam a transformar materiais descartados em novos produtos, reduzindo o lixo.</li>
-<li><strong>Histórias de Sucesso:</strong> Compartilhar exemplos de comunidades ou indivíduos que fizeram a diferença na proteção ambiental.</li>
-</ul>
-<h2>Benefícios</h2>
-<p>Os benefícios da Educação Verde são amplos e de longo prazo:</p>
-<ul>
-<li><strong>Cidadãos Mais Engajados:</strong> Formação de indivíduos mais conscientes e ativos na defesa do meio ambiente.</li>
-<li><strong>Desenvolvimento Sustentável:</strong> Contribuição para a construção de uma sociedade que atenda às necessidades do presente sem comprometer as gerações futuras.</li>
-<li><strong>Inovação:</strong> Estímulo à criatividade e ao desenvolvimento de soluções tecnológicas para desafios ambientais.</li>
-<li><strong>Saúde e Bem-Estar:</strong> Promoção de ambientes mais saudáveis e de um estilo de vida mais equilibrado.</li>
-</ul>
-<h2>Vídeos sobre o tema (conteúdo para usuário assistir)</h2>
-<p>Recomenda-se a inclusão de vídeos educativos e inspiradores sobre temas como mudanças climáticas, conservação da biodiversidade, energias renováveis e consumo consciente. Esses vídeos podem ser de documentários, canais educativos no YouTube ou produções independentes que abordem a temática de forma didática e envolvente.</p>
-<h3>API de Quiz para Educação Verde (Sugestão de Código)</h3>
-<p>Para tornar a Educação Verde mais interativa e avaliar o conhecimento dos participantes, pode-se desenvolver um quiz online. Uma API de quiz pode gerenciar perguntas, respostas e pontuações. Abaixo, um exemplo conceitual de como uma API de quiz poderia ser acessada usando Python:</p>
-<p>\`\`\`python
-import requests
-import json</p>
-<h1>Exemplo de uso de uma API de quiz (substitua pela URL e chave da API real)</h1>
-<p>def get_quiz_questions(topic, num_questions, api_key):
-    base_url = "https://api.greenquiz.com/v1/questions"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-    params = {
-        "topic": topic,
-        "limit": num_questions
-    }
-    try:
-        response = requests.get(base_url, headers=headers, params=params)
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins
-        data = response.json()
-        return data
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao obter perguntas do quiz: {e}")
-        return None</p>
-<p>def submit_quiz_answers(user_id, quiz_id, answers, api_key):
-    base_url = "https://api.greenquiz.com/v1/submit_answers"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "user_id": user_id,
-        "quiz_id": quiz_id,
-        "answers": answers
-    }
-    try:
-        response = requests.post(base_url, headers=headers, data=json.dumps(payload))
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao enviar respostas do quiz: {e}")
-        return None</p>
-<h1>Substitua pelos seus dados reais</h1>
-<p>api_key = "SUA_CHAVE_API_DE_QUIZ"
-user_id = "user123"</p>
-<h1>Obter perguntas sobre "Energia Limpa"</h1>
-<p>quiz_questions = get_quiz_questions("energia_limpa", 3, api_key)</p>
-<p>if quiz_questions and quiz_questions.get("questions"):
-    print("Perguntas do Quiz sobre Energia Limpa:")
-    quiz_id = quiz_questions.get("quiz_id")
-    user_answers = []
-    for i, question in enumerate(quiz_questions["questions"]):
-        print(f"\n{i+1}. {question.get("text")}")
-        for j, option in enumerate(question.get("options", [])):
-            print(f"   {chr(65+j)}. {option}")
-        # Simulação de resposta do usuário
-        # Em um aplicativo real, o usuário forneceria a resposta
-        if i == 0: # Resposta para a primeira pergunta
-            user_answers.append({"question_id": question.get("id"), "answer": "B"})
-        elif i == 1: # Resposta para a segunda pergunta
-            user_answers.append({"question_id": question.get("id"), "answer": "A"})
-        elif i == 2: # Resposta para a terceira pergunta
-            user_answers.append({"question_id": question.get("id"), "answer": "C"})</p>
-<pre><code># Enviar respostas do usuário
-submission_result = submit_quiz_answers(user_id, quiz_id, user_answers, api_key)
-
-if submission_result:
-    print(f"\nRespostas do quiz enviadas. Pontuação: {submission_result.get("score")}/{submission_result.get("total_questions")}")
-    print(f"Feedback: {submission_result.get("feedback")}")
-else:
-    print("Falha ao enviar respostas do quiz.")
-</code></pre>
-<p>else:
-    print("Não foi possível obter perguntas do quiz.")
-\`\`\`</p>
-<p><strong>Observação:</strong> Uma API de quiz real precisaria de um backend para armazenar perguntas, validar respostas e calcular pontuações. O exemplo acima é conceitual e ilustra a interação cliente-servidor para um quiz educativo. Existem plataformas de e-learning e ferramentas de quiz que oferecem APIs para integração.</p>`
+        "body": `
+            <p>Para denúncias relacionadas a crimes ambientais ou infrações tecnológicas, a tecnologia pode facilitar o processo. Muitos órgãos governamentais oferecem canais online para denúncias, como sites, aplicativos e ouvidorias digitais. A capacidade de anexar fotos, vídeos e geolocalização torna as denúncias mais eficazes.</p>
+        `
     },
     "topico7-educacao-verde-o-que-educa-o-verde-": {
         "title": "O que \u00e9 Educa\u00e7\u00e3o Verde?",
-        "body": `<h2>O que é Educação Verde?</h2>
-<p>Educação Verde, ou Educação Ambiental, é um processo contínuo e permanente que busca formar indivíduos conscientes e críticos sobre as questões ambientais, incentivando a participação ativa na construção de sociedades sustentáveis. Ela abrange a compreensão das inter-relações entre o ser humano e o meio ambiente, a valorização da biodiversidade, a promoção de hábitos de consumo responsáveis e a defesa da justiça socioambiental. Seu objetivo é desenvolver conhecimentos, habilidades, atitudes e valores que levem à conservação do meio ambiente e à melhoria da qualidade de vida.</p>
-`
+        "body": `
+            <p>Educação Verde, ou Educação Ambiental, é um processo contínuo e permanente que busca formar indivíduos conscientes e críticos sobre as questões ambientais, incentivando a participação ativa na construção de sociedades sustentáveis. Ela abrange a compreensão das inter-relações entre o ser humano e o meio ambiente, a valorização da biodiversidade, a promoção de hábitos de consumo responsáveis e a defesa da justiça socioambiental. Seu objetivo é desenvolver conhecimentos, habilidades, atitudes e valores que levem à conservação do meio ambiente e à melhoria da qualidade de vida.</p>
+        `
     },
     "topico7-educacao-verde-como-a-tecnologia-pode-ajudar-na-educa-o-verde-": {
         "title": "Como a tecnologia pode ajudar na Educa\u00e7\u00e3o Verde?",
-        "body": `<h2>Como a tecnologia pode ajudar na Educação Verde?</h2>
-<p>A tecnologia é uma ferramenta poderosa para a Educação Verde, tornando o aprendizado mais acessível, interativo e engajador. Ela permite a criação de conteúdos multimídia ricos, simulações de ecossistemas, jogos educativos, plataformas de e-learning e a disseminação de informações em larga escala. Além disso, a tecnologia pode conectar estudantes e educadores de diferentes partes do mundo, facilitando a troca de experiências e a colaboração em projetos ambientais. Realidade virtual e aumentada, por exemplo, podem transportar os alunos para ambientes naturais ou cenários de impacto ambiental, proporcionando uma experiência imersiva e impactante.</p>
-`
-    },
-    "topico7-educacao-verde-quais-os-objetivos-e-m-todos-da-educa-o-verde-": {
-        "title": "Quais os objetivos e m\u00e9todos da Educa\u00e7\u00e3o Verde?",
-        "body": `<h2>Quais os objetivos e métodos da Educação Verde?</h2>
-`
+        "body": `
+            <p>A tecnologia é uma ferramenta poderosa para a Educação Verde, tornando o aprendizado mais acessível, interativo e engajador. Ela permite a criação de conteúdos multimídia ricos, simulações de ecossistemas, jogos educativos, plataformas de e-learning e a disseminação de informações em larga escala. Além disso, a tecnologia pode conectar estudantes e educadores de diferentes partes do mundo, facilitando a troca de experiências e a colaboração em projetos ambientais. Realidade virtual e aumentada, por exemplo, podem transportar os alunos para ambientes naturais ou cenários de impacto ambiental, proporcionando uma experiência imersiva e impactante.</p>
+        `
     },
     "topico7-educacao-verde-objetivos": {
         "title": "Objetivos",
-        "body": `<h3>Objetivos</h3>
-<ul>
-<li><strong>Conscientização:</strong> Desenvolver a percepção e a sensibilidade sobre os problemas ambientais e suas causas.</li>
-<li><strong>Conhecimento:</strong> Fornecer informações e compreensão sobre o meio ambiente e a relação humana com ele.</li>
-<li><strong>Atitudes:</strong> Promover valores e sentimentos de preocupação com o meio ambiente e motivação para melhorá-lo.</li>
-<li><strong>Habilidades:</strong> Desenvolver a capacidade de identificar e resolver problemas ambientais.</li>
-<li><strong>Participação:</strong> Incentivar a ação individual e coletiva na resolução de questões ambientais.</li>
-</ul>
-`
+        "body": `
+            <ul>
+                <li><strong>Conscientização:</strong> Desenvolver a percepção e a sensibilidade sobre os problemas ambientais e suas causas.</li>
+                <li><strong>Conhecimento:</strong> Fornecer informações e compreensão sobre o meio ambiente e a relação humana com ele.</li>
+                <li><strong>Atitudes:</strong> Promover valores e sentimentos de preocupação com o meio ambiente e motivação para melhorá-lo.</li>
+                <li><strong>Habilidades:</strong> Desenvolver a capacidade de identificar e resolver problemas ambientais.</li>
+                <li><strong>Participação:</strong> Incentivar a ação individual e coletiva na resolução de questões ambientais.</li>
+            </ul>
+        `
     },
     "topico7-educacao-verde-m-todos": {
         "title": "M\u00e9todos",
-        "body": `<h3>Métodos</h3>
-<ul>
-<li><strong>Aprendizagem Baseada em Projetos:</strong> Envolver os alunos em projetos práticos que abordem problemas ambientais reais.</li>
-<li><strong>Aulas de Campo:</strong> Visitas a parques, reservas, estações de tratamento ou empresas com práticas sustentáveis.</li>
-<li><strong>Recursos Multimídia:</strong> Utilização de vídeos, documentários, infográficos e plataformas interativas.</li>
-<li><strong>Gamificação:</strong> Criação de jogos e desafios que tornem o aprendizado sobre sustentabilidade divertido e competitivo.</li>
-<li><strong>Debates e Discussões:</strong> Promover o pensamento crítico e a troca de ideias sobre temas ambientais complexos.</li>
-</ul>
-`
+        "body": `
+            <ul>
+                <li><strong>Aprendizagem Baseada em Projetos:</strong> Envolver os alunos em projetos práticos que abordem problemas ambientais reais.</li>
+                <li><strong>Aulas de Campo:</strong> Visitas a parques, reservas, estações de tratamento ou empresas com práticas sustentáveis.</li>
+                <li><strong>Recursos Multimídia:</strong> Utilização de vídeos, documentários, infográficos e plataformas interativas.</li>
+                <li><strong>Gamificação:</strong> Criação de jogos e desafios que tornem o aprendizado sobre sustentabilidade divertido e competitivo.</li>
+                <li><strong>Debates e Discussões:</strong> Promover o pensamento crítico e a troca de ideias sobre temas ambientais complexos.</li>
+            </ul>
+        `
     },
     "topico7-educacao-verde-projetos-hist-rias-e-workshops": {
         "title": "Projetos, Hist\u00f3rias e Workshops",
-        "body": `<h2>Projetos, Histórias e Workshops</h2>
-<ul>
-<li><strong>Projetos de Horta Escolar:</strong> Ensinam sobre cultivo orgânico, ciclo da água e alimentação saudável.</li>
-<li><strong>Campanhas de Reciclagem:</strong> Envolvem a comunidade na separação e destinação correta de resíduos.</li>
-<li><strong>Workshops de Reuso e Upcycling:</strong> Ensinam a transformar materiais descartados em novos produtos, reduzindo o lixo.</li>
-<li><strong>Histórias de Sucesso:</strong> Compartilhar exemplos de comunidades ou indivíduos que fizeram a diferença na proteção ambiental.</li>
-</ul>
-`
+        "body": `
+            <ul>
+                <li><strong>Projetos de Horta Escolar:</strong> Ensinam sobre cultivo orgânico, ciclo da água e alimentação saudável.</li>
+                <li><strong>Campanhas de Reciclagem:</strong> Envolvem a comunidade na separação e destinação correta de resíduos.</li>
+                <li><strong>Workshops de Reuso e Upcycling:</strong> Ensinam a transformar materiais descartados em novos produtos, reduzindo o lixo.</li>
+                <li><strong>Histórias de Sucesso:</strong> Compartilhar exemplos de comunidades ou indivíduos que fizeram a diferença na proteção ambiental.</li>
+            </ul>
+        `
     },
     "topico7-educacao-verde-benef-cios": {
         "title": "Benef\u00edcios",
-        "body": `<h2>Benefícios</h2>
-<p>Os benefícios da Educação Verde são amplos e de longo prazo:</p>
-<ul>
-<li><strong>Cidadãos Mais Engajados:</strong> Formação de indivíduos mais conscientes e ativos na defesa do meio ambiente.</li>
-<li><strong>Desenvolvimento Sustentável:</strong> Contribuição para a construção de uma sociedade que atenda às necessidades do presente sem comprometer as gerações futuras.</li>
-<li><strong>Inovação:</strong> Estímulo à criatividade e ao desenvolvimento de soluções tecnológicas para desafios ambientais.</li>
-<li><strong>Saúde e Bem-Estar:</strong> Promoção de ambientes mais saudáveis e de um estilo de vida mais equilibrado.</li>
-</ul>
-`
+        "body": `
+            <p>Os benefícios da Educação Verde são amplos e de longo prazo:</p>
+            <ul>
+                <li><strong>Cidadãos Mais Engajados:</strong> Formação de indivíduos mais conscientes e ativos na defesa do meio ambiente.</li>
+                <li><strong>Desenvolvimento Sustentável:</strong> Contribuição para a construção de uma sociedade que atenda às necessidades do presente sem comprometer as gerações futuras.</li>
+                <li><strong>Inovação:</strong> Estímulo à criatividade e ao desenvolvimento de soluções tecnológicas para desafios ambientais.</li>
+                <li><strong>Saúde e Bem-Estar:</strong> Promoção de ambientes mais saudáveis e de um estilo de vida mais equilibrado.</li>
+            </ul>
+        `
     },
     "topico7-educacao-verde-v-deos-sobre-o-tema-conte-do-para-usu-rio-assistir-": {
         "title": "V\u00eddeos sobre o tema (conte\u00fado para usu\u00e1rio assistir)",
-        "body": `<h2>Vídeos sobre o tema (conteúdo para usuário assistir)</h2>
-<p>Recomenda-se a inclusão de vídeos educativos e inspiradores sobre temas como mudanças climáticas, conservação da biodiversidade, energias renováveis e consumo consciente. Esses vídeos podem ser de documentários, canais educativos no YouTube ou produções independentes que abordem a temática de forma didática e envolvente.</p>
-`
+        "body": `
+            <p>Recomenda-se a inclusão de vídeos educativos e inspiradores sobre temas como mudanças climáticas, conservação da biodiversidade, energias renováveis e consumo consciente. Esses vídeos podem ser de documentários, canais educativos no YouTube ou produções independentes que abordem a temática de forma didática e envolvente.</p>
+        `
     },
     "topico7-educacao-verde-api-de-quiz-para-educa-o-verde-sugest-o-de-c-digo-": {
         "title": "API de Quiz para Educa\u00e7\u00e3o Verde (Sugest\u00e3o de C\u00f3digo)",
-        "body": `<h3>API de Quiz para Educação Verde (Sugestão de Código)</h3>
-<p>Para tornar a Educação Verde mais interativa e avaliar o conhecimento dos participantes, pode-se desenvolver um quiz online. Uma API de quiz pode gerenciar perguntas, respostas e pontuações. Abaixo, um exemplo conceitual de como uma API de quiz poderia ser acessada usando Python:</p>
-<p>\`\`\`python
-import requests
-import json</p>
-<h1>Exemplo de uso de uma API de quiz (substitua pela URL e chave da API real)</h1>
-<p>def get_quiz_questions(topic, num_questions, api_key):
-    base_url = "https://api.greenquiz.com/v1/questions"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-    params = {
-        "topic": topic,
-        "limit": num_questions
-    }
-    try:
-        response = requests.get(base_url, headers=headers, params=params)
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins
-        data = response.json()
-        return data
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao obter perguntas do quiz: {e}")
-        return None</p>
-<p>def submit_quiz_answers(user_id, quiz_id, answers, api_key):
-    base_url = "https://api.greenquiz.com/v1/submit_answers"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "user_id": user_id,
-        "quiz_id": quiz_id,
-        "answers": answers
-    }
-    try:
-        response = requests.post(base_url, headers=headers, data=json.dumps(payload))
-        response.raise_for_status()  # Levanta um erro para códigos de status HTTP ruins
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao enviar respostas do quiz: {e}")
-        return None</p>
-<h1>Substitua pelos seus dados reais</h1>
-<p>api_key = "SUA_CHAVE_API_DE_QUIZ"
-user_id = "user123"</p>
-<h1>Obter perguntas sobre "Energia Limpa"</h1>
-<p>quiz_questions = get_quiz_questions("energia_limpa", 3, api_key)</p>
-<p>if quiz_questions and quiz_questions.get("questions"):
-    print("Perguntas do Quiz sobre Energia Limpa:")
-    quiz_id = quiz_questions.get("quiz_id")
-    user_answers = []
-    for i, question in enumerate(quiz_questions["questions"]):
-        print(f"\n{i+1}. {question.get("text")}")
-        for j, option in enumerate(question.get("options", [])):
-            print(f"   {chr(65+j)}. {option}")
-        # Simulação de resposta do usuário
-        # Em um aplicativo real, o usuário forneceria a resposta
-        if i == 0: # Resposta para a primeira pergunta
-            user_answers.append({"question_id": question.get("id"), "answer": "B"})
-        elif i == 1: # Resposta para a segunda pergunta
-            user_answers.append({"question_id": question.get("id"), "answer": "A"})
-        elif i == 2: # Resposta para a terceira pergunta
-            user_answers.append({"question_id": question.get("id"), "answer": "C"})</p>
-<pre><code># Enviar respostas do usuário
-submission_result = submit_quiz_answers(user_id, quiz_id, user_answers, api_key)
-
-if submission_result:
-    print(f"\nRespostas do quiz enviadas. Pontuação: {submission_result.get("score")}/{submission_result.get("total_questions")}")
-    print(f"Feedback: {submission_result.get("feedback")}")
-else:
-    print("Falha ao enviar respostas do quiz.")
-</code></pre>
-<p>else:
-    print("Não foi possível obter perguntas do quiz.")
-\`\`\`</p>
-<p><strong>Observação:</strong> Uma API de quiz real precisaria de um backend para armazenar perguntas, validar respostas e calcular pontuações. O exemplo acima é conceitual e ilustra a interação cliente-servidor para um quiz educativo. Existem plataformas de e-learning e ferramentas de quiz que oferecem APIs para integração.</p>`
+        "body": `
+            <p>Para tornar a Educação Verde mais interativa e avaliar o conhecimento dos participantes, pode-se desenvolver um quiz online. Uma API de quiz pode gerenciar perguntas, respostas e pontuações. Abaixo, um exemplo conceitual de como uma API de quiz poderia ser acessada usando Python:</p>
+        `
     },
 };
 
