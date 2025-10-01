@@ -4,186 +4,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fontes e Referências - SustAmbiTech</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Adicionar Novo Ponto de Interesse - SustAmbiTech</title>
+    <link rel="stylesheet" href="style.css"> 
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <style>
-        /* Estilos Gerais para o Formulário */
-.main-content {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
+        /* ------------------------------------- */
+        /* ESTILOS INLINE MANTIDOS */
+        /* ------------------------------------- */
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            
+        }
 
-.form-container h2 {
-    color: #00796b; /* Cor primária do tema verde */
-    text-align: center;
-    margin-bottom: 5px;
-}
+        .main-content {
+            padding: 20px; /* Adiciona padding ao main-content para espaçamento */
+            display: flex; /* Adicionado para centralizar o form dentro do main */
+            justify-content: center;
+        }
 
-.form-container p {
-    text-align: center;
-    color: #555;
-    margin-bottom: 20px;
-}
+        #contribuicaoForm {
+            background-color: #697f3f;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
 
-/* Fieldset e Legend */
-fieldset {
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 20px;
-    margin-bottom: 25px;
-}
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+        /* ------------------------------------- */
+        /* ESTILOS DO MAPA E LEGENDA */
+        /* ------------------------------------- */
+        .mapa-legenda-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
 
-legend {
-    color: #00796b;
-    font-weight: bold;
-    padding: 0 10px;
-}
+        .mapa-container {
+            flex-grow: 1;
+        }
 
-/* Grupos de Formulário */
-.form-group {
-    margin-bottom: 15px;
-}
+        #mapaExistente {
+            height: 400px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-    color: #333;
-}
+        .mapa-container h3 {
+            margin-top: 0;
+            color: #007bff;
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+        
+        /* Estilo da Legenda (PC) */
+        .legenda {
+            height: 100%;
+            flex-basis: 200px;
+            padding: 15px;
+            background-color: #697f3f;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            align-self: flex-start;
+        }
 
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box; /* Garante que o padding não aumente o width */
-    font-size: 16px;
-}
+        .legenda-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
 
-.form-group textarea {
-    resize: vertical;
-}
+        .legenda-cor {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+            border: 2px solid #333;
+        }
 
-/* Layout Inline para CEP e Número */
-.form-group-inline {
-    display: flex;
-    gap: 20px;
-}
+        /* ------------------------------------- */
+        /* ESTILOS GERAIS DO FORMULÁRIO */
+        /* ------------------------------------- */
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-.form-group-inline .form-group {
-    flex: 1; /* Divide o espaço igualmente */
-}
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
 
-/* Botão de Envio */
-.submit-button {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    background-color: #00796b; /* Cor primária */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        input:not([type="radio"]),
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
 
-.submit-button:hover {
-    background-color: #004d40; /* Tom mais escuro ao passar o mouse */
-}
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
 
-/* Mensagens de Feedback */
-.message {
-    text-align: center;
-    margin-top: 15px;
-    padding: 10px;
-    border-radius: 4px;
-    font-weight: bold;
-}
+        /* Input Readonly/Disabled */
+        input[readonly], select[disabled] {
+            background-color: #f0f0f0;
+            color: #777;
+        }
 
-.message.success {
-    background-color: #e8f5e9;
-    color: #388e3c;
-}
+        /* DIVISÃO DO CAMPO TIPO/OUTROS */
+        .select-with-input-group {
+            display: flex;
+            gap: 10px;
+        }
 
-.message.error {
-    background-color: #ffebee;
-    color: #d32f2f;
-}
+        .select-with-input-group select {
+            flex: 1;
+        }
+
+        .select-with-input-group input {
+            flex: 1;
+            display: none;
+            margin-top: 0 !important;
+        }
+
+        /* Agrupamentos com botões */
+        .input-with-button-group {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .input-with-button-group .form-group {
+            flex-grow: 1;
+            margin-bottom: 0;
+        }
+        
+        /* Layout de Endereço em Colunas */
+        .endereco-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .endereco-row .form-group {
+            flex: 1;
+            min-width: 100px;
+            margin-bottom: 0;
+        }
+
+        .endereco-row .form-group-numero {
+            flex: 0 0 80px;
+        }
+
+
+        /* Estilos dos Botões */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+            width: 100%; /* Botão de Envio */
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #btnLocalizarDispositivo {
+            background-color: #2196F3;
+            height: 40px;
+            padding: 0 15px;
+            display: block; 
+            width: 100%;
+            margin-top: 0; 
+            text-align: center;
+        }
+
+        #btnLocalizarDispositivo:hover {
+            background-color: #0b7dda;
+        }
+        
+        /* Mensagem de Status */
+        #msgStatus {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #333;
+            background-color: #fff3cd; 
+            border: 1px solid #ffe0a3;
+            display: none;
+        }
+
+        /* BOX DE REVISÃO */
+        #revisaoFinalBox {
+            padding: 15px;
+            background-color: #587029;
+            border-left: 5px solid #FF9800; /* Cor Laranja para atenção */
+            border-radius: 4px;
+            margin: 30px 0;
+            font-size: 0.9em;
+        }
+
+        #revisaoFinalBox h4 {
+            color: #FF9800;
+            margin-top: 0;
+            
+        }
+        input, textarea, select{
+            background-color: #f3f3f3;
+        }
+        /* ------------------------------------- */
+        /* Responsividade */
+        /* ------------------------------------- */
+        @media (max-width: 768px) {
+            #contribuicaoForm {
+                padding: 15px;
+                box-shadow: none;
+            }
+
+            .input-with-button-group {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+            }
+
+            .input-with-button-group .form-group {
+                margin-bottom: 10px;
+            }
+
+            .input-with-button-group button {
+                width: 100%;
+                margin-top: 0;
+            }
+
+            /* Quebra o layout de mapa/legenda */
+            .mapa-legenda-container {
+                flex-direction: column;
+            }
+
+            /* A Legenda em Mobile se torna um bloco de largura total e é empurrada para baixo (order: 1) */
+            .legenda {
+                flex-basis: auto;
+                order: 1; /* Manda a legenda para baixo do mapa */
+            }
+            
+            .mapa-container {
+                order: 0; /* Garante que o mapa venha primeiro */
+            }
+
+            /* Endereço quebra em telas pequenas */
+            .endereco-row .form-group {
+                flex: 1 1 100%;
+            }
+
+            /* Tipo de Ponto / Outros também quebra em telas pequenas */
+            .select-with-input-group {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .select-with-input-group input {
+                margin-top: 10px !important;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div id="menu-container"></div>
-
-    <section class="form-container">
-    <h2>Sugerir Novo Ecoponto</h2>
-    <p>Ajude a expandir nossa rede de coleta! Preencha os detalhes do local que você gostaria de ver adicionado.</p>
-
-    <form id="sugestaoEcopontoForm">
-        <fieldset>
-            <legend>Detalhes do Local</legend>
-
-            <div class="form-group">
-                <label for="nomeLocal">Nome do Local/Ponto de Referência:</label>
-                <input type="text" id="nomeLocal" name="nomeLocal" required placeholder="Ex: Praça Central, Estacionamento do Mercado">
-            </div>
+<br>
+    <br>
+    <br>
+    <br>
+    <main class="main-content">
+        <form id="contribuicaoForm">
+            <h1>Adicionar Novo Ponto de Interesse Ambiental 🗺️</h1>
 
             <div class="form-group">
-                <label for="tipoPonto">Tipo de Material Principal:</label>
-                <select id="tipoPonto" name="tipoPonto" required>
-                    <option value="">Selecione o Tipo</option>
-                    <option value="Reciclagem">Reciclagem (Plástico, Papel, Vidro, Metal)</option>
-                    <option value="Posto Eletro">Posto Eletro (Eletrônicos, Pilhas, Baterias)</option>
-                    <option value="Óleo de Cozinha">Óleo de Cozinha Usado</option>
-                    <option value="Medicamentos">Medicamentos Vencidos</option>
-                    <option value="Outros">Outros (Especifique nas observações)</option>
-                </select>
+                <label for="email">Email (para contato se necessário):</label>
+                <input type="email" id="email" name="email" required placeholder="seu.email@exemplo.com">
             </div>
 
-            <div class="form-group">
-                <label for="endereco">Endereço Completo:</label>
-                <input type="text" id="endereco" name="endereco" required placeholder="Ex: Av. Brasil">
-            </div>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
 
-            <div class="form-group-inline">
-                <div class="form-group">
-                    <label for="numero">Número:</label>
-                    <input type="text" id="numero" name="numero" required placeholder="123 ou S/N">
+            <h2>1. Centralize o Mapa (Onde você está ou próximo)</h2>
+            <br>
+            <p style="font-size: 0.9em; margin-top: -15px;">Clique para centralizar o mapa na sua localização atual e facilitar a busca do novo ponto.</p>
+            <br>
+
+            <button type="button" id="btnLocalizarDispositivo" onclick="localizarPeloDispositivo()">
+                <span id="btnLocalizarDispositivoText">Usar Localização do Dispositivo</span>
+            </button>
+            <br>
+            <h3>1. Ponto Existente (Coloridos) | Ponto Novo (Pin Azul)</h3>
+            <br>
+            <h3>2. Clique ou Arraste o Pin Azul para o Local Correto!</h3>
+            <br>
+            <div id="camposAvancados" style="margin-top: 30px;">
+                <div class="mapa-legenda-container">
+                    <div class="mapa-container">
+                        <div id="mapaExistente"></div>
+                    </div>
+
+                    <div class="legenda">
+                        <h4>Legenda</h4>
+                        <div id="legendaContent"></div>
+                    </div>
                 </div>
+
+                <div id="msgStatus" style="display: none;"></div>
+
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+                <h2>2. Detalhes do Novo Ponto de Interesse</h2>
+                <br>
+                <p style="font-size: 0.9em; margin-top: -15px;">Campos preenchidos pelo CEP podem ser ajustados. O <b>Número</b> é obrigatório.</p>
+                <br>
                 <div class="form-group">
-                    <label for="cep">CEP:</label>
-                    <input type="text" id="cep" name="cep" required maxlength="9" pattern="\d{5}-?\d{3}" placeholder="00000-000">
+                    <label for="nomeLocal">Nome do Local (Obrigatório):</label>
+                    <input type="text" id="nomeLocal" name="nomeLocal" required placeholder="Ex: Ecoponto da Praça X">
                 </div>
-            </div>
-        </fieldset>
-        
-        <fieldset>
-            <legend>Informações Adicionais</legend>
-            <div class="form-group">
-                <label for="observacoes">Observações (Opcional):</label>
-                <textarea id="observacoes" name="observacoes" rows="3" placeholder="Qualquer detalhe extra sobre o acesso ou funcionamento do local..."></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label for="emailContato">Seu Email (Para contato sobre esta sugestão):</label>
-                <input type="email" id="emailContato" name="emailContato" placeholder="seu.email@exemplo.com">
-            </div>
-        </fieldset>
+                <label>Coordenadas (Geradas ao Clicar no Mapa):</label>
+                <div class="endereco-row">
+                     <div class="form-group">
+                        <input style="background-color: #ccc;" type="text" id="latitude" name="latitude" placeholder="Latitude" readonly>
+                    </div>
+                    <div class="form-group">
+                        <input style="background-color: #ccc;" type="text" id="longitude" name="longitude" placeholder="Longitude" readonly>
+                    </div>
+                </div>
 
-        <button type="submit" class="submit-button">Enviar Sugestão de Ecoponto</button>
+                <div class="endereco-row">
+                    <div class="form-group" style="flex: 2;">
+                        <label for="tipoPontoSelect">Informações/Tipo de Ponto (Obrigatório):</label>
+                        <div class="select-with-input-group">
+                            <select id="tipoPontoSelect" name="tipoPontoSelect"
+                                onchange="mostrarCampoOutros(this.value === 'Outros')" required>
+                                <option value="" disabled selected>-- Selecione o Tipo --</option>
+                                <option value="Posto Eletro">Posto Eletro</option>
+                                <option value="Eco Posto">Eco Posto</option>
+                                <option value="Descarte de Pilha">Descarte de Pilha</option>
+                                <option value="Reciclagem">Reciclagem</option>
+                                <option value="Óleo de Cozinha">Descarte de Óleo de Cozinha</option>
+                                <option value="Roupas/Têxtil">Doação de Roupas/Têxtil</option>
+                                <option value="Pneu">Descarte de Pneus</option>
+                                <option value="Outros">Outros [Escrever]</option>
+                            </select>
+                            <input type="text" id="outrosEspecificar" name="outrosEspecificar"
+                                placeholder="Especifique o tipo 'Outros'">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="flex: 1; min-width: 120px;">
+                        <label for="avaliacaoSelect">Avaliação (0-5) (Obrigatório):</label>
+                        <select id="avaliacaoSelect" name="avaliacaoSelect" required>
+                            <option value="" disabled selected>Avaliar</option>
+                            <option value="0">0 (Péssimo)</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5 (Excelente)</option>
+                        </select>
+                    </div>
+                </div>
 
-        <p id="form-message" class="message"></p>
-    </form>
-</section>
-    </main>
+                <div class="form-group">
+                    <label for="cep">CEP do Novo Ponto (Será validado e preenchido automaticamente):</label>
+                    <input type="text" id="cep" name="cep" placeholder="Ex: 00000-000" maxlength="9" onblur="buscarEnderecoPorCEP(this.value, true)">
+                </div>
+
+                <label>Endereço Detalhado:</label>
+                <div class="endereco-row">
+                    <div class="form-group">
+                        <input type="text" id="rua" name="rua" placeholder="Rua / Logradouro">
+                    </div>
+                    <div class="form-group form-group-numero">
+                        <input type="text" id="numero" name="numero" placeholder="Nº">
+                    </div>
+                </div>
+                <div class="endereco-row">
+                    <div class="form-group">
+                        <input type="text" id="bairro" name="bairro" placeholder="Bairro">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="cidade" name="cidade" placeholder="Cidade">
+                    </div>
+                    <div class="form-group form-group-numero">
+                        <input type="text" id="estado" name="estado" maxlength="2" placeholder="UF">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="observacao">Observação (Máx. 500 caracteres, ex: Horário de funcionamento, etc.):</label>
+                    <textarea id="observacao" name="observacao" rows="5" maxlength="500"></textarea>
+                </div>
+                
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
+
+                <div id="revisaoFinalBox">
+                    <h4>⚠️ Revisão Final Necessária ⚠️</h4>
+                    <p>O preenchimento do endereço por CEP utiliza uma base de dados externa (ViaCEP), que pode estar sujeita a <b>erros ou desatualizações</b>. Além disso, a localização no mapa é a sua estimativa (Pin Azul).</p>
+                    <p>Por favor, <b>confirme manualmente</b> se o endereço e o número estão corretos, e se o Pin Azul no mapa está no local exato antes de enviar.</p>
+                </div>
+
+                <button type="submit" onclick="enviarFormularioPonto(event)">Enviar Novo Ponto</button>
+            </div>
+        </form>
+        </main>
+    <br>
+    <br>
+    <br>
+    <br>
     <br>
     <br>
     <br>
@@ -201,78 +462,375 @@ legend {
                 .catch(error => console.error('Erro ao carregar o rodapé:', error));
         });
     </script>
+
     <script>
-        // Este código pode ser adicionado ao seu main.js (já que ele é type="module") 
-// ou em um bloco <script> na página, dependendo da sua estrutura.
+        let mapa = null;
+        let marcadorTemporario = null; 
+        let marcadorLocalizacaoUsuario = null; 
 
-// **Presume-se que a autenticação do Firebase já esteja configurada e o usuário logado.**
+        const DEFAULT_LAT = -23.5505;
+        const DEFAULT_LON = -46.6333;
+        const DEFAULT_ZOOM = 14;
 
-import { getDatabase, ref, push, serverTimestamp } from 'firebase/database';
+        const tipoParaCor = {
+            'Posto Eletro': '#FF0000', 
+            'Eco Posto': '#008000', 
+            'Descarte de Pilha': '#800080', 
+            'Reciclagem': '#FFA500', 
+            'Óleo de Cozinha': '#00CED1', 
+            'Roupas/Têxtil': '#FF69B4', 
+            'Pneu': '#696969', 
+            'Outros': '#000000'
+        };
 
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('sugestaoEcopontoForm');
-    const messageDisplay = document.getElementById('form-message');
+        const pontosExistentes = [
+            { lat: -23.5505, lon: -46.6333, tipo: 'Reciclagem', nome: 'Ponto Central de SP' },
+            { lat: -23.5615, lon: -46.6565, tipo: 'Posto Eletro', nome: 'Posto Eletrônico Avenida' },
+        ];
+        
+        async function buscarEnderecoPorCEP(cep, isNewPoint = false) {
+            const cepLimpo = cep.replace(/\D/g, '');
+            if (cepLimpo.length !== 8) return null;
 
-    if (form) {
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            messageDisplay.textContent = '';
-            messageDisplay.className = 'message';
+            if (!isNewPoint) return null; 
 
-            // 1. Obter o UID do usuário logado (MOCK/EXEMPLO)
-            // Substitua esta linha pela lógica real de obtenção do UID
-            const usuarioId = "SEU_UID_DE_EXEMPLO"; // <-- ATUALIZE COM A FUNÇÃO DE AUTENTICAÇÃO REAL
+            const targetRua = document.getElementById('rua');
+            const targetBairro = document.getElementById('bairro');
+            const targetCidade = document.getElementById('cidade');
+            const targetEstado = document.getElementById('estado');
+            
+            const msgElement = document.getElementById('msgStatus');
+            msgElement.style.display = 'block';
+            msgElement.style.backgroundColor = '#fff3cd'; 
+            msgElement.innerHTML = `Buscando endereço para o CEP ${cepLimpo}...`;
+            
+            document.getElementById('numero').value = '';
 
-            if (usuarioId === "SEU_UID_DE_EXEMPLO" || !usuarioId) {
-                messageDisplay.textContent = 'Erro: Você precisa estar logado para enviar uma sugestão.';
-                messageDisplay.classList.add('error');
+            try {
+                const url = `https://viacep.com.br/ws/${cepLimpo}/json/`;
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.erro) {
+                    throw new Error('CEP não encontrado ou inválido.');
+                }
+
+                targetRua.value = data.logradouro || '';
+                targetBairro.value = data.bairro || '';
+                targetCidade.value = data.localidade || '';
+                targetEstado.value = data.uf || '';
+                
+                msgElement.style.backgroundColor = '#e6ffe6';
+                msgElement.innerHTML = `Endereço encontrado e preenchido (Rua, Bairro, Cidade). <b>Por favor, preencha o Número e confira!</b>`;
+
+                return {
+                    rua: data.logradouro || '',
+                    bairro: data.bairro || '',
+                    cidade: data.localidade || '',
+                    estado: data.uf || ''
+                };
+
+            } catch (error) {
+                msgElement.style.backgroundColor = '#f8d7da';
+                msgElement.innerHTML = `Erro: ${error.message}. Preencha o endereço manualmente.`;
+                console.error("Erro no ViaCEP:", error);
+                targetRua.value = '';
+                targetBairro.value = '';
+                targetCidade.value = '';
+                targetEstado.value = '';
+                return null;
+            } finally {
+                setTimeout(() => { msgElement.style.display = 'none'; }, 8000);
+            }
+        }
+
+        async function reverterCoordenadas(lat, lon) {
+            console.log(`Buscando endereço real para: ${lat}, ${lon}`);
+            const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&addressdetails=1`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data && data.address) {
+                    const addr = data.address;
+                    const bairro = addr.suburb || addr.neighbourhood || addr.village || '';
+                    
+                    return {
+                        cep: (addr.postcode || '').replace(/(\d{5})(\d{3})/, '$1-$2'),
+                        rua: addr.road || addr.footway || 'Logradouro não identificado',
+                        bairro: bairro,
+                        cidade: addr.city || addr.town || addr.village || '',
+                        estado: addr.state_code || addr.state || ''
+                    };
+                } else {
+                    throw new Error('Coordenadas não puderam ser revertidas para endereço.');
+                }
+            } catch (error) {
+                 console.error("Erro na Geocodificação Reversa:", error);
+                 throw new Error("Erro na busca de endereço pelo mapa.");
+            }
+        }
+        
+        function criarIconeColorido(tipo, cor) {
+            return L.divIcon({
+                className: 'custom-div-icon',
+                html: `<div style="background-color: ${cor}; width: 15px; height: 15px; border-radius: 50%; border: 2px solid #333;"></div>`,
+                iconSize: [20, 20],
+                iconAnchor: [10, 10],
+                popupAnchor: [0, -10]
+            });
+        }
+
+        async function adicionarMarcadorNovoPonto(e) {
+            const latlng = e.latlng || e.target.getLatLng();
+            const lat = latlng.lat.toFixed(6);
+            const lon = latlng.lng.toFixed(6);
+
+            const msgElement = document.getElementById('msgStatus');
+
+            if (marcadorTemporario) {
+                mapa.removeLayer(marcadorTemporario);
+            }
+
+            marcadorTemporario = L.marker(latlng, { draggable: true }).addTo(mapa)
+                .bindPopup("Novo Ponto de Interesse: Arraste para ajuste fino.").openPopup();
+
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lon;
+            
+            msgElement.style.display = 'block';
+            msgElement.style.backgroundColor = '#e6ffe6';
+            msgElement.innerHTML = `<b>Local Selecionado!</b> Coordenadas: ${lat}, ${lon}. Buscando endereço aproximado...`;
+
+            try {
+                const endereco = await reverterCoordenadas(latlng.lat, latlng.lng);
+                
+                document.getElementById('cep').value = endereco.cep || document.getElementById('cep').value;
+                document.getElementById('rua').value = endereco.rua;
+                document.getElementById('bairro').value = endereco.bairro;
+                document.getElementById('cidade').value = endereco.cidade;
+                document.getElementById('estado').value = endereco.estado;
+                
+                document.getElementById('numero').value = ''; 
+
+                msgElement.innerHTML = `<b>Local Selecionado!</b> Endereço aproximado preenchido pelo mapa. Por favor, <b>preencha o Número e confira o CEP</b>.`;
+                msgElement.style.backgroundColor = '#d4edda'; 
+
+            } catch (error) {
+                 msgElement.innerHTML = `<b>Local Selecionado, mas o endereço não pôde ser encontrado.</b> Por favor, preencha todos os campos manualmente.`;
+                 msgElement.style.backgroundColor = '#f8d7da'; 
+                 console.error("Erro ao preencher endereço após clique:", error);
+            } finally {
+                marcadorTemporario.on('dragend', adicionarMarcadorNovoPonto);
+                setTimeout(() => { msgElement.style.display = 'none'; }, 8000);
+            }
+        }
+        
+        function centralizarMapa(lat, lon, zoom = DEFAULT_ZOOM) {
+            mapa.setView([lat, lon], zoom);
+            mapa.invalidateSize();
+        }
+        
+        function atualizarMarcadorUsuario(lat, lon, info) {
+            const userLatLng = [lat, lon];
+            const iconeUsuario = L.marker(userLatLng, {
+                icon: L.divIcon({
+                    className: 'custom-user-icon',
+                    html: `<div style="font-size: 1.5em; color: #ff0000;">📍</div>`, // Cor vermelha para destacar
+                    iconSize: [25, 25],
+                    iconAnchor: [12, 25]
+                })
+            });
+
+            if (marcadorLocalizacaoUsuario) {
+                mapa.removeLayer(marcadorLocalizacaoUsuario);
+            }
+            
+            marcadorLocalizacaoUsuario = iconeUsuario.addTo(mapa)
+                .bindPopup(`<b>Sua Referência:</b><br>${info}`).openPopup();
+        }
+
+        function inicializarMapa(lat, lon) {
+            const center = [lat || DEFAULT_LAT, lon || DEFAULT_LON];
+
+            if (mapa) {
+                mapa.remove();
+            }
+
+            mapa = L.map('mapaExistente').setView(center, DEFAULT_ZOOM); 
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(mapa);
+
+            pontosExistentes.forEach(ponto => {
+                const cor = tipoParaCor[ponto.tipo] || '#000000';
+                const icone = criarIconeColorido(ponto.tipo, cor);
+
+                L.marker([ponto.lat, ponto.lon], { icon: icone })
+                    .addTo(mapa)
+                    .bindPopup(`<b>${ponto.nome}</b><br>Tipo: ${ponto.tipo}`);
+            });
+
+            mapa.on('click', adicionarMarcadorNovoPonto);
+            
+            mapa.invalidateSize();
+            
+            preencherLegenda();
+        }
+
+        function preencherLegenda() {
+            const legendaDiv = document.getElementById('legendaContent');
+            let html = '<h4>Pontos Existentes</h4>';
+
+            for (const tipo in tipoParaCor) {
+                const cor = tipoParaCor[tipo];
+                html += `
+                    <div class="legenda-item">
+                        <div class="legenda-cor" style="background-color: ${cor};"></div>
+                        <span>${tipo}</span>
+                    </div>
+                `;
+            }
+            
+            html += `
+                <hr style="border: 0; border-top: 1px solid #ddd; margin: 10px 0;">
+                <h4>Sua Contribuição</h4>
+                <div class="legenda-item">
+                    <img src="https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png" 
+                        alt="Pin Azul" style="width: 15px; margin-right: 8px;">
+                    <span>Novo Ponto (Sua Escolha)</span>
+                </div>
+                <div class="legenda-item">
+                    <div style="font-size: 1.2em; margin-right: 8px; color: #ff0000;">📍</div>
+                    <span>Referência (Centralização)</span>
+                </div>
+            `;
+            legendaDiv.innerHTML = html;
+        }
+
+        function mostrarCampoOutros(isOutros) {
+            const campoOutros = document.getElementById('outrosEspecificar');
+            const select = document.getElementById('tipoPontoSelect');
+
+            campoOutros.style.display = isOutros ? 'block' : 'none';
+            select.style.flex = isOutros ? '1' : '2';
+
+            if (!isOutros) {
+                campoOutros.value = '';
+            }
+        }
+        
+        function localizarPeloDispositivo() {
+            const btnText = document.getElementById('btnLocalizarDispositivoText');
+            const originalText = 'Usar Localização do Dispositivo';
+            const msgElement = document.getElementById('msgStatus');
+            
+            btnText.textContent = 'Aguarde...';
+            msgElement.style.display = 'block';
+            msgElement.style.backgroundColor = '#fff3cd';
+            msgElement.innerHTML = `Aguardando permissão de localização do dispositivo...`;
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        
+                        centralizarMapa(lat, lon, 16);
+                        atualizarMarcadorUsuario(lat, lon, `Sua Localização Aproximada (Lat/Lon: ${lat.toFixed(4)}, ${lon.toFixed(4)})`);
+                        
+                        btnText.textContent = 'Mapa Centralizado!';
+                        msgElement.innerHTML = `Mapa centralizado na sua localização.`;
+                        msgElement.style.backgroundColor = '#d4edda';
+
+                        setTimeout(() => { btnText.textContent = originalText; }, 3000);
+                        setTimeout(() => { msgElement.style.display = 'none'; }, 5000);
+                    },
+                    (error) => {
+                        console.error("Erro de Geolocalização:", error);
+                        btnText.textContent = 'Erro!';
+                        msgElement.innerHTML = `Erro: ${error.message}. Permissão negada ou localização indisponível.`;
+                        msgElement.style.backgroundColor = '#f8d7da';
+                        
+                        setTimeout(() => { btnText.textContent = originalText; }, 3000);
+                        setTimeout(() => { msgElement.style.display = 'none'; }, 8000);
+                    }
+                );
+            } else {
+                btnText.textContent = 'Indisponível';
+                msgElement.innerHTML = `Seu navegador não suporta geolocalização.`;
+                msgElement.style.backgroundColor = '#f8d7da';
+                setTimeout(() => { msgElement.style.display = 'none'; }, 8000);
+            }
+        }
+
+
+        function enviarFormularioPonto(event) {
+            event.preventDefault();
+
+            const lat = document.getElementById('latitude').value;
+            const lon = document.getElementById('longitude').value;
+            const tipoPontoSelecionado = document.getElementById('tipoPontoSelect').value;
+            const numero = document.getElementById('numero').value;
+            const avaliacao = document.getElementById('avaliacaoSelect').value;
+            
+            if (!document.getElementById('email').value || !document.getElementById('nomeLocal').value || !tipoPontoSelecionado || !avaliacao) {
+                 alert('Preencha todos os campos obrigatórios (Email, Nome, Tipo, Avaliação)!');
+                 return;
+            }
+
+            if (tipoPontoSelecionado === 'Outros' && !document.getElementById('outrosEspecificar').value) {
+                 alert("Por favor, especifique o tipo 'Outros'.");
+                 return;
+            }
+            
+            if (!numero) {
+                 alert('O campo "Número" é obrigatório para um endereço preciso.');
+                 return;
+            }
+
+            if (!lat || !lon) {
+                alert('Por favor, <b>clique no mapa</b> para definir a localização do novo ponto (Pin Azul) e gerar as coordenadas.');
                 return;
             }
 
-            // 2. Coletar dados do formulário
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-
-            // 3. Formatar o objeto para o Firebase (conforme as regras)
-            const novaSugestao = {
-                usuarioId: usuarioId,
-                nomeLocal: data.nomeLocal,
-                tipoPonto: data.tipoPonto,
-                endereco: data.endereco,
-                numero: data.numero,
-                cep: data.cep.replace(/[^0-9]/g, ''), // Limpa o CEP para apenas dígitos
-                observacoes: data.observacoes || '',
-                emailContato: data.emailContato || '',
-                
-                // Campos requeridos pelas regras do Firebase
-                status: "pendente", // O status inicial DEVE ser 'pendente' (conforme regra)
-                data: new Date().toISOString() // Data de envio no formato ISO
-                
-                // NOTA: O campo "data" no seu banco usa string ISO, não serverTimestamp.
-                // Se preferir o timestamp do servidor do Firebase (mais robusto), mude para:
-                // data: serverTimestamp() 
+            const dadosPonto = {
+                email: document.getElementById('email').value,
+                nomeLocal: document.getElementById('nomeLocal').value,
+                tipoPonto: tipoPontoSelecionado === 'Outros' ? document.getElementById('outrosEspecificar').value : tipoPontoSelecionado,
+                avaliacao: avaliacao,
+                cep: document.getElementById('cep').value.replace(/\D/g, ''),
+                rua: document.getElementById('rua').value,
+                numero: numero,
+                bairro: document.getElementById('bairro').value,
+                cidade: document.getElementById('cidade').value,
+                estado: document.getElementById('estado').value,
+                latitude_selecionada: lat,
+                longitude_selecionada: lon,
+                observacao: document.getElementById('observacao').value
             };
 
-            // 4. Enviar para o Firebase Realtime Database
-            try {
-                // Presume-se que 'db' é a referência ao seu Realtime Database inicializado
-                const db = getDatabase(); 
-                const sugestoesRef = ref(db, 'sugestoes_ecopontos');
-                
-                await push(sugestoesRef, novaSugestao);
-
-                messageDisplay.textContent = 'Sugestão enviada com sucesso! Agradecemos sua contribuição.';
-                messageDisplay.classList.add('success');
-                form.reset();
-
-            } catch (error) {
-                console.error("Erro ao enviar a sugestão:", error);
-                messageDisplay.textContent = 'Erro ao enviar. Tente novamente ou verifique sua conexão.';
-                messageDisplay.classList.add('error');
+            console.log('--- Dados de Contribuição Enviados ---');
+            console.log(dadosPonto);
+            console.log('------------------------------------');
+            alert('Novo Ponto de Interesse enviado com sucesso para moderação! Obrigado! 🌱 (Verifique o console para os dados completos)');
+            
+            document.getElementById('contribuicaoForm').reset();
+            inicializarMapa(DEFAULT_LAT, DEFAULT_LON); 
+            marcadorTemporario = null;
+            document.getElementById('msgStatus').style.display = 'none';
+            if (marcadorLocalizacaoUsuario) {
+                 mapa.removeLayer(marcadorLocalizacaoUsuario);
+                 marcadorLocalizacaoUsuario = null;
             }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            inicializarMapa(DEFAULT_LAT, DEFAULT_LON);
+            mostrarCampoOutros(false); 
         });
-    }
-});
     </script>
 </body>
 </html>
