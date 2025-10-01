@@ -3,7 +3,7 @@
 // --- Importações de Módulos Firebase ---
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js';
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword, EmailAuthProvider, reauthenticateWithCredential, updateEmail, updatePassword, sendPasswordResetEmail, verifyPasswordResetCode, confirmPasswordReset } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js';
-import { getDatabase, ref, set, get, update } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js';
+import { getDatabase, ref, set, push ,get, update } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js';
 
 // --- Importação da Configuração do Firebase ---
 import { firebaseConfig } from './firebase-config.js';
@@ -483,7 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   displayProfileMessage('Senha atual incorreta.', 'red');
               } else if (error.code === 'auth/requires-recent-login') {
                   displayProfileMessage('Esta operação é sensível e requer reautenticação recente. Por favor, faça login novamente e tente de novo.', 'red');
-              } else {
+    1           } else {
                   displayProfileMessage(error.message || "Ocorreu um erro ao salvar as alterações.", "red");
               }
           }
@@ -512,7 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   }
 
-  // --- 5. Lógica para a Página de Recuperação de Senha (esqueceu-senha.html) ---
+// --- 5. Lógica para a Página de Recuperação de Senha (esqueceu-senha.html) ---
   const forgotPasswordRequestForm = document.getElementById('forgot-password-request-form');
   const requestFeedbackMessage = document.getElementById('requestFeedbackMessage');
 
