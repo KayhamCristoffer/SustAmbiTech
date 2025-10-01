@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         onAuthStateChanged(auth, async (user) => {
           // Array de páginas que requerem autenticação
-          const restrictedPages = ['edit-profile.html', 'servicos.html'];
+          const restrictedPages = ['edit-profile.html', 'servicos.html','formulario.html','fontes.html'];
           const currentPage = window.location.pathname.split('/').pop();
           const isRestrictedPage = restrictedPages.includes(currentPage);
           
