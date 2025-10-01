@@ -64,8 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const editMenuItem = document.getElementById('editMenuItem');
         const logoutMenuItem = document.getElementById('logoutMenuItem');
         const logoutButtonLink = logoutMenuItem ? logoutMenuItem.querySelector('a.logout') : null;
-        // Adicionado: Item de menu para serviços
-        const servicesMenuItem = document.getElementById('servicesMenuItem');
+        
+        // CORREÇÃO: Seleciona TODOS os itens restritos usando a classe 'restricted-menu-item'
+        // Importante: O HTML deve ser corrigido para usar classes ao invés de IDs duplicados!
+        const restrictedMenuItems = document.querySelectorAll('.restricted-menu-item');
 
         onAuthStateChanged(auth, async (user) => {
           // Array de páginas que requerem autenticação
@@ -81,8 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (userNameMenuItem) userNameMenuItem.style.display = 'list-item';
             if (editMenuItem) editMenuItem.style.display = 'list-item';
             if (logoutMenuItem) logoutMenuItem.style.display = 'list-item';
-            if (servicesMenuItem) servicesMenuItem.style.display = 'list-item'; // Garante que o item de serviços seja visível
-
+            
+            // NOVO: Exibe todos os itens de menu restritos
+            restrictedMenuItems.forEach(item => {
+                item.style.display = 'list-item';
+            });
+            
             if (heroRegisterBtn) heroRegisterBtn.style.display = 'none';
             if (heroEditProfileBtn) heroEditProfileBtn.style.display = 'block';
 
@@ -148,8 +154,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (userNameMenuItem) userNameMenuItem.style.display = 'none';
             if (editMenuItem) editMenuItem.style.display = 'none';
             if (logoutMenuItem) logoutMenuItem.style.display = 'none';
-            if (servicesMenuItem) servicesMenuItem.style.display = 'none'; // Esconde o item de menu de serviços
-
+            
+            // NOVO: Esconde todos os itens de menu restritos
+            restrictedMenuItems.forEach(item => {
+                item.style.display = 'none';
+            });
+            
             if (heroRegisterBtn) heroRegisterBtn.style.display = 'block';
             if (heroEditProfileBtn) heroEditProfileBtn.style.display = 'none';
             
@@ -519,80 +529,83 @@ document.addEventListener('DOMContentLoaded', () => {
           // Usuário chegou via link de e-mail para redefinir a senha
           oobCode = actionCode; // Armazena o código para uso posterior
 
-          forgotPasswordRequestForm.style.display = 'none'; // Esconde o formulário de solicitação
-          forgotPasswordResetForm.style.display = 'block';   // Mostra o formulário de nova senha
+          // Assumindo que você tem elementos com estes IDs, mostre/esconda os formulários
+          if (forgotPasswordRequestForm) forgotPasswordRequestForm.style.display = 'none';
+          if (forgotPasswordResetForm) forgotPasswordResetForm.style.display = 'block';
 
           // Opcional: Verificar o código imediatamente para dar um feedback inicial
-          // Não é estritamente necessário aqui, pois confirmPasswordReset fará a verificação
           verifyPasswordResetCode(auth, oobCode)
               .then((email) => {
                   console.log('Código de redefinição de senha válido para:', email);
-                  // Podemos pré-preencher o email, mas o Firebase não exige
               })
               .catch((error) => {
                   console.error('Erro ao verificar código de redefinição:', error);
-                  resetFeedbackMessage.textContent = 'Link de redefinição inválido ou expirado. Por favor, solicite um novo e-mail.';
-                  resetFeedbackMessage.style.color = 'red';
-                  forgotPasswordResetForm.style.display = 'none'; // Oculta o formulário de senha
-                  forgotPasswordRequestForm.style.display = 'block'; // Mostra o formulário de solicitação novamente
+                  if (resetFeedbackMessage) {
+                    resetFeedbackMessage.textContent = 'Link de redefinição inválido ou expirado. Por favor, solicite um novo e-mail.';
+                    resetFeedbackMessage.style.color = 'red';
+                  }
+                  if (forgotPasswordResetForm) forgotPasswordResetForm.style.display = 'none';
+                  if (forgotPasswordRequestForm) forgotPasswordRequestForm.style.display = 'block';
               });
 
           // Adicionar listener ao formulário de nova senha
-          forgotPasswordResetForm.addEventListener('submit', async (e) => {
-              e.preventDefault();
+          if (forgotPasswordResetForm) {
+              forgotPasswordResetForm.addEventListener('submit', async (e) => {
+                  e.preventDefault();
 
-              const newPassword = document.getElementById('newPassword').value.trim();
-              const confirmNewPassword = document.getElementById('confirmNewPassword').value.trim();
+                  const newPassword = document.getElementById('newPassword').value.trim();
+                  const confirmNewPassword = document.getElementById('confirmNewPassword').value.trim();
 
-              if (newPassword === '' || confirmNewPassword === '') {
-                  displayResetMessage('Por favor, preencha os dois campos de senha.', 'red');
-                  return;
-              }
-              if (newPassword !== confirmNewPassword) {
-                  displayResetMessage('As senhas não coincidem. Tente novamente.', 'red');
-                  return;
-              }
-              if (newPassword.length < 6) {
-                  displayResetMessage('A senha deve ter no mínimo 6 caracteres.', 'red');
-                  return;
-              }
-
-              displayResetMessage("Salvando nova senha...", "blue");
-
-              try {
-                  await confirmPasswordReset(auth, oobCode, newPassword);
-                  displayResetMessage('Sua senha foi redefinida com sucesso! Redirecionando para o login...', 'green');
-                  
-                  // Limpar campos de senha
-                  document.getElementById('newPassword').value = '';
-                  document.getElementById('confirmNewPassword').value = '';
-
-                  setTimeout(() => {
-                      window.location.href = 'login.html'; // Redireciona para a página de login
-                  }, 2000);
-
-              } catch (error) {
-                  console.error("Erro ao redefinir a senha:", error);
-                  let errorMessage = 'Erro ao redefinir a senha. O link pode ser inválido ou já foi usado.';
-                  switch (error.code) {
-                      case 'auth/invalid-action-code':
-                          errorMessage = 'O link de redefinição é inválido ou expirou.';
-                          break;
-                      case 'auth/user-disabled':
-                          errorMessage = 'Sua conta foi desativada.';
-                          break;
-                      case 'auth/user-not-found':
-                          errorMessage = 'Não há usuário com este e-mail.';
-                          break;
-                      case 'auth/weak-password':
-                          errorMessage = 'A nova senha é muito fraca. Escolha uma senha mais forte.';
-                          break;
-                      default:
-                          break;
+                  if (newPassword === '' || confirmNewPassword === '') {
+                      displayResetMessage('Por favor, preencha os dois campos de senha.', 'red');
+                      return;
                   }
-                  displayResetMessage(errorMessage, 'red');
-              }
-          });
+                  if (newPassword !== confirmNewPassword) {
+                      displayResetMessage('As senhas não coincidem. Tente novamente.', 'red');
+                      return;
+                  }
+                  if (newPassword.length < 6) {
+                      displayResetMessage('A senha deve ter no mínimo 6 caracteres.', 'red');
+                      return;
+                  }
+
+                  displayResetMessage("Salvando nova senha...", "blue");
+
+                  try {
+                      await confirmPasswordReset(auth, oobCode, newPassword);
+                      displayResetMessage('Sua senha foi redefinida com sucesso! Redirecionando para o login...', 'green');
+                      
+                      // Limpar campos de senha
+                      document.getElementById('newPassword').value = '';
+                      document.getElementById('confirmNewPassword').value = '';
+
+                      setTimeout(() => {
+                          window.location.href = 'login.html'; // Redireciona para a página de login
+                      }, 2000);
+
+                  } catch (error) {
+                      console.error("Erro ao redefinir a senha:", error);
+                      let errorMessage = 'Erro ao redefinir a senha. O link pode ser inválido ou já foi usado.';
+                      switch (error.code) {
+                          case 'auth/invalid-action-code':
+                              errorMessage = 'O link de redefinição é inválido ou expirou.';
+                              break;
+                          case 'auth/user-disabled':
+                              errorMessage = 'Sua conta foi desativada.';
+                              break;
+                          case 'auth/user-not-found':
+                              errorMessage = 'Não há usuário com este e-mail.';
+                              break;
+                          case 'auth/weak-password':
+                              errorMessage = 'A nova senha é muito fraca. Escolha uma senha mais forte.';
+                              break;
+                          default:
+                              break;
+                      }
+                      displayResetMessage(errorMessage, 'red');
+                  }
+              });
+          }
 
       } else if (forgotPasswordRequestForm) {
           // Usuário chegou na página para solicitar o e-mail de redefinição
@@ -629,7 +642,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
       }
   }
-    
+    
   // Funções auxiliares para feedback
   function displayRequestMessage(message, color) {
       if (requestFeedbackMessage) {
