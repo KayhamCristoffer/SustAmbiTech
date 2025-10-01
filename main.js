@@ -629,7 +629,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
       }
   }
-
+    
   // Funções auxiliares para feedback
   function displayRequestMessage(message, color) {
       if (requestFeedbackMessage) {
