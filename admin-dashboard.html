@@ -25,9 +25,9 @@
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        
+
         h1,
-        h2, 
+        h2,
         h3 {
             color: #f0f0f0;
             text-align: center;
@@ -163,9 +163,11 @@
         .actions .btn-deactivate:hover {
             background-color: #5a6268;
         }
-        .element.style{
+
+        .element.style {
             color: #fff;
         }
+
         /* Modal Styles */
         .modal {
             display: none;
@@ -338,13 +340,16 @@
         /* Adicional para a modal: Alinhamento de formulário */
         .form-grid-triple {
             display: grid;
-            grid-template-columns: 1fr 0.3fr 1fr; /* Para Rua, Número, Bairro */
+            grid-template-columns: 1fr 0.3fr 1fr;
+            /* Para Rua, Número, Bairro */
             gap: 15px;
             margin-bottom: 15px;
         }
+
         @media (max-width: 600px) {
             .form-grid-triple {
-                grid-template-columns: 1fr; /* Empilha em telas menores */
+                grid-template-columns: 1fr;
+                /* Empilha em telas menores */
             }
         }
     </style>
@@ -360,10 +365,9 @@
         <h1>Dashboard Administrativo</h1>
         <div id="authStatusMessage" class="message-box info"></div>
 
-        <!-- Botões de Ação Global -->
         <div class="dashboard-actions">
-            <!-- BOTÃO ALTERADO PARA REDIRECIONAR AO FORMULÁRIO DE SUGESTÃO -->
-            <button id="btnAddNewPoint" class="actions btn-add" style="background-color: #2196F3; height: 40px; padding: 0 15px; display: block; width: 100%; margin-top: 0; text-align: center;">
+            <button id="btnAddNewPoint" class="actions btn-add"
+                style="background-color: #2196F3; height: 40px; padding: 0 15px; display: block; width: 100%; margin-top: 0; text-align: center;">
                 Adicionar Nova Sugestão (via Formulário)
             </button>
         </div>
@@ -383,8 +387,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- As sugestões serão carregadas aqui -->
-                </tbody>
+                    </tbody>
             </table>
         </section>
 
@@ -402,8 +405,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Os ecopontos ativos serão carregados aqui -->
-                </tbody>
+                    </tbody>
             </table>
         </section>
 
@@ -412,70 +414,70 @@
 
     <div id="footer-container"></div>
 
-    <!-- Modal para Edição de Pontos -->
-    <div id="editPointModal" class="modal">
+    <div id="pointModal" class="modal">
         <div class="modal-content">
-            <span class="close-button close-edit-modal">&times;</span> <!-- Adicionei uma classe para facilitar o fechamento via JS -->
-            <h2>Editar Detalhes do Ponto de Coleta</h2>
-            <form id="editPointForm">
-                <input type="hidden" id="edit-point-id">
+            <span class="close-button close-edit-modal">&times;</span>
+            <h2 id="modalTitle">Editar Detalhes do Ponto de Coleta</h2>
+            <div id="modalMessageBox" class="message-box"></div> <form id="pointForm">
+                <input type="hidden" id="pointId">
                 <div class="form-group">
-                    <label for="edit-nome">Nome do Ponto:</label>
-                    <input type="text" id="edit-nome" required>
+                    <label for="modalNome">Nome do Ponto:</label>
+                    <input type="text" id="modalNome" required>
                 </div>
                 <div class="form-group">
-                    <label for="edit-tipoPonto">Tipo de Material:</label>
-                    <input type="text" id="edit-tipoPonto" required>
-                    <!-- Considere usar um <select> dropdown aqui se os tipos forem predefinidos -->
+                    <label for="modalTipoPonto">Tipo de Material:</label>
+                    <input type="text" id="modalTipoPonto" required>
+                    <input type="text" id="modalOutrosEspecificar" placeholder="Especifique o tipo de material..."
+                        style="display: none; margin-top: 5px;">
                 </div>
                 <div class="form-group">
-                    <label for="edit-ativo">Status do Ponto:</label>
-                    <select id="edit-ativo" required>
+                    <label for="modalAtivo">Status do Ponto:</label>
+                    <select id="modalAtivo" required>
                         <option value="true">Ativo (visível para usuários)</option>
                         <option value="false">Inativo (sugestão/não visível)</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="edit-cep">CEP:</label>
-                    <input type="text" id="edit-cep" placeholder="Ex: 00000-000">
+                    <label for="modalCep">CEP:</label>
+                    <input type="text" id="modalCep" placeholder="Ex: 00000-000">
                 </div>
                 <div class="form-grid-triple">
                     <div class="form-group">
-                        <label for="edit-rua">Rua:</label>
-                        <input type="text" id="edit-rua">
+                        <label for="modalRua">Rua:</label>
+                        <input type="text" id="modalRua">
                     </div>
                     <div class="form-group">
-                        <label for="edit-numero">Número:</label>
-                        <input type="text" id="edit-numero">
+                        <label for="modalNumero">Número:</label>
+                        <input type="text" id="modalNumero">
                     </div>
                     <div class="form-group">
-                        <label for="edit-bairro">Bairro:</label>
-                        <input type="text" id="edit-bairro">
+                        <label for="modalBairro">Bairro:</label>
+                        <input type="text" id="modalBairro">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edit-cidade">Cidade:</label>
-                    <input type="text" id="edit-cidade">
+                    <label for="modalCidade">Cidade:</label>
+                    <input type="text" id="modalCidade">
                 </div>
                 <div class="form-group">
-                    <label for="edit-estado">Estado:</label>
-                    <input type="text" id="edit-estado">
+                    <label for="modalEstado">Estado:</label>
+                    <input type="text" id="modalEstado">
                 </div>
                 <div class="form-group">
-                    <label for="edit-latitude">Latitude:</label>
-                    <input type="number" step="any" id="edit-latitude" required>
+                    <label for="modalLatitude">Latitude:</label>
+                    <input type="number" step="any" id="modalLatitude" required>
                 </div>
                 <div class="form-group">
-                    <label for="edit-longitude">Longitude:</label>
-                    <input type="number" step="any" id="edit-longitude" required>
+                    <label for="modalLongitude">Longitude:</label>
+                    <input type="number" step="any" id="modalLongitude" required>
                 </div>
                 <div class="form-group">
-                    <label for="edit-observacoes">Observações (máx. 500 caracteres):</label>
-                    <textarea id="edit-observacoes" maxlength="500"></textarea>
+                    <label for="modalObservacoes">Observações (máx. 500 caracteres):</label>
+                    <textarea id="modalObservacoes" maxlength="500"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="edit-email">Email de Contato (Opcional):</label>
-                    <input type="email" id="edit-email">
+                    <label for="modalEmail">Email de Contato (Opcional):</label>
+                    <input type="email" id="modalEmail">
                 </div>
                 <div class="form-group">
                     <label>ID do Usuário Criador:</label>
@@ -486,13 +488,12 @@
                     <span id="display-data" style="font-weight: normal;"></span>
                 </div>
 
-                <button type="submit">Salvar Alterações</button>
-                <button type="button" class="close-button close-edit-modal" style="background-color: #6C757D;">Cancelar</button>
+                <button type="submit" id="modalSaveButton">Salvar Alterações</button>
+                <button type="button" class="close-button close-edit-modal"
+                    style="background-color: #6C757D;">Cancelar</button>
             </form>
         </div>
     </div>
-    <!-------------------------------->
-
     <script src="main.js" type="module"></script>
     <script>
         // Carregamento do footer, como você já tem

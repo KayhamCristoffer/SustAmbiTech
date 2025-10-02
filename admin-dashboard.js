@@ -12,7 +12,7 @@ const activePointsTableBody = document.querySelector('#activePointsTable tbody')
 const suggestionsMessageBox = document.getElementById('suggestionsMessageBox');
 const activePointsMessageBox = document.getElementById('activePointsMessageBox');
 
-// Modal Elements
+// Modal Elements (IDs agora correspondem ao HTML ajustado)
 const pointModal = document.getElementById('pointModal');
 const modalTitle = document.getElementById('modalTitle');
 const pointForm = document.getElementById('pointForm');
@@ -31,7 +31,7 @@ const modalLongitude = document.getElementById('modalLongitude');
 const modalObservacoes = document.getElementById('modalObservacoes');
 const modalAtivo = document.getElementById('modalAtivo');
 const modalSaveButton = document.getElementById('modalSaveButton');
-const modalMessageBox = document.getElementById('modalMessageBox');
+const modalMessageBox = document.getElementById('modalMessageBox'); // Novo elemento no HTML
 const closeButton = document.querySelector('.close-button');
 const btnAddNewPoint = document.getElementById('btnAddNewPoint');
 
@@ -68,17 +68,30 @@ function openPointModal(pointData = null, id = null) {
     modalOutrosEspecificar.style.display = 'none'; // Esconde por padrão
     modalMessageBox.style.display = 'none'; // Limpa mensagens anteriores
 
+    // Preenche informações do criador no modal (mesmo que o ponto não exista)
+    document.getElementById('display-usuarioId').textContent = pointData?.usuarioId || 'N/A';
+    document.getElementById('display-data').textContent = pointData?.data ? new Date(pointData.data).toLocaleString('pt-BR') : 'N/A';
+    document.getElementById('modalEmail').value = pointData?.email || ''; // Adicionei o ID modalEmail no HTML
+
     if (pointData && id) {
-        modalTitle.textContent = 'Editar Ponto';
+        modalTitle.textContent = 'Editar Ponto de Coleta';
         pointIdInput.value = id;
         modalNome.value = pointData.nome || '';
         modalTipoPonto.value = pointData.tipoPonto || '';
-        if (pointData.tipoPonto === 'Outros') {
-            modalOutrosEspecificar.value = pointData.nomeOutrosTipo || ''; // Assumindo que você pode ter um campo para o texto "Outros"
+        // Lógica para Outros, agora que o campo existe no HTML
+        if (pointData.tipoPonto === 'Outros' && pointData.nomeOutrosTipo) { 
+            modalTipoPonto.value = 'Outros';
+            modalOutrosEspecificar.value = pointData.nomeOutrosTipo;
+            modalOutrosEspecificar.style.display = 'block';
+        } else if (pointData.tipoPonto && !['Plástico', 'Vidro', 'Metal', 'Papel', 'Eletrônico'].includes(pointData.tipoPonto)) {
+            // Caso o tipo não seja padrão, considera como 'Outros' e usa o tipo como o nome especificado
+            modalTipoPonto.value = 'Outros';
+            modalOutrosEspecificar.value = pointData.tipoPonto;
             modalOutrosEspecificar.style.display = 'block';
         } else {
             modalOutrosEspecificar.value = '';
         }
+
         modalCep.value = pointData.cep || '';
         modalRua.value = pointData.rua || '';
         modalNumero.value = pointData.numero || '';
@@ -88,10 +101,11 @@ function openPointModal(pointData = null, id = null) {
         modalLatitude.value = pointData.latitude || '';
         modalLongitude.value = pointData.longitude || '';
         modalObservacoes.value = pointData.observacoes || '';
-        modalAtivo.checked = pointData.ativo || false;
+        modalAtivo.value = pointData.ativo ? 'true' : 'false'; // Preenche o <select>
     } else {
         modalTitle.textContent = 'Adicionar Novo Ponto Oficial';
-        modalAtivo.checked = true; // Novo ponto oficial já começa ativo
+        modalAtivo.value = 'true'; // Novo ponto oficial já começa ativo
+        // Mantém as informações do criador/data de hoje se for um novo ponto
     }
     pointModal.style.display = 'block';
 }
@@ -164,7 +178,7 @@ function renderSuggestionRow(suggestion) {
     row.insertCell().textContent = `${suggestion.rua || ''}, ${suggestion.numero || ''} - ${suggestion.cidade || ''}/${suggestion.estado || ''}`;
     row.insertCell().textContent = suggestion.observacoes || 'N/A';
     row.insertCell().textContent = suggestion.email || suggestion.usuarioId; // Pode mostrar email ou ID do usuário
-    
+
     const actionsCell = row.insertCell();
     actionsCell.className = 'actions';
 
@@ -200,7 +214,7 @@ function renderActivePointRow(point) {
     row.insertCell().textContent = point.tipoPonto;
     row.insertCell().textContent = `${point.rua || ''}, ${point.numero || ''} - ${point.cidade || ''}/${point.estado || ''}`;
     row.insertCell().textContent = point.observacoes || 'N/A';
-    
+
     const actionsCell = row.insertCell();
     actionsCell.className = 'actions';
 
@@ -261,7 +275,7 @@ async function approveSuggestion(id, suggestionData) {
 async function togglePointActive(id, currentStatus) {
     const newStatus = !currentStatus;
     const actionText = newStatus ? 'ativar' : 'desativar';
-    const confirmMessage = newStatus 
+    const confirmMessage = newStatus
         ? `Tem certeza que deseja ativar este ponto? Ele se tornará visível publicamente.`
         : `Tem certeza que deseja desativar este ponto? Ele não será mais visível publicamente.`;
 
@@ -321,11 +335,12 @@ async function handlePointFormSubmit(event) {
     const latitude = parseFloat(modalLatitude.value);
     const longitude = parseFloat(modalLongitude.value);
     const observacoes = modalObservacoes.value.trim();
-    const ativo = modalAtivo.checked;
+    const ativo = modalAtivo.value === 'true'; // Coleta o valor booleano do <select>
+    const email = document.getElementById('modalEmail').value.trim();
 
     // Validação básica do formulário
-    if (!nome || !tipoPonto || !cep || !numero || isNaN(latitude) || isNaN(longitude)) {
-        showMessage(modalMessageBox, 'Por favor, preencha todos os campos obrigatórios (Nome, Tipo, CEP, Número, Latitude, Longitude).', 'error');
+    if (!nome || !tipoPonto || isNaN(latitude) || isNaN(longitude)) {
+        showMessage(modalMessageBox, 'Por favor, preencha todos os campos obrigatórios (Nome, Tipo, Latitude, Longitude).', 'error');
         return;
     }
     if (tipoPonto === 'Outros' && !outrosEspecificar) {
@@ -333,16 +348,15 @@ async function handlePointFormSubmit(event) {
         return;
     }
 
-    if (tipoPonto === 'Outros') {
-        tipoPonto = outrosEspecificar; // Usa o valor especificado para "Outros"
-    }
+    // Prepara o tipo de ponto
+    const finalTipoPonto = (tipoPonto === 'Outros' && outrosEspecificar) ? outrosEspecificar : tipoPonto;
 
     const pointData = {
         nome,
-        tipoPonto,
-        cep,
+        tipoPonto: finalTipoPonto,
+        cep: cep || null,
         rua: rua || null,
-        numero,
+        numero: numero || null,
         bairro: bairro || null,
         cidade: cidade || null,
         estado: estado || null,
@@ -352,7 +366,7 @@ async function handlePointFormSubmit(event) {
         ativo,
         data: new Date().toISOString(),
         usuarioId: currentUser ? currentUser.uid : 'admin_manual', // Marca quem criou/editou
-        email: currentUser ? currentUser.email : 'admin_manual' // Salva o email do admin ou marca como manual
+        email: email || null // Salva o email
     };
 
     try {
@@ -414,13 +428,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Event listener para o botão "Adicionar Novo Ponto" (Abre o modal em modo adição)
+    // Event listener para o botão "Adicionar Novo Ponto" (Redireciona para o formulário)
     btnAddNewPoint.addEventListener('click', () => {
         window.location.href = 'formulario.html';
     });
 
     // Event listeners para o modal
-    closeButton.addEventListener('click', closePointModal);
+    // closeButton já seleciona a primeira ocorrência, mas vamos garantir o fechamento em todos
+    document.querySelectorAll('.close-button').forEach(btn => {
+        btn.addEventListener('click', closePointModal);
+    });
     window.addEventListener('click', (event) => {
         if (event.target === pointModal) {
             closePointModal();
@@ -442,7 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Event listener para preencher automaticamente CEP no modal (pode ser reutilizado do formulario.js)
+    // Event listener para preencher automaticamente CEP no modal (ViaCEP)
     modalCep.addEventListener('blur', async () => {
         const cep = modalCep.value.replace(/\D/g, '');
         if (cep.length !== 8) return;
@@ -467,4 +484,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
