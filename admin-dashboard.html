@@ -1,279 +1,512 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Ecopontos</title>
-    <link rel="stylesheet" href="css/style.css"> 
+    <title>Dashboard Admin - SustAmbiTech</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos para o Dashboard Admin */
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #78a831;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #f0f0f0;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .dashboard-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #e6ffe6;
+            /* Light green background for sections */
+            border-radius: 8px;
+            border: 1px solid #d4edda;
+        }
+
+        .dashboard-section h2 {
+            color: #008000;
+            /* Darker green for section titles */
+            margin-top: 0;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .message-box {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none;
+            /* Hidden by default */
+        }
+
+        .message-box.success {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+
+        .message-box.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+
+        .message-box.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border-color: #bee5eb;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+            /* Align content to the top */
+        }
+
+        th {
+            background-color: #697f3f;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .actions button {
+            background-color: #2196F3;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            transition: background-color 0.3s ease;
+            white-space: nowrap;
+            /* Prevent buttons from wrapping text */
+        }
+
+        .actions button:hover {
+            background-color: #0b7dda;
+        }
+
+        .actions .btn-edit {
+            background-color: #FFC107;
+            color: #333;
+        }
+
+        .actions .btn-edit:hover {
+            background-color: #e0a800;
+        }
+
+        .actions .btn-delete {
+            background-color: #DC3545;
+        }
+
+        .actions .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+        .actions .btn-approve {
+            background-color: #28A745;
+        }
+
+        .actions .btn-approve:hover {
+            background-color: #218838;
+        }
+
+        .actions .btn-add {
+            background-color: #007bff;
+        }
+
+        .actions .btn-add:hover {
+            background-color: #0056b3;
+        }
+
+        .actions .btn-deactivate {
+            background-color: #6C757D;
+        }
+
+        /* Grey for deactivating */
+        .actions .btn-deactivate:hover {
+            background-color: #5a6268;
+        }
+
+        .element.style {
+            color: #fff;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1000;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content .form-group {
+            margin-bottom: 15px;
+        }
+
+        .modal-content label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .modal-content input[type="text"],
+        .modal-content input[type="number"],
+        .modal-content input[type="email"],
+        .modal-content textarea,
+        .modal-content select {
+            width: calc(100% - 22px);
+            /* Adjust for padding and border */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .modal-content button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+            width: auto;
+            /* Override general button width */
+        }
+
+        .modal-content button:hover {
+            background-color: #45a049;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-content {
+                margin: 10px;
+                padding: 10px;
+            }
+
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                border: 1px solid #ccc;
+                margin-bottom: 10px;
+                padding: 10px;
+            }
+
+            td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+
+            td:before {
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+            }
+
+            /* Label the data */
+            td:nth-of-type(1):before {
+                content: "Nome";
+            }
+
+            td:nth-of-type(2):before {
+                content: "Tipo";
+            }
+
+            td:nth-of-type(3):before {
+                content: "Localização";
+            }
+
+            td:nth-of-type(4):before {
+                content: "Observações";
+            }
+
+            td:nth-of-type(5):before {
+                content: "Ativo";
+            }
+
+            td:nth-of-type(6):before {
+                content: "Ações";
+            }
+
+            td:last-child {
+                border-bottom: 0;
+            }
+
+            .actions button {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 8px;
+            }
+        }
+
+        /* Adicional para a modal: Alinhamento de formulário */
+        .form-grid-triple {
+            display: grid;
+            grid-template-columns: 1fr 0.3fr 1fr;
+            /* Para Rua, Número, Bairro */
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid-triple {
+                grid-template-columns: 1fr;
+                /* Empilha em telas menores */
+            }
+        }
+    </style>
 </head>
+
 <body>
+    <div id="menu-container"></div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <main class="main-content">
+        <h1>Dashboard Administrativo</h1>
+        <div id="authStatusMessage" class="message-box info"></div>
 
-    <header>
-        <h1>Painel Administrativo de Ecopontos</h1>
-        <nav>
-            <a href="index.html">Ver Mapa</a>
-            <a href="#" id="logoutBtn">Sair</a>
-        </nav>
-            <style>
-                /* Estilos para a Seção de Edição Rápida (substitui o modal) */
-.edit-section {
-    background-color: #f7f7f7;
-    border: 1px solid #ddd;
-    padding: 20px 0; /* Padding vertical, o horizontal vem do .container */
-    margin-top: 30px;
-    margin-bottom: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.edit-section h3 {
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    color: #007bff;
-}
-
-/* Estilos gerais de formulário (se ainda não tiver) */
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
-}
-
-.edit-section input[type="text"],
-.edit-section textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Garante que o padding não aumente a largura total */
-}
-
-.edit-section input:disabled {
-    background-color: #eee;
-    color: #777;
-}
-
-.form-actions {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-}
-
-.btn-success, .btn-cancelar {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.btn-success {
-    background-color: #28a745;
-    color: white;
-}
-
-.btn-cancelar {
-    background-color: #6c757d;
-    color: white;
-}
-            </style>
-    </header>
-
-    <main>
-        <div class="container">
-            <p id="authStatusMessage" class="message-box info" style="display: none;"></p>
-
-            <button id="btnAddNewPoint" class="btn-primary">Adicionar Novo Ponto Oficial</button>
-
-            <h2>Sugestões Pendentes (Não Ativas)</h2>
-            <p id="suggestionsMessageBox" class="message-box info" style="display: none;"></p>
-            <div class="table-wrapper">
-                <table id="suggestionsTable">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Tipo</th>
-                            <th>Localização</th>
-                            <th>Observações</th>
-                            <th>Sugerido por</th>
-                            <th class="actions">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        </tbody>
-                </table>
-            </div>
-
-            <h2>Ecopontos Oficiais Ativos</h2>
-            <p id="activePointsMessageBox" class="message-box info" style="display: none;"></p>
-            <div class="table-wrapper">
-                <table id="activePointsTable">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Tipo</th>
-                            <th>Localização</th>
-                            <th>Observações</th>
-                            <th class="actions">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        </tbody>
-                </table>
-            </div>
-            
+        <div class="dashboard-actions">
+            <button id="btnAddNewPoint" class="actions btn-add"
+                style="background-color: #2196F3; height: 40px; padding: 0 15px; display: block; width: 100%; margin-top: 0; text-align: center;">
+                Adicionar Nova Sugestão (via Formulário)
+            </button>
         </div>
+        <br>
+        <section class="dashboard-section">
+            <h2>Sugestões Pendentes / Pontos Inativos (Ativo: false)</h2>
+            <div id="suggestionsMessageBox" class="message-box"></div>
+            <table id="suggestionsTable">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Localização</th>
+                        <th>Detalhes</th>
+                        <th>Contribuído por</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Ecopontos Oficiais (Ativo: true)</h2>
+            <div id="activePointsMessageBox" class="message-box"></div>
+            <table id="activePointsTable">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Localização</th>
+                        <th>Observações</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </section>
+
     </main>
+    <br><br><br><br><br><br><br>
 
-    <section id="edit-ecoponto-section" class="edit-section" style="display: none;">
-        <div class="container">
-            <h3>Edição Rápida de Ecoponto Ativo</h3>
-            <p id="editSectionMessageBox" class="message-box info" style="display: none;"></p>
-            
-            <form id="edit-ecoponto-form">
-                <input type="hidden" id="edit-ecoponto-id" name="id">
-
-                <div class="form-group">
-                    <label for="edit-nome">Nome do Ponto:</label>
-                    <input type="text" id="edit-nome" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="edit-tipo">Tipo de Ponto:</label>
-                    <input type="text" id="edit-tipo" required> 
-                </div>
-
-                <div class="form-group">
-                    <label for="edit-localizacao">Endereço Simplificado:</label>
-                    <input type="text" id="edit-localizacao" disabled title="Edição de endereço completo requer o Modal de Sugestão/Aprovação." placeholder="Rua, Bairro, Cidade (Somente Leitura)">
-                </div>
-                
-                <div class="form-group">
-                    <label for="edit-observacoes">Observações:</label>
-                    <textarea id="edit-observacoes" rows="3"></textarea>
-                </div>
-
-                <div class="form-actions">
-                    <button type="submit" class="btn-success">Salvar Alterações</button>
-                    <button type="button" class="btn-cancelar">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </section>
+    <div id="footer-container"></div>
 
     <div id="pointModal" class="modal">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2 id="modalTitle">Detalhes do Ponto de Coleta</h2>
-            
-            <p id="modalMessageBox" class="message-box error" style="display: none;"></p>
-
-            <form id="pointForm">
+            <span class="close-button close-edit-modal">&times;</span>
+            <h2 id="modalTitle">Editar Detalhes do Ponto de Coleta</h2>
+            <div id="modalMessageBox" class="message-box"></div> <form id="pointForm">
                 <input type="hidden" id="pointId">
-
-                <fieldset class="creator-info">
-                    <legend>Informações de Criação/Edição</legend>
-                    <p>Usuário ID: <span id="display-usuarioId"></span></p>
-                    <p>Data: <span id="display-data"></span></p>
-                    <label for="modalEmail">Email do Sugeridor:</label>
-                    <input type="email" id="modalEmail" disabled>
-                </fieldset>
-
                 <div class="form-group">
-                    <label for="modalNome">Nome/Descrição Breve:</label>
+                    <label for="modalNome">Nome do Ponto:</label>
                     <input type="text" id="modalNome" required>
                 </div>
-                
                 <div class="form-group">
                     <label for="modalTipoPonto">Tipo de Material:</label>
-                    <select id="modalTipoPonto" required>
-                        <option value="">Selecione...</option>
-                        <option value="Plástico">Plástico</option>
-                        <option value="Vidro">Vidro</option>
-                        <option value="Metal">Metal</option>
-                        <option value="Papel">Papel</option>
-                        <option value="Eletrônico">Eletrônico</option>
-                        <option value="Outros">Outros (Especificar)</option>
-                    </select>
+                    <input type="text" id="modalTipoPonto" required>
+                    <input type="text" id="modalOutrosEspecificar" placeholder="Especifique o tipo de material..."
+                        style="display: none; margin-top: 5px;">
                 </div>
-                <div class="form-group" style="display: none;">
-                    <label for="modalOutrosEspecificar">Especifique "Outros":</label>
-                    <input type="text" id="modalOutrosEspecificar" placeholder="Ex: Óleo de Cozinha Usado">
-                </div>
-
-                <fieldset>
-                    <legend>Localização Geográfica</legend>
-                    <div class="form-group">
-                        <label for="modalCep">CEP:</label>
-                        <input type="text" id="modalCep" maxlength="8">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group half">
-                            <label for="modalRua">Rua/Logradouro:</label>
-                            <input type="text" id="modalRua" required>
-                        </div>
-                        <div class="form-group half">
-                            <label for="modalNumero">Número:</label>
-                            <input type="text" id="modalNumero">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group half">
-                            <label for="modalBairro">Bairro:</label>
-                            <input type="text" id="modalBairro">
-                        </div>
-                        <div class="form-group half">
-                            <label for="modalCidade">Cidade:</label>
-                            <input type="text" id="modalCidade" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group half">
-                            <label for="modalEstado">Estado (UF):</label>
-                            <input type="text" id="modalEstado" maxlength="2" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group half">
-                            <label for="modalLatitude">Latitude:</label>
-                            <input type="number" step="any" id="modalLatitude" required>
-                        </div>
-                        <div class="form-group half">
-                            <label for="modalLongitude">Longitude:</label>
-                            <input type="number" step="any" id="modalLongitude" required>
-                        </div>
-                    </div>
-                </fieldset>
-                
-                <div class="form-group">
-                    <label for="modalObservacoes">Observações Adicionais:</label>
-                    <textarea id="modalObservacoes" rows="4"></textarea>
-                </div>
-
                 <div class="form-group">
                     <label for="modalAtivo">Status do Ponto:</label>
                     <select id="modalAtivo" required>
-                        <option value="true">Ativo (Público)</option>
-                        <option value="false">Inativo (Sugestão/Rascunho)</option>
+                        <option value="true">Ativo (visível para usuários)</option>
+                        <option value="false">Inativo (sugestão/não visível)</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="modalCep">CEP:</label>
+                    <input type="text" id="modalCep" placeholder="Ex: 00000-000">
+                </div>
+                <div class="form-grid-triple">
+                    <div class="form-group">
+                        <label for="modalRua">Rua:</label>
+                        <input type="text" id="modalRua">
+                    </div>
+                    <div class="form-group">
+                        <label for="modalNumero">Número:</label>
+                        <input type="text" id="modalNumero">
+                    </div>
+                    <div class="form-group">
+                        <label for="modalBairro">Bairro:</label>
+                        <input type="text" id="modalBairro">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="modalCidade">Cidade:</label>
+                    <input type="text" id="modalCidade">
+                </div>
+                <div class="form-group">
+                    <label for="modalEstado">Estado:</label>
+                    <input type="text" id="modalEstado">
+                </div>
+                <div class="form-group">
+                    <label for="modalLatitude">Latitude:</label>
+                    <input type="number" step="any" id="modalLatitude" required>
+                </div>
+                <div class="form-group">
+                    <label for="modalLongitude">Longitude:</label>
+                    <input type="number" step="any" id="modalLongitude" required>
+                </div>
+                <div class="form-group">
+                    <label for="modalObservacoes">Observações (máx. 500 caracteres):</label>
+                    <textarea id="modalObservacoes" maxlength="500"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="modalEmail">Email de Contato (Opcional):</label>
+                    <input type="email" id="modalEmail">
+                </div>
+                <div class="form-group">
+                    <label>ID do Usuário Criador:</label>
+                    <span id="display-usuarioId" style="font-weight: normal;"></span>
+                </div>
+                <div class="form-group">
+                    <label>Data de Criação:</label>
+                    <span id="display-data" style="font-weight: normal;"></span>
+                </div>
 
-                <button type="submit" id="modalSaveButton" class="btn-success">Salvar e Fechar</button>
+                <button type="submit" id="modalSaveButton">Salvar Alterações</button>
+                <button type="button" class="close-button close-edit-modal"
+                    style="background-color: #6C757D;">Cancelar</button>
             </form>
         </div>
     </div>
-    
-    <footer>
-        <p>&copy; 2024 Ecopontos. Todos os direitos reservados.</p>
-    </footer>
-
-    <script type="module" src="js/main.js"></script>
-    <script type="module" src="js/admin-dashboard.js"></script>
+    <script src="main.js" type="module"></script>
+    <script>
+        // Carregamento do footer, como você já tem
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+                })
+                .catch(error => console.error('Erro ao carregar o rodapé:', error));
+        });
+    </script>
+    <script src="admin-dashboard.js" type="module"></script>
 </body>
+
 </html>
