@@ -1,642 +1,279 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin - SustAmbiTech</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Estilos específicos para o Dashboard Admin */
-        body {
-            font-family: Arial, sans-serif;
-            color: #333;
-            min-height: 100vh;
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        .main-content {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #78a831;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        h1,
-        h2,
-        h3 {
-            color: #f0f0f0;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .dashboard-section {
-            margin-bottom: 40px;
-            padding: 20px;
-            background-color: #e6ffe6;
-            /* Light green background for sections */
-            border-radius: 8px;
-            border: 1px solid #d4edda;
-        }
-
-        .dashboard-section h2 {
-            color: #008000;
-            /* Darker green for section titles */
-            margin-top: 0;
-            text-align: left;
-            margin-bottom: 15px;
-        }
-
-        /* --- Estilos de Mensagens --- */
-        .message-box {
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            display: none;
-            /* Hidden by default */
-        }
-
-        .message-box.success {
-            background-color: #d4edda;
-            color: #155724;
-            border-color: #c3e6cb;
-        }
-
-        .message-box.error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border-color: #f5c6cb;
-        }
-
-        .message-box.info {
-            background-color: #d1ecf1;
-            color: #0c5460;
-            border-color: #bee5eb;
-        }
-
-        /* --- Estilos de Tabela --- */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: #fff;
-        }
-
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-            vertical-align: top;
-            /* Align content to the top */
-        }
-
-        th {
-            background-color: #697f3f;
-            color: white;
-            font-weight: bold;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        /* --- Estilos de Ações (Botões) --- */
-        .actions button {
-            background-color: #2196F3;
-            color: white;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-right: 5px;
-            margin-bottom: 5px;
-            transition: background-color 0.3s ease;
-            white-space: nowrap;
-            /* Prevent buttons from wrapping text */
-        }
-
-        .actions button:hover {
-            background-color: #0b7dda;
-        }
-
-        .actions .btn-edit {
-            background-color: #FFC107;
-            color: #333;
-        }
-
-        .actions .btn-edit:hover {
-            background-color: #e0a800;
-        }
-
-        .actions .btn-delete {
-            background-color: #DC3545;
-        }
-
-        .actions .btn-delete:hover {
-            background-color: #c82333;
-        }
-
-        .actions .btn-approve {
-            background-color: #28A745;
-        }
-
-        .actions .btn-approve:hover {
-            background-color: #218838;
-        }
-
-        .actions .btn-add {
-            background-color: #007bff;
-        }
-
-        .actions .btn-add:hover {
-            background-color: #0056b3;
-        }
-
-        .actions .btn-deactivate {
-            background-color: #6C757D;
-        }
-
-        .actions .btn-deactivate:hover {
-            background-color: #5a6268;
-        }
-
-        .element.style {
-            color: #fff;
-        }
-
-        /* --- Estilos de Formulário --- */
-        .form-grid-triple {
-            display: grid;
-            grid-template-columns: 1fr 0.3fr 1fr;
-            /* Para Rua, Número, Bairro */
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        /* --- Estilo da Nova Seção de Edição --- */
-        #edit-ecoponto-section {
-            display: none; /* ESSENCIAL: Começa invisível, será exibida pelo JS */
-            background-color: #f7fcf9; 
-            padding: 30px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border: 2px solid #28A745; /* Borda verde destacada */
-            margin-top: 20px;
-        }
-        
-        #edit-ecoponto-section h2 {
-            color: #28A745; 
-            text-align: left;
-            margin-bottom: 20px;
-        }
-        
-        #edit-ecoponto-section label {
-            display: block;
-            margin-top: 10px;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        
-        #edit-ecoponto-section input[type="text"],
-        #edit-ecoponto-section input[type="number"],
-        #edit-ecoponto-section textarea,
-        #edit-ecoponto-section select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        
-        #edit-ecoponto-section button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 15px;
-            margin-right: 10px;
-            font-weight: bold;
-        }
-        
-        .btn-salvar { background-color: #28A745; color: white; }
-        .btn-salvar:hover { background-color: #218838; }
-        .btn-cancelar { background-color: #6C757D; color: white; }
-        .btn-cancelar:hover { background-color: #5a6268; }
-
-
-        /* --- Estilos Modal Antigos (mantidos para o modal de Sugestões) --- */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 700px;
-            border-radius: 8px;
-            position: relative;
-        }
-
-        .close-button {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        /* ... outros estilos de modal ... */
-
-        /* --- Ajustes Responsivos --- */
-        @media (max-width: 768px) {
-            .main-content {
-                margin: 10px;
-                padding: 10px;
-            }
-
-            table,
-            thead,
-            tbody,
-            th,
-            td,
-            tr {
-                display: block;
-            }
-
-            thead tr {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-
-            tr {
-                border: 1px solid #ccc;
-                margin-bottom: 10px;
-                padding: 10px;
-            }
-
-            td {
-                border: none;
-                border-bottom: 1px solid #eee;
-                position: relative;
-                padding-left: 50%;
-                text-align: right;
-            }
-
-            td:before {
-                position: absolute;
-                top: 6px;
-                left: 6px;
-                width: 45%;
-                padding-right: 10px;
-                white-space: nowrap;
-                text-align: left;
-                font-weight: bold;
-            }
-
-            /* Label the data - Mantendo o que você já tinha */
-            td:nth-of-type(1):before {
-                content: "Nome";
-            }
-
-            td:nth-of-type(2):before {
-                content: "Tipo";
-            }
-
-            td:nth-of-type(3):before {
-                content: "Localização";
-            }
-
-            td:nth-of-type(4):before {
-                content: "Observações";
-            }
-
-            td:nth-of-type(5):before {
-                content: "Ativo";
-            }
-
-            td:nth-of-type(6):before {
-                content: "Ações";
-            }
-
-            td:last-child {
-                border-bottom: 0;
-            }
-
-            .actions button {
-                width: 100%;
-                margin-right: 0;
-                margin-bottom: 8px;
-            }
-            
-            .form-grid-triple {
-                grid-template-columns: 1fr;
-                /* Empilha em telas menores */
-            }
-        }
-    </style>
+    <title>Admin Dashboard - Ecopontos</title>
+    <link rel="stylesheet" href="css/style.css"> 
 </head>
-
 <body>
-    <div id="menu-container"></div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <main class="main-content">
-        <h1>Dashboard Administrativo</h1>
-        <div id="authStatusMessage" class="message-box info"></div>
 
-        <div class="dashboard-actions">
-            <button id="btnAddNewPoint" class="actions btn-add"
-                style="background-color: #2196F3; height: 40px; padding: 0 15px; display: block; width: 100%; margin-top: 0; text-align: center;">
-                Adicionar Nova Sugestão (via Formulário)
-            </button>
+    <header>
+        <h1>Painel Administrativo de Ecopontos</h1>
+        <nav>
+            <a href="index.html">Ver Mapa</a>
+            <a href="#" id="logoutBtn">Sair</a>
+        </nav>
+            <style>
+                /* Estilos para a Seção de Edição Rápida (substitui o modal) */
+.edit-section {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    padding: 20px 0; /* Padding vertical, o horizontal vem do .container */
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-section h3 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+/* Estilos gerais de formulário (se ainda não tiver) */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.edit-section input[type="text"],
+.edit-section textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Garante que o padding não aumente a largura total */
+}
+
+.edit-section input:disabled {
+    background-color: #eee;
+    color: #777;
+}
+
+.form-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-success, .btn-cancelar {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-cancelar {
+    background-color: #6c757d;
+    color: white;
+}
+            </style>
+    </header>
+
+    <main>
+        <div class="container">
+            <p id="authStatusMessage" class="message-box info" style="display: none;"></p>
+
+            <button id="btnAddNewPoint" class="btn-primary">Adicionar Novo Ponto Oficial</button>
+
+            <h2>Sugestões Pendentes (Não Ativas)</h2>
+            <p id="suggestionsMessageBox" class="message-box info" style="display: none;"></p>
+            <div class="table-wrapper">
+                <table id="suggestionsTable">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Tipo</th>
+                            <th>Localização</th>
+                            <th>Observações</th>
+                            <th>Sugerido por</th>
+                            <th class="actions">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+
+            <h2>Ecopontos Oficiais Ativos</h2>
+            <p id="activePointsMessageBox" class="message-box info" style="display: none;"></p>
+            <div class="table-wrapper">
+                <table id="activePointsTable">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Tipo</th>
+                            <th>Localização</th>
+                            <th>Observações</th>
+                            <th class="actions">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+            
         </div>
-        <br>
-        <section class="dashboard-section">
-            <h2>Sugestões Pendentes / Pontos Inativos (Ativo: false)</h2>
-            <div id="suggestionsMessageBox" class="message-box"></div>
-            <table id="suggestionsTable">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Tipo</th>
-                        <th>Localização</th>
-                        <th>Detalhes</th>
-                        <th>Contribuído por</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </section>
+    </main>
 
-        <section class="dashboard-section">
-            <h2>Ecopontos Oficiais (Ativo: true)</h2>
-            <div id="activePointsMessageBox" class="message-box"></div>
-            <table id="activePointsTable">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Tipo</th>
-                        <th>Localização</th>
-                        <th>Observações</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Ecoponto Modelo</td>
-                        <td>Plástico, Vidro</td>
-                        <td>Rua A, 123</td>
-                        <td>Horário comercial</td>
-                        <td class="actions">
-                             <button class="btn-edit" onclick="prepararEdicao('ecoponto-id-123', 'Ecoponto Modelo', 'Rua A, 123', 'Plástico, Vidro', 'Horário comercial')">Editar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-        
-        <section id="edit-ecoponto-section" class="dashboard-section">
-            <h2>Editar Ecoponto Selecionado</h2>
-            <div id="editSectionMessageBox" class="message-box"></div>
-
+    <section id="edit-ecoponto-section" class="edit-section" style="display: none;">
+        <div class="container">
+            <h3>Edição Rápida de Ecoponto Ativo</h3>
+            <p id="editSectionMessageBox" class="message-box info" style="display: none;"></p>
+            
             <form id="edit-ecoponto-form">
                 <input type="hidden" id="edit-ecoponto-id" name="id">
 
-                <label for="edit-nome">Nome:</label>
-                <input type="text" id="edit-nome" name="nome" required>
-
-                <label for="edit-tipo">Tipo de Material:</label>
-                <input type="text" id="edit-tipo" name="tipo" required>
+                <div class="form-group">
+                    <label for="edit-nome">Nome do Ponto:</label>
+                    <input type="text" id="edit-nome" required>
+                </div>
                 
-                <label for="edit-localizacao">Localização (Rua e Número):</label>
-                <input type="text" id="edit-localizacao" name="localizacao" required>
-                
-                <label for="edit-observacoes">Observações:</label>
-                <textarea id="edit-observacoes" name="observacoes"></textarea>
+                <div class="form-group">
+                    <label for="edit-tipo">Tipo de Ponto:</label>
+                    <input type="text" id="edit-tipo" required> 
+                </div>
 
-                <button type="submit" class="btn-salvar">Salvar Alterações</button>
-                <button type="button" class="btn-cancelar" onclick="fecharEdicao()">Cancelar</button>
+                <div class="form-group">
+                    <label for="edit-localizacao">Endereço Simplificado:</label>
+                    <input type="text" id="edit-localizacao" disabled title="Edição de endereço completo requer o Modal de Sugestão/Aprovação." placeholder="Rua, Bairro, Cidade (Somente Leitura)">
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-observacoes">Observações:</label>
+                    <textarea id="edit-observacoes" rows="3"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-success">Salvar Alterações</button>
+                    <button type="button" class="btn-cancelar">Cancelar</button>
+                </div>
             </form>
-        </section>
-
-
-        </main>
-    <br><br><br><br><br><br><br>
-
-    <div id="footer-container"></div>
+        </div>
+    </section>
 
     <div id="pointModal" class="modal">
         <div class="modal-content">
-            <span class="close-button close-edit-modal">&times;</span>
+            <span class="close-button">&times;</span>
             <h2 id="modalTitle">Detalhes do Ponto de Coleta</h2>
-            <div id="modalMessageBox" class="message-box"></div>
+            
+            <p id="modalMessageBox" class="message-box error" style="display: none;"></p>
+
             <form id="pointForm">
                 <input type="hidden" id="pointId">
+
+                <fieldset class="creator-info">
+                    <legend>Informações de Criação/Edição</legend>
+                    <p>Usuário ID: <span id="display-usuarioId"></span></p>
+                    <p>Data: <span id="display-data"></span></p>
+                    <label for="modalEmail">Email do Sugeridor:</label>
+                    <input type="email" id="modalEmail" disabled>
+                </fieldset>
+
                 <div class="form-group">
-                    <label for="modalNome">Nome do Ponto:</label>
+                    <label for="modalNome">Nome/Descrição Breve:</label>
                     <input type="text" id="modalNome" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="modalTipoPonto">Tipo de Material:</label>
-                    <input type="text" id="modalTipoPonto" required>
-                    <input type="text" id="modalOutrosEspecificar" placeholder="Especifique o tipo de material..."
-                        style="display: none; margin-top: 5px;">
+                    <select id="modalTipoPonto" required>
+                        <option value="">Selecione...</option>
+                        <option value="Plástico">Plástico</option>
+                        <option value="Vidro">Vidro</option>
+                        <option value="Metal">Metal</option>
+                        <option value="Papel">Papel</option>
+                        <option value="Eletrônico">Eletrônico</option>
+                        <option value="Outros">Outros (Especificar)</option>
+                    </select>
                 </div>
+                <div class="form-group" style="display: none;">
+                    <label for="modalOutrosEspecificar">Especifique "Outros":</label>
+                    <input type="text" id="modalOutrosEspecificar" placeholder="Ex: Óleo de Cozinha Usado">
+                </div>
+
+                <fieldset>
+                    <legend>Localização Geográfica</legend>
+                    <div class="form-group">
+                        <label for="modalCep">CEP:</label>
+                        <input type="text" id="modalCep" maxlength="8">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="modalRua">Rua/Logradouro:</label>
+                            <input type="text" id="modalRua" required>
+                        </div>
+                        <div class="form-group half">
+                            <label for="modalNumero">Número:</label>
+                            <input type="text" id="modalNumero">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="modalBairro">Bairro:</label>
+                            <input type="text" id="modalBairro">
+                        </div>
+                        <div class="form-group half">
+                            <label for="modalCidade">Cidade:</label>
+                            <input type="text" id="modalCidade" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="modalEstado">Estado (UF):</label>
+                            <input type="text" id="modalEstado" maxlength="2" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="modalLatitude">Latitude:</label>
+                            <input type="number" step="any" id="modalLatitude" required>
+                        </div>
+                        <div class="form-group half">
+                            <label for="modalLongitude">Longitude:</label>
+                            <input type="number" step="any" id="modalLongitude" required>
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <div class="form-group">
+                    <label for="modalObservacoes">Observações Adicionais:</label>
+                    <textarea id="modalObservacoes" rows="4"></textarea>
+                </div>
+
                 <div class="form-group">
                     <label for="modalAtivo">Status do Ponto:</label>
                     <select id="modalAtivo" required>
-                        <option value="true">Ativo (visível para usuários)</option>
-                        <option value="false">Inativo (sugestão/não visível)</option>
+                        <option value="true">Ativo (Público)</option>
+                        <option value="false">Inativo (Sugestão/Rascunho)</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="modalCep">CEP:</label>
-                    <input type="text" id="modalCep" placeholder="Ex: 00000-000">
-                </div>
-                <div class="form-grid-triple">
-                    <div class="form-group">
-                        <label for="modalRua">Rua:</label>
-                        <input type="text" id="modalRua">
-                    </div>
-                    <div class="form-group">
-                        <label for="modalNumero">Número:</label>
-                        <input type="text" id="modalNumero">
-                    </div>
-                    <div class="form-group">
-                        <label for="modalBairro">Bairro:</label>
-                        <input type="text" id="modalBairro">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="modalCidade">Cidade:</label>
-                    <input type="text" id="modalCidade">
-                </div>
-                <div class="form-group">
-                    <label for="modalEstado">Estado:</label>
-                    <input type="text" id="modalEstado">
-                </div>
-                <div class="form-group">
-                    <label for="modalLatitude">Latitude:</label>
-                    <input type="number" step="any" id="modalLatitude" required>
-                </div>
-                <div class="form-group">
-                    <label for="modalLongitude">Longitude:</label>
-                    <input type="number" step="any" id="modalLongitude" required>
-                </div>
-                <div class="form-group">
-                    <label for="modalObservacoes">Observações (máx. 500 caracteres):</label>
-                    <textarea id="modalObservacoes" maxlength="500"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="modalEmail">Email de Contato (Opcional):</label>
-                    <input type="email" id="modalEmail">
-                </div>
-                <div class="form-group">
-                    <label>ID do Usuário Criador:</label>
-                    <span id="display-usuarioId" style="font-weight: normal;"></span>
-                </div>
-                <div class="form-group">
-                    <label>Data de Criação:</label>
-                    <span id="display-data" style="font-weight: normal;"></span>
-                </div>
 
-                <button type="submit" id="modalSaveButton">Salvar Alterações</button>
-                <button type="button" class="close-button close-edit-modal"
-                    style="background-color: #6C757D;">Cancelar</button>
+                <button type="submit" id="modalSaveButton" class="btn-success">Salvar e Fechar</button>
             </form>
         </div>
     </div>
     
-    <script>
-        // ==============================================
-        // Lógica JavaScript para a Nova Seção de Edição
-        // ==============================================
-        const editSection = document.getElementById('edit-ecoponto-section');
-        const editForm = document.getElementById('edit-ecoponto-form');
-        const editSectionMessageBox = document.getElementById('editSectionMessageBox');
-        
-        // Simulação de URL da API (substitua pela sua URL real)
-        const API_BASE_URL = 'https://sua-api-render.onrender.com';
+    <footer>
+        <p>&copy; 2024 Ecopontos. Todos os direitos reservados.</p>
+    </footer>
 
-        /**
-         * 1. PREPARA O FORMULÁRIO DE EDIÇÃO
-         * É chamada ao clicar no botão 'Editar' na linha da tabela.
-         * @param {string} id - ID do ecoponto.
-         * @param {string} nome - Nome atual do ecoponto.
-         * @param {string} localizacao - Endereço/Localização atual.
-         * @param {string} tipo - Tipo de material.
-         * @param {string} observacoes - Observações.
-         */
-        function prepararEdicao(id, nome, localizacao, tipo, observacoes) {
-            // Preenche os campos do formulário com os dados
-            document.getElementById('edit-ecoponto-id').value = id;
-            document.getElementById('edit-nome').value = nome;
-            document.getElementById('edit-localizacao').value = localizacao;
-            document.getElementById('edit-tipo').value = tipo;
-            document.getElementById('edit-observacoes').value = observacoes;
-            
-            // Torna a seção de edição visível
-            editSection.style.display = 'block';
-            editSectionMessageBox.style.display = 'none'; // Limpa mensagens anteriores
-            
-            // Rola a página para que a seção de edição fique visível
-            editSection.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        /**
-         * 2. FECHA A SEÇÃO DE EDIÇÃO
-         */
-        function fecharEdicao() {
-            editSection.style.display = 'none';
-        }
-
-        /**
-         * 3. LIDA COM A SUBMISSÃO DO FORMULÁRIO (PUT na API)
-         */
-        editForm.addEventListener('submit', async function(event) {
-            event.preventDefault();
-
-            const ecopontoId = document.getElementById('edit-ecoponto-id').value;
-            const updatedData = {
-                nome: document.getElementById('edit-nome').value,
-                // Na sua API, o campo de endereço é único, aqui estou mapeando a localização
-                endereco: document.getElementById('edit-localizacao').value, 
-                // Você precisará adicionar mais campos como latitude, longitude, etc.
-            };
-            
-            const endpoint = `${API_BASE_URL}/ecopontos/${ecopontoId}`;
-
-            editSectionMessageBox.textContent = 'Enviando dados...';
-            editSectionMessageBox.className = 'message-box info';
-            editSectionMessageBox.style.display = 'block';
-
-            try {
-                // Requisição PUT para a API
-                const response = await fetch(endpoint, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        // Se a rota for protegida, o Token DEVE ser incluído:
-                        // 'Authorization': `Bearer SEU_TOKEN_DE_ADMIN` 
-                    },
-                    body: JSON.stringify(updatedData)
-                });
-
-                if (response.ok) {
-                    editSectionMessageBox.textContent = `Ecoponto ID ${ecopontoId} atualizado com sucesso!`;
-                    editSectionMessageBox.className = 'message-box success';
-                    // Opcional: Aqui você chamaria a função para recarregar as tabelas do dashboard
-                    // fecharEdicao(); 
-                } else {
-                    const errorData = await response.json();
-                    editSectionMessageBox.textContent = `Erro (${response.status}): ${errorData.detail || 'Falha na atualização.'}`;
-                    editSectionMessageBox.className = 'message-box error';
-                }
-            } catch (error) {
-                editSectionMessageBox.textContent = `Erro de conexão com a API: ${error.message}`;
-                editSectionMessageBox.className = 'message-box error';
-            }
-        });
-
-        // Lógica para o modal de sugestão (mantida do seu código original)
-        // Você precisará garantir que o clique no 'X' e o botão 'Cancelar' fechem o div#pointModal
-        const pointModal = document.getElementById('pointModal');
-        const closeButtons = pointModal.querySelectorAll('.close-edit-modal');
-        closeButtons.forEach(button => {
-            button.onclick = () => {
-                pointModal.style.display = 'none';
-            };
-        });
-        // Quando o usuário clicar fora do modal, ele fecha
-        window.onclick = function(event) {
-            if (event.target == pointModal) {
-                pointModal.style.display = "none";
-            }
-        }
-    </script>
-    
-    <script src="main.js" type="module"></script>
-    <script src="admin-dashboard.js" type="module"></script>
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/admin-dashboard.js"></script>
 </body>
 </html>
