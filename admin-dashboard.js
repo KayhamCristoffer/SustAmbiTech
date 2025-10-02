@@ -42,10 +42,10 @@ const editEstado = document.getElementById('edit-estado');
 const editLatitude = document.getElementById('edit-latitude');
 const editLongitude = document.getElementById('edit-longitude');
 const editObservacoes = document.getElementById('edit-observacoes');
-const editEmail = document.getElementById('edit-email'); // Campo agora readonly
+const editEmail = document.getElementById('edit-email'); // Campo readonly
 
 // Campos de Visualização
-const displayUsuarioId = document.getElementById('display-usuarioId'); // Usado para mostrar o EMAIL do contribuinte
+const displayUsuarioId = document.getElementById('display-usuarioId'); // Usado para mostrar o NOME do contribuinte
 const displayData = document.getElementById('display-data');
 
 
@@ -69,6 +69,27 @@ function showMessage(element, message, type) {
     }
 }
 
+/**
+ * Busca o nome do usuário pelo UID na tabela 'users'.
+ * @param {string} uid O UID do usuário.
+ * @returns {Promise<string>} O nome do usuário ou o UID (como fallback).
+ */
+async function getUserName(uid) {
+    if (!uid) return 'N/A';
+    try {
+        const userRef = ref(database, `users/${uid}`);
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+            const userData = snapshot.val();
+            return userData.nome ? `${userData.nome} ${userData.sobrenome || ''}`.trim() : uid;
+        }
+        return `Usuário ID: ${uid}`; // Retorna o ID se não encontrar o nome
+    } catch (error) {
+        console.error("Erro ao buscar nome do usuário:", error);
+        return `Erro: ${uid}`;
+    }
+}
+
 // =========================================================
 // LÓGICA DE EDIÇÃO NA SEÇÃO (ÚNICA)
 // =========================================================
@@ -79,9 +100,10 @@ function showMessage(element, message, type) {
  * @param {string|null} id ID do ponto, se for edição.
  * @param {string} mode 'edit' ou 'new'.
  */
-function openEditSection(pointData = null, id = null, mode = 'edit') {
+async function openEditSection(pointData = null, id = null, mode = 'edit') {
     editForm.reset();
     editSectionMessageBox.style.display = 'none';
+    displayUsuarioId.textContent = 'Carregando...'; // Mensagem de carregamento
 
     if (mode === 'new') {
         // Modo Adicionar Novo Ponto
@@ -90,8 +112,9 @@ function openEditSection(pointData = null, id = null, mode = 'edit') {
         editAtivo.value = 'true';
         
         // Dados de rastreamento para Novo Ponto
-        editUsuarioId.value = currentUser ? currentUser.uid : 'admin_manual';
-        displayUsuarioId.textContent = currentUser ? currentUser.email || currentUser.uid : 'admin_manual'; 
+        const newUid = currentUser ? currentUser.uid : 'admin_manual';
+        editUsuarioId.value = newUid;
+        displayUsuarioId.textContent = await getUserName(newUid); // Busca o nome
         displayData.textContent = new Date().toLocaleString('pt-BR');
         
     } else {
@@ -118,13 +141,25 @@ function openEditSection(pointData = null, id = null, mode = 'edit') {
         
         editAtivo.value = pointData.ativo ? 'true' : 'false';
 
+        // --- SOLUÇÃO 2: Tipo do Ponto ---
         // Preenche o campo select (Tipo do Ponto)
-        editTipo.value = pointData.tipoPonto || '';
+        const tipoPontoValue = pointData.tipoPonto || '';
+        editTipo.value = tipoPontoValue; 
         
-        // Campo Contribuinte: Mostra o Email do ponto (se for sugestão) ou N/A.
+        // Se o valor do banco não estiver nas opções hardcoded, adiciona-o temporariamente.
+        // Isso garante que o valor correto seja exibido.
+        if (tipoPontoValue && !Array.from(editTipo.options).some(opt => opt.value === tipoPontoValue)) {
+            const newOption = new Option(tipoPontoValue, tipoPontoValue, true, true);
+            editTipo.add(newOption);
+        }
+
+        // --- SOLUÇÃO 1: Usuário Contribuinte (Nome) ---
         // O UID permanece no campo hidden: editUsuarioId.value
-        displayUsuarioId.textContent = pointData.email || 'Não informado / N/A';
-        editUsuarioId.value = pointData.usuarioId || ''; // Mantém o UID no hidden
+        editUsuarioId.value = pointData.usuarioId || ''; 
+        
+        // Busca o nome do usuário pelo UID
+        const userName = await getUserName(pointData.usuarioId);
+        displayUsuarioId.textContent = userName;
         
         displayData.textContent = pointData.data ? new Date(pointData.data).toLocaleString('pt-BR') : 'N/A';
     }
@@ -138,6 +173,12 @@ function openEditSection(pointData = null, id = null, mode = 'edit') {
  */
 function closeEditSection() {
     editSection.style.display = 'none';
+    // Remove qualquer opção temporária que tenha sido adicionada
+    const options = Array.from(editTipo.options);
+    const tempOption = options.find(opt => opt.getAttribute('data-temp'));
+    if (tempOption) {
+        editTipo.remove(tempOption.index);
+    }
 }
 
 /**
