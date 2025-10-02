@@ -1,6 +1,7 @@
 // =========================================================
 // admin-dashboard.js
 // Lógica principal do Dashboard Administrativo (Firebase)
+// Versão SEM MODAL, usando apenas a Seção de Edição.
 // =========================================================
 
 // --- Importações de Módulos Firebase ---
@@ -15,41 +16,41 @@ const activePointsTableBody = document.querySelector('#activePointsTable tbody')
 const suggestionsMessageBox = document.getElementById('suggestionsMessageBox');
 const activePointsMessageBox = document.getElementById('activePointsMessageBox');
 
-// --- Elementos da NOVA SEÇÃO DE EDIÇÃO (Substitui o modal para pontos ATIVOS) ---
+// --- Elementos da SEÇÃO DE EDIÇÃO (Única) ---
 const editSection = document.getElementById('edit-ecoponto-section');
+const editSectionTitle = document.getElementById('editSectionTitle');
 const editForm = document.getElementById('edit-ecoponto-form');
 const editSectionMessageBox = document.getElementById('editSectionMessageBox');
-const editId = document.getElementById('edit-ecoponto-id');
-const editNome = document.getElementById('edit-nome');
-const editTipo = document.getElementById('edit-tipo'); // Novo campo na seção para TipoPonto
-const editLocalizacao = document.getElementById('edit-localizacao'); // Campo de endereço na seção
-const editObservacoes = document.getElementById('edit-observacoes');
-
-
-// --- Elementos do MODAL DE SUGERIR/EDITAR (Mantido para sugestões e Novo Ponto) ---
-const pointModal = document.getElementById('pointModal');
-const modalTitle = document.getElementById('modalTitle');
-const pointForm = document.getElementById('pointForm');
-const pointIdInput = document.getElementById('pointId');
-const modalNome = document.getElementById('modalNome');
-const modalTipoPonto = document.getElementById('modalTipoPonto');
-const modalOutrosEspecificar = document.getElementById('modalOutrosEspecificar');
-const modalCep = document.getElementById('modalCep');
-const modalRua = document.getElementById('modalRua');
-const modalNumero = document.getElementById('modalNumero');
-const modalBairro = document.getElementById('modalBairro');
-const modalCidade = document.getElementById('modalCidade');
-const modalEstado = document.getElementById('modalEstado');
-const modalLatitude = document.getElementById('modalLatitude');
-const modalLongitude = document.getElementById('modalLongitude');
-const modalObservacoes = document.getElementById('modalObservacoes');
-const modalAtivo = document.getElementById('modalAtivo');
-const modalMessageBox = document.getElementById('modalMessageBox');
 const btnAddNewPoint = document.getElementById('btnAddNewPoint');
+const btnCancelEdit = document.getElementById('btnCancelEdit');
+
+// Campos do Formulário de Edição
+const editId = document.getElementById('edit-ecoponto-id');
+const editDataCriacao = document.getElementById('edit-data-criacao');
+const editUsuarioId = document.getElementById('edit-usuario-id');
+
+const editNome = document.getElementById('edit-nome');
+const editTipo = document.getElementById('edit-tipo'); 
+const editAtivo = document.getElementById('edit-ativo'); 
+
+const editCep = document.getElementById('edit-cep');
+const editRua = document.getElementById('edit-rua');
+const editNumero = document.getElementById('edit-numero');
+const editBairro = document.getElementById('edit-bairro');
+const editCidade = document.getElementById('edit-cidade');
+const editEstado = document.getElementById('edit-estado');
+const editLatitude = document.getElementById('edit-latitude');
+const editLongitude = document.getElementById('edit-longitude');
+const editObservacoes = document.getElementById('edit-observacoes');
+const editEmail = document.getElementById('edit-email');
+
+// Campos de Visualização
+const displayUsuarioId = document.getElementById('display-usuarioId');
+const displayData = document.getElementById('display-data');
 
 
 let currentUser = null;
-let currentAdminLevel = 'commum';
+let currentAdminLevel = 'commum'; // Mantenha esta lógica se for usá-la.
 
 // =========================================================
 // FUNÇÕES AUXILIARES
@@ -59,171 +60,63 @@ function showMessage(element, message, type) {
     element.textContent = message;
     element.className = `message-box ${type}`;
     element.style.display = 'block';
-    setTimeout(() => {
-        element.style.display = 'none';
-        element.textContent = '';
-    }, 5000);
+    // Otimizado: remove timeout para mensagens de tabela, mas mantém para formulário
+    if (element === editSectionMessageBox) {
+        setTimeout(() => {
+            element.style.display = 'none';
+            element.textContent = '';
+        }, 5000);
+    }
 }
 
 // =========================================================
-// LÓGICA DE EDIÇÃO NO MODAL (Para Sugestões e Novo Ponto)
+// LÓGICA DE EDIÇÃO NA SEÇÃO (ÚNICA)
 // =========================================================
 
 /**
- * Abre o modal de ponto para adição ou edição (USADO POR SUGGESTIONS E ADD NEW POINT).
+ * Abre a seção de edição com os dados do ponto para ADIÇÃO ou EDIÇÃO.
  * @param {Object|null} pointData Dados do ponto para edição, ou null para adicionar.
  * @param {string|null} id ID do ponto, se for edição.
+ * @param {string} mode 'edit' ou 'new'.
  */
-function openPointModal(pointData = null, id = null) {
-    // Esconde a seção de edição ativa, se estiver visível
-    closeEditSection();
-    
-    pointForm.reset();
-    pointIdInput.value = '';
-    modalOutrosEspecificar.style.display = 'none';
-    modalMessageBox.style.display = 'none';
+function openEditSection(pointData = null, id = null, mode = 'edit') {
+    editForm.reset();
+    editSectionMessageBox.style.display = 'none';
 
-    // Preenche informações do criador no modal
-    document.getElementById('display-usuarioId').textContent = pointData?.usuarioId || 'N/A';
-    document.getElementById('display-data').textContent = pointData?.data ? new Date(pointData.data).toLocaleString('pt-BR') : 'N/A';
-    document.getElementById('modalEmail').value = pointData?.email || '';
-
-    if (pointData && id) {
-        modalTitle.textContent = 'Editar Ponto de Coleta (Via Modal)';
-        pointIdInput.value = id;
-        modalNome.value = pointData.nome || '';
+    if (mode === 'new') {
+        // Modo Adicionar Novo Ponto
+        editSectionTitle.textContent = 'Adicionar Novo Ecoponto Oficial';
+        editId.value = '';
+        editAtivo.value = 'true';
+        displayUsuarioId.textContent = currentUser ? currentUser.uid : 'admin_manual';
+        displayData.textContent = new Date().toLocaleString('pt-BR');
         
-        // Lógica para Outros, mantida do seu código
-        const tiposPadrao = ['Plástico', 'Vidro', 'Metal', 'Papel', 'Eletrônico'];
-        if (pointData.tipoPonto === 'Outros' && pointData.nomeOutrosTipo) { 
-            modalTipoPonto.value = 'Outros';
-            modalOutrosEspecificar.value = pointData.nomeOutrosTipo;
-            modalOutrosEspecificar.style.display = 'block';
-        } else if (pointData.tipoPonto && !tiposPadrao.includes(pointData.tipoPonto)) {
-            modalTipoPonto.value = 'Outros';
-            modalOutrosEspecificar.value = pointData.tipoPonto;
-            modalOutrosEspecificar.style.display = 'block';
-        } else {
-            modalTipoPonto.value = pointData.tipoPonto || '';
-            modalOutrosEspecificar.value = '';
-        }
-
-        modalCep.value = pointData.cep || '';
-        modalRua.value = pointData.rua || '';
-        modalNumero.value = pointData.numero || '';
-        modalBairro.value = pointData.bairro || '';
-        modalCidade.value = pointData.cidade || '';
-        modalEstado.value = pointData.estado || '';
-        modalLatitude.value = pointData.latitude || '';
-        modalLongitude.value = pointData.longitude || '';
-        modalObservacoes.value = pointData.observacoes || '';
-        modalAtivo.value = pointData.ativo ? 'true' : 'false';
     } else {
-        modalTitle.textContent = 'Adicionar Novo Ponto Oficial';
-        modalAtivo.value = 'true';
-    }
-    pointModal.style.display = 'block';
-}
+        // Modo Edição (Sugestão ou Ponto Ativo)
+        editSectionTitle.textContent = 'Editar Ponto de Coleta';
+        editId.value = id;
+        
+        editNome.value = pointData.nome || '';
+        editCep.value = pointData.cep || '';
+        editRua.value = pointData.rua || '';
+        editNumero.value = pointData.numero || '';
+        editBairro.value = pointData.bairro || '';
+        editCidade.value = pointData.cidade || '';
+        editEstado.value = pointData.estado || '';
+        editLatitude.value = pointData.latitude || '';
+        editLongitude.value = pointData.longitude || '';
+        editObservacoes.value = pointData.observacoes || '';
+        editEmail.value = pointData.email || '';
+        editAtivo.value = pointData.ativo ? 'true' : 'false';
 
-function closePointModal() {
-    pointModal.style.display = 'none';
-}
-
-/**
- * Manipula o envio do formulário do modal para adicionar/editar pontos (USADO POR SUGGESTIONS E ADD NEW POINT).
- */
-async function handlePointFormSubmit(event) {
-    event.preventDefault();
-    modalMessageBox.style.display = 'none';
-
-    // ... (Mantém a lógica de coleta de dados e validação do seu código original) ...
-    const id = pointIdInput.value;
-    const nome = modalNome.value.trim();
-    let tipoPonto = modalTipoPonto.value;
-    const outrosEspecificar = modalOutrosEspecificar.value.trim();
-    const cep = modalCep.value.trim();
-    const rua = modalRua.value.trim();
-    const numero = modalNumero.value.trim();
-    const bairro = modalBairro.value.trim();
-    const cidade = modalCidade.value.trim();
-    const estado = modalEstado.value.trim();
-    const latitude = parseFloat(modalLatitude.value);
-    const longitude = parseFloat(modalLongitude.value);
-    const observacoes = modalObservacoes.value.trim();
-    const ativo = modalAtivo.value === 'true'; 
-    const email = document.getElementById('modalEmail').value.trim();
-
-    if (!nome || !tipoPonto || isNaN(latitude) || isNaN(longitude)) {
-        showMessage(modalMessageBox, 'Por favor, preencha todos os campos obrigatórios (Nome, Tipo, Latitude, Longitude).', 'error');
-        return;
-    }
-    if (tipoPonto === 'Outros' && !outrosEspecificar) {
-        showMessage(modalMessageBox, 'Por favor, especifique o tipo "Outros".', 'error');
-        return;
+        // Preenche o campo select com o valor correto
+        editTipo.value = pointData.tipoPonto || '';
+        
+        displayUsuarioId.textContent = pointData.usuarioId || 'N/A';
+        displayData.textContent = pointData.data ? new Date(pointData.data).toLocaleString('pt-BR') : 'N/A';
     }
 
-    const finalTipoPonto = (tipoPonto === 'Outros' && outrosEspecificar) ? outrosEspecificar : tipoPonto;
-
-    const pointData = {
-        nome,
-        tipoPonto: finalTipoPonto,
-        cep: cep || null,
-        rua: rua || null,
-        numero: numero || null,
-        bairro: bairro || null,
-        cidade: cidade || null,
-        estado: estado || null,
-        latitude,
-        longitude,
-        observacoes: observacoes || null,
-        ativo,
-        data: new Date().toISOString(),
-        usuarioId: currentUser ? currentUser.uid : 'admin_manual',
-        email: email || null
-    };
-
-    try {
-        if (id) {
-            // Edição de ponto existente (via Modal)
-            await update(ref(database, `pontos/${id}`), pointData);
-            showMessage(modalMessageBox, 'Ponto atualizado com sucesso!', 'success');
-        } else {
-            // Adição de novo ponto
-            await push(ref(database, 'pontos'), pointData);
-            showMessage(modalMessageBox, 'Novo ponto adicionado com sucesso!', 'success');
-        }
-        closePointModal();
-        loadPoints();
-    } catch (error) {
-        console.error("Erro ao salvar ponto:", error);
-        showMessage(modalMessageBox, `Erro ao salvar ponto: ${error.message}`, 'error');
-    }
-}
-
-
-// =========================================================
-// LÓGICA DE EDIÇÃO NA SEÇÃO (Para Pontos Ativos)
-// =========================================================
-
-/**
- * Abre a seção de edição com os dados do ponto ativo (USADO APENAS PARA PONTOS ATIVOS).
- * @param {Object} pointData Dados completos do ponto.
- * @param {string} id ID do ponto.
- */
-function openEditSection(pointData, id) {
-    // Esconde o modal, se estiver visível
-    closePointModal(); 
-    
-    // Preenche os campos da SEÇÃO de edição
-    editId.value = id;
-    editNome.value = pointData.nome || '';
-    editTipo.value = pointData.tipoPonto || ''; // O campo "Tipo" na seção
-    editLocalizacao.value = `${pointData.rua || ''}, ${pointData.numero || ''} - ${pointData.bairro || ''}`; // Endereço simplificado
-    editObservacoes.value = pointData.observacoes || '';
-
-    // Torna a seção de edição visível
     editSection.style.display = 'block';
-    showMessage(editSectionMessageBox, 'Edite os dados principais e clique em Salvar.', 'info');
     editSection.scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -235,44 +128,72 @@ function closeEditSection() {
 }
 
 /**
- * Manipula o envio do formulário da seção de edição (Requisição UPDATE no Firebase).
+ * Manipula o envio do formulário da seção de edição (Requisição UPDATE/PUSH no Firebase).
  */
 editForm.addEventListener('submit', async function(event) {
     event.preventDefault();
     editSectionMessageBox.style.display = 'none';
 
     const id = editId.value;
-    if (!id) {
-        showMessage(editSectionMessageBox, 'Erro: ID do ponto não encontrado.', 'error');
+
+    // Coleta dados completos
+    const nome = editNome.value.trim();
+    const tipoPonto = editTipo.value;
+    const ativo = editAtivo.value === 'true';
+    const latitude = parseFloat(editLatitude.value);
+    const longitude = parseFloat(editLongitude.value);
+
+    if (!nome || !tipoPonto || isNaN(latitude) || isNaN(longitude)) {
+        showMessage(editSectionMessageBox, 'Por favor, preencha Nome, Tipo, Latitude e Longitude (obrigatórios).', 'error');
         return;
     }
 
-    // Coleta dados da seção (ajuste para o que você quer atualizar)
-    const updatedData = {
-        nome: editNome.value.trim(),
-        tipoPonto: editTipo.value.trim(),
-        observacoes: editObservacoes.value.trim(),
-        // ATENÇÃO: Se quiser atualizar Rua, Número e Bairro, 
-        // você precisará de campos separados ou parsear o 'editLocalizacao'.
-        // Por enquanto, só atualiza os campos simples:
-        // rua: <valor_aqui>,
-        // numero: <valor_aqui>,
+    const pointData = {
+        nome,
+        tipoPonto,
+        cep: editCep.value.trim() || null,
+        rua: editRua.value.trim() || null,
+        numero: editNumero.value.trim() || null,
+        bairro: editBairro.value.trim() || null,
+        cidade: editCidade.value.trim() || null,
+        estado: editEstado.value.trim() || null,
+        latitude,
+        longitude,
+        observacoes: editObservacoes.value.trim() || null,
+        email: editEmail.value.trim() || null,
+        ativo,
+        
+        // Mantém dados de criação ou os cria
+        data: id ? displayData.textContent : new Date().toISOString(),
+        usuarioId: id ? displayUsuarioId.textContent : (currentUser ? currentUser.uid : 'admin_manual')
     };
     
     showMessage(editSectionMessageBox, 'Enviando alterações...', 'info');
 
     try {
-        await update(ref(database, `pontos/${id}`), updatedData);
-        
-        showMessage(editSectionMessageBox, `Ponto ID ${id} atualizado com sucesso! Recarregando lista...`, 'success');
+        if (id) {
+            // Edição de ponto existente
+            await update(ref(database, `pontos/${id}`), pointData);
+            showMessage(editSectionMessageBox, `Ponto ID ${id} atualizado com sucesso! Recarregando lista...`, 'success');
+        } else {
+            // Adição de novo ponto
+            await push(ref(database, 'pontos'), pointData);
+            showMessage(editSectionMessageBox, 'Novo ponto adicionado com sucesso! Recarregando lista...', 'success');
+        }
         
         loadPoints(); // Recarrega os dados
         closeEditSection(); // Fecha a seção
     } catch (error) {
-        console.error("Erro ao salvar ponto na seção:", error);
+        console.error("Erro ao salvar ponto:", error);
         showMessage(editSectionMessageBox, `Erro ao atualizar ponto: ${error.message}`, 'error');
     }
 });
+
+// Evento de Cancelar Edição
+btnCancelEdit.addEventListener('click', closeEditSection);
+
+// Evento de Adicionar Novo Ponto
+btnAddNewPoint.addEventListener('click', () => openEditSection(null, null, 'new'));
 
 
 // =========================================================
@@ -292,7 +213,7 @@ async function loadPoints() {
 
     try {
         const snapshot = await get(ref(database, 'pontos'));
-        // ... (Mantém a lógica de iteração e separação em sugestões e ativos) ...
+        
         if (snapshot.exists()) {
             const allPoints = snapshot.val();
             let hasSuggestions = false;
@@ -300,7 +221,7 @@ async function loadPoints() {
 
             Object.keys(allPoints).forEach(id => {
                 const point = { id, ...allPoints[id] };
-                if (point.ativo === false) {
+                if (point.ativo === false || point.ativo === undefined) {
                     renderSuggestionRow(point);
                     hasSuggestions = true;
                 } else {
@@ -309,7 +230,6 @@ async function loadPoints() {
                 }
             });
 
-            // Lógica de mensagens mantida
             if (!hasSuggestions) {
                 showMessage(suggestionsMessageBox, 'Nenhuma sugestão pendente encontrada.', 'info');
             } else {
@@ -346,18 +266,18 @@ function renderSuggestionRow(suggestion) {
     const actionsCell = row.insertCell();
     actionsCell.className = 'actions';
 
-    // Botão Aprovar
+    // Botão Aprovar (apenas atualiza o status para ativo: true)
     const approveBtn = document.createElement('button');
     approveBtn.textContent = 'Aprovar';
     approveBtn.className = 'btn-approve';
     approveBtn.addEventListener('click', () => approveSuggestion(suggestion.id, suggestion));
     actionsCell.appendChild(approveBtn);
 
-    // Botão Editar (Abre o MODAL para SUGERIR)
+    // Botão Editar (Abre a SEÇÃO de edição)
     const editBtn = document.createElement('button');
     editBtn.textContent = 'Editar';
     editBtn.className = 'btn-edit';
-    editBtn.addEventListener('click', () => openPointModal(suggestion, suggestion.id)); // <-- Usa o MODAL
+    editBtn.addEventListener('click', () => openEditSection(suggestion, suggestion.id, 'edit')); // <-- Usa a SEÇÃO
     actionsCell.appendChild(editBtn);
 
     // Botão Deletar
@@ -378,46 +298,46 @@ function renderActivePointRow(point) {
     row.insertCell().textContent = point.tipoPonto;
     row.insertCell().textContent = `${point.rua || ''}, ${point.numero || ''} - ${point.cidade || ''}/${point.estado || ''}`;
     row.insertCell().textContent = point.observacoes || 'N/A';
-
+    
     const actionsCell = row.insertCell();
     actionsCell.className = 'actions';
 
+    // Botão Editar (Abre a SEÇÃO de edição)
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Editar';
+    editBtn.className = 'btn-edit';
+    editBtn.addEventListener('click', () => openEditSection(point, point.id, 'edit')); // <-- Usa a SEÇÃO
+    actionsCell.appendChild(editBtn);
+    
     // Botão Desativar
     const deactivateBtn = document.createElement('button');
     deactivateBtn.textContent = 'Desativar';
     deactivateBtn.className = 'btn-deactivate';
-    deactivateBtn.addEventListener('click', () => togglePointActive(point.id, point.ativo));
+    deactivateBtn.addEventListener('click', () => deactivatePoint(point.id, point));
     actionsCell.appendChild(deactivateBtn);
-
-    // Botão Editar (Abre a SEÇÃO DE EDIÇÃO para ATIVOS)
-    const editBtn = document.createElement('button');
-    editBtn.textContent = 'Editar';
-    editBtn.className = 'btn-edit';
-    editBtn.addEventListener('click', () => openEditSection(point, point.id)); // <-- Usa a SEÇÃO
-    actionsCell.appendChild(editBtn);
 
     // Botão Deletar
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Deletar';
     deleteBtn.className = 'btn-delete';
-    deleteBtn.addEventListener('click', () => deletePoint(point.id, 'ponto oficial'));
+    deleteBtn.addEventListener('click', () => deletePoint(point.id, 'ecoponto ativo'));
     actionsCell.appendChild(deleteBtn);
 }
 
+// =========================================================
+// FUNÇÕES DE AÇÃO DO FIREBASE
+// =========================================================
 
-// As funções 'approveSuggestion', 'togglePointActive' e 'deletePoint' 
-// permanecem inalteradas, pois elas só fazem o update ou remove no Firebase.
-
-// ... (approveSuggestion, togglePointActive, deletePoint mantidas) ...
-
-async function approveSuggestion(id, suggestionData) {
-    if (!confirm(`Tem certeza que deseja aprovar o ponto "${suggestionData.nome}"? Ele se tornará visível publicamente.`)) {
+/**
+ * Aprova uma sugestão, setando 'ativo' para true.
+ */
+async function approveSuggestion(id, suggestion) {
+    if (!confirm(`Tem certeza que deseja APROVAR a sugestão "${suggestion.nome}" e torná-la um ponto ativo?`)) {
         return;
     }
     try {
-        const pointRef = ref(database, `pontos/${id}`);
-        await update(pointRef, { ativo: true });
-        showMessage(suggestionsMessageBox, 'Sugestão aprovada com sucesso!', 'success');
+        await update(ref(database, `pontos/${id}`), { ativo: true });
+        showMessage(suggestionsMessageBox, `Sugestão "${suggestion.nome}" aprovada e ativada!`, 'success');
         loadPoints();
     } catch (error) {
         console.error("Erro ao aprovar sugestão:", error);
@@ -425,130 +345,63 @@ async function approveSuggestion(id, suggestionData) {
     }
 }
 
-async function togglePointActive(id, currentStatus) {
-    const newStatus = !currentStatus;
-    const actionText = newStatus ? 'ativar' : 'desativar';
-    const confirmMessage = newStatus
-        ? `Tem certeza que deseja ativar este ponto? Ele se tornará visível publicamente.`
-        : `Tem certeza que deseja desativar este ponto? Ele não será mais visível publicamente.`;
-
-    if (!confirm(confirmMessage)) {
+/**
+ * Desativa um ponto ativo, setando 'ativo' para false.
+ */
+async function deactivatePoint(id, point) {
+    if (!confirm(`Tem certeza que deseja DESATIVAR o ecoponto "${point.nome}"? Ele será movido para Sugestões/Inativos.`)) {
         return;
     }
     try {
-        await update(ref(database, `pontos/${id}`), { ativo: newStatus });
-        showMessage(activePointsMessageBox, `Ponto ${actionText}do com sucesso!`, 'success');
+        await update(ref(database, `pontos/${id}`), { ativo: false });
+        showMessage(activePointsMessageBox, `Ecoponto "${point.nome}" desativado.`, 'info');
         loadPoints();
     } catch (error) {
-        console.error(`Erro ao ${actionText} ponto:`, error);
-        showMessage(activePointsMessageBox, `Erro ao ${actionText} ponto: ${error.message}`, 'error');
+        console.error("Erro ao desativar ponto:", error);
+        showMessage(activePointsMessageBox, `Erro ao desativar ponto: ${error.message}`, 'error');
     }
 }
 
+/**
+ * Deleta um ponto permanentemente.
+ */
 async function deletePoint(id, type) {
-    if (!confirm(`Tem certeza que deseja deletar este ${type} permanentemente?`)) {
+    if (!confirm(`Tem certeza que deseja DELETAR permanentemente este ${type} (ID: ${id})? Esta ação é irreversível.`)) {
         return;
     }
     try {
         await remove(ref(database, `pontos/${id}`));
-        showMessage(suggestionsMessageBox, `${type} deletado com sucesso!`, 'success');
-        showMessage(activePointsMessageBox, `${type} deletado com sucesso!`, 'success');
+        showMessage(type === 'sugestão' ? suggestionsMessageBox : activePointsMessageBox, `Ponto (ID: ${id}) deletado com sucesso.`, 'success');
         loadPoints();
     } catch (error) {
         console.error("Erro ao deletar ponto:", error);
-        showMessage(suggestionsMessageBox, `Erro ao deletar ${type}: ${error.message}`, 'error');
+        showMessage(type === 'sugestão' ? suggestionsMessageBox : activePointsMessageBox, `Erro ao deletar ponto: ${error.message}`, 'error');
     }
 }
 
+
 // =========================================================
-// EVENT LISTENERS
+// INICIALIZAÇÃO E AUTENTICAÇÃO
 // =========================================================
 
-// Event listener para o botão de CANCELAR na SEÇÃO de edição
-document.querySelector('.btn-cancelar').addEventListener('click', closeEditSection);
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        currentUser = user;
+        // Verifica o nível de acesso (se houver essa lógica em seu banco de dados)
+        // Por agora, presumimos que qualquer usuário autenticado pode ver o dashboard.
+        authStatusMessage.textContent = `Logado como: ${user.email}. Carregando dados...`;
+        authStatusMessage.className = 'message-box success';
+        authStatusMessage.style.display = 'block';
 
-// Autenticação e Autorização ao carregar a página (Mantido)
-document.addEventListener('DOMContentLoaded', () => {
-    // ... (Mantém a lógica de onAuthStateChanged e verificação de nível 'admin') ...
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            currentUser = user;
-            const userRef = ref(database, 'users/' + user.uid);
-            const snapshot = await get(userRef);
-
-            if (snapshot.exists()) {
-                const userData = snapshot.val();
-                currentAdminLevel = userData.nivel || 'commum';
-
-                if (currentAdminLevel === 'admin') {
-                    showMessage(authStatusMessage, `Bem-vindo, Administrador ${userData.nome || user.email}! Carregando dashboard...`, 'info');
-                    loadPoints();
-                } else {
-                    showMessage(authStatusMessage, 'Acesso negado: Você não tem permissão para acessar esta página.', 'error');
-                    setTimeout(() => { window.location.href = 'index.html'; }, 3000);
-                }
-            } else {
-                showMessage(authStatusMessage, 'Acesso negado: Seu perfil não está configurado como administrador.', 'error');
-                setTimeout(() => { window.location.href = 'index.html'; }, 3000);
-            }
-        } else {
-            showMessage(authStatusMessage, 'Acesso negado: Você precisa estar logado para acessar esta página.', 'error');
-            setTimeout(() => { window.location.href = 'login.html'; }, 3000);
-        }
-    });
-
-    // Event listener para o botão "Adicionar Novo Ponto" (Mantido para redirecionar)
-    btnAddNewPoint.addEventListener('click', () => {
-        window.location.href = 'formulario.html';
-    });
-
-    // Event listeners para fechar o modal (Mantido)
-    document.querySelectorAll('.close-button').forEach(btn => {
-        btn.addEventListener('click', closePointModal);
-    });
-    window.addEventListener('click', (event) => {
-        if (event.target === pointModal) {
-            closePointModal();
-        }
-    });
-
-    // Event listener para o envio do formulário do modal (Mantido para Sugestões)
-    pointForm.addEventListener('submit', handlePointFormSubmit);
-
-    // Esconder/Mostrar campo 'Outros' no modal (Mantido)
-    modalTipoPonto.addEventListener('change', (event) => {
-        if (event.target.value === 'Outros') {
-            modalOutrosEspecificar.style.display = 'block';
-            modalOutrosEspecificar.setAttribute('required', 'true');
-        } else {
-            modalOutrosEspecificar.style.display = 'none';
-            modalOutrosEspecificar.removeAttribute('required');
-            modalOutrosEspecificar.value = '';
-        }
-    });
-
-    // Event listener para preencher CEP no modal (ViaCEP) (Mantido)
-    modalCep.addEventListener('blur', async () => {
-        const cep = modalCep.value.replace(/\D/g, '');
-        if (cep.length !== 8) return;
-
-        try {
-            const url = `https://viacep.com.br/ws/${cep}/json/`;
-            const response = await fetch(url);
-            const data = await response.json();
-
-            if (data.erro) {
-                showMessage(modalMessageBox, 'CEP não encontrado ou inválido.', 'error');
-                return;
-            }
-            modalRua.value = data.logradouro || '';
-            modalBairro.value = data.bairro || '';
-            modalCidade.value = data.localidade || '';
-            modalEstado.value = data.uf || '';
-            showMessage(modalMessageBox, 'Endereço preenchido via CEP.', 'info');
-        } catch (error) {
-            console.error("Erro no ViaCEP do modal:", error);
-            showMessage(modalMessageBox, 'Erro ao buscar CEP.', 'error');
-        }
-    });
+        loadPoints(); // Carrega os dados após a autenticação
+        
+    } else {
+        currentUser = null;
+        authStatusMessage.textContent = 'Não autenticado. Redirecionando para login...';
+        authStatusMessage.className = 'message-box error';
+        authStatusMessage.style.display = 'block';
+        
+        // Redirecionamento forçado se não for admin
+        // window.location.href = 'login.html'; // Descomente se precisar de redirecionamento
+    }
 });

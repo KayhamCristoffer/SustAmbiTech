@@ -122,13 +122,21 @@
             background-color: #0b7dda;
         }
 
-        .actions .btn-edit {
+        .actions .btn-edit,
+        #edit-ecoponto-form button[type="submit"] {
             background-color: #FFC107;
             color: #333;
         }
 
-        .actions .btn-edit:hover {
+        .actions .btn-edit:hover,
+        #edit-ecoponto-form button[type="submit"]:hover {
             background-color: #e0a800;
+        }
+
+        /* Estilos adicionais para o botão CANCELAR na seção de edição */
+        #edit-ecoponto-form .btn-cancelar {
+            background-color: #6C757D;
+            color: white;
         }
 
         .actions .btn-delete {
@@ -164,94 +172,41 @@
             background-color: #5a6268;
         }
 
-        .element.style {
-            color: #fff;
-        }
-
-        /* Modal Styles */
-        .modal {
+        /* Estilo da Seção de Edição Rápida (Aparece embaixo da tabela Ativos) */
+        #edit-ecoponto-section {
             display: none;
-            /* Hidden by default */
-            position: fixed;
-            /* Stay in place */
-            z-index: 1000;
-            /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            height: 100%;
-            /* Full height */
-            overflow: auto;
-            /* Enable scroll if needed */
-            background-color: rgba(0, 0, 0, 0.4);
-            /* Black w/ opacity */
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
+            /* ESSENCIAL: OCULTO INICIALMENTE */
+            border: 2px solid #008000;
             padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 700px;
+            margin: 30px 0;
             border-radius: 8px;
-            position: relative;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .close-button {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .modal-content .form-group {
+        #edit-ecoponto-form .form-group {
             margin-bottom: 15px;
         }
 
-        .modal-content label {
+        #edit-ecoponto-form label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
+            color: #333;
+            /* Cor do texto do label */
         }
 
-        .modal-content input[type="text"],
-        .modal-content input[type="number"],
-        .modal-content input[type="email"],
-        .modal-content textarea,
-        .modal-content select {
+        #edit-ecoponto-form input[type="text"],
+        #edit-ecoponto-form input[type="number"],
+        #edit-ecoponto-form input[type="email"],
+        #edit-ecoponto-form textarea,
+        #edit-ecoponto-form select {
             width: calc(100% - 22px);
-            /* Adjust for padding and border */
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
-        }
-
-        .modal-content button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background-color 0.3s;
-            width: auto;
-            /* Override general button width */
-        }
-
-        .modal-content button:hover {
-            background-color: #45a049;
+            background-color: #f9f9f9;
         }
 
         /* Responsive adjustments */
@@ -301,30 +256,52 @@
                 font-weight: bold;
             }
 
-            /* Label the data */
-            td:nth-of-type(1):before {
+            /* Label the data - Sugestões */
+            #suggestionsTable td:nth-of-type(1):before {
                 content: "Nome";
             }
 
-            td:nth-of-type(2):before {
+            #suggestionsTable td:nth-of-type(2):before {
                 content: "Tipo";
             }
 
-            td:nth-of-type(3):before {
+            #suggestionsTable td:nth-of-type(3):before {
                 content: "Localização";
             }
 
-            td:nth-of-type(4):before {
+            #suggestionsTable td:nth-of-type(4):before {
+                content: "Detalhes";
+            }
+
+            #suggestionsTable td:nth-of-type(5):before {
+                content: "Contribuído por";
+            }
+
+            #suggestionsTable td:nth-of-type(6):before {
+                content: "Ações";
+            }
+
+            /* Label the data - Pontos Ativos */
+            #activePointsTable td:nth-of-type(1):before {
+                content: "Nome";
+            }
+
+            #activePointsTable td:nth-of-type(2):before {
+                content: "Tipo";
+            }
+
+            #activePointsTable td:nth-of-type(3):before {
+                content: "Localização";
+            }
+
+            #activePointsTable td:nth-of-type(4):before {
                 content: "Observações";
             }
 
-            td:nth-of-type(5):before {
-                content: "Ativo";
-            }
-
-            td:nth-of-type(6):before {
+            #activePointsTable td:nth-of-type(5):before {
                 content: "Ações";
             }
+
 
             td:last-child {
                 border-bottom: 0;
@@ -335,19 +312,26 @@
                 margin-right: 0;
                 margin-bottom: 8px;
             }
+
+            /* Responsive para a seção de Edição Rápida */
+            #edit-ecoponto-form input[type="text"],
+            #edit-ecoponto-form textarea {
+                width: 100%;
+                /* Ajuste para telas pequenas */
+            }
         }
 
-        /* Adicional para a modal: Alinhamento de formulário */
-        .form-grid-triple {
+        /* Adicional para a Edição: Alinhamento de formulário */
+        .form-grid-double {
             display: grid;
-            grid-template-columns: 1fr 0.3fr 1fr;
-            /* Para Rua, Número, Bairro */
+            grid-template-columns: 1fr 1fr;
+            /* Para dois campos na mesma linha */
             gap: 15px;
             margin-bottom: 15px;
         }
 
         @media (max-width: 600px) {
-            .form-grid-triple {
+            .form-grid-double {
                 grid-template-columns: 1fr;
                 /* Empilha em telas menores */
             }
@@ -368,10 +352,11 @@
         <div class="dashboard-actions">
             <button id="btnAddNewPoint" class="actions btn-add"
                 style="background-color: #2196F3; height: 40px; padding: 0 15px; display: block; width: 100%; margin-top: 0; text-align: center;">
-                Adicionar Nova Sugestão (via Formulário)
+                Adicionar Novo Ecoponto Oficial
             </button>
         </div>
         <br>
+
         <section class="dashboard-section">
             <h2>Sugestões Pendentes / Pontos Inativos (Ativo: false)</h2>
             <div id="suggestionsMessageBox" class="message-box"></div>
@@ -409,94 +394,117 @@
             </table>
         </section>
 
+        <section id="edit-ecoponto-section" style="display: none;">
+            <h3 id="editSectionTitle" style="color: #008000; text-align: left;">Editar Ponto de Coleta</h3>
+            <div id="editSectionMessageBox" class="message-box"></div>
+            <form id="edit-ecoponto-form">
+                <input type="hidden" id="edit-ecoponto-id">
+                <input type="hidden" id="edit-data-criacao">
+                <input type="hidden" id="edit-usuario-id">
+
+                <div class="form-group">
+                    <label for="edit-nome">Nome do Ponto:</label>
+                    <input type="text" id="edit-nome" required>
+                </div>
+
+                <div class="form-grid-double">
+                    <div class="form-group">
+                        <label for="edit-tipo">Tipo de Material:</label>
+                        <select id="edit-tipo" required>
+                            <option value="">Selecione</option>
+                            <option value="Plástico">Plástico</option>
+                            <option value="Vidro">Vidro</option>
+                            <option value="Metal">Metal</option>
+                            <option value="Papel">Papel</option>
+                            <option value="Eletrônico">Eletrônico</option>
+                            <option value="Outros">Outros (Especificar)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-ativo">Status do Ponto:</label>
+                        <select id="edit-ativo" required>
+                            <option value="true">Ativo (visível para usuários)</option>
+                            <option value="false">Inativo (sugestão/não visível)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-grid-double">
+                    <div class="form-group">
+                        <label for="edit-cep">CEP:</label>
+                        <input type="text" id="edit-cep" placeholder="Ex: 00000-000">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-numero">Número:</label>
+                        <input type="text" id="edit-numero">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-rua">Rua:</label>
+                    <input type="text" id="edit-rua">
+                </div>
+                <div class="form-grid-double">
+                    <div class="form-group">
+                        <label for="edit-bairro">Bairro:</label>
+                        <input type="text" id="edit-bairro">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-cidade">Cidade:</label>
+                        <input type="text" id="edit-cidade">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="edit-estado">Estado:</label>
+                    <input type="text" id="edit-estado">
+                </div>
+
+                <div class="form-grid-double">
+                    <div class="form-group">
+                        <label for="edit-latitude">Latitude:</label>
+                        <input type="number" step="any" id="edit-latitude" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-longitude">Longitude:</label>
+                        <input type="number" step="any" id="edit-longitude" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-observacoes">Observações (máx. 500 caracteres):</label>
+                    <textarea id="edit-observacoes" maxlength="500"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-email">Email de Contato (Opcional):</label>
+                    <input type="email" id="edit-email">
+                </div>
+
+                <div class="form-group">
+                    <label>ID do Usuário Criador:</label>
+                    <span id="display-usuarioId" style="font-weight: normal; color: #333;"></span>
+                </div>
+                <div class="form-group">
+                    <label>Data de Criação:</label>
+                    <span id="display-data" style="font-weight: normal; color: #333;"></span>
+                </div>
+
+                <div class="form-actions" style="margin-top: 20px;">
+                    <button type="submit" class="btn-edit">Salvar Alterações</button>
+                    <button type="button" class="actions btn-cancelar" id="btnCancelEdit">Cancelar Edição</button>
+                </div>
+            </form>
+        </section>
+
+
     </main>
     <br><br><br><br><br><br><br>
 
     <div id="footer-container"></div>
 
-    <div id="pointModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button close-edit-modal">&times;</span>
-            <h2 id="modalTitle">Editar Detalhes do Ponto de Coleta</h2>
-            <div id="modalMessageBox" class="message-box"></div> <form id="pointForm">
-                <input type="hidden" id="pointId">
-                <div class="form-group">
-                    <label for="modalNome">Nome do Ponto:</label>
-                    <input type="text" id="modalNome" required>
-                </div>
-                <div class="form-group">
-                    <label for="modalTipoPonto">Tipo de Material:</label>
-                    <input type="text" id="modalTipoPonto" required>
-                    <input type="text" id="modalOutrosEspecificar" placeholder="Especifique o tipo de material..."
-                        style="display: none; margin-top: 5px;">
-                </div>
-                <div class="form-group">
-                    <label for="modalAtivo">Status do Ponto:</label>
-                    <select id="modalAtivo" required>
-                        <option value="true">Ativo (visível para usuários)</option>
-                        <option value="false">Inativo (sugestão/não visível)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="modalCep">CEP:</label>
-                    <input type="text" id="modalCep" placeholder="Ex: 00000-000">
-                </div>
-                <div class="form-grid-triple">
-                    <div class="form-group">
-                        <label for="modalRua">Rua:</label>
-                        <input type="text" id="modalRua">
-                    </div>
-                    <div class="form-group">
-                        <label for="modalNumero">Número:</label>
-                        <input type="text" id="modalNumero">
-                    </div>
-                    <div class="form-group">
-                        <label for="modalBairro">Bairro:</label>
-                        <input type="text" id="modalBairro">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="modalCidade">Cidade:</label>
-                    <input type="text" id="modalCidade">
-                </div>
-                <div class="form-group">
-                    <label for="modalEstado">Estado:</label>
-                    <input type="text" id="modalEstado">
-                </div>
-                <div class="form-group">
-                    <label for="modalLatitude">Latitude:</label>
-                    <input type="number" step="any" id="modalLatitude" required>
-                </div>
-                <div class="form-group">
-                    <label for="modalLongitude">Longitude:</label>
-                    <input type="number" step="any" id="modalLongitude" required>
-                </div>
-                <div class="form-group">
-                    <label for="modalObservacoes">Observações (máx. 500 caracteres):</label>
-                    <textarea id="modalObservacoes" maxlength="500"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="modalEmail">Email de Contato (Opcional):</label>
-                    <input type="email" id="modalEmail">
-                </div>
-                <div class="form-group">
-                    <label>ID do Usuário Criador:</label>
-                    <span id="display-usuarioId" style="font-weight: normal;"></span>
-                </div>
-                <div class="form-group">
-                    <label>Data de Criação:</label>
-                    <span id="display-data" style="font-weight: normal;"></span>
-                </div>
-
-                <button type="submit" id="modalSaveButton">Salvar Alterações</button>
-                <button type="button" class="close-button close-edit-modal"
-                    style="background-color: #6C757D;">Cancelar</button>
-            </form>
-        </div>
-    </div>
     <script src="main.js" type="module"></script>
     <script>
-        // Carregamento do footer, como você já tem
+        // Carregamento do footer
         document.addEventListener('DOMContentLoaded', () => {
             fetch('footer.html')
                 .then(response => response.text())
