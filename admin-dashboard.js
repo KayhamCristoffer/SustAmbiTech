@@ -27,7 +27,7 @@ const btnCancelEdit = document.getElementById('btnCancelEdit');
 // Campos do Formulário de Edição
 const editId = document.getElementById('edit-ecoponto-id');
 const editDataCriacao = document.getElementById('edit-data-criacao');
-const editUsuarioId = document.getElementById('edit-usuario-id');
+const editUsuarioId = document.getElementById('edit-usuario-id'); // Este é o campo HIDDEN do UID
 
 const editNome = document.getElementById('edit-nome');
 const editTipo = document.getElementById('edit-tipo'); 
@@ -42,15 +42,15 @@ const editEstado = document.getElementById('edit-estado');
 const editLatitude = document.getElementById('edit-latitude');
 const editLongitude = document.getElementById('edit-longitude');
 const editObservacoes = document.getElementById('edit-observacoes');
-const editEmail = document.getElementById('edit-email');
+const editEmail = document.getElementById('edit-email'); // Campo agora readonly
 
 // Campos de Visualização
-const displayUsuarioId = document.getElementById('display-usuarioId');
+const displayUsuarioId = document.getElementById('display-usuarioId'); // Usado para mostrar o EMAIL do contribuinte
 const displayData = document.getElementById('display-data');
 
 
 let currentUser = null;
-let currentAdminLevel = 'commum'; // Mantenha esta lógica se for usá-la.
+let currentAdminLevel = 'commum'; 
 
 // =========================================================
 // FUNÇÕES AUXILIARES
@@ -88,7 +88,10 @@ function openEditSection(pointData = null, id = null, mode = 'edit') {
         editSectionTitle.textContent = 'Adicionar Novo Ecoponto Oficial';
         editId.value = '';
         editAtivo.value = 'true';
-        displayUsuarioId.textContent = currentUser ? currentUser.uid : 'admin_manual';
+        
+        // Dados de rastreamento para Novo Ponto
+        editUsuarioId.value = currentUser ? currentUser.uid : 'admin_manual';
+        displayUsuarioId.textContent = currentUser ? currentUser.email || currentUser.uid : 'admin_manual'; 
         displayData.textContent = new Date().toLocaleString('pt-BR');
         
     } else {
@@ -103,16 +106,26 @@ function openEditSection(pointData = null, id = null, mode = 'edit') {
         editBairro.value = pointData.bairro || '';
         editCidade.value = pointData.cidade || '';
         editEstado.value = pointData.estado || '';
+        
+        // Latitude e Longitude (READONLY)
         editLatitude.value = pointData.latitude || '';
         editLongitude.value = pointData.longitude || '';
+        
         editObservacoes.value = pointData.observacoes || '';
-        editEmail.value = pointData.email || '';
+        
+        // Email de Contato (READONLY)
+        editEmail.value = pointData.email || ''; 
+        
         editAtivo.value = pointData.ativo ? 'true' : 'false';
 
-        // Preenche o campo select com o valor correto
+        // Preenche o campo select (Tipo do Ponto)
         editTipo.value = pointData.tipoPonto || '';
         
-        displayUsuarioId.textContent = pointData.usuarioId || 'N/A';
+        // Campo Contribuinte: Mostra o Email do ponto (se for sugestão) ou N/A.
+        // O UID permanece no campo hidden: editUsuarioId.value
+        displayUsuarioId.textContent = pointData.email || 'Não informado / N/A';
+        editUsuarioId.value = pointData.usuarioId || ''; // Mantém o UID no hidden
+        
         displayData.textContent = pointData.data ? new Date(pointData.data).toLocaleString('pt-BR') : 'N/A';
     }
 
@@ -142,6 +155,9 @@ editForm.addEventListener('submit', async function(event) {
     const ativo = editAtivo.value === 'true';
     const latitude = parseFloat(editLatitude.value);
     const longitude = parseFloat(editLongitude.value);
+    
+    // Pega o UID do campo HIDDEN
+    const usuarioId = editUsuarioId.value; 
 
     if (!nome || !tipoPonto || isNaN(latitude) || isNaN(longitude)) {
         showMessage(editSectionMessageBox, 'Por favor, preencha Nome, Tipo, Latitude e Longitude (obrigatórios).', 'error');
@@ -160,12 +176,15 @@ editForm.addEventListener('submit', async function(event) {
         latitude,
         longitude,
         observacoes: editObservacoes.value.trim() || null,
-        email: editEmail.value.trim() || null,
+        
+        // O email é mantido no banco, mas não é modificado aqui (campo readonly)
+        email: editEmail.value.trim() || null, 
+        
         ativo,
         
         // Mantém dados de criação ou os cria
         data: id ? displayData.textContent : new Date().toISOString(),
-        usuarioId: id ? displayUsuarioId.textContent : (currentUser ? currentUser.uid : 'admin_manual')
+        usuarioId: id ? usuarioId : (currentUser ? currentUser.uid : 'admin_manual')
     };
     
     showMessage(editSectionMessageBox, 'Enviando alterações...', 'info');
@@ -261,8 +280,8 @@ function renderSuggestionRow(suggestion) {
     row.insertCell().textContent = suggestion.tipoPonto;
     row.insertCell().textContent = `${suggestion.rua || ''}, ${suggestion.numero || ''} - ${suggestion.cidade || ''}/${suggestion.estado || ''}`;
     row.insertCell().textContent = suggestion.observacoes || 'N/A';
-    row.insertCell().textContent = suggestion.email || suggestion.usuarioId;
-
+    row.insertCell().textContent = suggestion.email || suggestion.usuarioId; // Mostra email ou UID
+    
     const actionsCell = row.insertCell();
     actionsCell.className = 'actions';
 
@@ -277,7 +296,7 @@ function renderSuggestionRow(suggestion) {
     const editBtn = document.createElement('button');
     editBtn.textContent = 'Editar';
     editBtn.className = 'btn-edit';
-    editBtn.addEventListener('click', () => openEditSection(suggestion, suggestion.id, 'edit')); // <-- Usa a SEÇÃO
+    editBtn.addEventListener('click', () => openEditSection(suggestion, suggestion.id, 'edit')); 
     actionsCell.appendChild(editBtn);
 
     // Botão Deletar
@@ -306,7 +325,7 @@ function renderActivePointRow(point) {
     const editBtn = document.createElement('button');
     editBtn.textContent = 'Editar';
     editBtn.className = 'btn-edit';
-    editBtn.addEventListener('click', () => openEditSection(point, point.id, 'edit')); // <-- Usa a SEÇÃO
+    editBtn.addEventListener('click', () => openEditSection(point, point.id, 'edit')); 
     actionsCell.appendChild(editBtn);
     
     // Botão Desativar

@@ -122,22 +122,39 @@
             background-color: #0b7dda;
         }
 
-        .actions .btn-edit,
-        #edit-ecoponto-form button[type="submit"] {
+        /* --- CSS Personalizado para Salvar e Cancelar --- */
+        .actions .btn-edit {
+            /* Botão Editar (na tabela) */
             background-color: #FFC107;
             color: #333;
         }
 
-        .actions .btn-edit:hover,
-        #edit-ecoponto-form button[type="submit"]:hover {
+        .actions .btn-edit:hover {
             background-color: #e0a800;
+        }
+
+        #edit-ecoponto-form button[type="submit"] {
+            /* Botão Salvar (no formulário) */
+            background-color: #28A745;
+            /* VERDE */
+            color: white;
+        }
+
+        #edit-ecoponto-form button[type="submit"]:hover {
+            background-color: #218838;
         }
 
         /* Estilos adicionais para o botão CANCELAR na seção de edição */
         #edit-ecoponto-form .btn-cancelar {
-            background-color: #6C757D;
+            background-color: #DC3545;
+            /* VERMELHO */
             color: white;
         }
+
+        #edit-ecoponto-form .btn-cancelar:hover {
+            background-color: #c82333;
+        }
+        /* --- Fim do CSS Personalizado --- */
 
         .actions .btn-delete {
             background-color: #DC3545;
@@ -207,6 +224,12 @@
             border-radius: 4px;
             box-sizing: border-box;
             background-color: #f9f9f9;
+        }
+        
+        /* Estilo para campos Readonly */
+        #edit-ecoponto-form input[readonly] {
+            background-color: #eee; /* Cor de fundo diferente para indicar que não é editável */
+            cursor: not-allowed;
         }
 
         /* Responsive adjustments */
@@ -400,7 +423,7 @@
             <form id="edit-ecoponto-form">
                 <input type="hidden" id="edit-ecoponto-id">
                 <input type="hidden" id="edit-data-criacao">
-                <input type="hidden" id="edit-usuario-id">
+                <input type="hidden" id="edit-usuario-id"> 
 
                 <div class="form-group">
                     <label for="edit-nome">Nome do Ponto:</label>
@@ -409,7 +432,7 @@
 
                 <div class="form-grid-double">
                     <div class="form-group">
-                        <label for="edit-tipo">Tipo de Material:</label>
+                        <label for="edit-tipo">Tipo do Ponto:</label> 
                         <select id="edit-tipo" required>
                             <option value="">Selecione</option>
                             <option value="Plástico">Plástico</option>
@@ -461,12 +484,12 @@
 
                 <div class="form-grid-double">
                     <div class="form-group">
-                        <label for="edit-latitude">Latitude:</label>
-                        <input type="number" step="any" id="edit-latitude" required>
+                        <label for="edit-latitude">Latitude (Bloqueado):</label>
+                        <input type="number" step="any" id="edit-latitude" required readonly>
                     </div>
                     <div class="form-group">
-                        <label for="edit-longitude">Longitude:</label>
-                        <input type="number" step="any" id="edit-longitude" required>
+                        <label for="edit-longitude">Longitude (Bloqueado):</label>
+                        <input type="number" step="any" id="edit-longitude" required readonly>
                     </div>
                 </div>
 
@@ -476,12 +499,12 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="edit-email">Email de Contato (Opcional):</label>
-                    <input type="email" id="edit-email">
+                    <label for="edit-email">Email de Contato (Bloqueado):</label>
+                    <input type="email" id="edit-email" readonly>
                 </div>
 
                 <div class="form-group">
-                    <label>ID do Usuário Criador:</label>
+                    <label>Usuário Contribuinte (Email, não UID):</label>
                     <span id="display-usuarioId" style="font-weight: normal; color: #333;"></span>
                 </div>
                 <div class="form-group">
