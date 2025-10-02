@@ -355,8 +355,24 @@
             margin-bottom: 15px;
         }
 
+        /* NOVO: Estilo para 3 colunas */
+        .form-grid-triple {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        /* Mídia query para telas médias (3 para 2 colunas) */
+        @media (max-width: 992px) {
+            .form-grid-triple {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
         @media (max-width: 600px) {
-            .form-grid-double {
+            .form-grid-double,
+            .form-grid-triple {
                 grid-template-columns: 1fr;
                 /* Empilha em telas menores */
             }
@@ -427,12 +443,12 @@
                 <input type="hidden" id="edit-data-criacao">
                 <input type="hidden" id="edit-usuario-id">
 
-                <div class="form-group">
-                    <label for="edit-nome">Nome do Ponto:</label>
-                    <input type="text" id="edit-nome" required>
-                </div>
-
-                <div class="form-grid-double">
+                <!-- NOVO: Nome do Ponto, Tipo do Ponto, Status do Ponto na mesma linha -->
+                <div class="form-grid-triple">
+                    <div class="form-group">
+                        <label for="edit-nome">Nome do Ponto:</label>
+                        <input type="text" id="edit-nome" required>
+                    </div>
                     <div class="form-group">
                         <label for="edit-tipo">Tipo do Ponto:</label>
                         <select id="edit-tipo" required>
@@ -454,34 +470,36 @@
                     </div>
                 </div>
 
-                <div class="form-grid-double">
+                <!-- NOVO: Rua, Número, Bairro na mesma linha -->
+                <div class="form-grid-triple">
                     <div class="form-group">
-                        <label for="edit-cep">CEP:</label>
-                        <input type="text" id="edit-cep" placeholder="Ex: 00000-000">
+                        <label for="edit-rua">Rua:</label>
+                        <input type="text" id="edit-rua">
                     </div>
                     <div class="form-group">
                         <label for="edit-numero">Número:</label>
                         <input type="text" id="edit-numero">
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="edit-rua">Rua:</label>
-                    <input type="text" id="edit-rua">
-                </div>
-                <div class="form-grid-double">
                     <div class="form-group">
                         <label for="edit-bairro">Bairro:</label>
                         <input type="text" id="edit-bairro">
                     </div>
+                </div>
+
+                <!-- NOVO: Cidade, Estado, CEP na mesma linha -->
+                <div class="form-grid-triple">
                     <div class="form-group">
                         <label for="edit-cidade">Cidade:</label>
                         <input type="text" id="edit-cidade">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit-estado">Estado:</label>
-                    <input type="text" id="edit-estado">
+                    <div class="form-group">
+                        <label for="edit-estado">Estado:</label>
+                        <input type="text" id="edit-estado">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-cep">CEP:</label>
+                        <input type="text" id="edit-cep" placeholder="Ex: 00000-000">
+                    </div>
                 </div>
 
                 <div class="form-grid-double">
@@ -506,7 +524,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Usuário Contribuinte (Email, não UID):</label>
+                    <label>Usuário Contribuinte:</label>
                     <span id="display-usuarioId" style="font-weight: normal; color: #333;"></span>
                 </div>
                 <div class="form-group">
