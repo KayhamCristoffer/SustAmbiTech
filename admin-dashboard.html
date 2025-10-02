@@ -297,84 +297,9 @@
         </section>
 
     </main>
+    <br><br><br><br><br><br><br>
 
     <div id="footer-container"></div>
-
-    <!-- Modal para Adicionar/Editar Ponto -->
-    <div id="pointModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <form id="pointForm">
-                <input type="hidden" id="pointId">
-                <div class="form-group">
-                    <label for="modalNome">Nome do Ponto:</label>
-                    <input type="text" id="modalNome" required>
-                </div>
-                <div class="form-group">
-                    <label for="modalTipoPonto">Tipo de Ponto:</label>
-                    <select id="modalTipoPonto" required>
-                        <option value="" disabled selected>-- Selecione o Tipo --</option>
-                        <option value="Posto Eletro">Posto Eletro</option>
-                        <option value="Eco Posto">Eco Posto</option>
-                        <option value="Descarte de Pilha">Descarte de Pilha</option>
-                        <option value="Reciclagem">Reciclagem</option>
-                        <option value="Óleo de Cozinha">Descarte de Óleo de Cozinha</option>
-                        <option value="Roupas/Têxtil">Doação de Roupas/Têxtil</option>
-                        <option value="Pneu">Descarte de Pneus</option>
-                        <option value="Outros">Outros</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="modalOutrosEspecificar">Especifique "Outros" (se aplicável):</label>
-                    <input type="text" id="modalOutrosEspecificar">
-                </div>
-                <div class="form-group">
-                    <label for="modalCep">CEP:</label>
-                    <input type="text" id="modalCep" maxlength="9">
-                </div>
-                <div class="form-group">
-                    <label for="modalRua">Rua:</label>
-                    <input type="text" id="modalRua">
-                </div>
-                <div class="form-group">
-                    <label for="modalNumero">Número:</label>
-                    <input type="text" id="modalNumero">
-                </div>
-                <div class="form-group">
-                    <label for="modalBairro">Bairro:</label>
-                    <input type="text" id="modalBairro">
-                </div>
-                <div class="form-group">
-                    <label for="modalCidade">Cidade:</label>
-                    <input type="text" id="modalCidade">
-                </div>
-                <div class="form-group">
-                    <label for="modalEstado">Estado (UF):</label>
-                    <input type="text" id="modalEstado" maxlength="2">
-                </div>
-                <div class="form-group">
-                    <label for="modalLatitude">Latitude:</label>
-                    <input type="number" id="modalLatitude" step="any" required>
-                </div>
-                <div class="form-group">
-                    <label for="modalLongitude">Longitude:</label>
-                    <input type="number" id="modalLongitude" step="any" required>
-                </div>
-                <div class="form-group">
-                    <label for="modalObservacoes">Observações (Máx. 500 caracteres):</label>
-                    <textarea id="modalObservacoes" rows="3" maxlength="500"></textarea>
-                </div>
-                <div class="form-group">
-                    <input type="checkbox" id="modalAtivo">
-                    <label for="modalAtivo" style="display: inline-block; margin-left: 5px;">Ponto Ativo (Visível Publicamente)</label>
-                </div>
-                <button type="submit" id="modalSaveButton">Salvar Ponto</button>
-            </form>
-            <div id="modalMessageBox" class="message-box"></div>
-        </div>
-    </div>
-
 
     <script src="main.js" type="module"></script>
     <script>
