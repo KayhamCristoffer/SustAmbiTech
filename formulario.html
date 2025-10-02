@@ -672,6 +672,7 @@
         }
 
         // FUNÇÃO ATUALIZADA: Inicializar Mapa (para carregar pontos ATIVOS do Firebase)
+                // FUNÇÃO ATUALIZADA: Inicializar Mapa (para carregar pontos ATIVOS do Firebase)
         async function inicializarMapa(lat, lon) {
             const center = [lat || DEFAULT_LAT, lon || DEFAULT_LON];
 
@@ -687,12 +688,13 @@
 
             // --- Carregar pontos ATIVOS do Firebase Realtime Database ---
             try {
-                // Cria uma query para buscar apenas pontos onde 'ativo' é true
                 const pontosAtivosQuery = query(ref(database, 'pontos'), orderByChild('ativo'), equalTo(true));
                 const snapshot = await get(pontosAtivosQuery);
 
+                // --- NOVO: console.log para verificar os dados ---
                 if (snapshot.exists()) {
                     const pontosData = snapshot.val();
+                    console.log("Dados de pontos ativos carregados do Firebase:", pontosData); // <--- Adicionado
                     Object.keys(pontosData).forEach(key => {
                         const ponto = pontosData[key];
                         const cor = tipoParaCor[ponto.tipoPonto] || '#000000';
@@ -707,7 +709,7 @@
                         }
                     });
                 } else {
-                    console.log("Nenhum ecoponto ativo encontrado no Firebase.");
+                    console.log("Nenhum ecoponto ativo encontrado no Firebase (consulta retornou vazio)."); // <--- Adicionado
                 }
             } catch (error) {
                 console.error("Erro ao carregar ecopontos do Firebase:", error);
@@ -717,9 +719,16 @@
             mapa.on('click', adicionarMarcadorNovoPonto);
 
             mapa.invalidateSize();
+            // --- NOVO: Chamada adicional de invalidateSize após o carregamento dos dados ---
+            // Isso pode ajudar se a tabela (ou outros elementos) estiverem afetando o layout do mapa.
+            setTimeout(() => {
+                mapa.invalidateSize();
+            }, 100); // Pequeno atraso para garantir que o DOM esteja renderizado
+
 
             preencherLegenda();
         }
+
 
         // Função para preencher a legenda do mapa
         function preencherLegenda() {

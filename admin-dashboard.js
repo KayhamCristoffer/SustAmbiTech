@@ -415,7 +415,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Event listener para o botão "Adicionar Novo Ponto" (Abre o modal em modo adição)
-    btnAddNewPoint.addEventListener('click', () => openPointModal());
+    btnAddNewPoint.addEventListener('click', () => {
+        window.location.href = 'formulario.html';
+    });
 
     // Event listeners para o modal
     closeButton.addEventListener('click', closePointModal);
