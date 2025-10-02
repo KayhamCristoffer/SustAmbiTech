@@ -158,7 +158,15 @@ async function inicializarMapaIndex(lat, lon, zoom = DEFAULT_ZOOM_INDEX) {
                 if (typeof ponto.latitude === 'number' && typeof ponto.longitude === 'number') {
                     L.marker([ponto.latitude, ponto.longitude], { icon: icone })
                         .addTo(mapaIndex)
-                        .bindPopup(`<b>${ponto.nome}</b><br>Tipo: ${ponto.tipoPonto}<br>Endereço: ${ponto.rua || 'N/A'}, ${ponto.numero || 'N/A'} - ${ponto.cidade || 'N/A'}/${ponto.estado || 'N/A'}`);
+                        // AQUI ESTÁ A LINHA MODIFICADA PARA INCLUIR O CEP E FORMATAR O ENDEREÇO
+                        .bindPopup(`
+                            <b>${ponto.nome}</b><br>
+                            Tipo: ${ponto.tipoPonto}<br>
+                            Endereço: ${ponto.rua || 'N/A'}, ${ponto.numero || 'S/N'}<br>
+                            Bairro: ${ponto.bairro || 'N/A'}<br>
+                            Cidade: ${ponto.cidade || 'N/A'} - ${ponto.estado || 'N/A'}<br>
+                            CEP: ${ponto.cep || 'N/A'}
+                        `);
                 } else {
                     console.warn(`Ponto "${ponto.nome}" (ID: ${key}) possui coordenadas inválidas e não será exibido no mapa do Index.`);
                 }
