@@ -10,7 +10,6 @@
         /* Estilos específicos para o Dashboard Admin */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f7f6;
             color: #333;
             min-height: 100vh;
             padding: 0;
@@ -22,13 +21,14 @@
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: #78a831;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        h1, h2 {
-            color: #4CAF50;
+        h1,
+        h2 {
+            color: #e6ffe6;
             text-align: center;
             margin-bottom: 25px;
         }
@@ -36,13 +36,15 @@
         .dashboard-section {
             margin-bottom: 40px;
             padding: 20px;
-            background-color: #e6ffe6; /* Light green background for sections */
+            background-color: #e6ffe6;
+            /* Light green background for sections */
             border-radius: 8px;
             border: 1px solid #d4edda;
         }
 
         .dashboard-section h2 {
-            color: #008000; /* Darker green for section titles */
+            color: #008000;
+            /* Darker green for section titles */
             margin-top: 0;
             text-align: left;
             margin-bottom: 15px;
@@ -53,11 +55,27 @@
             margin-bottom: 20px;
             border-radius: 5px;
             font-weight: bold;
-            display: none; /* Hidden by default */
+            display: none;
+            /* Hidden by default */
         }
-        .message-box.success { background-color: #d4edda; color: #155724; border-color: #c3e6cb; }
-        .message-box.error { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
-        .message-box.info { background-color: #d1ecf1; color: #0c5460; border-color: #bee5eb; }
+
+        .message-box.success {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+
+        .message-box.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+
+        .message-box.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border-color: #bee5eb;
+        }
 
         table {
             width: 100%;
@@ -66,11 +84,13 @@
             background-color: #fff;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 10px;
             text-align: left;
-            vertical-align: top; /* Align content to the top */
+            vertical-align: top;
+            /* Align content to the top */
         }
 
         th {
@@ -93,35 +113,76 @@
             margin-right: 5px;
             margin-bottom: 5px;
             transition: background-color 0.3s ease;
-            white-space: nowrap; /* Prevent buttons from wrapping text */
+            white-space: nowrap;
+            /* Prevent buttons from wrapping text */
         }
 
         .actions button:hover {
             background-color: #0b7dda;
         }
 
-        .actions .btn-edit { background-color: #FFC107; color: #333; }
-        .actions .btn-edit:hover { background-color: #e0a800; }
-        .actions .btn-delete { background-color: #DC3545; }
-        .actions .btn-delete:hover { background-color: #c82333; }
-        .actions .btn-approve { background-color: #28A745; }
-        .actions .btn-approve:hover { background-color: #218838; }
-        .actions .btn-add { background-color: #007bff; }
-        .actions .btn-add:hover { background-color: #0056b3; }
-        .actions .btn-deactivate { background-color: #6C757D; } /* Grey for deactivating */
-        .actions .btn-deactivate:hover { background-color: #5a6268; }
+        .actions .btn-edit {
+            background-color: #FFC107;
+            color: #333;
+        }
 
+        .actions .btn-edit:hover {
+            background-color: #e0a800;
+        }
+
+        .actions .btn-delete {
+            background-color: #DC3545;
+        }
+
+        .actions .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+        .actions .btn-approve {
+            background-color: #28A745;
+        }
+
+        .actions .btn-approve:hover {
+            background-color: #218838;
+        }
+
+        .actions .btn-add {
+            background-color: #007bff;
+        }
+
+        .actions .btn-add:hover {
+            background-color: #0056b3;
+        }
+
+        .actions .btn-deactivate {
+            background-color: #6C757D;
+        }
+
+        /* Grey for deactivating */
+        .actions .btn-deactivate:hover {
+            background-color: #5a6268;
+        }
+        .element.style{
+            color: #fff;
+        }
         /* Modal Styles */
         .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1000;
+            /* Sit on top */
             left: 0;
             top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
             padding-top: 60px;
         }
 
@@ -165,7 +226,8 @@
         .modal-content input[type="email"],
         .modal-content textarea,
         .modal-content select {
-            width: calc(100% - 22px); /* Adjust for padding and border */
+            width: calc(100% - 22px);
+            /* Adjust for padding and border */
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -181,8 +243,10 @@
             cursor: pointer;
             margin-top: 10px;
             transition: background-color 0.3s;
-            width: auto; /* Override general button width */
+            width: auto;
+            /* Override general button width */
         }
+
         .modal-content button:hover {
             background-color: #45a049;
         }
@@ -193,19 +257,28 @@
                 margin: 10px;
                 padding: 10px;
             }
-            table, thead, tbody, th, td, tr {
+
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
                 display: block;
             }
+
             thead tr {
                 position: absolute;
                 top: -9999px;
                 left: -9999px;
             }
+
             tr {
                 border: 1px solid #ccc;
                 margin-bottom: 10px;
                 padding: 10px;
             }
+
             td {
                 border: none;
                 border-bottom: 1px solid #eee;
@@ -213,6 +286,7 @@
                 padding-left: 50%;
                 text-align: right;
             }
+
             td:before {
                 position: absolute;
                 top: 6px;
@@ -223,19 +297,50 @@
                 text-align: left;
                 font-weight: bold;
             }
+
             /* Label the data */
-            td:nth-of-type(1):before { content: "Nome"; }
-            td:nth-of-type(2):before { content: "Tipo"; }
-            td:nth-of-type(3):before { content: "Localização"; }
-            td:nth-of-type(4):before { content: "Observações"; }
-            td:nth-of-type(5):before { content: "Ativo"; }
-            td:nth-of-type(6):before { content: "Ações"; }
-            td:last-child { border-bottom: 0; }
+            td:nth-of-type(1):before {
+                content: "Nome";
+            }
+
+            td:nth-of-type(2):before {
+                content: "Tipo";
+            }
+
+            td:nth-of-type(3):before {
+                content: "Localização";
+            }
+
+            td:nth-of-type(4):before {
+                content: "Observações";
+            }
+
+            td:nth-of-type(5):before {
+                content: "Ativo";
+            }
+
+            td:nth-of-type(6):before {
+                content: "Ações";
+            }
+
+            td:last-child {
+                border-bottom: 0;
+            }
 
             .actions button {
                 width: 100%;
                 margin-right: 0;
                 margin-bottom: 8px;
+            }
+
+            #btnAddNewPoint {
+                background-color: #2196F3;
+                height: 40px;
+                padding: 0 15px;
+                display: block;
+                width: 100%;
+                margin-top: 0;
+                text-align: center;
             }
         }
     </style>
@@ -256,7 +361,7 @@
             <!-- BOTÃO ALTERADO PARA REDIRECIONAR AO FORMULÁRIO DE SUGESTÃO -->
             <button id="btnAddNewPoint" class="actions btn-add">Adicionar Nova Sugestão (via Formulário)</button>
         </div>
-
+<br>
         <section class="dashboard-section">
             <h2>Sugestões Pendentes / Pontos Inativos (Ativo: false)</h2>
             <div id="suggestionsMessageBox" class="message-box"></div>
