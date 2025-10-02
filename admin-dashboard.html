@@ -51,6 +51,7 @@
             margin-bottom: 15px;
         }
 
+        /* --- Estilos de Mensagens --- */
         .message-box {
             padding: 10px;
             margin-bottom: 20px;
@@ -78,6 +79,7 @@
             border-color: #bee5eb;
         }
 
+        /* --- Estilos de Tabela --- */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -104,6 +106,7 @@
             background-color: #f9f9f9;
         }
 
+        /* --- Estilos de Ações (Botões) --- */
         .actions button {
             background-color: #2196F3;
             color: white;
@@ -159,7 +162,6 @@
             background-color: #6C757D;
         }
 
-        /* Grey for deactivating */
         .actions .btn-deactivate:hover {
             background-color: #5a6268;
         }
@@ -168,24 +170,77 @@
             color: #fff;
         }
 
-        /* Modal Styles */
+        /* --- Estilos de Formulário --- */
+        .form-grid-triple {
+            display: grid;
+            grid-template-columns: 1fr 0.3fr 1fr;
+            /* Para Rua, Número, Bairro */
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        /* --- Estilo da Nova Seção de Edição --- */
+        #edit-ecoponto-section {
+            display: none; /* ESSENCIAL: Começa invisível, será exibida pelo JS */
+            background-color: #f7fcf9; 
+            padding: 30px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid #28A745; /* Borda verde destacada */
+            margin-top: 20px;
+        }
+        
+        #edit-ecoponto-section h2 {
+            color: #28A745; 
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        
+        #edit-ecoponto-section label {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        #edit-ecoponto-section input[type="text"],
+        #edit-ecoponto-section input[type="number"],
+        #edit-ecoponto-section textarea,
+        #edit-ecoponto-section select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        #edit-ecoponto-section button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 15px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .btn-salvar { background-color: #28A745; color: white; }
+        .btn-salvar:hover { background-color: #218838; }
+        .btn-cancelar { background-color: #6C757D; color: white; }
+        .btn-cancelar:hover { background-color: #5a6268; }
+
+
+        /* --- Estilos Modal Antigos (mantidos para o modal de Sugestões) --- */
         .modal {
             display: none;
-            /* Hidden by default */
             position: fixed;
-            /* Stay in place */
             z-index: 1000;
-            /* Sit on top */
             left: 0;
             top: 0;
             width: 100%;
-            /* Full width */
             height: 100%;
-            /* Full height */
             overflow: auto;
-            /* Enable scroll if needed */
             background-color: rgba(0, 0, 0, 0.4);
-            /* Black w/ opacity */
             padding-top: 60px;
         }
 
@@ -206,55 +261,9 @@
             font-size: 28px;
             font-weight: bold;
         }
+        /* ... outros estilos de modal ... */
 
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .modal-content .form-group {
-            margin-bottom: 15px;
-        }
-
-        .modal-content label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .modal-content input[type="text"],
-        .modal-content input[type="number"],
-        .modal-content input[type="email"],
-        .modal-content textarea,
-        .modal-content select {
-            width: calc(100% - 22px);
-            /* Adjust for padding and border */
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .modal-content button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background-color 0.3s;
-            width: auto;
-            /* Override general button width */
-        }
-
-        .modal-content button:hover {
-            background-color: #45a049;
-        }
-
-        /* Responsive adjustments */
+        /* --- Ajustes Responsivos --- */
         @media (max-width: 768px) {
             .main-content {
                 margin: 10px;
@@ -301,7 +310,7 @@
                 font-weight: bold;
             }
 
-            /* Label the data */
+            /* Label the data - Mantendo o que você já tinha */
             td:nth-of-type(1):before {
                 content: "Nome";
             }
@@ -335,18 +344,7 @@
                 margin-right: 0;
                 margin-bottom: 8px;
             }
-        }
-
-        /* Adicional para a modal: Alinhamento de formulário */
-        .form-grid-triple {
-            display: grid;
-            grid-template-columns: 1fr 0.3fr 1fr;
-            /* Para Rua, Número, Bairro */
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        @media (max-width: 600px) {
+            
             .form-grid-triple {
                 grid-template-columns: 1fr;
                 /* Empilha em telas menores */
@@ -387,7 +385,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    </tbody>
+                </tbody>
             </table>
         </section>
 
@@ -405,11 +403,45 @@
                     </tr>
                 </thead>
                 <tbody>
-                    </tbody>
+                    <tr>
+                        <td>Ecoponto Modelo</td>
+                        <td>Plástico, Vidro</td>
+                        <td>Rua A, 123</td>
+                        <td>Horário comercial</td>
+                        <td class="actions">
+                             <button class="btn-edit" onclick="prepararEdicao('ecoponto-id-123', 'Ecoponto Modelo', 'Rua A, 123', 'Plástico, Vidro', 'Horário comercial')">Editar</button>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </section>
+        
+        <section id="edit-ecoponto-section" class="dashboard-section">
+            <h2>Editar Ecoponto Selecionado</h2>
+            <div id="editSectionMessageBox" class="message-box"></div>
 
-    </main>
+            <form id="edit-ecoponto-form">
+                <input type="hidden" id="edit-ecoponto-id" name="id">
+
+                <label for="edit-nome">Nome:</label>
+                <input type="text" id="edit-nome" name="nome" required>
+
+                <label for="edit-tipo">Tipo de Material:</label>
+                <input type="text" id="edit-tipo" name="tipo" required>
+                
+                <label for="edit-localizacao">Localização (Rua e Número):</label>
+                <input type="text" id="edit-localizacao" name="localizacao" required>
+                
+                <label for="edit-observacoes">Observações:</label>
+                <textarea id="edit-observacoes" name="observacoes"></textarea>
+
+                <button type="submit" class="btn-salvar">Salvar Alterações</button>
+                <button type="button" class="btn-cancelar" onclick="fecharEdicao()">Cancelar</button>
+            </form>
+        </section>
+
+
+        </main>
     <br><br><br><br><br><br><br>
 
     <div id="footer-container"></div>
@@ -417,8 +449,9 @@
     <div id="pointModal" class="modal">
         <div class="modal-content">
             <span class="close-button close-edit-modal">&times;</span>
-            <h2 id="modalTitle">Editar Detalhes do Ponto de Coleta</h2>
-            <div id="modalMessageBox" class="message-box"></div> <form id="pointForm">
+            <h2 id="modalTitle">Detalhes do Ponto de Coleta</h2>
+            <div id="modalMessageBox" class="message-box"></div>
+            <form id="pointForm">
                 <input type="hidden" id="pointId">
                 <div class="form-group">
                     <label for="modalNome">Nome do Ponto:</label>
@@ -494,19 +527,116 @@
             </form>
         </div>
     </div>
-    <script src="main.js" type="module"></script>
+    
     <script>
-        // Carregamento do footer, como você já tem
-        document.addEventListener('DOMContentLoaded', () => {
-            fetch('footer.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('footer-container').innerHTML = data;
-                })
-                .catch(error => console.error('Erro ao carregar o rodapé:', error));
+        // ==============================================
+        // Lógica JavaScript para a Nova Seção de Edição
+        // ==============================================
+        const editSection = document.getElementById('edit-ecoponto-section');
+        const editForm = document.getElementById('edit-ecoponto-form');
+        const editSectionMessageBox = document.getElementById('editSectionMessageBox');
+        
+        // Simulação de URL da API (substitua pela sua URL real)
+        const API_BASE_URL = 'https://sua-api-render.onrender.com';
+
+        /**
+         * 1. PREPARA O FORMULÁRIO DE EDIÇÃO
+         * É chamada ao clicar no botão 'Editar' na linha da tabela.
+         * @param {string} id - ID do ecoponto.
+         * @param {string} nome - Nome atual do ecoponto.
+         * @param {string} localizacao - Endereço/Localização atual.
+         * @param {string} tipo - Tipo de material.
+         * @param {string} observacoes - Observações.
+         */
+        function prepararEdicao(id, nome, localizacao, tipo, observacoes) {
+            // Preenche os campos do formulário com os dados
+            document.getElementById('edit-ecoponto-id').value = id;
+            document.getElementById('edit-nome').value = nome;
+            document.getElementById('edit-localizacao').value = localizacao;
+            document.getElementById('edit-tipo').value = tipo;
+            document.getElementById('edit-observacoes').value = observacoes;
+            
+            // Torna a seção de edição visível
+            editSection.style.display = 'block';
+            editSectionMessageBox.style.display = 'none'; // Limpa mensagens anteriores
+            
+            // Rola a página para que a seção de edição fique visível
+            editSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /**
+         * 2. FECHA A SEÇÃO DE EDIÇÃO
+         */
+        function fecharEdicao() {
+            editSection.style.display = 'none';
+        }
+
+        /**
+         * 3. LIDA COM A SUBMISSÃO DO FORMULÁRIO (PUT na API)
+         */
+        editForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const ecopontoId = document.getElementById('edit-ecoponto-id').value;
+            const updatedData = {
+                nome: document.getElementById('edit-nome').value,
+                // Na sua API, o campo de endereço é único, aqui estou mapeando a localização
+                endereco: document.getElementById('edit-localizacao').value, 
+                // Você precisará adicionar mais campos como latitude, longitude, etc.
+            };
+            
+            const endpoint = `${API_BASE_URL}/ecopontos/${ecopontoId}`;
+
+            editSectionMessageBox.textContent = 'Enviando dados...';
+            editSectionMessageBox.className = 'message-box info';
+            editSectionMessageBox.style.display = 'block';
+
+            try {
+                // Requisição PUT para a API
+                const response = await fetch(endpoint, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Se a rota for protegida, o Token DEVE ser incluído:
+                        // 'Authorization': `Bearer SEU_TOKEN_DE_ADMIN` 
+                    },
+                    body: JSON.stringify(updatedData)
+                });
+
+                if (response.ok) {
+                    editSectionMessageBox.textContent = `Ecoponto ID ${ecopontoId} atualizado com sucesso!`;
+                    editSectionMessageBox.className = 'message-box success';
+                    // Opcional: Aqui você chamaria a função para recarregar as tabelas do dashboard
+                    // fecharEdicao(); 
+                } else {
+                    const errorData = await response.json();
+                    editSectionMessageBox.textContent = `Erro (${response.status}): ${errorData.detail || 'Falha na atualização.'}`;
+                    editSectionMessageBox.className = 'message-box error';
+                }
+            } catch (error) {
+                editSectionMessageBox.textContent = `Erro de conexão com a API: ${error.message}`;
+                editSectionMessageBox.className = 'message-box error';
+            }
         });
+
+        // Lógica para o modal de sugestão (mantida do seu código original)
+        // Você precisará garantir que o clique no 'X' e o botão 'Cancelar' fechem o div#pointModal
+        const pointModal = document.getElementById('pointModal');
+        const closeButtons = pointModal.querySelectorAll('.close-edit-modal');
+        closeButtons.forEach(button => {
+            button.onclick = () => {
+                pointModal.style.display = 'none';
+            };
+        });
+        // Quando o usuário clicar fora do modal, ele fecha
+        window.onclick = function(event) {
+            if (event.target == pointModal) {
+                pointModal.style.display = "none";
+            }
+        }
     </script>
+    
+    <script src="main.js" type="module"></script>
     <script src="admin-dashboard.js" type="module"></script>
 </body>
-
 </html>
