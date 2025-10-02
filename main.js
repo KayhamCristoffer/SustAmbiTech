@@ -66,15 +66,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const logoutButtonLink = logoutMenuItem ? logoutMenuItem.querySelector('a.logout') : null;
         
         // CORREÇÃO: Seleciona TODOS os itens restritos usando a classe 'restricted-menu-item'
-        // Importante: O HTML deve ser corrigido para usar classes ao invés de IDs duplicados!
         const restrictedMenuItems = document.querySelectorAll('.restricted-menu-item');
+        // NOVO: Item do dashboard admin
+        const adminDashboardMenuItem = document.getElementById('adminDashboardMenuItem');
+
 
         onAuthStateChanged(auth, async (user) => {
-          // Array de páginas que requerem autenticação
-          const restrictedPages = ['edit-profile.html', 'servicos.html','formulario.html','fontes.html'];
+          // Array de páginas que requerem autenticação (adicione o dashboard admin aqui)
+          const restrictedPages = ['edit-profile.html', 'servicos.html','formulario.html','fontes.html', 'admin-dashboard.html'];
           const currentPage = window.location.pathname.split('/').pop();
           const isRestrictedPage = restrictedPages.includes(currentPage);
           
+          // Por padrão, esconde o item do dashboard admin
+          if (adminDashboardMenuItem) adminDashboardMenuItem.style.display = 'none';
+
           if (user) {
             // Usuário está logado
             if (loginMenuItem) loginMenuItem.style.display = 'none';
@@ -84,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (editMenuItem) editMenuItem.style.display = 'list-item';
             if (logoutMenuItem) logoutMenuItem.style.display = 'list-item';
             
-            // NOVO: Exibe todos os itens de menu restritos
+            // NOVO: Exibe todos os itens de menu restritos (inicialmente)
             restrictedMenuItems.forEach(item => {
                 item.style.display = 'list-item';
             });
@@ -102,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const userData = snapshot.val();
                 const nome = userData.nome || 'Usuário';
                 const sobrenome = userData.sobrenome || '';
+                const userNivel = userData.nivel || 'commum'; // Pega o nível do usuário
                 
                 originalFirstName = userData.nome || '';
                 originalLastName = userData.sobrenome || '';
@@ -123,6 +129,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById('email').value = originalEmail;
                 }
 
+                // NOVO: Lógica para mostrar/esconder o dashboard admin
+                if (adminDashboardMenuItem) {
+                    if (userNivel === 'admin') {
+                        adminDashboardMenuItem.style.display = 'list-item';
+                    } else {
+                        adminDashboardMenuItem.style.display = 'none';
+                    }
+                }
+
               } else {
                 console.warn("Dados de perfil do usuário não encontrados no Realtime Database.");
                 originalEmail = user.email;
@@ -134,6 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Este campo de e-mail é para o formulário de edição de perfil
                     document.getElementById('email').value = user.email || '';
                 }
+                // NOVO: Esconde o dashboard admin se não encontrar dados de perfil ou não for admin
+                if (adminDashboardMenuItem) adminDashboardMenuItem.style.display = 'none';
               }
             } catch (dbError) {
               console.error("Erro ao buscar dados do usuário no Realtime Database:", dbError);
@@ -146,6 +163,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Este campo de e-mail é para o formulário de edição de perfil
                     document.getElementById('email').value = user.email || '';
                 }
+              // NOVO: Esconde o dashboard admin em caso de erro
+              if (adminDashboardMenuItem) adminDashboardMenuItem.style.display = 'none';
             }
 
           } else {
@@ -161,6 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
             restrictedMenuItems.forEach(item => {
                 item.style.display = 'none';
             });
+            // NOVO: Esconde o dashboard admin para usuários não logados
+            if (adminDashboardMenuItem) adminDashboardMenuItem.style.display = 'none';
             
             if (heroRegisterBtn) heroRegisterBtn.style.display = 'block';
             if (heroEditProfileBtn) heroEditProfileBtn.style.display = 'none';
@@ -657,7 +678,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function displayResetMessage(message, color) {
       if (resetFeedbackMessage) {
           resetFeedbackMessage.textContent = message;
-          resetFeedbackMessage.style.color = color;
       }
   }
 

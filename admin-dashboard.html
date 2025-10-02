@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - SustAmbiTech</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos para o Dashboard Admin */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .dashboard-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #e6ffe6; /* Light green background for sections */
+            border-radius: 8px;
+            border: 1px solid #d4edda;
+        }
+
+        .dashboard-section h2 {
+            color: #008000; /* Darker green for section titles */
+            margin-top: 0;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .message-box {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none; /* Hidden by default */
+        }
+        .message-box.success { background-color: #d4edda; color: #155724; border-color: #c3e6cb; }
+        .message-box.error { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
+        .message-box.info { background-color: #d1ecf1; color: #0c5460; border-color: #bee5eb; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top; /* Align content to the top */
+        }
+
+        th {
+            background-color: #697f3f;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .actions button {
+            background-color: #2196F3;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            transition: background-color 0.3s ease;
+            white-space: nowrap; /* Prevent buttons from wrapping text */
+        }
+
+        .actions button:hover {
+            background-color: #0b7dda;
+        }
+
+        .actions .btn-edit { background-color: #FFC107; color: #333; }
+        .actions .btn-edit:hover { background-color: #e0a800; }
+        .actions .btn-delete { background-color: #DC3545; }
+        .actions .btn-delete:hover { background-color: #c82333; }
+        .actions .btn-approve { background-color: #28A745; }
+        .actions .btn-approve:hover { background-color: #218838; }
+        .actions .btn-add { background-color: #007bff; }
+        .actions .btn-add:hover { background-color: #0056b3; }
+        .actions .btn-deactivate { background-color: #6C757D; } /* Grey for deactivating */
+        .actions .btn-deactivate:hover { background-color: #5a6268; }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content .form-group {
+            margin-bottom: 15px;
+        }
+
+        .modal-content label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .modal-content input[type="text"],
+        .modal-content input[type="number"],
+        .modal-content input[type="email"],
+        .modal-content textarea,
+        .modal-content select {
+            width: calc(100% - 22px); /* Adjust for padding and border */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .modal-content button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+            width: auto; /* Override general button width */
+        }
+        .modal-content button:hover {
+            background-color: #45a049;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-content {
+                margin: 10px;
+                padding: 10px;
+            }
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                border: 1px solid #ccc;
+                margin-bottom: 10px;
+                padding: 10px;
+            }
+            td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+            td:before {
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+            }
+            /* Label the data */
+            td:nth-of-type(1):before { content: "Nome"; }
+            td:nth-of-type(2):before { content: "Tipo"; }
+            td:nth-of-type(3):before { content: "Localização"; }
+            td:nth-of-type(4):before { content: "Observações"; }
+            td:nth-of-type(5):before { content: "Ativo"; }
+            td:nth-of-type(6):before { content: "Ações"; }
+            td:last-child { border-bottom: 0; }
+
+            .actions button {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="menu-container"></div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <main class="main-content">
+        <h1>Dashboard Administrativo</h1>
+        <div id="authStatusMessage" class="message-box info"></div>
+
+        <!-- Botões de Ação Global -->
+        <div class="dashboard-actions">
+            <button id="btnAddNewPoint" class="actions btn-add">Adicionar Novo Ponto (Oficial)</button>
+        </div>
+
+        <section class="dashboard-section">
+            <h2>Sugestões Pendentes / Pontos Inativos (Ativo: false)</h2>
+            <div id="suggestionsMessageBox" class="message-box"></div>
+            <table id="suggestionsTable">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Localização</th>
+                        <th>Detalhes</th>
+                        <th>Contribuído por</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- As sugestões serão carregadas aqui -->
+                </tbody>
+            </table>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Ecopontos Oficiais (Ativo: true)</h2>
+            <div id="activePointsMessageBox" class="message-box"></div>
+            <table id="activePointsTable">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Localização</th>
+                        <th>Observações</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Os ecopontos ativos serão carregados aqui -->
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <div id="footer-container"></div>
+
+    <!-- Modal para Adicionar/Editar Ponto -->
+    <div id="pointModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <form id="pointForm">
+                <input type="hidden" id="pointId">
+                <div class="form-group">
+                    <label for="modalNome">Nome do Ponto:</label>
+                    <input type="text" id="modalNome" required>
+                </div>
+                <div class="form-group">
+                    <label for="modalTipoPonto">Tipo de Ponto:</label>
+                    <select id="modalTipoPonto" required>
+                        <option value="" disabled selected>-- Selecione o Tipo --</option>
+                        <option value="Posto Eletro">Posto Eletro</option>
+                        <option value="Eco Posto">Eco Posto</option>
+                        <option value="Descarte de Pilha">Descarte de Pilha</option>
+                        <option value="Reciclagem">Reciclagem</option>
+                        <option value="Óleo de Cozinha">Descarte de Óleo de Cozinha</option>
+                        <option value="Roupas/Têxtil">Doação de Roupas/Têxtil</option>
+                        <option value="Pneu">Descarte de Pneus</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="modalOutrosEspecificar">Especifique "Outros" (se aplicável):</label>
+                    <input type="text" id="modalOutrosEspecificar">
+                </div>
+                <div class="form-group">
+                    <label for="modalCep">CEP:</label>
+                    <input type="text" id="modalCep" maxlength="9">
+                </div>
+                <div class="form-group">
+                    <label for="modalRua">Rua:</label>
+                    <input type="text" id="modalRua">
+                </div>
+                <div class="form-group">
+                    <label for="modalNumero">Número:</label>
+                    <input type="text" id="modalNumero">
+                </div>
+                <div class="form-group">
+                    <label for="modalBairro">Bairro:</label>
+                    <input type="text" id="modalBairro">
+                </div>
+                <div class="form-group">
+                    <label for="modalCidade">Cidade:</label>
+                    <input type="text" id="modalCidade">
+                </div>
+                <div class="form-group">
+                    <label for="modalEstado">Estado (UF):</label>
+                    <input type="text" id="modalEstado" maxlength="2">
+                </div>
+                <div class="form-group">
+                    <label for="modalLatitude">Latitude:</label>
+                    <input type="number" id="modalLatitude" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="modalLongitude">Longitude:</label>
+                    <input type="number" id="modalLongitude" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="modalObservacoes">Observações (Máx. 500 caracteres):</label>
+                    <textarea id="modalObservacoes" rows="3" maxlength="500"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="modalAtivo">
+                    <label for="modalAtivo" style="display: inline-block; margin-left: 5px;">Ponto Ativo (Visível Publicamente)</label>
+                </div>
+                <button type="submit" id="modalSaveButton">Salvar Ponto</button>
+            </form>
+            <div id="modalMessageBox" class="message-box"></div>
+        </div>
+    </div>
+
+
+    <script src="main.js" type="module"></script>
+    <script>
+        // Carregamento do footer, como você já tem
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+                })
+                .catch(error => console.error('Erro ao carregar o rodapé:', error));
+        });
+    </script>
+    <script src="admin-dashboard.js" type="module"></script>
+</body>
+
+</html>

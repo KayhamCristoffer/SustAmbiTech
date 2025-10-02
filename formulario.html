@@ -383,10 +383,10 @@
                         </div>
                     </div>
                     
-                    <!-- Campo de Avaliação: Removido 'required' se não for parte da sugestão inicial -->
+                    <!-- Campo de Avaliação: Permanece opcional e não é enviado com a sugestão inicial -->
                     <div class="form-group" style="flex: 1; min-width: 120px;">
                         <label for="avaliacaoSelect">Avaliação (0-5):</label>
-                        <select id="avaliacaoSelect" name="avaliacaoSelect"> <!-- Removido 'required' -->
+                        <select id="avaliacaoSelect" name="avaliacaoSelect">
                             <option value="" disabled selected>Avaliar (Opcional)</option>
                             <option value="0">0 (Péssimo)</option>
                             <option value="1">1</option>
@@ -466,7 +466,7 @@
     <script type="module">
         // Importações necessárias do Firebase e do seu main.js
         import { auth, database } from './main.js';
-        import { get, ref, push } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js';
+        import { get, ref, push, query, orderByChild, equalTo } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js';
         import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js';
 
         let mapa = null;
@@ -489,7 +489,7 @@
             'Outros': '#000000'
         };
 
-        // --- Funções Auxiliares (mantidas como estão, ou com pequenos ajustes) ---
+        // --- Funções Auxiliares ---
 
         // Função para criar ícones coloridos no mapa
         function criarIconeColorido(tipo, cor) {
@@ -507,7 +507,7 @@
             const cepLimpo = cep.replace(/\D/g, '');
             if (cepLimpo.length !== 8) return null;
 
-            if (!isNewPoint) return null; // Apenas busca para novos pontos
+            if (!isNewPoint) return null;
 
             const targetRua = document.getElementById('rua');
             const targetBairro = document.getElementById('bairro');
@@ -572,14 +572,13 @@
                     const addr = data.address;
                     const bairro = addr.suburb || addr.neighbourhood || addr.village || '';
                     
-                    // Ajuste para garantir que o CEP tenha o formato correto xx.xxx-xxx
-                    let cep = (addr.postcode || '').replace(/\D/g, ''); // Remove não-dígitos
-                    if (cep.length > 5) {
-                        cep = cep.substring(0, 5) + '-' + cep.substring(5, 8);
+                    let cep = (addr.postcode || '').replace(/\D/g, '');
+                    if (cep.length >= 8) { // Ajuste para o formato XX.XXX-XXX
+                         cep = cep.substring(0, 5) + '-' + cep.substring(5, 8);
                     } else if (cep.length > 0) {
-                        cep = cep; // Se tiver menos de 5, deixa como está
+                         // Se tiver menos de 8, mantém o que tem
                     } else {
-                        cep = '';
+                         cep = '';
                     }
 
                     return {
@@ -598,7 +597,7 @@
             }
         }
 
-        // FUNÇÃO MODIFICADA: Adicionar Marcador de Novo Ponto (com preenchimento de endereço)
+        // FUNÇÃO ATUALIZADA: Adicionar Marcador de Novo Ponto (com preenchimento de endereço)
         async function adicionarMarcadorNovoPonto(e) {
             const latlng = e.latlng || e.target.getLatLng();
             const lat = latlng.lat.toFixed(6);
@@ -629,7 +628,7 @@
                 document.getElementById('cidade').value = endereco.cidade;
                 document.getElementById('estado').value = endereco.estado;
 
-                document.getElementById('numero').value = ''; // Limpar o número para que o usuário preencha
+                document.getElementById('numero').value = '';
 
                 msgElement.innerHTML = `<b>Local Selecionado!</b> Endereço aproximado preenchido pelo mapa. Por favor, <b>preencha o Número e confira o CEP</b>.`;
                 msgElement.style.backgroundColor = '#d4edda';
@@ -639,7 +638,7 @@
                  msgElement.style.backgroundColor = '#f8d7da';
                  console.error("Erro ao preencher endereço após clique:", error);
             } finally {
-                if (marcadorTemporario) { // Garante que o marcador existe antes de adicionar o listener
+                if (marcadorTemporario) {
                     marcadorTemporario.on('dragend', adicionarMarcadorNovoPonto);
                 }
                 setTimeout(() => { msgElement.style.display = 'none'; }, 8000);
@@ -672,7 +671,7 @@
                 .bindPopup(`<b>Sua Referência:</b><br>${info}`).openPopup();
         }
 
-        // FUNÇÃO MODIFICADA: Inicializar Mapa (para carregar ecopontos do Firebase)
+        // FUNÇÃO ATUALIZADA: Inicializar Mapa (para carregar pontos ATIVOS do Firebase)
         async function inicializarMapa(lat, lon) {
             const center = [lat || DEFAULT_LAT, lon || DEFAULT_LON];
 
@@ -686,23 +685,29 @@
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(mapa);
 
-            // --- Carregar ecopontos do Firebase Realtime Database ---
+            // --- Carregar pontos ATIVOS do Firebase Realtime Database ---
             try {
-                const snapshot = await get(ref(database, 'ecopontos'));
+                // Cria uma query para buscar apenas pontos onde 'ativo' é true
+                const pontosAtivosQuery = query(ref(database, 'pontos'), orderByChild('ativo'), equalTo(true));
+                const snapshot = await get(pontosAtivosQuery);
+
                 if (snapshot.exists()) {
-                    const ecopontosData = snapshot.val();
-                    Object.keys(ecopontosData).forEach(key => {
-                        const ponto = ecopontosData[key];
-                        // Certifique-se que 'tipoPonto' é o campo correto na sua estrutura 'ecopontos'
+                    const pontosData = snapshot.val();
+                    Object.keys(pontosData).forEach(key => {
+                        const ponto = pontosData[key];
                         const cor = tipoParaCor[ponto.tipoPonto] || '#000000';
                         const icone = criarIconeColorido(ponto.tipoPonto, cor);
 
-                        L.marker([ponto.latitude, ponto.longitude], { icon: icone })
-                            .addTo(mapa)
-                            .bindPopup(`<b>${ponto.nome}</b><br>Tipo: ${ponto.tipoPonto}<br>Endereço: ${ponto.endereco}`);
+                        if (typeof ponto.latitude === 'number' && typeof ponto.longitude === 'number') {
+                            L.marker([ponto.latitude, ponto.longitude], { icon: icone })
+                                .addTo(mapa)
+                                .bindPopup(`<b>${ponto.nome}</b><br>Tipo: ${ponto.tipoPonto}<br>Endereço: ${ponto.rua || 'N/A'}, ${ponto.numero || 'N/A'} - ${ponto.cidade || 'N/A'}/${ponto.estado || 'N/A'}`);
+                        } else {
+                            console.warn(`Ponto "${ponto.nome}" (ID: ${key}) possui coordenadas inválidas e não será exibido no mapa.`);
+                        }
                     });
                 } else {
-                    console.log("Nenhum ecoponto existente encontrado no Firebase.");
+                    console.log("Nenhum ecoponto ativo encontrado no Firebase.");
                 }
             } catch (error) {
                 console.error("Erro ao carregar ecopontos do Firebase:", error);
@@ -805,7 +810,7 @@
             }
         }
 
-        // FUNÇÃO MODIFICADA: Enviar Formulário para sugestoes_ecopontos
+        // FUNÇÃO ATUALIZADA: Enviar Formulário para o nó 'pontos'
         async function enviarFormularioPonto(event) {
             event.preventDefault();
 
@@ -815,7 +820,7 @@
                 return;
             }
 
-            const emailForm = document.getElementById('email').value; // Pegar o email do campo
+            const emailForm = document.getElementById('email').value;
             const lat = document.getElementById('latitude').value;
             const lon = document.getElementById('longitude').value;
             const tipoPontoSelecionado = document.getElementById('tipoPontoSelect').value;
@@ -828,9 +833,9 @@
             const estado = document.getElementById('estado').value;
             const observacao = document.getElementById('observacao').value;
 
-            // Validações
+            // Validações adicionais para campos requeridos no HTML e no BD
             if (!emailForm || !nomeLocal || !tipoPontoSelecionado || !numero || !cep || !lat || !lon) {
-                alert('Por favor, preencha todos os campos obrigatórios (Email, Nome, Tipo, Número, CEP e clique no mapa para Latitude/Longitude)!');
+                alert('Por favor, preencha todos os campos obrigatórios (Email, Nome, Tipo, Número, CEP, Latitude e Longitude)!');
                 return;
             }
 
@@ -841,33 +846,32 @@
 
             const tipoFinal = tipoPontoSelecionado === 'Outros' ? document.getElementById('outrosEspecificar').value.trim() : tipoPontoSelecionado;
 
-            // Monta o objeto de dados para o Realtime Database, seguindo sua estrutura de 'sugestoes_ecopontos'
+            // Monta o objeto de dados para o Realtime Database, com 'ativo: false' por padrão
             const suggestionData = {
+                ativo: false, // É uma sugestão, portanto inativo por padrão
                 usuarioId: currentUser.uid,
-                email: currentUser.email || emailForm, // Preferir o e-mail do usuário logado, mas usar o do campo se necessário
-                nomeLocal: nomeLocal,
+                email: currentUser.email || emailForm,
+                nome: nomeLocal, // Renomeado de nomeLocal para nome para corresponder à nova estrutura
                 tipoPonto: tipoFinal,
                 numero: numero,
                 cep: cep,
-                rua: rua || null, // Incluindo campos de endereço preenchidos
+                latitude: parseFloat(lat),
+                longitude: parseFloat(lon),
+                rua: rua || null,
                 bairro: bairro || null,
                 cidade: cidade || null,
                 estado: estado || null,
-                latitude: parseFloat(lat), // Converter para número
-                longitude: parseFloat(lon), // Converter para número
-                observacoes: observacao || null, // Usando 'observacoes' para combinar com 'feedbacks' ou apenas 'observacao'
-                status: "pendente", // Status inicial de uma sugestão
-                data: new Date().toISOString() // Data da submissão
+                observacoes: observacao || null, // Observações também podem ser nulas
+                data: new Date().toISOString()
             };
 
-            console.log('--- Dados de Contribuição a Serem Enviados para sugestoes_ecopontos ---');
+            console.log('--- Dados de Sugestão Enviados para "pontos" ---');
             console.log(suggestionData);
             console.log('------------------------------------');
 
             try {
-                // Salvar no Realtime Database usando 'push' para gerar uma chave única
-                await push(ref(database, 'sugestoes_ecopontos'), suggestionData);
-                alert('Novo Ponto de Interesse enviado com sucesso para moderação! Obrigado! 🌱');
+                await push(ref(database, 'pontos'), suggestionData); // Salvando no nó 'pontos'
+                alert('Sua sugestão de Ponto de Interesse foi enviada com sucesso para moderação! Obrigado! 🌱');
 
                 // Limpa o formulário e reseta o mapa após o sucesso
                 document.getElementById('contribuicaoForm').reset();
@@ -880,11 +884,11 @@
                      marcadorLocalizacaoUsuario = null;
                 }
                 document.getElementById('msgStatus').style.display = 'none';
-                inicializarMapa(DEFAULT_LAT, DEFAULT_LON); // Re-inicializa o mapa para limpar marcadores temporários
+                inicializarMapa(DEFAULT_LAT, DEFAULT_LON);
 
             } catch (error) {
                 console.error("Erro ao salvar sugestão no Firebase:", error);
-                alert('Erro ao enviar o ponto de interesse. Por favor, tente novamente. Detalhes no console.');
+                alert('Erro ao enviar a sugestão. Por favor, tente novamente. Detalhes no console.');
             }
         }
 
