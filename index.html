@@ -65,7 +65,7 @@
             max-width: 900px; /* Ou o tamanho desejado */
             margin: 20px auto;
             padding: 20px;
-            background-color: #697f3f;
+            background-color: #697f3f; /* Cor de fundo para o container principal do mapa */
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
@@ -79,18 +79,35 @@
             margin-bottom: 15px;
         }
 
-        .map-display-container .map-legend {
-            background-color: #697f3f;
-            padding: 15px;
-            border-radius: 5px;
-            text-align: left;
-            margin-top: 15px;
+        /* NOVO: Estilos para o wrapper de legenda e clima */
+        .map-info-and-climate-wrapper {
+            display: flex;
+            gap: 20px; /* Espaço entre a legenda e o clima */
+            margin-top: 20px;
+            flex-wrap: wrap; /* Permite que os itens quebrem para a linha de baixo em telas menores */
+            justify-content: center; /* Centraliza os itens quando eles quebram */
+            align-items: flex-start; /* Alinha os itens ao topo */
         }
 
-        .map-display-container .map-legend h4 {
-            color: #4CAF50;
+        /* NOVO: Estilos para a legenda e o container do clima */
+        .map-info-and-climate-wrapper .map-legend,
+        .map-info-and-climate-wrapper .climate-content-container {
+            flex: 1; /* Permite que ambos cresçam e diminuam */
+            min-width: 280px; /* Largura mínima para cada item */
+            background-color: #e6ffe6; /* Cor de fundo clara para essas caixas */
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #d4edda;
+            box-sizing: border-box;
+            text-align: left; /* Garante que o texto dentro seja alinhado à esquerda */
+        }
+
+        .map-display-container .map-legend h4,
+        .climate-content-container h4 { /* Aplica ao h4 de ambos */
+            color: #008000; /* Verde escuro para os títulos */
             margin-top: 0;
             margin-bottom: 10px;
+            text-align: left; /* Garante alinhamento à esquerda */
         }
 
         .map-display-container .map-legend .legend-item {
@@ -107,14 +124,27 @@
             margin-right: 8px;
         }
 
+        /* NOVO: Ajustes para o formulário de clima injetado */
+        .climate-content-container #form-clima {
+            padding: 0; /* Remove padding extra se houver */
+            background-color: transparent; /* Garante que não tenha fundo extra */
+            box-shadow: none; /* Remove sombra extra se houver */
+        }
+        /* Ajusta o h2 original do clima que agora é um h4 dentro do container */
+        .climate-content-container #form-clima h2 {
+            display: none; /* Esconde o h2 original do clima se ele for carregado junto */
+        }
+
+
         .map-display-container .map-action-section {
             margin-top: 20px;
             padding-top: 15px;
             border-top: 1px solid #eee;
+            color: #f0f0f0; /* Cor do texto no botão de ação */
         }
 
         .map-display-container .map-action-section h3 {
-            color: #333;
+            color: #f0f0f0; /* Cor do texto no botão de ação */
             margin-bottom: 15px;
         }
 
@@ -139,6 +169,26 @@
 
         .map-display-container .map-action-button:hover {
             background-color: #45a049;
+        }
+        
+        /* Responsividade para o novo layout de legenda/clima */
+        @media (max-width: 768px) {
+            .map-info-and-climate-wrapper {
+                flex-direction: column; /* Empilha a legenda e o clima verticalmente em telas menores */
+            }
+            .map-info-and-climate-wrapper .map-legend,
+            .map-info-and-climate-wrapper .climate-content-container {
+                min-width: unset; /* Remove o min-width quando empilhado */
+                width: 100%; /* Ocupa 100% da largura quando empilhado */
+            }
+            .carousel-slide img {
+                height: 300px; /* Ajusta altura do carrossel para telas menores */
+            }
+        }
+        @media (max-width: 480px) {
+            .carousel-slide img {
+                height: 200px; /* Ajusta altura do carrossel para telas muito pequenas */
+            }
         }
     </style>
 </head>
@@ -172,16 +222,39 @@
             </div>
         </section>
 
-        <!-- Seção do Clima (existente) -->
-        <div>
-            <H2 style="text-align: center;" id="clima-index">Veja como está o clima em sua cidade!</H2>
-            <div id="form-clima"></div>
-        </div>
-        <br>
+        <!-- NOVO: Seção do Mapa de Visualização (Agora acima do Carrossel) -->
+        <section class="map-section">
+            <h2 style="text-align: center; color: #f0f0f0;">Ecopontos Próximos de Você</h2>
+            <div class="map-display-container">
+                <button id="btnLocateUserMap" class="map-action-button locate-user" style="margin-bottom: 15px;">Localizar Minha Posição</button>
+                <div id="mapaIndex"></div>
+                
+                <!-- NOVO: Container flexível para Legenda e Clima -->
+                <div class="map-info-and-climate-wrapper">
+                    <div class="map-legend" id="mapIndexLegend">
+                        <h4>Legenda</h4>
+                        <!-- Itens da legenda serão carregados via JS aqui -->
+                    </div>
+                    
+                    <div class="climate-content-container">
+                        <h4>Clima Local</h4>
+                        <!-- O conteúdo de clima.html será injetado aqui via JS -->
+                        <div id="form-clima"></div>
+                    </div>
+                </div>
 
-        <!-- NOVO: Seção do Carrossel de Imagens -->
+                <div class="map-action-section">
+                    <h3 id="addPointHeader">Quer adicionar um novo ponto?</h3>
+                    <a id="addPointCallToAction" href="#" class="map-action-button"></a>
+                </div>
+            </div>
+        </section>
+        <br>
+        
+        <!-- Seção do Clima Original (Removida daqui, seu conteúdo agora está dentro da seção do mapa) -->
+        <!-- NOVO: Seção do Carrossel de Imagens (Agora abaixo do Mapa) -->
         <section class="carousel-section">
-            <h2 style="text-align: center;">Explore nossos Temas</h2>
+            <h2 style="text-align: center; color: #f0f0f0;">Explore nossos Temas</h2>
             <div class="carousel-container" id="carouselContainer">
                 <div class="carousel-slide" id="carouselSlide">
                     <!-- Imagens serão carregadas via JS aqui -->
@@ -192,25 +265,6 @@
         </section>
         <br>
 
-        <!-- NOVO: Seção do Mapa de Visualização -->
-        <section class="map-section">
-            <h2 style="text-align: center;">Ecopontos Próximos de Você</h2>
-            <div class="map-display-container">
-                <button id="btnLocateUserMap" class="map-action-button locate-user" style="margin-bottom: 15px;">Localizar Minha Posição</button>
-                <div id="mapaIndex"></div>
-                <div class="map-legend" id="mapIndexLegend">
-                    <h4>Legenda</h4>
-                    <!-- Itens da legenda serão carregados via JS aqui -->
-                </div>
-                <div class="map-action-section">
-                    <h3 id="addPointHeader">Quer adicionar um novo ponto?</h3>
-                    <!-- O botão/link abaixo será dinâmico via JS -->
-                    <a id="addPointCallToAction" href="#" class="map-action-button"></a>
-                </div>
-            </div>
-        </section>
-        <br>
-        
         <!-- Features Section (existente) -->
         <section class="features-section">
             <div class="container">
@@ -350,6 +404,7 @@
                 })
                 .catch(error => console.error('Erro ao carregar o rodapé:', error));
 
+            // MODIFICADO: O formulário de clima agora é injetado dentro de '.climate-content-container'
             fetch('clima.html')
                 .then(response => response.text())
                 .then(data => {
