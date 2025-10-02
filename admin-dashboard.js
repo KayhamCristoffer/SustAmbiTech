@@ -43,6 +43,7 @@ const modalDisplayData = document.getElementById('modalDisplayData');
 
 let currentUser = null; // Para armazenar o usuário logado
 let currentAdminLevel = 'commum'; // Para armazenar o nível do usuário
+let allLoadedPoints = {}; // NOVO: Objeto para armazenar todos os pontos carregados, indexados por ID.
 
 // --- Funções Auxiliares ---
 
@@ -79,15 +80,37 @@ function openPointModal(pointData = null, id = null) {
         pointIdInput.value = id; // Define o ID do ponto no campo hidden
 
         modalNome.value = pointData.nome || '';
-        modalTipoPonto.value = pointData.tipoPonto || ''; // Preenche o select
-        // Se o tipo do ponto for "Outros" (ou um valor que você mapeou para "Outros"), mostra e preenche o campo de especificação
-        if (pointData.tipoPonto === 'Outros' && pointData.nomeOutrosTipo) { // Use 'nomeOutrosTipo' se você salva assim
-             modalOutrosEspecificar.value = pointData.nomeOutrosTipo; // Assumindo que este campo exista
-             modalOutrosEspecificar.style.display = 'block';
-             modalOutrosEspecificar.setAttribute('required', 'true');
-        } else if (modalTipoPonto.value === 'Outros') { // Se o select for 'Outros' mas não tinha valor específico
+        // É crucial que o valor do select seja uma das opções existentes no HTML.
+        // Se pointData.tipoPonto não for uma opção direta, você pode precisar de uma lógica de mapeamento.
+        // Por exemplo, se "Outros" é uma opção, e pointData.tipoPonto é um valor customizado,
+        // você pode setar modalTipoPonto.value = 'Outros' e o campo de texto.
+        modalTipoPonto.value = pointData.tipoPonto || '';
+
+        // Se o tipo do ponto no Firebase é "Outros" ou um valor que foi customizado
+        if (modalTipoPonto.value === 'Outros') {
             modalOutrosEspecificar.style.display = 'block';
             modalOutrosEspecificar.setAttribute('required', 'true');
+            // Se o valor salvo não é "Outros" mas sim o que foi especificado,
+            // precisamos definir o select para "Outros" e preencher o input de texto.
+            // Isso depende de como você salva o "Outros" no DB. Se você salva "Outros"
+            // no campo tipoPonto e o valor real em outro campo (ex: nomeOutrosTipo),
+            // então a lógica abaixo está correta.
+            // Para simplificar, assumimos que 'tipoPonto' pode ser o valor customizado,
+            // e 'Outros' é uma opção do select que o usuário seleciona para especificá-lo.
+            // Se o tipoPonto salvo não está na sua lista de opções do select (e não é "Outros"),
+            // você pode querer setar o select para "Outros" e o texto para o valor salvo.
+            // Por simplicidade, vamos apenas preencher o modalTipoPonto com o que veio do DB
+            // e se for "Outros", mostrar o campo extra.
+            // A sua lógica original com `pointData.nomeOutrosTipo` é boa se você tiver esse campo.
+            // Se 'tipoPonto' no DB já é o valor customizado e 'Outros' é só uma opção da UI:
+            // Verifique se o valor do DB é 'Outros', se sim, mostra o campo.
+            // Se o valor do DB não está nas opções fixas do select, pode-se assumir que é 'Outros'
+            // e preencher `modalOutrosEspecificar.value = pointData.tipoPonto;`
+            modalOutrosEspecificar.value = pointData.nomeOutrosTipo || ''; // ou pointData.tipoPonto se você salva o valor customizado diretamente aqui
+        } else {
+             modalOutrosEspecificar.style.display = 'none';
+             modalOutrosEspecificar.removeAttribute('required');
+             modalOutrosEspecificar.value = '';
         }
 
         modalCep.value = pointData.cep || '';
@@ -101,7 +124,7 @@ function openPointModal(pointData = null, id = null) {
         modalObservacoes.value = pointData.observacoes || '';
         modalAtivo.checked = pointData.ativo === true; // Garante que o checkbox é setado corretamente (booleano)
 
-        // Exibir dados de criação que não são editáveis
+        // Exibir dados de criação que não são editáveis (verificar se os elementos existem)
         if (modalDisplayUsuarioId) modalDisplayUsuarioId.textContent = pointData.usuarioId || 'N/A';
         if (modalDisplayData) modalDisplayData.textContent = pointData.data ? new Date(pointData.data).toLocaleString() : 'N/A';
 
@@ -137,11 +160,18 @@ function loadPoints() {
         activePointsTableBody.innerHTML = '';
         let hasSuggestions = false;
         let hasActivePoints = false;
+        allLoadedPoints = {}; // Zera o cache de pontos
 
         if (snapshot.exists()) {
-            const allPoints = snapshot.val();
-            // Para garantir que as sugestões sejam renderizadas primeiro, se necessário
-            const pointsArray = Object.keys(allPoints).map(id => ({ id, ...allPoints[id] }));
+            const rawPoints = snapshot.val();
+            const pointsArray = [];
+
+            // Popula allLoadedPoints e pointsArray
+            Object.keys(rawPoints).forEach(id => {
+                const point = { id, ...rawPoints[id] };
+                allLoadedPoints[id] = point; // Armazena no cache
+                pointsArray.push(point);
+            });
 
             // Renderiza as sugestões (ativo: false)
             for (const point of pointsArray) {
@@ -211,6 +241,7 @@ async function renderSuggestionRow(suggestion) {
             <button class="btn-delete" data-id="${suggestion.id}">Excluir</button>
         </td>
     `;
+    // REMOVIDO: Event listeners diretos aqui. Serão tratados por delegação de eventos.
 }
 
 /**
@@ -232,6 +263,7 @@ async function renderActivePointRow(point) {
             <button class="btn-delete" data-id="${point.id}">Excluir</button>
         </td>
     `;
+    // REMOVIDO: Event listeners diretos aqui. Serão tratados por delegação de eventos.
 }
 
 /**
@@ -239,17 +271,15 @@ async function renderActivePointRow(point) {
  * @param {string} id O ID do ponto.
  * @param {Object} suggestionData Os dados da sugestão a ser aprovada.
  */
-async function approveSuggestion(id, suggestionData) {
-    if (!confirm(`Tem certeza que deseja aprovar o ponto "${suggestionData.nome}"? Ele se tornará visível publicamente.`)) {
+async function approveSuggestion(id) { // Removi suggestionData pois os dados já estão em allLoadedPoints
+    if (!confirm(`Tem certeza que deseja aprovar este ponto? Ele se tornará visível publicamente.`)) {
         return;
     }
 
     try {
-        // Atualiza o ponto para 'ativo: true'
         const pointRef = ref(database, `pontos/${id}`);
         await update(pointRef, { ativo: true });
         showMessage(suggestionsMessageBox, 'Sugestão aprovada com sucesso!', 'success');
-        // loadPoints() não é mais necessário aqui, onValue já vai atualizar
     } catch (error) {
         console.error("Erro ao aprovar sugestão:", error);
         showMessage(suggestionsMessageBox, `Erro ao aprovar sugestão: ${error.message}`, 'error');
@@ -276,7 +306,6 @@ async function togglePointActive(id, currentStatus) {
     try {
         await update(ref(database, `pontos/${id}`), { ativo: newStatus });
         showMessage(activePointsMessageBox, `Ponto ${actionText}do com sucesso!`, 'success');
-        // loadPoints() não é mais necessário aqui, onValue já vai atualizar
     } catch (error) {
         console.error(`Erro ao ${actionText} ponto:`, error);
         showMessage(activePointsMessageBox, `Erro ao ${actionText} ponto: ${error.message}`, 'error');
@@ -297,7 +326,6 @@ async function deletePoint(id, type) {
         await remove(ref(database, `pontos/${id}`));
         showMessage(suggestionsMessageBox, `${type} deletado com sucesso!`, 'success');
         showMessage(activePointsMessageBox, `${type} deletado com sucesso!`, 'success');
-        // loadPoints() não é mais necessário aqui, onValue já vai atualizar
     } catch (error) {
         console.error("Erro ao deletar ponto:", error);
         showMessage(suggestionsMessageBox, `Erro ao deletar ${type}: ${error.message}`, 'error');
@@ -355,22 +383,19 @@ async function handlePointFormSubmit(event) {
         longitude,
         observacoes: observacoes || null,
         ativo,
-        // Campos que NÃO devem ser sobrescritos se for uma edição,
-        // mas sim mantidos do original. Se for um novo ponto, eles serão definidos.
-        // Se a lógica do seu formulário permitir a edição desses campos, ajuste abaixo.
-        // Para edição, o usuarioId e data já deveriam estar no ponto existente.
-        // Para novo ponto, você pode definir eles aqui:
-        // data: new Date().toISOString(),
-        // usuarioId: currentUser ? currentUser.uid : 'admin_manual',
     };
 
-    // Para garantir que `usuarioId` e `data` sejam mantidos em edições ou definidos em novos
+    // Campos que são metadados e devem ser definidos apenas para novos pontos
     if (!id) { // Se for um novo ponto, adiciona esses campos
         pointData.data = new Date().toISOString();
         pointData.usuarioId = currentUser ? currentUser.uid : 'admin_manual';
+        pointData.email = currentUser ? currentUser.email : 'admin_manual'; // Para novos pontos
+    } else {
+        // Se for edição, mantém o usuarioId e data originais, mas atualiza o email
+        // Assumimos que usuarioId e data não mudam em edições.
+        // O email pode ser o do admin que está editando.
+        pointData.email = currentUser ? currentUser.email : 'admin_manual'; // Atualiza com o email do editor
     }
-    // O email pode ser atualizado pelo admin ou mantido
-    pointData.email = currentUser ? currentUser.email : 'admin_manual';
 
 
     try {
@@ -385,7 +410,6 @@ async function handlePointFormSubmit(event) {
             showMessage(modalMessageBox, 'Novo ponto adicionado com sucesso!', 'success');
         }
         closePointModal();
-        // loadPoints() não é mais necessário aqui, onValue já vai atualizar as tabelas
     } catch (error) {
         console.error("Erro ao salvar ponto:", error);
         showMessage(modalMessageBox, `Erro ao salvar ponto: ${error.message}`, 'error');
@@ -394,7 +418,6 @@ async function handlePointFormSubmit(event) {
 
 // --- Event Listeners ---
 
-// Autenticação e Autorização ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
     onAuthStateChanged(auth, async (user) => {
         if (user) {
@@ -407,25 +430,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentAdminLevel = userData.nivel || 'commum';
 
                 if (currentAdminLevel === 'admin') {
-                    // Usuário é admin, carrega os pontos
                     showMessage(authStatusMessage, `Bem-vindo, Administrador ${userData.nome || user.email}! Carregando dashboard...`, 'info');
                     loadPoints(); // Chama loadPoints com onValue aqui
                 } else {
-                    // Não é admin, redireciona
                     showMessage(authStatusMessage, 'Acesso negado: Você não tem permissão para acessar esta página.', 'error');
                     setTimeout(() => {
-                        window.location.href = 'index.html'; // Redireciona para a página inicial
+                        window.location.href = 'index.html';
                     }, 3000);
                 }
             } else {
-                // Usuário logado, mas sem dados de perfil ou nível definido (trata como não-admin)
                 showMessage(authStatusMessage, 'Acesso negado: Seu perfil não está configurado como administrador.', 'error');
                 setTimeout(() => {
                     window.location.href = 'index.html';
                 }, 3000);
             }
         } else {
-            // Nenhum usuário logado, redireciona para login
             showMessage(authStatusMessage, 'Acesso negado: Você precisa estar logado para acessar esta página.', 'error');
             setTimeout(() => {
                 window.location.href = 'login.html';
@@ -434,7 +453,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Event listener para o botão global "Adicionar Nova Sugestão"
-    // Este botão redireciona para um formulário de sugestão separado
     btnAddNewPoint.addEventListener('click', () => {
         window.location.href = 'formulario.html';
     });
@@ -447,7 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Event listener para o envio do formulário do modal (para edição ou adição de ponto OFICIAL via modal)
+    // Event listener para o envio do formulário do modal
     pointForm.addEventListener('submit', handlePointFormSubmit);
 
     // Esconder/Mostrar campo 'Outros' no modal
@@ -484,6 +502,35 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error("Erro no ViaCEP do modal:", error);
             showMessage(modalMessageBox, 'Erro ao buscar CEP.', 'error');
+        }
+    });
+
+    // NOVO: Delegação de eventos para os botões das tabelas (Aprovar, Editar, Desativar, Excluir)
+    document.addEventListener('click', async (event) => {
+        const target = event.target;
+
+        // Verifica se o elemento clicado é um botão e tem um 'data-id'
+        if (target.tagName === 'BUTTON' && target.dataset.id) {
+            const pointId = target.dataset.id;
+            const pointData = allLoadedPoints[pointId]; // Pega os dados do cache
+
+            if (!pointData) {
+                console.error(`Dados do ponto ${pointId} não encontrados no cache.`);
+                showMessage(activePointsMessageBox, 'Erro: Dados do ponto não carregados. Tente novamente.', 'error');
+                return;
+            }
+
+            if (target.classList.contains('btn-approve')) {
+                await approveSuggestion(pointId);
+            } else if (target.classList.contains('btn-deactivate')) {
+                await togglePointActive(pointId, pointData.ativo); // Passa o status atual
+            } else if (target.classList.contains('btn-delete')) {
+                // Determine o tipo de ponto para a mensagem de confirmação
+                const type = pointData.ativo === false ? 'sugestão' : 'ponto oficial';
+                await deletePoint(pointId, type);
+            } else if (target.classList.contains('btn-edit')) {
+                openPointModal(pointData, pointId); // Abre a modal com os dados
+            }
         }
     });
 });
