@@ -4,11 +4,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <title>SustAmbiTech - Tecnologia para Sustentabilidade Ambiental </title>
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Inclua o Leaflet CSS para o mapa -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        /* Estilos específicos para o Carrossel */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px; /* Ou o tamanho desejado */
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-slide {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 400px; /* Altura fixa para as imagens do carrossel */
+            object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
+            flex-shrink: 0; /* Impede que as imagens encolham */
+            cursor: pointer;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 24px;
+            z-index: 10;
+            border-radius: 5px;
+        }
+
+        .carousel-button.prev {
+            left: 10px;
+        }
+
+        .carousel-button.next {
+            right: 10px;
+        }
+
+        /* Estilos específicos para o Mapa de Visualização */
+        .map-display-container {
+            width: 100%;
+            max-width: 900px; /* Ou o tamanho desejado */
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #697f3f;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #mapaIndex {
+            height: 450px; /* Altura do mapa no index */
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .map-display-container .map-legend {
+            background-color: #697f3f;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .map-display-container .map-legend h4 {
+            color: #4CAF50;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .map-display-container .map-legend .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .map-display-container .map-legend .legend-color-box {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid #333;
+            margin-right: 8px;
+        }
+
+        .map-display-container .map-action-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .map-display-container .map-action-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .map-display-container .map-action-button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .map-display-container .map-action-button.locate-user {
+            background-color: #2196F3;
+        }
+        .map-display-container .map-action-button.locate-user:hover {
+            background-color: #0b7dda;
+        }
+
+        .map-display-container .map-action-button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <div id="menu-container"></div>
 <body>
@@ -18,19 +150,14 @@
         <section class="hero-section">
             <div class="hero-content">
                 <div class="hero-text">
-                    <!-- Adicionado id="heroTitle" aqui -->
                     <h1 id="heroTitle">Bem-vindo ao Futuro Verde</h1>
                     <p>Explore soluções tecnológicas inovadoras para um mundo mais sustentável. Juntos, podemos
                         construir um futuro melhor para as próximas gerações.</p>
                     <div class="hero-buttons">
-                        <!-- Botão Cadastre-se (visível para não logados) -->
                         <a id="heroRegisterBtn" href="register.html" class="btn btn-primary"
                             style="text-decoration: none;">Cadastre-se</a>
-
-                        <!-- Botão Editar Perfil (visível para logados, inicialmente oculto) -->
                         <a id="heroEditProfileBtn" href="edit-profile.html" class="btn btn-primary"
                             style="text-decoration: none; display: none;">Editar Perfil</a>
-
                         <a href="sobre.html" class="btn btn-secondary" style="text-decoration: none;">Saiba Mais</a>
                     </div>
                 </div>
@@ -44,12 +171,47 @@
                 </div>
             </div>
         </section>
+
+        <!-- Seção do Clima (existente) -->
         <div>
             <H2 style="text-align: center;" id="clima-index">Veja como está o clima em sua cidade!</H2>
             <div id="form-clima"></div>
         </div>
         <br>
-        <!-- Features Section -->
+
+        <!-- NOVO: Seção do Carrossel de Imagens -->
+        <section class="carousel-section">
+            <h2 style="text-align: center;">Explore nossos Temas</h2>
+            <div class="carousel-container" id="carouselContainer">
+                <div class="carousel-slide" id="carouselSlide">
+                    <!-- Imagens serão carregadas via JS aqui -->
+                </div>
+                <button class="carousel-button prev" id="carouselPrevBtn">&#10094;</button>
+                <button class="carousel-button next" id="carouselNextBtn">&#10095;</button>
+            </div>
+        </section>
+        <br>
+
+        <!-- NOVO: Seção do Mapa de Visualização -->
+        <section class="map-section">
+            <h2 style="text-align: center;">Ecopontos Próximos de Você</h2>
+            <div class="map-display-container">
+                <button id="btnLocateUserMap" class="map-action-button locate-user" style="margin-bottom: 15px;">Localizar Minha Posição</button>
+                <div id="mapaIndex"></div>
+                <div class="map-legend" id="mapIndexLegend">
+                    <h4>Legenda</h4>
+                    <!-- Itens da legenda serão carregados via JS aqui -->
+                </div>
+                <div class="map-action-section">
+                    <h3 id="addPointHeader">Quer adicionar um novo ponto?</h3>
+                    <!-- O botão/link abaixo será dinâmico via JS -->
+                    <a id="addPointCallToAction" href="#" class="map-action-button"></a>
+                </div>
+            </div>
+        </section>
+        <br>
+        
+        <!-- Features Section (existente) -->
         <section class="features-section">
             <div class="container">
                 <div class="section-header">
@@ -103,42 +265,42 @@
 
                     <a href="servicos.html#reciclagem-inteligente" class="grid-item feature-card">
                         <div class="feature-icon">♻️</div>
-                        <h3>Reciclagem Inteligente</h3>
+                        <h3>Reciclagem Inteligente</div>
                         <p>Desenvolvemos sistemas automatizados que otimizam a coleta, triagem e o reprocessamento de
                             resíduos industriais e urbanos.</p>
                     </a>
 
                     <a href="servicos.html#mobilidade-sustentavel" class="grid-item feature-card">
                         <div class="feature-icon">🚗</div>
-                        <h3>Mobilidade Sustentável</h3>
+                        <h3>Mobilidade Sustentável</div>
                         <p>Promovemos o uso de veículos elétricos e sistemas de transporte inteligentes para reduzir a
                             poluição e a emissão de carbono.</p>
                     </a>
 
                     <a href="servicos.html#consumo-consciente" class="grid-item feature-card">
                         <div class="feature-icon">🛍️</div>
-                        <h3>Consumo Consciente</h3>
+                        <h3>Consumo Consciente</div>
                         <p>Oferecemos ferramentas e informações para educar e incentivar o consumo de produtos e
                             serviços que respeitam o meio ambiente.</p>
                     </a>
 
                     <a href="servicos.html#politicas-legislacao" class="grid-item feature-card">
                         <div class="feature-icon">⚖️</div>
-                        <h3>Políticas & Legislação</h3>
+                        <h3>Políticas & Legislação</div>
                         <p>Detalhes sobre normas, leis e acordos internacionais que moldam as ações de sustentabilidade
                             em nível global.</p>
                     </a>
 
                     <a href="servicos.html#educacao-verde" class="grid-item feature-card">
                         <div class="feature-icon">🎓</div>
-                        <h3>Educação Verde</h3>
+                        <h3>Educação Verde</div>
                         <p>Conteúdo educativo e workshops para capacitar indivíduos e comunidades sobre a importância da
                             sustentabilidade e da ecologia.</p>
                     </a>
 
                     <a href="fontes.html" class="grid-item feature-card">
                         <div class="feature-icon">📚</div>
-                        <h3>Fontes Bibliográficas</h3>
+                        <h3>Fontes Bibliográficas</div>
                         <p>Confira a lista de referências e estudos que fundamentam nossa pesquisa e desenvolvimento de
                             soluções sustentáveis.</p>
                     </a>
@@ -178,7 +340,7 @@
     <!-- Script principal do seu aplicativo, agora centralizado -->
     <script src="main.js" type="module"></script>
 
-    <!-- Script para carregar o rodapé -->
+    <!-- Script para carregar o rodapé e o formulário de clima -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             fetch('footer.html')
@@ -187,109 +349,99 @@
                     document.getElementById('footer-container').innerHTML = data;
                 })
                 .catch(error => console.error('Erro ao carregar o rodapé:', error));
-        });
-        document.addEventListener('DOMContentLoaded', () => {
+
             fetch('clima.html')
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('form-clima').innerHTML = data;
+                    setupClimaForm(); // Chama a função setupClimaForm APÓS o HTML ser inserido
                 })
-                .catch(error => console.error('Erro ao carregar o Formulario de clima:', error));
+                .catch(error => console.error('Erro ao carregar o Formulário de clima:', error));
         });
     </script>
     
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        fetch('clima.html')
-            .then(response => response.text())
-            .then(data => {
-                // 1. O HTML é inserido aqui
-                document.getElementById('form-clima').innerHTML = data;
-
-                // 2. A função que configura o evento é chamada
-                // SOMENTE APÓS o HTML já estar na página.
-                setupClimaForm();
-            })
-            .catch(error => console.error('Erro ao carregar o Formulário de clima:', error));
-    });
-
-    // Toda a sua lógica JavaScript foi consolidada em uma única função.
-    function setupClimaForm() {
-        const searchForm = document.querySelector('#search');
-        if (!searchForm) {
-            console.error('Elemento #search não encontrado.');
-            return;
-        }
-
-        searchForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-
-            const cityNameInput = document.querySelector('#city_name');
-            if (!cityNameInput) return; // Checagem adicional
-            
-            const cityName = cityNameInput.value;
-
-            if (!cityName) {
-                document.querySelector("#weather").classList.remove('show');
-                showAlert('Você precisa digitar uma cidade...');
+    <!-- Script existente para o formulário de clima (mantido e encapsulado) -->
+    <script>
+        function setupClimaForm() {
+            const searchForm = document.querySelector('#search');
+            if (!searchForm) {
+                console.error('Elemento #search não encontrado.');
                 return;
             }
 
-            const apiKey = '8a60b2de14f7a17c7a11706b2cfcd87c';
-            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(cityName)}&appid=${apiKey}&units=metric&lang=pt_br`;
+            searchForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
 
-            try {
-                const results = await fetch(apiUrl);
-                const json = await results.json();
+                const cityNameInput = document.querySelector('#city_name');
+                if (!cityNameInput) return;
+                
+                const cityName = cityNameInput.value;
 
-                if (json.cod === 200) {
-                    showInfo({
-                        city: json.name,
-                        country: json.sys.country,
-                        temp: json.main.temp,
-                        tempMax: json.main.temp_max,
-                        tempMin: json.main.temp_min,
-                        description: json.weather[0].description,
-                        tempIcon: json.weather[0].icon,
-                        windSpeed: json.wind.speed,
-                        humidity: json.main.humidity,
-                    });
-                } else {
+                if (!cityName) {
                     document.querySelector("#weather").classList.remove('show');
-                    showAlert(`
-                        Não foi possível localizar...
-                        <img src="./img/404.svg"/>
-                    `);
+                    showAlert('Você precisa digitar uma cidade...');
+                    return;
                 }
-            } catch (error) {
-                console.error('Erro ao buscar dados do clima:', error);
-                document.querySelector("#weather").classList.remove('show');
-                showAlert('Erro ao conectar com a API. Tente novamente mais tarde.');
-            }
-        });
 
-        // Essas funções helper também foram movidas para dentro do script principal
-        function showInfo(json) {
-            showAlert('');
-            document.querySelector("#weather").classList.add('show');
-            document.querySelector('#title').innerHTML = `${json.city}, ${json.country}`;
-            document.querySelector('#temp_value').innerHTML = `${json.temp.toFixed(1).toString().replace('.', ',')} <sup>C°</sup>`;
-            document.querySelector('#temp_description').innerHTML = `${json.description}`;
-            document.querySelector('#temp_img').setAttribute('src', `https://openweathermap.org/img/wn/${json.tempIcon}@2x.png`);
-            document.querySelector('#temp_max').innerHTML = `${json.tempMax.toFixed(1).toString().replace('.', ',')} <sup>C°</sup>`;
-            document.querySelector('#temp_min').innerHTML = `${json.tempMin.toFixed(1).toString().replace('.', ',')} <sup>C°</sup>`;
-            document.querySelector('#humidity').innerHTML = `${json.humidity}%`;
-            document.querySelector('#wind').innerHTML = `${json.windSpeed.toFixed(1)} km/h`;
-        }
+                const apiKey = '8a60b2de14f7a17c7a11706b2cfcd87c'; // Use a sua chave de API real
+                const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(cityName)}&appid=${apiKey}&units=metric&lang=pt_br`;
 
-        function showAlert(msg) {
-            const alertDiv = document.querySelector('#alert');
-            if (alertDiv) {
-                alertDiv.innerHTML = msg;
+                try {
+                    const results = await fetch(apiUrl);
+                    const json = await results.json();
+
+                    if (json.cod === 200) {
+                        showInfo({
+                            city: json.name,
+                            country: json.sys.country,
+                            temp: json.main.temp,
+                            tempMax: json.main.temp_max,
+                            tempMin: json.main.temp_min,
+                            description: json.weather[0].description,
+                            tempIcon: json.weather[0].icon,
+                            windSpeed: json.wind.speed,
+                            humidity: json.main.humidity,
+                        });
+                    } else {
+                        document.querySelector("#weather").classList.remove('show');
+                        showAlert(`
+                            Não foi possível localizar...
+                            <img src="./img/404.svg"/>
+                        `);
+                    }
+                } catch (error) {
+                    console.error('Erro ao buscar dados do clima:', error);
+                    document.querySelector("#weather").classList.remove('show');
+                    showAlert('Erro ao conectar com a API. Tente novamente mais tarde.');
+                }
+            });
+
+            function showInfo(json) {
+                showAlert('');
+                document.querySelector("#weather").classList.add('show');
+                document.querySelector('#title').innerHTML = `${json.city}, ${json.country}`;
+                document.querySelector('#temp_value').innerHTML = `${json.temp.toFixed(1).toString().replace('.', ',')} <sup>C°</sup>`;
+                document.querySelector('#temp_description').innerHTML = `${json.description}`;
+                document.querySelector('#temp_img').setAttribute('src', `https://openweathermap.org/img/wn/${json.tempIcon}@2x.png`);
+                document.querySelector('#temp_max').innerHTML = `${json.tempMax.toFixed(1).toString().replace('.', ',')} <sup>C°</sup>`;
+                document.querySelector('#temp_min').innerHTML = `${json.tempMin.toFixed(1).toString().replace('.', ',')} <sup>C°</sup>`;
+                document.querySelector('#humidity').innerHTML = `${json.humidity}%`;
+                document.querySelector('#wind').innerHTML = `${json.windSpeed.toFixed(1)} km/h`;
+            }
+
+            function showAlert(msg) {
+                const alertDiv = document.querySelector('#alert');
+                if (alertDiv) {
+                    alertDiv.innerHTML = msg;
+                }
             }
         }
-    }
-</script>
+    </script>
+
+    <!-- Leaflet JS, se ainda não estiver carregado -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> 
+    <!-- NOVO: Script para a lógica do carrossel e do mapa do index -->
+    <script src="index-scripts.js" type="module"></script>
 
 </body>
 

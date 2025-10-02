@@ -333,7 +333,19 @@
                 margin-right: 0;
                 margin-bottom: 8px;
             }
+        }
 
+        /* Adicional para a modal: Alinhamento de formulário */
+        .form-grid-triple {
+            display: grid;
+            grid-template-columns: 1fr 0.3fr 1fr; /* Para Rua, Número, Bairro */
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        @media (max-width: 600px) {
+            .form-grid-triple {
+                grid-template-columns: 1fr; /* Empilha em telas menores */
+            }
         }
     </style>
 </head>
@@ -355,7 +367,7 @@
                 Adicionar Nova Sugestão (via Formulário)
             </button>
         </div>
-<br>
+        <br>
         <section class="dashboard-section">
             <h2>Sugestões Pendentes / Pontos Inativos (Ativo: false)</h2>
             <div id="suggestionsMessageBox" class="message-box"></div>
@@ -399,6 +411,87 @@
     <br><br><br><br><br><br><br>
 
     <div id="footer-container"></div>
+
+    <!-- Modal para Edição de Pontos -->
+    <div id="editPointModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button close-edit-modal">&times;</span> <!-- Adicionei uma classe para facilitar o fechamento via JS -->
+            <h2>Editar Detalhes do Ponto de Coleta</h2>
+            <form id="editPointForm">
+                <input type="hidden" id="edit-point-id">
+                <div class="form-group">
+                    <label for="edit-nome">Nome do Ponto:</label>
+                    <input type="text" id="edit-nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-tipoPonto">Tipo de Material:</label>
+                    <input type="text" id="edit-tipoPonto" required>
+                    <!-- Considere usar um <select> dropdown aqui se os tipos forem predefinidos -->
+                </div>
+                <div class="form-group">
+                    <label for="edit-ativo">Status do Ponto:</label>
+                    <select id="edit-ativo" required>
+                        <option value="true">Ativo (visível para usuários)</option>
+                        <option value="false">Inativo (sugestão/não visível)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-cep">CEP:</label>
+                    <input type="text" id="edit-cep" placeholder="Ex: 00000-000">
+                </div>
+                <div class="form-grid-triple">
+                    <div class="form-group">
+                        <label for="edit-rua">Rua:</label>
+                        <input type="text" id="edit-rua">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-numero">Número:</label>
+                        <input type="text" id="edit-numero">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-bairro">Bairro:</label>
+                        <input type="text" id="edit-bairro">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="edit-cidade">Cidade:</label>
+                    <input type="text" id="edit-cidade">
+                </div>
+                <div class="form-group">
+                    <label for="edit-estado">Estado:</label>
+                    <input type="text" id="edit-estado">
+                </div>
+                <div class="form-group">
+                    <label for="edit-latitude">Latitude:</label>
+                    <input type="number" step="any" id="edit-latitude" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-longitude">Longitude:</label>
+                    <input type="number" step="any" id="edit-longitude" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-observacoes">Observações (máx. 500 caracteres):</label>
+                    <textarea id="edit-observacoes" maxlength="500"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit-email">Email de Contato (Opcional):</label>
+                    <input type="email" id="edit-email">
+                </div>
+                <div class="form-group">
+                    <label>ID do Usuário Criador:</label>
+                    <span id="display-usuarioId" style="font-weight: normal;"></span>
+                </div>
+                <div class="form-group">
+                    <label>Data de Criação:</label>
+                    <span id="display-data" style="font-weight: normal;"></span>
+                </div>
+
+                <button type="submit">Salvar Alterações</button>
+                <button type="button" class="close-button close-edit-modal" style="background-color: #6C757D;">Cancelar</button>
+            </form>
+        </div>
+    </div>
+    <!-------------------------------->
 
     <script src="main.js" type="module"></script>
     <script>
