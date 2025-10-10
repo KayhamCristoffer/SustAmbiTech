@@ -14,6 +14,334 @@
     <!-- Inclua o Leaflet CSS para o mapa -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
+</head>
+<div id="menu-container"></div>
+
+<body>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 id="heroTitle">Bem-vindo ao Futuro Verde</h1>
+                    <p>Explore soluções tecnológicas inovadoras para um mundo mais sustentável. Juntos, podemos
+                        construir um futuro melhor para as próximas gerações.</p>
+                    <div class="hero-buttons">
+                        <a id="heroRegisterBtn" href="register.html" class="btn btn-primary"
+                            style="text-decoration: none;">Cadastre-se</a>
+                        <a id="heroEditProfileBtn" href="edit-profile.html" class="btn btn-primary"
+                            style="text-decoration: none; display: none;">Editar Perfil</a>
+                        <a href="sobre.html" class="btn btn-secondary" style="text-decoration: none;">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-visual">
+                        <div class="floating-element">🌱</div>
+                        <div class="floating-element">♻️</div>
+                        <div class="floating-element">🌍</div>
+                        <div class="floating-element">💚</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOVO: Seção do Mapa de Visualização (Agora acima do Carrossel) -->
+        <section class="map-section">
+            <h2 style="text-align: center; color: #f0f0f0;">Ecopontos Próximos de Você</h2>
+            <div class="map-display-container">
+                <button id="btnLocateUserMap" class="map-action-button locate-user"
+                    style="margin-bottom: 15px;">Localizar Minha Posição</button>
+                <div id="mapaIndex"></div>
+
+                <!-- NOVO: Container flexível para Legenda e Clima -->
+                <div class="map-info-and-climate-wrapper">
+                    <div class="map-legend" id="mapIndexLegend">
+                        <h4>Legenda</h4>
+                        <!-- Itens da legenda serão carregados via JS aqui -->
+
+                    </div>
+
+                    <div class="climate-content-container">
+                        <h4 style="text-align: center;">Clima Local</h4>
+                        <!-- O conteúdo de clima.html será injetado aqui via JS -->
+                        <div id="form-clima"></div>
+                    </div>
+                </div>
+
+                <div class="map-action-section">
+                    <h3 id="addPointHeader">Quer adicionar um novo ponto?</h3>
+                    <a id="addPointCallToAction" href="#" class="map-action-button"></a>
+                </div>
+
+            </div>
+
+        </section>
+        <br>
+        <section class="tutorial-plugshare">
+            <style>
+                /* Estilos específicos para a seção PlugShare */
+                .tutorial-plugshare {
+                    color: #e0e0e0;
+                    padding: 40px;
+                    border-radius: 16px;
+                    max-width: 90%;
+                    margin: 40px auto;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    background-color: #677d3e;
+                    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+                }
+
+                .tutorial-plugshare h2 {
+                    text-align: center;
+                    border-bottom: 3px solid rgba(139, 195, 74, 0.6);
+                    padding-bottom: 15px;
+                    margin-bottom: 30px;
+                    font-size: 2.2em;
+                    font-weight: 700;
+                }
+
+                .tutorial-plugshare h3 {
+                    color: #aed581;
+                    margin-top: 30px;
+                    margin-bottom: 15px;
+                    font-size: 1.5em;
+                    font-weight: 600;
+                }
+
+                .tutorial-plugshare p,
+                .tutorial-plugshare li {
+                    line-height: 1.7;
+                    font-size: 1.05em;
+                    text-align: justify;
+                }
+
+                .tutorial-plugshare ul {
+                    list-style-type: none;
+                    padding-left: 20px;
+                    margin-top: 15px;
+                }
+
+                .tutorial-plugshare ul li {
+                    position: relative;
+                    margin-bottom: 12px;
+                    padding-left: 15px;
+                }
+
+                .tutorial-plugshare ol {
+                    padding-left: 25px;
+                    margin-bottom: 30px;
+                }
+
+                .tutorial-plugshare ol li {
+                    margin-bottom: 15px;
+                    padding-left: 0;
+                    font-weight: bold;
+                }
+
+                .tutorial-plugshare strong {
+                    color: #f0f0f0;
+                }
+
+                .tutorial-plugshare a {
+                    color: #8bc34a;
+                    text-decoration: none;
+                    font-weight: 600;
+                }
+
+                .tutorial-plugshare a:hover {
+                    text-decoration: underline;
+                }
+
+                .tutorial-plugshare .dicas {
+                    background-color: #3a5035;
+                    padding: 20px;
+                    border-radius: 10px;
+                    margin-top: 30px;
+                    border-left: 5px solid #aed581;
+                }
+
+                .tutorial-plugshare .dicas h3 {
+                    color: #f0f0f0;
+                    border-bottom: none;
+                    margin-top: 0;
+                }
+
+                /* --- ESTILOS PARA O BOTÃO --- */
+                .toggle-btn {
+                    display: block;
+                    margin: 0 auto 20px;
+                    background-color: #8bc34a;
+                    color: #1e1e1e;
+                    border: none;
+                    padding: 12px 20px;
+                    font-size: 1.1em;
+                    font-weight: 600;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+                }
+
+                .toggle-btn:hover {
+                    background-color: #9ccc65;
+                }
+
+                /* Conteúdo recolhível */
+                .tutorial-content {
+                    display: none;
+                    overflow: hidden;
+                    animation: fadeIn 0.5s ease;
+                }
+
+                @keyframes fadeIn {
+                    from {
+                        opacity: 0;
+                    }
+
+                    to {
+                        opacity: 1;
+                    }
+                }
+            </style>
+
+            <h2>Como funciona o PlugShare?</h2>
+
+            <!-- BOTÃO -->
+            <button class="toggle-btn" onclick="toggleTutorial()">📘 Veja um pequeno Passo a Passo de como utilizar</button>
+
+            <!-- CONTEÚDO ESCONDIDO -->
+            <div id="tutorialContent" class="tutorial-content">
+                <p>O PlugShare é uma ferramenta essencial para qualquer proprietário de veículo elétrico. Trata-se do
+                    maior mapa <b>colaborativo mundial de pontos de recarga</b> e é crucial para planejar viagens e
+                    evitar surpresas. Este tutorial detalha como utilizá-lo ao máximo.</p>
+
+                <ol>
+                    <li>
+                        <h3>O que é o PlugShare</h3>
+                        <p>O PlugShare é um mapa colaborativo mundial de pontos de recarga para veículos elétricos.
+                            Nele, você pode encontrar carregadores próximos, <b>filtrar por tipo de conector</b>,
+                            planejar viagens e ver comentários de outros usuários sobre o funcionamento de cada estação.
+                        </p>
+                    </li>
+
+                    <li>
+                        <h3>Como Acessar</h3>
+                        <ul>
+                            <li><strong>No navegador:</strong> acesse <a href="https://www.plugshare.com/br"
+                                    target="_blank">https://www.plugshare.com/br</a></li>
+                            <li><strong>No celular:</strong> baixe o aplicativo PlugShare na <b>Google Play
+                                    (Android)</b> ou <b>App Store (iOS)</b>.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h3>Primeiros Passos</h3>
+                        <ul>
+                            <li>Permita acesso à sua localização para encontrar pontos próximos automaticamente.</li>
+                            <li>Use a barra de pesquisa para procurar por endereço, cidade ou local específico.</li>
+                            <li>Clique nos <b>pinos no mapa</b> para abrir informações detalhadas sobre cada ponto de
+                                recarga.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h3>Detalhes de um Ponto de Recarga</h3>
+                        <p>Ao clicar em um pino no mapa, você verá as seguintes informações:</p>
+                        <ul>
+                            <li>Nome do local e endereço.</li>
+                            <li>Tipos de conectores disponíveis (ex.: <b>CCS, CHAdeMO, Type 2</b>).</li>
+                            <li>Potência e velocidade de carregamento <b>AC</b> = mais lento / <b>DC Fast</b> = rápido.
+                            </li>
+                            <li>Fotos adicionadas pela comunidade.</li>
+                            <li>Comentários sobre funcionamento, preços e horários.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h3>Usando Filtros</h3>
+                        <p>Os filtros são a parte mais importante para encontrar carregadores <b>compatíveis</b> com seu
+                            veículo e suas necessidades. Utilize-os para refinar a busca por:</p>
+                        <ul>
+                            <li>Tipo de conector.</li>
+                            <li>Tipo de carregamento (AC ou DC rápido).</li>
+                            <li>Rede de carregamento (quando aplicável).</li>
+                            <li>Gratuito ou pago.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h3>Criar Conta e Configurar Veículo</h3>
+                        <p>Criar uma conta no PlugShare é altamente recomendado, pois permite:</p>
+                        <ul>
+                            <li>Salvar locais favoritos.</li>
+                            <li>Adicionar seu veículo e ver apenas <b>pontos compatíveis</b>.</li>
+                            <li>Fazer check-ins e registrar histórico de carregamentos.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h3>Planejamento de Viagem (Trip Planner)</h3>
+                        <p>O <strong>Trip Planner</strong> é a ferramenta ideal para rotas longas:</p>
+                        <ul>
+                            <li>No menu, selecione 'Trip Planner'.</li>
+                            <li>Informe origem e destino da viagem.</li>
+                            <li>O sistema sugere estações de recarga ao longo do caminho, ajudando a mitigar a ansiedade
+                                de autonomia.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h3>No Local de Recarga</h3>
+                        <ul>
+                            <li>Clique em <strong>'Check-in'</strong> para avisar que está usando o carregador.</li>
+                            <li>Verifique comentários recentes para confirmar se o equipamento está funcionando
+                                corretamente.</li>
+                            <li>Em alguns locais, é possível pagar pelo app <b>Pay with PlugShare</b>.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h3>Contribuir com a Comunidade</h3>
+                        <p>Você pode ajudar outros motoristas e fortalecer a rede de recarga:</p>
+                        <ul>
+                            <li>Adicionando fotos do ponto.</li>
+                            <li>Deixando comentários sobre o funcionamento e o custo.</li>
+                            <li>Cadastrando novos locais em <b>'Add Location'</b> quando encontrar carregadores não
+                                listados.</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <div class="dicas">
+                    <h3>10. Dicas Rápidas</h3>
+                    <ul>
+                        <li><strong>AC (Level 2):</strong> recarga mais lenta, útil para uso prolongado (ex.: shopping
+                            ou pernoite).</li>
+                        <li><strong>DC Fast:</strong> recarga rápida, ideal para viagens e paradas curtas.</li>
+                        <li>Sempre confira a compatibilidade do conector com seu carro <b>CCS, CHAdeMO, Type 2</b>.</li>
+                        <li>Leia os <b>comentários</b> antes de sair de casa, pois a situação dos carregadores pode
+                            mudar rapidamente.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <script>
+                function toggleTutorial() {
+                    const content = document.getElementById("tutorialContent");
+                    const btn = document.querySelector(".toggle-btn");
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                        btn.textContent = "📘 Mostrar Tutorial";
+                    } else {
+                        content.style.display = "block";
+                        btn.textContent = "🔽 Ocultar Tutorial";
+                    }
+                }
+            </script>
+        </section>
+
+        <section class="carousel-section">
+            
     <style>
         /* Estilos específicos para o Carrossel */
         .carousel-container {
@@ -230,71 +558,6 @@
             }
         }
     </style>
-</head>
-<div id="menu-container"></div>
-
-<body>
-
-    <main class="main-content">
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 id="heroTitle">Bem-vindo ao Futuro Verde</h1>
-                    <p>Explore soluções tecnológicas inovadoras para um mundo mais sustentável. Juntos, podemos
-                        construir um futuro melhor para as próximas gerações.</p>
-                    <div class="hero-buttons">
-                        <a id="heroRegisterBtn" href="register.html" class="btn btn-primary"
-                            style="text-decoration: none;">Cadastre-se</a>
-                        <a id="heroEditProfileBtn" href="edit-profile.html" class="btn btn-primary"
-                            style="text-decoration: none; display: none;">Editar Perfil</a>
-                        <a href="sobre.html" class="btn btn-secondary" style="text-decoration: none;">Saiba Mais</a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <div class="hero-visual">
-                        <div class="floating-element">🌱</div>
-                        <div class="floating-element">♻️</div>
-                        <div class="floating-element">🌍</div>
-                        <div class="floating-element">💚</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- NOVO: Seção do Mapa de Visualização (Agora acima do Carrossel) -->
-        <section class="map-section">
-            <h2 style="text-align: center; color: #f0f0f0;">Ecopontos Próximos de Você</h2>
-            <div class="map-display-container">
-                <button id="btnLocateUserMap" class="map-action-button locate-user"
-                    style="margin-bottom: 15px;">Localizar Minha Posição</button>
-                <div id="mapaIndex"></div>
-
-                <!-- NOVO: Container flexível para Legenda e Clima -->
-                <div class="map-info-and-climate-wrapper">
-                    <div class="map-legend" id="mapIndexLegend">
-                        <h4>Legenda</h4>
-                        <!-- Itens da legenda serão carregados via JS aqui -->
-                    </div>
-
-                    <div class="climate-content-container">
-                        <h4 style="text-align: center;">Clima Local</h4>
-                        <!-- O conteúdo de clima.html será injetado aqui via JS -->
-                        <div id="form-clima"></div>
-                    </div>
-                </div>
-
-                <div class="map-action-section">
-                    <h3 id="addPointHeader">Quer adicionar um novo ponto?</h3>
-                    <a id="addPointCallToAction" href="#" class="map-action-button"></a>
-                </div>
-            </div>
-        </section>
-        <br>
-
-        <!-- Seção do Clima Original (Removida daqui, seu conteúdo agora está dentro da seção do mapa) -->
-        <!-- NOVO: Seção do Carrossel de Imagens (Agora abaixo do Mapa) -->
-        <section class="carousel-section">
             <h2 style="text-align: center; color: #f0f0f0;">Explore nossos Temas</h2>
             <div class="carousel-container" id="carouselContainer">
                 <div class="carousel-slide" id="carouselSlide">
@@ -304,13 +567,12 @@
                 <button class="carousel-button next" id="carouselNextBtn">&#10095;</button>
             </div>
         </section>
-        <br>
 
         <!-- Features Section (existente) -->
         <section class="features-section">
             <div class="container">
                 <div class="section-header">
-                    <h2>Mapeamento do Site</h2>
+                    <h2>Mapeamento Sobre Outros Serviços</h2>
                     <p style="max-width: 1200px;">Clique em qualquer um dos cartões abaixo para navegar rapidamente para
                         a seção desejada e explorar detalhes sobre nosso projeto, equipe, serviços e muito mais.</p>
                 </div>
@@ -405,750 +667,414 @@
 
         </section>
 
-        <!-- Stats Section -->
-        <section class="stats-section">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-number">85%</div>
-                        <div class="stat-label">Redução de CO₂</div>
+        <section class="mecanica-eletricos">
+            <style>
+                .mecanica-eletricos {
+                    color: #f0f0f0;
+                    padding: 3rem;
+                    border-radius: 16px;
+                    max-width: 100%;
+                    margin: 50px auto;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+                }
+
+                .mecanica-eletricos h2 {
+                    color: #aed581;
+                    border-bottom: 3px solid rgba(174, 213, 129, 0.5);
+                    padding-bottom: 10px;
+                    margin-bottom: 25px;
+                    font-size: 2em;
+                    text-align: center;
+                    font-weight: 700;
+                }
+
+                .mecanica-eletricos h3 {
+                    color: #c5e1a5;
+                    margin-top: 30px;
+                    font-size: 1.5em;
+                    font-weight: 600;
+                }
+
+                .mecanica-eletricos p {
+                    line-height: 1.8;
+                    text-align: justify;
+                    font-size: 1.05em;
+                    margin-bottom: 20px;
+                }
+
+                .mecanica-eletricos ul {
+                    list-style-type: none;
+                    padding-left: 15px;
+                }
+
+                .mecanica-eletricos ul li {
+                    position: relative;
+                    margin-bottom: 12px;
+                    padding-left: 18px;
+                }
+
+                .mecanica-eletricos ul li::before {
+                    content: "•";
+                    color: #aed581;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    font-size: 1.2em;
+                }
+
+                .mecanica-eletricos strong {
+                    color: #fff;
+                }
+
+                .mecanica-eletricos table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 15px;
+                    margin-bottom: 25px;
+                    font-size: 0.95em;
+                    text-align: center;
+                    border-radius: 10px;
+                    overflow: hidden;
+                }
+
+                .mecanica-eletricos th,
+                .mecanica-eletricos td {
+                    padding: 12px 10px;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                }
+
+                .mecanica-eletricos th {
+                    background-color: #4a6140;
+                    color: #c5e1a5;
+                    font-weight: 600;
+                }
+
+                .mecanica-eletricos td {
+                    color: #f0f0f0;
+                    background: #697f3f;
+                }
+
+                .mecanica-eletricos .resumo {
+                    margin-top: 30px;
+                    background-color: #2e402a;
+                    border-left: 5px solid #aed581;
+                    padding: 20px;
+                    border-radius: 10px;
+                }
+
+                .mecanica-eletricos .resumo p {
+                    margin: 0;
+                }
+
+                @media (max-width: 768px) {
+                    .mecanica-eletricos {
+                        padding: 25px;
+                    }
+
+                    .mecanica-eletricos table {
+                        font-size: 0.9em;
+                    }
+                }
+            </style>
+
+            <h2>Como é a mecânica dos carros elétricos</h2>
+            <p>
+                Os carros elétricos possuem uma mecânica muito diferente dos veículos a combustão. Eles têm cerca de
+                <strong>20 componentes móveis</strong> contra mais de <strong>200</strong> em motores convencionais,
+                resultando em menos desgaste e manutenção.
+                A substituição da parte mecânica por eletrônica significa que a manutenção foca em diagnóstico
+                eletrônico, atualizações de software e sistemas de sensores integrados.
+                Peças como <strong>motor elétrico</strong>, <strong>bateria</strong>, <strong>inversores</strong> e
+                <strong>módulos de controle</strong> são as mais críticas. Já não existem componentes como óleo,
+                correia, velas, embreagem ou escapamento, reduzindo custos e complexidade.
+            </p>
+
+            <h3>Peças mais importantes dos carros elétricos</h3>
+            <ul>
+                <li><strong>Bateria:</strong> Coração do carro, armazena energia elétrica. É o componente mais caro
+                    e sensível.</li>
+                <li><strong>Motor elétrico:</strong> Responsável pela movimentação, possui poucos componentes
+                    móveis.</li>
+                <li><strong>Inversor e conversores:</strong> Transformam e controlam a energia elétrica para o
+                    motor.</li>
+                <li><strong>Sistemas de gestão e sensores:</strong> Monitoram e ajustam o funcionamento do veículo.
+                </li>
+            </ul>
+
+            <h3>Manutenção e custos no Brasil</h3>
+            <p>
+                A manutenção de carros elétricos é geralmente mais econômica que a de carros tradicionais, podendo
+                custar cerca de <strong>35% a 50% menos</strong>. Revisões periódicas incluem inspeções de sistemas
+                eletrônicos, troca de filtro de ar-condicionado e fluido de freio, mas dispensam troca de óleo,
+                filtro de combustível e peças mecânicas comuns. Custos estimados:
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Revisão 10.000 km (R$)</th>
+                        <th>Revisão 20.000 km (R$)</th>
+                        <th>Revisão 30.000 km (R$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Caoa Chery iCar</td>
+                        <td>177,32</td>
+                        <td>283,53</td>
+                        <td>479,39</td>
+                    </tr>
+                    <tr>
+                        <td>JAC E-JS1</td>
+                        <td>360,00</td>
+                        <td>480,00</td>
+                        <td>360,00</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Revisão média geral</strong></td>
+                        <td colspan="3">≈ 250,00 (média custos)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Oficinas especializadas no Brasil</h3>
+            <p>
+                Oficinas especializadas em carros elétricos demandam infraestrutura com equipamentos avançados de
+                diagnóstico eletrônico e pessoal treinado em elétrica, software e integração de sistemas.
+                Muitas redes independentes já estão preparadas e oferecem atendimento competitivo, principalmente em
+                grandes centros como São Paulo.
+            </p>
+            <ul>
+                <li><strong>Exemplos:</strong> K2 Imports (SP), E-Zeni Car Service.</li>
+                <li>Escolher oficina capacitada é fundamental para evitar problemas caros.</li>
+                <li>Oficinas independentes tendem a ter preços mais competitivos que concessionárias.</li>
+                <li>Avaliações destacam boas práticas, transparência e qualidade em oficinas focadas em elétricos.</li>
+            </ul>
+
+            <p>
+                O mercado de oficinas para carros elétricos está crescendo rapidamente e pode movimentar até
+                <strong>R$ 5 bilhões/ano até 2030</strong>, com grande potencial para oficinas independentes.
+            </p>
+
+            <section class="avaliacao-carros">
+                <style>
+                    /* Estilos de Layout e Tema - MANTIDOS E EXPANDIDOS */
+                    .avaliacao-carros {
+                        color: #e0e0e0;
+                        padding: 40px;
+                        border-radius: 16px;
+
+                        margin: 40px auto;
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    }
+
+                    .avaliacao-carros h2 {
+                        text-align: center;
+                        color: #8bc34a;
+                        margin-bottom: 30px;
+                        font-size: 2.2em;
+                        font-weight: 600;
+                    }
+
+                    .avaliacao-carros p {
+                        line-height: 1.7;
+                        margin-bottom: 20px;
+                        font-size: 1.05em;
+                        text-align: justify;
+                    }
+
+                    .avaliacao-carros h3,
+                    .avaliacao-carros h4 {
+                        color: #aed581;
+                        border-bottom: 2px solid rgba(174, 213, 129, 0.3);
+                        padding-bottom: 8px;
+                        margin-top: 35px;
+                        margin-bottom: 20px;
+                        font-weight: 600;
+                    }
+
+                    .avaliacoes {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 25px;
+                        margin-top: 20px;
+                        justify-content: center;
+                    }
+
+                    .positivas,
+                    .negativas {
+                        flex: 1;
+                        min-width: 320px;
+                        background: #4a6140;
+                        padding: 2%;
+                        border-radius: 12px;
+                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                    }
+
+                    .graficos {
+                        border-radius: 16px;
+                        margin-top: 50px;
+                    }
+
+                    /* Container para Gráficos - 2 por linha */
+                    .graficos-linha-unica {
+                        display: flex;
+                        gap: 20px;
+                        flex-wrap: wrap;
+                        justify-content: space-around;
+                    }
+
+                    .grafico-canvas-wrapper {
+                        /* Contêiner para o Chart.js */
+                        flex: 1 1 45%;
+                        min-width: 300px;
+                        padding: 20px;
+                        background-color: #697f3f;
+                        border-radius: 10px;
+                        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+                        margin-bottom: 30px;
+                    }
+
+                    .grafico-canvas-wrapper canvas {
+                        max-height: 350px;
+                    }
+
+                    /* Responsividade */
+                    @media (max-width: 768px) {
+                        .graficos-linha-unica {
+                            flex-direction: column;
+                        }
+
+                        .grafico-canvas-wrapper {
+                            width: 100%;
+                            margin-bottom: 30px;
+                        }
+                    }
+                </style>
+
+                <h2>Avaliação de Carros Elétricos no Brasil: Prós e Contras</h2>
+
+                <p>
+                    Os carros elétricos representam uma revolução na indústria automotiva e são cruciais para um futuro
+                    mais
+                    sustentável. No Brasil, sua adoção está em crescimento, mas ainda enfrenta um cenário com vantagens
+                    e
+                    desafios únicos que merecem ser analisados.
+                </p>
+
+                <div class="avaliacoes">
+                    <div class="positivas">
+                        <h3>Vantagens (Aspectos Positivos)</h3>
+                        <ul>
+                            <li><b>Sustentabilidade:</b> Zero emissões de gases poluentes durante o uso, melhorando a
+                                qualidade do ar urbano e contribuindo para a redução da pegada de carbono, especialmente
+                                com
+                                a matriz energética renovável brasileira.</li>
+                            <li><b>Economia de Combustível:</b> O custo por quilômetro rodado é significativamente menor
+                                do
+                                que com gasolina ou etanol, proporcionando grande economia a longo prazo.</li>
+                            <li><b>Baixa Manutenção:</b> Motores elétricos são mais simples, com menos peças móveis e
+                                fluidos, resultando em menores custos e frequência de manutenção.</li>
+                            <li><b>Desempenho:</b> A aceleração instantânea e o torque linear oferecem uma experiência
+                                de
+                                condução mais silenciosa e confortável.</li>
+                            <li><b>Incentivos (em algumas cidades):</b> Redução ou isenção de IPVA e rodízio em grandes
+                                centros urbanos, como São Paulo.</li>
+                        </ul>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number">Carros Eletricos</div>
-                        <div class="stat-label">Vantagens a longo prazo</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">200+</div>
-                        <div class="stat-label">Eletro Postos</div>
+
+                    <div class="negativas">
+                        <h3>Desvantagens (Aspectos Negativos)</h3>
+                        <ul>
+                            <li><b>Custo Inicial Elevado:</b> O preço de compra dos carros elétricos ainda é alto para a
+                                maioria dos consumidores brasileiros.</li>
+                            <li><b>Infraestrutura de Recarga:</b> A rede de eletropostos ainda é limitada e irregular,
+                                especialmente em rodovias e cidades menores, gerando ansiedade de autonomia.</li>
+                            <li><b>Autonomia Variável:</b> A autonomia limitada exige planejamento de viagens.</li>
+                            <li><b>Tempo de Recarga:</b> A recarga completa pode levar mais tempo em comparação ao
+                                abastecimento tradicional.</li>
+                            <li><b>Degradação da Bateria:</b> A capacidade da bateria diminui com o tempo e o uso
+                                (informação geral, não citada no PDF).</li>
+                        </ul>
                     </div>
                 </div>
+                <br><br>
+                <div class="conclusao">
+                    <p>
+                        No Brasil, os veículos elétricos são uma promissora solução para a mobilidade urbana e a
+                        sustentabilidade ambiental. Embora desafios como o custo e a infraestrutura ainda existam, os
+                        benefícios a longo prazo em economia e impacto ambiental os tornam uma escolha cada vez mais
+                        atraente para o futuro. O avanço da tecnologia e o investimento em infraestrutura serão chave
+                        para
+                        sua popularização.
+                    </p>
+                </div>
+
+                <div class="graficos">
+                    <h3>Dados e Tendências</h3>
+
+                    <div class="graficos-linha-unica">
+                        <div class="grafico-canvas-wrapper">
+                            <h4>Custo de Abastecimento Estimado por 100 km (R$)</h4>
+                            <p class="legenda-grafico">Comparação do custo médio de rodar 100 km com carro a gasolina e
+                                carro elétrico.</p>
+                            <canvas id="graficoCusto"></canvas>
+                        </div>
+
+                        <div class="grafico-canvas-wrapper">
+                            <h4>Autonomia Média Comparada (Km)</h4>
+                            <p class="legenda-grafico">Estimativa da autonomia média de veículos a combustão e elétricos
+                                populares no Brasil.</p>
+                            <canvas id="graficoAutonomia"></canvas>
+                        </div>
+
+                        <div class="grafico-canvas-wrapper">
+                            <h4>Crescimento da Frota de Veículos Elétricos no Brasil (2020–2024)</h4>
+                            <p class="legenda-grafico">Frota de Carros Eletrificados (unidades).</p>
+                            <canvas id="graficoFrota"></canvas>
+                        </div>
+
+                        <div class="grafico-canvas-wrapper">
+                            <h4>Expansão de Eletropostos no Brasil (2020–2024)</h4>
+                            <p class="legenda-grafico">Quantidade de pontos de recarga em operação.</p>
+                            <canvas id="graficoEletropostos"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <div class="resumo">
+                <p>
+                    Esse panorama mostra que carros elétricos têm <strong>manutenção técnica diferenciada</strong>,
+                    menos frequente e mais focada em sistemas eletrônicos.
+                    A escolha de uma oficina especializada no Brasil deve considerar <strong>experiência, estrutura
+                        e avaliações</strong> para garantir segurança e economia.
+                </p>
             </div>
         </section>
-<section class="avaliacao-carros">
-    <style>
-        /* Estilos de Layout e Tema - MANTIDOS E EXPANDIDOS */
-        .avaliacao-carros {
-            color: #e0e0e0;
-            padding: 40px;
-            border-radius: 16px;
-            max-width: 95%;
-            margin: 40px auto;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .avaliacao-carros h2 {
-            text-align: center;
-            color: #8bc34a;
-            margin-bottom: 30px;
-            font-size: 2.2em;
-            font-weight: 600;
-        }
-
-        .avaliacao-carros p {
-            line-height: 1.7;
-            margin-bottom: 20px;
-            font-size: 1.05em;
-            text-align: justify;
-        }
-
-        .avaliacao-carros h3,
-        .avaliacao-carros h4 {
-            color: #aed581;
-            border-bottom: 2px solid rgba(174, 213, 129, 0.3);
-            padding-bottom: 8px;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .avaliacoes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
-            margin-top: 20px;
-            justify-content: center;
-        }
-
-        .positivas,
-        .negativas {
-            flex: 1;
-            min-width: 320px;
-            background: #697f3f;
-            padding: 2%;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .graficos {
-            padding: 30px;
-            border-radius: 16px;
-            margin-top: 50px;
-        }
-
-        /* Container para Gráficos - 2 por linha */
-        .graficos-linha-unica {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-        
-        .grafico-canvas-wrapper {
-            /* Contêiner para o Chart.js */
-            flex: 1 1 45%; 
-            min-width: 300px;
-            padding: 20px;
-            background-color: #697f3f;
-            border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            margin-bottom: 30px;
-        }
-        
-        .grafico-canvas-wrapper canvas {
-            max-height: 350px; 
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .graficos-linha-unica {
-                flex-direction: column;
-            }
-
-            .grafico-canvas-wrapper {
-                width: 100%;
-                margin-bottom: 30px;
-            }
-        }
-    </style>
-
-    <h2>Avaliação de Carros Elétricos no Brasil: Prós e Contras</h2>
-
-    <p>
-        Os carros elétricos representam uma revolução na indústria automotiva e são cruciais para um futuro mais sustentável. No Brasil, sua adoção está em crescimento, mas ainda enfrenta um cenário com vantagens e desafios únicos que merecem ser analisados.
-    </p>
-
-    <div class="avaliacoes">
-        <div class="positivas">
-            <h3>Vantagens (Aspectos Positivos)</h3>
-            <ul>
-                <li><b>Sustentabilidade:</b> Zero emissões de gases poluentes durante o uso, melhorando a qualidade do ar urbano e contribuindo para a redução da pegada de carbono, especialmente com a matriz energética renovável brasileira.</li>
-                <li><b>Economia de Combustível:</b> O custo por quilômetro rodado é significativamente menor do que com gasolina ou etanol, proporcionando grande economia a longo prazo.</li>
-                <li><b>Baixa Manutenção:</b> Motores elétricos são mais simples, com menos peças móveis e fluidos, resultando em menores custos e frequência de manutenção.</li>
-                <li><b>Desempenho:</b> A aceleração instantânea e o torque linear oferecem uma experiência de condução mais silenciosa e confortável.</li>
-                <li><b>Incentivos (em algumas cidades):</b> Redução ou isenção de IPVA e rodízio em grandes centros urbanos, como São Paulo.</li>
-            </ul>
-        </div>
-
-        <div class="negativas">
-            <h3>Desvantagens (Aspectos Negativos)</h3>
-            <ul>
-                <li><b>Custo Inicial Elevado:</b> O preço de compra dos carros elétricos ainda é alto para a maioria dos consumidores brasileiros.</li>
-                <li><b>Infraestrutura de Recarga:</b> A rede de eletropostos ainda é limitada e irregular, especialmente em rodovias e cidades menores, gerando ansiedade de autonomia.</li>
-                <li><b>Autonomia Variável:</b> A autonomia limitada exige planejamento de viagens.</li>
-                <li><b>Tempo de Recarga:</b> A recarga completa pode levar mais tempo em comparação ao abastecimento tradicional.</li>
-                <li><b>Degradação da Bateria:</b> A capacidade da bateria diminui com o tempo e o uso (informação geral, não citada no PDF).</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="conclusao">
-        <p>
-            No Brasil, os veículos elétricos são uma promissora solução para a mobilidade urbana e a sustentabilidade ambiental. Embora desafios como o custo e a infraestrutura ainda existam, os benefícios a longo prazo em economia e impacto ambiental os tornam uma escolha cada vez mais atraente para o futuro. O avanço da tecnologia e o investimento em infraestrutura serão chave para sua popularização.
-        </p>
-    </div>
-
-    <div class="graficos">
-        <h3>Dados e Tendências (Gráficos Gerados com Chart.js)</h3>
-
-        <div class="graficos-linha-unica">
-            <div class="grafico-canvas-wrapper">
-                <h4>Custo de Abastecimento Estimado por 100 km (R$)</h4>
-                <p class="legenda-grafico">Comparação do custo médio de rodar 100 km com carro a gasolina e carro elétrico.</p>
-                <canvas id="graficoCusto"></canvas>
-            </div>
-
-            <div class="grafico-canvas-wrapper">
-                <h4>Autonomia Média Comparada (Km)</h4>
-                <p class="legenda-grafico">Estimativa da autonomia média de veículos a combustão e elétricos populares no Brasil.</p>
-                <canvas id="graficoAutonomia"></canvas>
-            </div>
-        
-            <div class="grafico-canvas-wrapper"> 
-                <h4>Crescimento da Frota de Veículos Elétricos no Brasil (2020–2024)</h4>
-                <p class="legenda-grafico">Frota de Carros Eletrificados (unidades).</p>
-                <canvas id="graficoFrota"></canvas>
-            </div>
-
-            <div class="grafico-canvas-wrapper"> 
-                <h4>Expansão de Eletropostos no Brasil (2020–2024)</h4>
-                <p class="legenda-grafico">Quantidade de pontos de recarga em operação.</p>
-                <canvas id="graficoEletropostos"></canvas>
-            </div>
-        </div>
-    </div>
-
-</section>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-
-<script>
-    // --- Configurações de Cores e Estilo (baseado no seu tema) ---
-    const COR_GASOLINA = '#42a5f5';  // Azul
-    const COR_ELETRICO = '#8bc34a'; // Verde
-    const COR_LINHA = '#ffd700';    // Amarelo Ouro
-    const COR_TEXTO = '#e0e0e0';
-    const COR_GRADE = 'rgba(255, 255, 255, 0.1)';
-    
-    // Dados atualizados da Tabela 1 do documento
-    const dadosVeiculos = [5000, 12000, 28000, 60000, 167000];
-    const dadosEletropostos = [1500, 3000, 5000, 8000, 10600];
-    const anosNovos = [2020, 2021, 2022, 2023, 2024];
-
-
-    const CHART_CONFIG_BASE = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                display: false,
-            },
-        },
-        // Configurações dos Eixos para o Tema Escuro
-        scales: {
-            x: { 
-                grid: { color: COR_GRADE },
-                ticks: { color: COR_TEXTO },
-                title: { display: true, color: COR_TEXTO, font: { size: 14 } }
-            },
-            y: {
-                grid: { color: COR_GRADE },
-                ticks: { color: COR_TEXTO },
-                title: { display: true, color: COR_TEXTO, font: { size: 14 } }
-            }
-        },
-        layout: {
-            padding: 10
-        }
-    };
-
-    // --- GRÁFICO 1: Custo de Abastecimento (Barra) ---
-    new Chart(document.getElementById('graficoCusto'), {
-        type: 'bar',
-        data: {
-            labels: ['Gasolina', 'Elétrico'],
-            datasets: [{
-                data: [51, 9],
-                backgroundColor: [COR_GASOLINA, COR_ELETRICO],
-                borderRadius: 4,
-            }]
-        },
-        options: {
-            ...CHART_CONFIG_BASE,
-            scales: {
-                ...CHART_CONFIG_BASE.scales,
-                y: {
-                    ...CHART_CONFIG_BASE.scales.y,
-                    max: 60,
-                    title: { ...CHART_CONFIG_BASE.scales.y.title, text: 'Custo (R$)' }
-                }
-            },
-            plugins: {
-                ...CHART_CONFIG_BASE.plugins,
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return 'R$ ' + context.parsed.y.toFixed(2);
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    // --- GRÁFICO 2: Autonomia Média (Barra) ---
-    new Chart(document.getElementById('graficoAutonomia'), {
-        type: 'bar',
-        data: {
-            labels: ['Gasolina', 'Elétrico'],
-            datasets: [{
-                data: [500, 350],
-                backgroundColor: [COR_GASOLINA, COR_ELETRICO],
-                borderRadius: 4,
-            }]
-        },
-        options: {
-            ...CHART_CONFIG_BASE,
-            scales: {
-                ...CHART_CONFIG_BASE.scales,
-                y: {
-                    ...CHART_CONFIG_BASE.scales.y,
-                    max: 600,
-                    title: { ...CHART_CONFIG_BASE.scales.y.title, text: 'Autonomia (Km)' }
-                }
-            },
-            plugins: {
-                ...CHART_CONFIG_BASE.plugins,
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return context.parsed.y + ' Km';
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    // --- GRÁFICO 3: Crescimento da Frota (Linha) - DADOS ATUALIZADOS DO PDF ---
-    new Chart(document.getElementById('graficoFrota'), {
-        type: 'line',
-        data: {
-            labels: anosNovos,
-            datasets: [{
-                label: 'Frota de Carros Eletrificados (unidades)',
-                data: dadosVeiculos,
-                borderColor: COR_LINHA,
-                backgroundColor: 'rgba(255, 215, 0, 0.1)',
-                borderWidth: 2,
-                pointRadius: 6,
-                pointBackgroundColor: COR_ELETRICO,
-                pointBorderColor: 'white',
-                fill: false,
-                tension: 0.3
-            }]
-        },
-        options: {
-            ...CHART_CONFIG_BASE,
-            scales: {
-                ...CHART_CONFIG_BASE.scales,
-                x: {
-                    ...CHART_CONFIG_BASE.scales.x,
-                    title: { ...CHART_CONFIG_BASE.scales.x.title, text: 'Ano' }
-                },
-                y: {
-                    ...CHART_CONFIG_BASE.scales.y,
-                    max: 180000,
-                    title: { ...CHART_CONFIG_BASE.scales.y.title, text: 'Quantidade (unidades)' }
-                }
-            },
-            plugins: {
-                ...CHART_CONFIG_BASE.plugins,
-                tooltip: {
-                    callbacks: {
-                        label: (context) => {
-                            // Formata com separador de milhar
-                            return context.parsed.y.toLocaleString('pt-BR') + ' unidades';
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    // --- GRÁFICO 4: Expansão de Eletropostos (Barra) - NOVO GRÁFICO ---
-    new Chart(document.getElementById('graficoEletropostos'), {
-        type: 'bar',
-        data: {
-            labels: anosNovos,
-            datasets: [{
-                label: 'Eletropostos',
-                data: dadosEletropostos,
-                backgroundColor: COR_ELETRICO,
-                borderRadius: 4,
-            }]
-        },
-        options: {
-            ...CHART_CONFIG_BASE,
-            scales: {
-                ...CHART_CONFIG_BASE.scales,
-                y: {
-                    ...CHART_CONFIG_BASE.scales.y,
-                    max: 12000,
-                    title: { ...CHART_CONFIG_BASE.scales.y.title, text: 'Quantidade de Pontos' }
-                }
-            },
-            plugins: {
-                ...CHART_CONFIG_BASE.plugins,
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return context.parsed.y.toLocaleString('pt-BR') + ' eletropostos';
-                        }
-                    }
-                }
-            }
-        }
-    });
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-
-<script>
-    // --- Configurações de Cores e Estilo (baseado no seu tema) ---
-    const COR_GASOLINA = '#42a5f5';  // Azul
-    const COR_ELETRICO = '#8bc34a'; // Verde
-    const COR_LINHA = '#ffd700';    // Amarelo Ouro
-    const COR_TEXTO = '#e0e0e0';
-    const COR_GRADE = 'rgba(255, 255, 255, 0.1)';
-    
-    // Dados atualizados da Tabela 1 do documento 
-    const dadosVeiculos = [5000, 12000, 28000, 60000, 167000];
-    const dadosEletropostos = [1500, 3000, 5000, 8000, 10600];
-    const anosNovos = [2020, 2021, 2022, 2023, 2024];
-
-
-    const CHART_CONFIG_BASE = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                display: false,
-            },
-        },
-        // Configurações dos Eixos para o Tema Escuro
-        scales: {
-            x: { 
-                grid: { color: COR_GRADE },
-                ticks: { color: COR_TEXTO },
-                title: { display: true, color: COR_TEXTO, font: { size: 14 } }
-            },
-            y: {
-                grid: { color: COR_GRADE },
-                ticks: { color: COR_TEXTO },
-                title: { display: true, color: COR_TEXTO, font: { size: 14 } }
-            }
-        },
-        layout: {
-            padding: 10
-        }
-    };
-
-    // --- GRÁFICO 1: Custo de Abastecimento (Barra) ---
-    new Chart(document.getElementById('graficoCusto'), {
-        type: 'bar',
-        data: {
-            labels: ['Gasolina', 'Elétrico'],
-            datasets: [{
-                data: [60, 13],
-                backgroundColor: [COR_GASOLINA, COR_ELETRICO],
-                borderRadius: 4,
-            }]
-        },
-        options: {
-            ...CHART_CONFIG_BASE,
-            scales: {
-                ...CHART_CONFIG_BASE.scales,
-                y: {
-                    ...CHART_CONFIG_BASE.scales.y,
-                    max: 70,
-                    title: { ...CHART_CONFIG_BASE.scales.y.title, text: 'Custo (R$)' }
-                }
-            },
-            plugins: {
-                ...CHART_CONFIG_BASE.plugins,
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return 'R$ ' + context.parsed.y.toFixed(2);
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    // --- GRÁFICO 2: Autonomia Média (Barra) ---
-    new Chart(document.getElementById('graficoAutonomia'), {
-        type: 'bar',
-        data: {
-            labels: ['Gasolina', 'Elétrico'],
-            datasets: [{
-                data: [550, 350],
-                backgroundColor: [COR_GASOLINA, COR_ELETRICO],
-                borderRadius: 4,
-            }]
-        },
-        options: {
-            ...CHART_CONFIG_BASE,
-            scales: {
-                ...CHART_CONFIG_BASE.scales,
-                y: {
-                    ...CHART_CONFIG_BASE.scales.y,
-                    max: 600,
-                    title: { ...CHART_CONFIG_BASE.scales.y.title, text: 'Autonomia (Km)' }
-                }
-            },
-            plugins: {
-                ...CHART_CONFIG_BASE.plugins,
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return context.parsed.y + ' Km';
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    // --- GRÁFICO 3: Crescimento da Frota (Linha) - DADOS ATUALIZADOS DO PDF  ---
-    new Chart(document.getElementById('graficoFrota'), {
-        type: 'line',
-        data: {
-            labels: anosNovos,
-            datasets: [{
-                label: 'Frota de Carros Eletrificados (unidades)',
-                data: dadosVeiculos,
-                borderColor: COR_LINHA,
-                backgroundColor: 'rgba(255, 215, 0, 0.1)',
-                borderWidth: 2,
-                pointRadius: 6,
-                pointBackgroundColor: COR_ELETRICO,
-                pointBorderColor: 'white',
-                fill: false,
-                tension: 0.3
-            }]
-        },
-        options: {
-            ...CHART_CONFIG_BASE,
-            scales: {
-                ...CHART_CONFIG_BASE.scales,
-                x: {
-                    ...CHART_CONFIG_BASE.scales.x,
-                    title: { ...CHART_CONFIG_BASE.scales.x.title, text: 'Ano' }
-                },
-                y: {
-                    ...CHART_CONFIG_BASE.scales.y,
-                    max: 180000, // Ajustado para o pico de 167000 em 2024
-                    title: { ...CHART_CONFIG_BASE.scales.y.title, text: 'Quantidade (unidades)' }
-                }
-            },
-            plugins: {
-                ...CHART_CONFIG_BASE.plugins,
-                tooltip: {
-                    callbacks: {
-                        label: (context) => {
-                            // Formata com separador de milhar
-                            return context.parsed.y.toLocaleString('pt-BR') + ' unidades';
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    // --- GRÁFICO 4: Expansão de Eletropostos (Barra) - NOVO GRÁFICO  ---
-    new Chart(document.getElementById('graficoEletropostos'), {
-        type: 'bar',
-        data: {
-            labels: anosNovos,
-            datasets: [{
-                label: 'Eletropostos',
-                data: dadosEletropostos,
-                backgroundColor: COR_ELETRICO,
-                borderRadius: 4,
-            }]
-        },
-        options: {
-            ...CHART_CONFIG_BASE,
-            scales: {
-                ...CHART_CONFIG_BASE.scales,
-                y: {
-                    ...CHART_CONFIG_BASE.scales.y,
-                    max: 12000, // Ajustado para o pico de 10600 em 2024
-                    title: { ...CHART_CONFIG_BASE.scales.y.title, text: 'Quantidade de Pontos' }
-                }
-            },
-            plugins: {
-                ...CHART_CONFIG_BASE.plugins,
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return context.parsed.y.toLocaleString('pt-BR') + ' eletropostos';
-                        }
-                    }
-                }
-            }
-        }
-    });
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-
-<script>
-    // --- Configurações de Cores e Estilo (para corresponder ao seu tema) ---
-    const COR_GASOLINA = '#42a5f5';  // Azul
-    const COR_ELETRICO = '#8bc34a'; // Verde
-    const COR_LINHA = '#ffd700';    // Amarelo Ouro
-    const COR_FUNDO_CHART = '#4a6645'; // Fundo do wrapper
-
-    const CHART_CONFIG_BASE = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                display: false,
-                labels: { color: '#e0e0e0' }
-            },
-        },
-        scales: {
-            x: { 
-                grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                ticks: { color: '#e0e0e0' },
-                title: { display: false }
-            },
-            y: {
-                grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                ticks: { color: '#e0e0e0' },
-                title: { display: true, color: '#e0e0e0' }
-            }
-        },
-    };
-
-    // --- GRÁFICO 1: Custo de Abastecimento ---
-    new Chart(document.getElementById('graficoCusto'), {
-        type: 'bar',
-        data: {
-            labels: ['Gasolina', 'Elétrico'],
-            datasets: [{
-                data: [60, 13],
-                backgroundColor: [COR_GASOLINA, COR_ELETRICO],
-                borderRadius: 4,
-            }]
-        },
-        options: {
-            ...CHART_CONFIG_BASE,
-            scales: {
-                ...CHART_CONFIG_BASE.scales,
-                y: {
-                    ...CHART_CONFIG_BASE.scales.y,
-                    max: 80, // Limite Y como no seu CSS
-                    title: { ...CHART_CONFIG_BASE.scales.y.title, text: 'Custo (R$)' }
-                }
-            },
-            plugins: {
-                ...CHART_CONFIG_BASE.plugins,
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return 'R$ ' + context.parsed.y.toFixed(2);
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    // --- GRÁFICO 2: Autonomia Média ---
-    new Chart(document.getElementById('graficoAutonomia'), {
-        type: 'bar',
-        data: {
-            labels: ['Gasolina', 'Elétrico'],
-            datasets: [{
-                data: [550, 350],
-                backgroundColor: [COR_GASOLINA, COR_ELETRICO],
-                borderRadius: 4,
-            }]
-        },
-        options: {
-            ...CHART_CONFIG_BASE,
-            scales: {
-                ...CHART_CONFIG_BASE.scales,
-                y: {
-                    ...CHART_CONFIG_BASE.scales.y,
-                    max: 600, // Limite Y como no seu CSS
-                    title: { ...CHART_CONFIG_BASE.scales.y.title, text: 'Autonomia (Km)' }
-                }
-            },
-            plugins: {
-                ...CHART_CONFIG_BASE.plugins,
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return context.parsed.y + ' Km';
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    // --- GRÁFICO 3: Crescimento da Frota (Linha) ---
-    const dadosFrota = [40, 60, 80, 100, 120, 145, 180, 220]; // Dados em milhares
-    const anos = [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
-    
-    // Cor de destaque para os pontos de projeção (2024 e 2025)
-    const corPontos = dadosFrota.map((_, index) => 
-        index >= 6 ? '#ff7043' : COR_ELETRICO // Laranja para 2024 e 2025, Verde para os demais
-    );
-
-    new Chart(document.getElementById('graficoFrota'), {
-        type: 'line',
-        data: {
-            labels: anos,
-            datasets: [{
-                label: 'Frota de Carros Elétricos',
-                data: dadosFrota,
-                borderColor: COR_LINHA,
-                backgroundColor: 'rgba(255, 215, 0, 0.1)', // Sombra sutil
-                borderWidth: 2,
-                pointRadius: 6,
-                pointBackgroundColor: corPontos,
-                pointBorderColor: 'white',
-                fill: false,
-                tension: 0.1 // Suaviza a linha
-            }]
-        },
-        options: {
-            ...CHART_CONFIG_BASE,
-            scales: {
-                ...CHART_CONFIG_BASE.scales,
-                x: {
-                    ...CHART_CONFIG_BASE.scales.x,
-                    title: { ...CHART_CONFIG_BASE.scales.x.title, display: true, text: 'Ano' }
-                },
-                y: {
-                    ...CHART_CONFIG_BASE.scales.y,
-                    max: 250, // Limite Y como no seu CSS
-                    title: { ...CHART_CONFIG_BASE.scales.y.title, text: 'Frota (milhares)' }
-                }
-            },
-            plugins: {
-                ...CHART_CONFIG_BASE.plugins,
-                tooltip: {
-                    callbacks: {
-                        title: (context) => context[0].label,
-                        label: (context) => {
-                            const ano = context.label;
-                            const valor = context.parsed.y;
-                            let label = valor + ' mil';
-                            if (ano >= 2024) {
-                                label += ' (Projeção)';
-                            }
-                            return label;
-                        }
-                    }
-                }
-            }
-        }
-    });
-</script>
-
 
         <section class="modelos-carros">
             <style>
+                /* Estilos .modelos-carros */
                 .modelos-carros {
                     font-family: "Inter", Arial, sans-serif;
-
                     padding: 2rem;
                     border-radius: 1rem;
                     color: #81c784;
+                    max-width: 100%;
+                    /* Ajustado para centralizar e limitar a largura */
+                    margin: 40px auto;
                 }
 
                 .modelos-carros h2 {
                     text-align: center;
                     font-size: 1.6rem;
                     margin-bottom: 0.5rem;
+                    color: #81c784;
+                    /* Cor do título */
                 }
 
                 .modelos-carros p {
@@ -1158,11 +1084,14 @@
                     margin-bottom: 1.5rem;
                 }
 
+                /* Estilo para envolver e dar responsividade horizontal */
                 .modelos-carros .tabela-wrap {
                     overflow-x: auto;
                     background: #697f3f;
                     border-radius: 0.75rem;
                     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+                    margin-bottom: 30px;
+                    /* Espaço entre as tabelas e o texto/título */
                 }
 
                 .modelos-carros table {
@@ -1171,21 +1100,20 @@
                     min-width: 800px;
                 }
 
-                .modelos-carros thead {
-                    background: #697f3f;
-                }
-
                 .modelos-carros th,
                 .modelos-carros td {
                     text-align: left;
                     padding: 0.9rem 1.2rem;
-                    border-bottom: 1px solid #e5e7eb;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
                 }
 
                 .modelos-carros th {
                     color: #81c784;
                     font-weight: 600;
                     font-size: 0.95rem;
+                    background: #3b5704;
+                    /* Cor escura do cabeçalho */
+                    text-transform: uppercase;
                 }
 
                 .modelos-carros td {
@@ -1193,11 +1121,13 @@
                     color: #f0f0f0;
                     font-size: 0.9rem;
                     line-height: 1.4;
+                    background: #697f3f;
+                    /* Cor do corpo da célula */
                 }
 
+                /* Estilos de link usados na primeira tabela */
                 .modelos-carros a {
                     color: #f0f0f0;
-                    /* cor clara padrão */
                     text-decoration: none;
                     font-weight: 600;
                     padding: 4px 8px;
@@ -1209,22 +1139,21 @@
                 .modelos-carros a:hover {
                     color: #ffffff;
                     background-color: #81c784;
-                    /* verde suave no hover */
                 }
 
-
-                .modelos-carros tbody tr:nth-child(even) {
-                    background: #697f3f;
-                }
-
+                /* Hover em linhas da tabela */
                 .modelos-carros tbody tr:hover {
                     background: #3b5704;
                     transition: background 0.2s ease;
                 }
 
-                .modelos-carros td.modelos {
+                /* Estilo para a última coluna (Modelos e Impacto Ambiental) */
+                .modelos-carros td.modelos,
+                .modelos-carros td.impacto {
                     font-weight: 600;
-                    color: #f0f0f0;
+                    color: #c5e1a5;
+                    /* Cor de destaque verde-clara */
+                    font-style: italic;
                 }
 
                 .modelos-carros .nota {
@@ -1234,6 +1163,7 @@
                     text-align: center;
                 }
 
+                /* Media Query para Responsividade */
                 @media (max-width: 640px) {
                     .modelos-carros table {
                         min-width: 600px;
@@ -1244,6 +1174,7 @@
                     }
                 }
             </style>
+
 
             <h2>Fabricantes e Modelos de Carros Elétricos no Brasil</h2>
             <p>Principais fabricantes atuando no mercado nacional, com descrição e exemplos de modelos elétricos e
@@ -1355,7 +1286,277 @@
             </div>
 
             <p class="nota">*Informações sujeitas a atualização conforme lançamentos e estratégias de mercado.</p>
+
+            <br><br><br>
+            <h2>Práticas de Economia e Sustentabilidade no Dia a Dia</h2>
+            <p>Pequenas mudanças de hábito no cotidiano podem gerar uma economia financeira significativa ao longo do
+                ano, ao mesmo tempo em que contribuem diretamente para a redução do <b>impacto ambiental</b>. A tabela a
+                seguir demonstra como essas ações se traduzem em valores poupados e benefícios para o planeta.</p>
+
+            <div class="tabela-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ação de Economia</th>
+                            <th>Economia Financeira (Mês)</th>
+                            <th>Economia Financeira (Ano)</th>
+                            <th>Impacto Ambiental Positivo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Apagar luz ao sair de um cômodo</td>
+                            <td>R$ 20</td>
+                            <td>R$ 240</td>
+                            <td class="impacto">Reduz consumo de energia → menos emissão de CO₂</td>
+                        </tr>
+                        <tr>
+                            <td>Usar lâmpadas <b>LED</b> em vez de incandescentes</td>
+                            <td>R$ 30</td>
+                            <td>R$ 360</td>
+                            <td class="impacto">Diminui gasto de energia em até 80%</td>
+                        </tr>
+                        <tr>
+                            <td>Tomar banhos mais curtos (5–7 min)</td>
+                            <td>R$ 40</td>
+                            <td>R$ 480</td>
+                            <td class="impacto">Menos uso de água e energia para aquecer</td>
+                        </tr>
+                        <tr>
+                            <td>Desligar aparelhos da tomada (standby)</td>
+                            <td>R$ 15</td>
+                            <td>R$ 180</td>
+                            <td class="impacto">Reduz desperdício de energia elétrica</td>
+                        </tr>
+                        <tr>
+                            <td>Usar <b>transporte público ou bicicleta</b> 2x por semana</td>
+                            <td>R$ 150</td>
+                            <td>R$ 1.800</td>
+                            <td class="impacto">Menos uso de combustível → redução da poluição do ar</td>
+                        </tr>
+                        <tr>
+                            <td>Levar garrafinha de água em vez de comprar descartáveis</td>
+                            <td>R$ 50</td>
+                            <td>R$ 600</td>
+                            <td class="impacto">Menos plástico descartado no meio ambiente</td>
+                        </tr>
+                        <tr>
+                            <td>Comprar a granel (arroz, feijão, temperos)</td>
+                            <td>R$ 70</td>
+                            <td>R$ 840</td>
+                            <td class="impacto">Reduz embalagens plásticas e desperdício</td>
+                        </tr>
+                        <tr>
+                            <td>Evitar desperdício de alimentos (planejar compras)</td>
+                            <td>R$ 100</td>
+                            <td>R$ 1.200</td>
+                            <td class="impacto">Reduz lixo orgânico e emissão de metano</td>
+                        </tr>
+                        <tr>
+                            <td>Trocar carro por <b>carona</b> em 2 dias da semana</td>
+                            <td>R$ 200</td>
+                            <td>R$ 2.400</td>
+                            <td class="impacto">Menos poluição do ar e congestionamentos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="nota">*Valores de economia são estimativas e podem variar.</p>
         </section>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+        <script>
+            // --- Configurações de Cores e Estilo (baseado no seu tema) ---
+            const COR_GASOLINA = '#42a5f5';  // Azul
+            const COR_ELETRICO = '#8bc34a'; // Verde
+            const COR_LINHA = '#ffd700';    // Amarelo Ouro
+            const COR_TEXTO = '#e0e0e0';
+            const COR_GRADE = 'rgba(255, 255, 255, 0.1)';
+
+            // Dados atualizados da Tabela 1 do documento
+            const dadosVeiculos = [5000, 12000, 28000, 60000, 167000];
+            const dadosEletropostos = [1500, 3000, 5000, 8000, 10600];
+            const anosNovos = [2020, 2021, 2022, 2023, 2024];
+
+
+            const CHART_CONFIG_BASE = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                },
+                // Configurações dos Eixos para o Tema Escuro
+                scales: {
+                    x: {
+                        grid: { color: COR_GRADE },
+                        ticks: { color: COR_TEXTO },
+                        title: { display: true, color: COR_TEXTO, font: { size: 14 } }
+                    },
+                    y: {
+                        grid: { color: COR_GRADE },
+                        ticks: { color: COR_TEXTO },
+                        title: { display: true, color: COR_TEXTO, font: { size: 14 } }
+                    }
+                },
+                layout: {
+                    padding: 10
+                }
+            };
+
+            // --- GRÁFICO 1: Custo de Abastecimento (Barra) ---
+            new Chart(document.getElementById('graficoCusto'), {
+                type: 'bar',
+                data: {
+                    labels: ['Gasolina', 'Elétrico'],
+                    datasets: [{
+                        data: [51, 9],
+                        backgroundColor: [COR_GASOLINA, COR_ELETRICO],
+                        borderRadius: 4,
+                    }]
+                },
+                options: {
+                    ...CHART_CONFIG_BASE,
+                    scales: {
+                        ...CHART_CONFIG_BASE.scales,
+                        y: {
+                            ...CHART_CONFIG_BASE.scales.y,
+                            max: 60,
+                            title: { ...CHART_CONFIG_BASE.scales.y.title, text: 'Custo (R$)' }
+                        }
+                    },
+                    plugins: {
+                        ...CHART_CONFIG_BASE.plugins,
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return 'R$ ' + context.parsed.y.toFixed(2);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- GRÁFICO 2: Autonomia Média (Barra) ---
+            new Chart(document.getElementById('graficoAutonomia'), {
+                type: 'bar',
+                data: {
+                    labels: ['Gasolina', 'Elétrico'],
+                    datasets: [{
+                        data: [500, 350],
+                        backgroundColor: [COR_GASOLINA, COR_ELETRICO],
+                        borderRadius: 4,
+                    }]
+                },
+                options: {
+                    ...CHART_CONFIG_BASE,
+                    scales: {
+                        ...CHART_CONFIG_BASE.scales,
+                        y: {
+                            ...CHART_CONFIG_BASE.scales.y,
+                            max: 600,
+                            title: { ...CHART_CONFIG_BASE.scales.y.title, text: 'Autonomia (Km)' }
+                        }
+                    },
+                    plugins: {
+                        ...CHART_CONFIG_BASE.plugins,
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return context.parsed.y + ' Km';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- GRÁFICO 3: Crescimento da Frota (Linha) - DADOS ATUALIZADOS DO PDF ---
+            new Chart(document.getElementById('graficoFrota'), {
+                type: 'line',
+                data: {
+                    labels: anosNovos,
+                    datasets: [{
+                        label: 'Frota de Carros Eletrificados (unidades)',
+                        data: dadosVeiculos,
+                        borderColor: COR_LINHA,
+                        backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                        borderWidth: 2,
+                        pointRadius: 6,
+                        pointBackgroundColor: COR_ELETRICO,
+                        pointBorderColor: 'white',
+                        fill: false,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    ...CHART_CONFIG_BASE,
+                    scales: {
+                        ...CHART_CONFIG_BASE.scales,
+                        x: {
+                            ...CHART_CONFIG_BASE.scales.x,
+                            title: { ...CHART_CONFIG_BASE.scales.x.title, text: 'Ano' }
+                        },
+                        y: {
+                            ...CHART_CONFIG_BASE.scales.y,
+                            max: 180000,
+                            title: { ...CHART_CONFIG_BASE.scales.y.title, text: 'Quantidade (unidades)' }
+                        }
+                    },
+                    plugins: {
+                        ...CHART_CONFIG_BASE.plugins,
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => {
+                                    // Formata com separador de milhar
+                                    return context.parsed.y.toLocaleString('pt-BR') + ' unidades';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // --- GRÁFICO 4: Expansão de Eletropostos (Barra) - NOVO GRÁFICO ---
+            new Chart(document.getElementById('graficoEletropostos'), {
+                type: 'bar',
+                data: {
+                    labels: anosNovos,
+                    datasets: [{
+                        label: 'Eletropostos',
+                        data: dadosEletropostos,
+                        backgroundColor: COR_ELETRICO,
+                        borderRadius: 4,
+                    }]
+                },
+                options: {
+                    ...CHART_CONFIG_BASE,
+                    scales: {
+                        ...CHART_CONFIG_BASE.scales,
+                        y: {
+                            ...CHART_CONFIG_BASE.scales.y,
+                            max: 12000,
+                            title: { ...CHART_CONFIG_BASE.scales.y.title, text: 'Quantidade de Pontos' }
+                        }
+                    },
+                    plugins: {
+                        ...CHART_CONFIG_BASE.plugins,
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return context.parsed.y.toLocaleString('pt-BR') + ' eletropostos';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+
+
 
     </main>
     <br><br><br>
