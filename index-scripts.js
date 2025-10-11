@@ -35,32 +35,44 @@ let autoSlideInterval;
 
 // Dados do carrossel: imagens e links
 const carouselData = [
-    { src: 'https://via.placeholder.com/800x400/FF5733/FFFFFF?text=Tema+1:+Reciclagem', link: 'exemplo1.html', alt: 'Imagem de Reciclagem' },
-    { src: 'https://via.placeholder.com/800x400/33FF57/FFFFFF?text=Tema+2:+Energia+Sustentavel', link: 'exemplo2.html', alt: 'Imagem de Energia Sustentável' },
-    { src: 'https://via.placeholder.com/800x400/3357FF/FFFFFF?text=Tema+3:+Preservacao+da+Agua', link: 'exemplo3.html', alt: 'Imagem de Preservação da Água' },
-    { src: 'https://via.placeholder.com/800x400/FF33FF/FFFFFF?text=Tema+4:+Biodiversidade', link: 'exemplo4.html', alt: 'Imagem de Biodiversidade' },
-    { src: 'https://via.placeholder.com/800x400/FFFF33/333333?text=Tema+5:+Poluicao+Zero', link: 'exemplo5.html', alt: 'Imagem de Poluição Zero' }
-    // Adicione mais até 10 imagens se desejar
+    { src: './img/img1.png', link: './servicos.html#monitoramento-ambiental', alt: 'Imagem de Monitoramento Ambiental' },
+    { src: './img/img1.png', link: './servicos.html#energia-limpa', alt: 'Imagem de Energia Sustentável e Limpa' },
+    { src: './img/img1.png', link: './servicos.html#consumo-consciente', alt: 'Imagem de Consumo e Economia Consciente' },
+    { src: './img/img1.png', link: './servicos.html#reciclagem-inteligente', alt: 'Imagem de Reciclagem Inteligente' },
+    { src: './img/img1.png', link: './servicos.html#mobilidade-sustentavel', alt: 'Imagem de Mobilidade Sustentável' },
+    { src: './img/img1.png', link: './servicos.html#politicas-legislacao', alt: 'Imagem de Políticas & Legislação' },
+    { src: './img/img1.png', link: './servicos.html#educacao-verde', alt: 'Imagem de Educação Verde' },
+    { src: './img/img1.png', link: '#carros-eletricos', alt: 'Imagem de Carros Elétricos' }
 ];
 
 // --- Funções do Carrossel ---
+// Função loadCarouselImages original (ajustada para esta etapa)
+// --- Funções do Carrossel ---
 function loadCarouselImages() {
     carouselSlide.innerHTML = ''; // Limpa qualquer conteúdo pré-existente
+    
     carouselData.forEach(item => {
         const img = document.createElement('img');
         img.src = item.src;
         img.alt = item.alt;
-        img.style.width = '100%'; // Garante que cada imagem ocupe a largura do slide
+        
+        // 🔑 AJUSTE PRINCIPAL: Define a largura de cada imagem para que caiba no slide principal.
+        // O valor é 100% dividido pelo número total de slides, garantindo que o conjunto (carouselSlide)
+        // se estenda para a largura correta (ex: 500% para 5 imagens).
+        img.style.width = (100 / carouselData.length) + '%'; 
+        
         img.addEventListener('click', () => {
             window.location.href = item.link;
         });
         carouselSlide.appendChild(img);
     });
-    // Ajusta a largura do carouselSlide para caber todas as imagens
+    
+    // ESSENCIAL: A largura TOTAL do carouselSlide é a soma de todas as imagens lado a lado (ex: 500%)
     carouselSlide.style.width = (carouselData.length * 100) + '%';
 }
 
 function showSlide(index) {
+    // ... (O restante da função showSlide permanece o mesmo) ...
     if (index >= carouselData.length) {
         currentSlideIndex = 0;
     } else if (index < 0) {
@@ -68,9 +80,12 @@ function showSlide(index) {
     } else {
         currentSlideIndex = index;
     }
-    const offset = -currentSlideIndex * (100 / carouselData.length); // Calcula o deslocamento percentual
+    
+    // Calcula o deslocamento em porcentagem
+    const offset = -currentSlideIndex * (100 / carouselData.length);
     carouselSlide.style.transform = `translateX(${offset}%)`;
 }
+
 
 
 function nextSlide() {
