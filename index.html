@@ -207,7 +207,8 @@
             <h2>Como funciona o PlugShare?</h2>
 
             <!-- BOTÃO -->
-            <button class="toggle-btn" onclick="toggleTutorial()">📘 Veja um pequeno Passo a Passo de como utilizar</button>
+            <button class="toggle-btn" onclick="toggleTutorial()">📘 Veja um pequeno Passo a Passo de como
+                utilizar</button>
 
             <!-- CONTEÚDO ESCONDIDO -->
             <div id="tutorialContent" class="tutorial-content">
@@ -341,223 +342,223 @@
         </section>
 
         <section class="carousel-section">
-            
-    <style>
-        /* Estilos específicos para o Carrossel */
-        .carousel-container {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            /* Ou o tamanho desejado */
-            margin: 20px auto;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
 
-        .carousel-slide {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
+            <style>
+                /* Estilos específicos para o Carrossel */
+                .carousel-container {
+                    position: relative;
+                    width: 100%;
+                    max-width: 900px;
+                    /* Ou o tamanho desejado */
+                    margin: 20px auto;
+                    overflow: hidden;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                }
 
-        .carousel-slide img {
-            width: 100%;
-            height: 400px;
-            /* Altura fixa para as imagens do carrossel */
-            object-fit: cover;
-            /* Garante que a imagem preencha o espaço sem distorção */
-            flex-shrink: 0;
-            /* Impede que as imagens encolham */
-            cursor: pointer;
-        }
+                .carousel-slide {
+                    display: flex;
+                    transition: transform 0.5s ease-in-out;
+                }
 
-        .carousel-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 24px;
-            z-index: 10;
-            border-radius: 5px;
-        }
+                .carousel-slide img {
+                    width: 100%;
+                    height: 400px;
+                    /* Altura fixa para as imagens do carrossel */
+                    object-fit: cover;
+                    /* Garante que a imagem preencha o espaço sem distorção */
+                    flex-shrink: 0;
+                    /* Impede que as imagens encolham */
+                    cursor: pointer;
+                }
 
-        .carousel-button.prev {
-            left: 10px;
-        }
+                .carousel-button {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background-color: rgba(0, 0, 0, 0.5);
+                    color: white;
+                    border: none;
+                    padding: 10px 15px;
+                    cursor: pointer;
+                    font-size: 24px;
+                    z-index: 10;
+                    border-radius: 5px;
+                }
 
-        .carousel-button.next {
-            right: 10px;
-        }
+                .carousel-button.prev {
+                    left: 10px;
+                }
 
-        /* Estilos específicos para o Mapa de Visualização */
-        .map-display-container {
-            width: 100%;
-            max-width: 90%;
-            /* Ou o tamanho desejado */
-            margin: 20px auto;
-            background-color: #697f3f;
-            /* Cor de fundo para o container principal do mapa */
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            padding: 1%;
-        }
+                .carousel-button.next {
+                    right: 10px;
+                }
 
-        #mapaIndex {
-            height: 450px;
-            /* Altura do mapa no index */
-            width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-bottom: 15px;
-        }
+                /* Estilos específicos para o Mapa de Visualização */
+                .map-display-container {
+                    width: 100%;
+                    max-width: 90%;
+                    /* Ou o tamanho desejado */
+                    margin: 20px auto;
+                    background-color: #697f3f;
+                    /* Cor de fundo para o container principal do mapa */
+                    border-radius: 8px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    text-align: center;
+                    padding: 1%;
+                }
 
-        /* NOVO: Estilos para o wrapper de legenda e clima */
-        .map-info-and-climate-wrapper {
-            display: flex;
-            gap: 20px;
-            /* Espaço entre a legenda e o clima */
-            margin-top: 20px;
-            flex-wrap: wrap;
-            /* Permite que os itens quebrem para a linha de baixo em telas menores */
-            justify-content: center;
-            /* Centraliza os itens quando eles quebram */
-            align-items: flex-start;
-            /* Alinha os itens ao topo */
-        }
+                #mapaIndex {
+                    height: 450px;
+                    /* Altura do mapa no index */
+                    width: 100%;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    margin-bottom: 15px;
+                }
 
-        /* NOVO: Estilos para a legenda e o container do clima */
-        .map-info-and-climate-wrapper .map-legend,
-        .map-info-and-climate-wrapper .climate-content-container {
-            flex: 1;
-            /* Permite que ambos cresçam e diminuam */
-            min-width: 280px;
-            /* Largura mínima para cada item */
-            background-color: #587029;
-            border-radius: 8px;
-            height: 450px;
-            padding: 15px;
-            border: 1px solid #587029;
-            box-sizing: border-box;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: left;
-            /* Garante que o texto dentro seja alinhado à esquerda */
-        }
+                /* NOVO: Estilos para o wrapper de legenda e clima */
+                .map-info-and-climate-wrapper {
+                    display: flex;
+                    gap: 20px;
+                    /* Espaço entre a legenda e o clima */
+                    margin-top: 20px;
+                    flex-wrap: wrap;
+                    /* Permite que os itens quebrem para a linha de baixo em telas menores */
+                    justify-content: center;
+                    /* Centraliza os itens quando eles quebram */
+                    align-items: flex-start;
+                    /* Alinha os itens ao topo */
+                }
 
-        .map-display-container .map-legend h4,
-        .climate-content-container h4 {
-            /* Aplica ao h4 de ambos */
-            color: #f0f0f0;
-            /* Verde escuro para os títulos */
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 24px;
-            text-align: left;
-            /* Garante alinhamento à esquerda */
-        }
+                /* NOVO: Estilos para a legenda e o container do clima */
+                .map-info-and-climate-wrapper .map-legend,
+                .map-info-and-climate-wrapper .climate-content-container {
+                    flex: 1;
+                    /* Permite que ambos cresçam e diminuam */
+                    min-width: 280px;
+                    /* Largura mínima para cada item */
+                    background-color: #587029;
+                    border-radius: 8px;
+                    height: 450px;
+                    padding: 15px;
+                    border: 1px solid #587029;
+                    box-sizing: border-box;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    text-align: left;
+                    /* Garante que o texto dentro seja alinhado à esquerda */
+                }
 
-        .map-display-container .map-legend .legend-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 5px;
-            font-size: 20px;
-        }
+                .map-display-container .map-legend h4,
+                .climate-content-container h4 {
+                    /* Aplica ao h4 de ambos */
+                    color: #f0f0f0;
+                    /* Verde escuro para os títulos */
+                    margin-top: 0;
+                    margin-bottom: 10px;
+                    font-size: 24px;
+                    text-align: left;
+                    /* Garante alinhamento à esquerda */
+                }
 
-        .map-display-container .map-legend .legend-color-box {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            border: 2px solid #333;
-            margin-right: 8px;
-        }
+                .map-display-container .map-legend .legend-item {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 5px;
+                    font-size: 20px;
+                }
 
-        /* NOVO: Ajustes para o formulário de clima injetado */
-        .climate-content-container #form-clima {
-            padding: 0;
-            /* Remove padding extra se houver */
-            background-color: transparent;
-            /* Garante que não tenha fundo extra */
-            box-shadow: none;
-            /* Remove sombra extra se houver */
-        }
+                .map-display-container .map-legend .legend-color-box {
+                    width: 18px;
+                    height: 18px;
+                    border-radius: 50%;
+                    border: 2px solid #333;
+                    margin-right: 8px;
+                }
 
-        /* Ajusta o h2 original do clima que agora é um h4 dentro do container */
-        .climate-content-container #form-clima h2 {
-            display: none;
-            /* Esconde o h2 original do clima se ele for carregado junto */
-        }
+                /* NOVO: Ajustes para o formulário de clima injetado */
+                .climate-content-container #form-clima {
+                    padding: 0;
+                    /* Remove padding extra se houver */
+                    background-color: transparent;
+                    /* Garante que não tenha fundo extra */
+                    box-shadow: none;
+                    /* Remove sombra extra se houver */
+                }
+
+                /* Ajusta o h2 original do clima que agora é um h4 dentro do container */
+                .climate-content-container #form-clima h2 {
+                    display: none;
+                    /* Esconde o h2 original do clima se ele for carregado junto */
+                }
 
 
-        .map-display-container .map-action-section {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-            color: #f0f0f0;
-            /* Cor do texto no botão de ação */
-        }
+                .map-display-container .map-action-section {
+                    margin-top: 20px;
+                    padding-top: 15px;
+                    border-top: 1px solid #eee;
+                    color: #f0f0f0;
+                    /* Cor do texto no botão de ação */
+                }
 
-        .map-display-container .map-action-section h3 {
-            color: #f0f0f0;
-            /* Cor do texto no botão de ação */
-            margin-bottom: 15px;
-        }
+                .map-display-container .map-action-section h3 {
+                    color: #f0f0f0;
+                    /* Cor do texto no botão de ação */
+                    margin-bottom: 15px;
+                }
 
-        .map-display-container .map-action-button {
-            display: inline-block;
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
+                .map-display-container .map-action-button {
+                    display: inline-block;
+                    background-color: #4CAF50;
+                    color: white;
+                    padding: 12px 25px;
+                    border: none;
+                    border-radius: 5px;
+                    text-decoration: none;
+                    font-weight: bold;
+                    transition: background-color 0.3s ease;
+                }
 
-        .map-display-container .map-action-button.locate-user {
-            background-color: #2196F3;
-        }
+                .map-display-container .map-action-button.locate-user {
+                    background-color: #2196F3;
+                }
 
-        .map-display-container .map-action-button.locate-user:hover {
-            background-color: #0b7dda;
-        }
+                .map-display-container .map-action-button.locate-user:hover {
+                    background-color: #0b7dda;
+                }
 
-        .map-display-container .map-action-button:hover {
-            background-color: #45a049;
-        }
+                .map-display-container .map-action-button:hover {
+                    background-color: #45a049;
+                }
 
-        /* Responsividade para o novo layout de legenda/clima */
-        @media (max-width: 768px) {
-            .map-info-and-climate-wrapper {
-                flex-direction: column;
-                /* Empilha a legenda e o clima verticalmente em telas menores */
-            }
+                /* Responsividade para o novo layout de legenda/clima */
+                @media (max-width: 768px) {
+                    .map-info-and-climate-wrapper {
+                        flex-direction: column;
+                        /* Empilha a legenda e o clima verticalmente em telas menores */
+                    }
 
-            .map-info-and-climate-wrapper .map-legend,
-            .map-info-and-climate-wrapper .climate-content-container {
-                min-width: unset;
-                /* Remove o min-width quando empilhado */
-                width: 100%;
-                /* Ocupa 100% da largura quando empilhado */
-            }
+                    .map-info-and-climate-wrapper .map-legend,
+                    .map-info-and-climate-wrapper .climate-content-container {
+                        min-width: unset;
+                        /* Remove o min-width quando empilhado */
+                        width: 100%;
+                        /* Ocupa 100% da largura quando empilhado */
+                    }
 
-            .carousel-slide img {
-                height: 300px;
-                /* Ajusta altura do carrossel para telas menores */
-            }
-        }
+                    .carousel-slide img {
+                        height: 300px;
+                        /* Ajusta altura do carrossel para telas menores */
+                    }
+                }
 
-        @media (max-width: 480px) {
-            .carousel-slide img {
-                height: 200px;
-                /* Ajusta altura do carrossel para telas muito pequenas */
-            }
-        }
-    </style>
+                @media (max-width: 480px) {
+                    .carousel-slide img {
+                        height: 200px;
+                        /* Ajusta altura do carrossel para telas muito pequenas */
+                    }
+                }
+            </style>
             <h2 style="text-align: center; color: #f0f0f0;">Explore nossos Temas</h2>
             <div class="carousel-container" id="carouselContainer">
                 <div class="carousel-slide" id="carouselSlide">
@@ -1008,8 +1009,12 @@
                         sustentabilidade ambiental. Embora desafios como o custo e a infraestrutura ainda existam, os
                         benefícios a longo prazo em economia e impacto ambiental os tornam uma escolha cada vez mais
                         atraente para o futuro. O avanço da tecnologia e o investimento em infraestrutura serão chave
-                        para
-                        sua popularização.
+                        para sua popularização.
+                    </p>
+                    <p style="text-align: center; margin-bottom: 20px;">
+                        <a href="#btnLocateUserMap"
+                            style="color: white; text-decoration: none; padding: 10px 15px; background-color: #4CAF50; border-radius: 6px; display: inline-block;"
+                            class="botao-limpo">Veja Eletro Postos perto de você</a>
                     </p>
                 </div>
 
