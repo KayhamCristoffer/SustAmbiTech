@@ -33,8 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "title": "O que \u00e9 Monitoramento Ambiental?",
         "body": `
             <p>Monitoramento ambiental refere-se à coleta sistemática de dados sobre o estado do meio ambiente, incluindo ar, água, solo e biodiversidade. O objetivo é avaliar a qualidade ambiental, identificar tendências, prever impactos e fornecer informações para a tomada de decisões e implementação de políticas de proteção ambiental. É uma ferramenta essencial para a gestão sustentável dos recursos naturais e para a saúde pública.</p>
-            <a href="https://ambisis.com.br/blog/gestao-ambiental/monitoramento-ambiental/"
-                target="_blank" rel="noopener noreferrer">
+            <a href="https://ambisis.com.br/blog/gestao-ambiental/monitoramento-ambiental/" target="_blank" rel="noopener noreferrer">
                 Saiba Mais
             </a>
         `
@@ -43,42 +42,54 @@ document.addEventListener('DOMContentLoaded', () => {
         "title": "Como a tecnologia pode ajudar no Monitoramento Ambiental?",
         "body": `
             <p>A tecnologia desempenha um papel crucial no aprimoramento do monitoramento ambiental, tornando-o mais eficiente, preciso e abrangente. Sensores avançados, plataformas de coleta de dados em tempo real, inteligência artificial e análise de big data permitem a detecção precoce de problemas, a modelagem de cenários e a comunicação eficaz de informações. Isso facilita a resposta rápida a desastres ambientais e a implementação de medidas preventivas.</p>
-            <a href="https://manejebem.com/tecnologias-para-monitoramento-ambiental/">Saiba Mais.</a>
+            <a href="https://manejebem.com/tecnologias-para-monitoramento-ambiental/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico1-monitoramento-ambiental-tipos-de-sensores-e-suas-aplica-es-": {
         "title": "Tipos de sensores e suas aplica\u00e7\u00f5es:",
         "body": `
             <p>Diversos tipos de sensores são utilizados para coletar dados ambientais, cada um com aplicações específicas:</p>
-            <a href=""></a>
+            <a href="https://nybsys.com/types-of-sensors/" target="_blank" rel="noopener noreferrer">
+                Saima Mais.
+            </a>
         `
     },
     "topico1-monitoramento-ambiental-sensores-de-qualidade-do-ar": {
         "title": "Sensores de Qualidade do Ar",
         "body": `
             <p>Estes sensores medem a concentração de poluentes como material particulado (PM2.5, PM10), dióxido de carbono (CO2), monóxido de carbono (CO), dióxido de enxofre (SO2), óxidos de nitrogênio (NOx) e ozônio (O3). São cruciais para monitorar a poluição atmosférica em áreas urbanas e industriais, alertando sobre níveis perigosos e ajudando a formular estratégias de controle da poluição.</p>
-            <a href=""></a>
+            <a href="https://www.biotecrs.com.br/monitoramento-poluentes-atmosfericos" target="_blank" rel="noopener noreferrer">
+                Saima Mais.
+            </a>    
         `
     },
     "topico1-monitoramento-ambiental-sensores-de-qualidade-da-gua": {
         "title": "Sensores de Qualidade da \u00c1gua",
         "body": `
             <p>Utilizados para avaliar parâmetros como pH, turbidez, oxigênio dissolvido, condutividade elétrica, temperatura e presença de contaminantes químicos e biológicos em rios, lagos e oceanos. Essenciais para a gestão de recursos hídricos, detecção de poluição e proteção de ecossistemas aquáticos.</p>
-            <a href=""></a>
+            <a href="https://www.ana.gov.br/portalpnqa/indicadores-indice-aguas.aspx" target="_blank" rel="noopener noreferrer">
+                Saima Mais.
+            </a>
         `
     },
     "topico1-monitoramento-ambiental-sensores-de-temperatura-e-umidade": {
         "title": "Sensores de Temperatura e Umidade",
         "body": `
             <p>Monitoram as condições climáticas, sendo fundamentais para estudos meteorológicos, agricultura de precisão, previsão de eventos extremos e avaliação das mudanças climáticas. Podem ser encontrados em estações meteorológicas, dispositivos IoT e sistemas de automação.</p>
-            <a href=""></a>
+            <a href="" target="_blank" rel="noopener noreferrer">
+                Saima Mais.
+            </a>
         `
     },
     "topico1-monitoramento-ambiental-sensores-de-gases-de-efeito-estufa": {
         "title": "Sensores de Gases de Efeito Estufa",
         "body": `
             <p>Focados na medição de gases como metano (CH4) e dióxido de carbono (CO2) para entender suas concentrações na atmosfera e seu impacto no aquecimento global. São usados em pesquisas climáticas e no monitoramento de emissões industriais.</p>
-            <a href=""></a>
+            <a href="" target="_blank" rel="noopener noreferrer">
+                Saima Mais.
+            </a>
         `
     },
     "topico1-monitoramento-ambiental-outros-sensores": {
