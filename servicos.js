@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "body": `
             <p>Diversos tipos de sensores são utilizados para coletar dados ambientais, cada um com aplicações específicas:</p>
             <a href="https://blog.cpetecnologia.com.br/desenvolvimento-em-sensores-remotos-para-monitoramento-ambiental/" target="_blank" rel="noopener noreferrer">
-                Saima Mais.
+                Saiba Mais.
             </a>
         `
     },
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "body": `
             <p>Estes sensores medem a concentração de poluentes como material particulado (PM2.5, PM10), dióxido de carbono (CO2), monóxido de carbono (CO), dióxido de enxofre (SO2), óxidos de nitrogênio (NOx) e ozônio (O3). São cruciais para monitorar a poluição atmosférica em áreas urbanas e industriais, alertando sobre níveis perigosos e ajudando a formular estratégias de controle da poluição.</p>
             <a href="https://www.biotecrs.com.br/monitoramento-poluentes-atmosfericos" target="_blank" rel="noopener noreferrer">
-                Saima Mais.
+                Saiba Mais.
             </a>    
         `
     },
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "body": `
             <p>Utilizados para avaliar parâmetros como pH, turbidez, oxigênio dissolvido, condutividade elétrica, temperatura e presença de contaminantes químicos e biológicos em rios, lagos e oceanos. Essenciais para a gestão de recursos hídricos, detecção de poluição e proteção de ecossistemas aquáticos.</p>
             <a href="https://www.ana.gov.br/portalpnqa/indicadores-indice-aguas.aspx" target="_blank" rel="noopener noreferrer">
-                Saima Mais.
+                Saiba Mais.
             </a>
         `
     },
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "body": `
             <p>Monitoram as condições climáticas, sendo fundamentais para estudos meteorológicos, agricultura de precisão, previsão de eventos extremos e avaliação das mudanças climáticas. Podem ser encontrados em estações meteorológicas, dispositivos IoT e sistemas de automação.</p>
             <a href="https://useconectividade.com.br/10-vantagens-do-monitoramento-climatico-para-a-agricultura-de-precisao/" target="_blank" rel="noopener noreferrer">
-                Saima Mais.
+                Saiba Mais.
             </a>
         `
     },
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "body": `
             <p>Focados na medição de gases como metano (CH4) e dióxido de carbono (CO2) para entender suas concentrações na atmosfera e seu impacto no aquecimento global. São usados em pesquisas climáticas e no monitoramento de emissões industriais.</p>
             <a href="https://oeco.org.br/dicionario-ambiental/28261-gases-do-efeito-estufa-dioxido-de-carbono-co2-e-metano-ch4/" target="_blank" rel="noopener noreferrer">
-                Saima Mais.
+                Saiba Mais.
             </a>
         `
     },
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "body": `
             <p>Incluem sensores de solo (umidade, nutrientes), radiação solar (para energia solar e agricultura) e ruído (para monitoramento da poluição sonora em cidades).</p>
             <a href="https://www.grupobravomt.com.br/5-post-o-que-sao-e-como-funcionam-os-sensores-de-solo-para-a-agricultura-de-precisao-sorriso-mt" target="_blank" rel="noopener noreferrer">
-                Saima Mais.
+                Saiba Mais.
             </a>
         `
     },
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "body": `
             <p>Sensores ambientais podem ser encontrados em estações de monitoramento fixas, dispositivos móveis, drones e satélites. Em cidades como São Paulo, redes de sensores são instaladas em pontos estratégicos para fornecer dados em tempo real. Aplicativos móveis e plataformas web integram esses dados, permitindo que cidadãos e autoridades visualizem a qualidade do ar, da água e outras informações ambientais. Muitos desses sistemas utilizam APIs para compartilhar dados e integrar-se com outras plataformas.</p>
             <a href="https://cetesb.sp.gov.br/ar/redes-de-monitoramento/" target="_blank" rel="noopener noreferrer">
-                Saima Mais.
+                Saiba Mais.
             </a>
         `
     },
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "body": `
             <p>Sistemas de monitoramento ambiental frequentemente incluem funcionalidades de alerta e notificação, que informam usuários e autoridades sobre condições ambientais que excedem limites seguros ou indicam eventos críticos. Isso permite uma resposta rápida a emergências e a implementação de medidas de mitigação.</p>
             <a href="https://www.gov.br/mdr/pt-br/noticias/defesa-civil-alerta-saiba-como-funciona-o-novo-sistema-de-alertas-de-desastres-do-governo-federal" target="_blank" rel="noopener noreferrer">
-                Saima Mais.
+                Saiba Mais.
             </a>
         `
     },
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "body": `
             <p>O monitoramento ambiental tecnológico tem um impacto significativo na capacidade de proteger o planeta. Por exemplo, em diversas cidades, a instalação de redes de sensores de qualidade do ar permitiu identificar fontes de poluição e implementar restrições de tráfego, resultando em melhorias na saúde respiratória da população. A detecção precoce de vazamentos em oleodutos por sensores de solo também evitou desastres ecológicos maiores.</p>
             <a href="https://www.verx.com.br/tecnologia-para-o-meio-ambiente-como-a-tecnologia-pode-ajudar-a-salvar-o-planeta/" target="_blank" rel="noopener noreferrer">
-                Saima Mais.
+                Saiba Mais.
             </a>
         `
     },
@@ -143,11 +143,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <ul>
                 <li><a href="https://www.boletimaomar.com.br/">
                     Boletim ao Mar.</a></li>
-                <li><a href="index.html#clima-index">
+                <li><a href="index.html#mapaIndex">
                     Veja o Clima em sua região</a></li>
             </ul>
-            <a href="" target="_blank" rel="noopener noreferrer">
-                Saima Mais.
+            <a href="https://www.monolithicpower.com/en/learning/mpscholar/sensors/intro-to-sensors/history-and-evolution?srsltid=AfmBOoq34gSwXBouuLK8phdSsA0ZQq0dpCBPz6JyC_otHwBfxE6oe41G" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
             </a>
         `
     },
@@ -155,8 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "title": "O que \u00e9 Energia Limpa?",
         "body": `
             <p>Energia limpa, também conhecida como energia renovável, refere-se a fontes de energia que não liberam poluentes na atmosfera ou que têm um impacto ambiental mínimo. Ao contrário dos combustíveis fósseis, que são finitos e contribuem para as mudanças climáticas, as fontes de energia limpa são naturalmente reabastecidas e sustentáveis a longo prazo. Elas são cruciais para a transição energética global e para a redução da pegada de carbono.</p>
-            <a href="" target="_blank" rel="noopener noreferrer">
-                Saima Mais.
+            <a href="https://www.iberdrola.com/sustentabilidade/energias-limpas#:~:text=Respeito%20ao%20meio%20ambiente,o%20combate%20%C3%A0s%20mudan%C3%A7as%20clim%C3%A1ticas." target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
             </a>
         `
     },
@@ -164,54 +164,82 @@ document.addEventListener('DOMContentLoaded', () => {
         "title": "Como a tecnologia pode ajudar na Energia Limpa?",
         "body": `
             <p>A tecnologia é a força motriz por trás do avanço e da viabilidade da energia limpa. Inovações em materiais, eletrônica, inteligência artificial e engenharia têm permitido o desenvolvimento de sistemas mais eficientes para captação, conversão, armazenamento e distribuição de energia renovável. A tecnologia também facilita a integração dessas fontes na rede elétrica existente e a otimização do consumo de energia.</p>
+            <a href="https://tradener.com.br/2023/07/19/energia-renovavel-o-futuro-sustentavel-da-geracao-de-energia/?gad_source=1&gad_campaignid=22789115167&gbraid=0AAAAADSYUGy9uPV2sZV4a8Rhz_d4IOCXA&gclid=Cj0KCQjwgKjHBhChARIsAPJR3xc4dCyGwnrVhompzLWbPSQvTYReEBT2LiBdfmEgTCS_M114awzlM3saAmW0EALw_wcB" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>    
         `
     }, 
     "topico2-energia-limpa-energia-solar": {
         "title": "Energia Solar",
         "body": `
             <p>Utiliza a luz do sol para gerar eletricidade (fotovoltaica) ou calor (térmica). A tecnologia fotovoltaica, com painéis solares cada vez mais eficientes e acessíveis, é uma das soluções mais populares para residências, empresas e grandes usinas. O avanço em baterias também permite o armazenamento da energia solar para uso noturno ou em dias nublados.</p>
+            <a href="https://www.piscodeluz.org/energia-fotovoltaica?gad_source=1&gad_campaignid=1631379533&gbraid=0AAAAAC5wUG2bUIlnGozDTE3XOBinu7vT8&gclid=Cj0KCQjwgKjHBhChARIsAPJR3xeVv_wqjyvkB94rRW0GBeK7pUDyMFDmF7F3MKa1YuSa8l54wrXnI88aAjWKEALw_wcB" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>    
+
         `
     },
     "topico2-energia-limpa-energia-e-lica": {
         "title": "Energia E\u00f3lica",
         "body": `
             <p>Converte a força do vento em eletricidade através de turbinas eólicas. Parques eólicos, tanto em terra (onshore) quanto no mar (offshore), são capazes de gerar grandes quantidades de energia. A tecnologia tem focado em turbinas maiores e mais eficientes, capazes de operar em diferentes condições de vento.</p>
+            <a href="https://www.portalsolar.com.br/energia-eolica" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>   
         `
     },
     "topico2-energia-limpa-energia-hidrel-trica": {
         "title": "Energia Hidrel\u00e9trica",
         "body": `
             <p>Produz eletricidade a partir da força da água em movimento, geralmente em rios, através de barragens e turbinas. É uma fonte de energia renovável estabelecida, mas seu impacto ambiental (alteração de ecossistemas fluviais) requer planejamento cuidadoso.</p>
+            <a href="https://ecossis.com/noticias/responsabilidade-socioambiental/a-importancia-da-energia-hidraulica-para-o-meio-ambiente-uma-fonte-renovavel-e-sustentavel-de-energia/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>    
         `
     },
     "topico2-energia-limpa-biomassa-e-biog-s": {
         "title": "Biomassa e Biog\u00e1s",
         "body": `
             <p>Biomassa é matéria orgânica (como resíduos agrícolas, florestais ou urbanos) que pode ser queimada para gerar calor e eletricidade, ou convertida em biocombustíveis. Biogás é produzido pela decomposição anaeróbica de matéria orgânica, gerando um gás combustível que pode ser usado para energia. São soluções que aproveitam resíduos, reduzindo o descarte e gerando energia.</p>
+            <a href="https://brasilescola.uol.com.br/geografia/biomassa.htm" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>    
         `
     },
     "topico2-energia-limpa-energia-das-mar-s-e-ondas": {
         "title": "Energia das Mar\u00e9s e Ondas",
         "body": `
             <p>Aproveita a energia cinética das marés e das ondas oceânicas para gerar eletricidade. Embora ainda em estágios iniciais de desenvolvimento comercial, essas tecnologias têm um grande potencial em regiões costeiras com condições favoráveis.</p>
+            <a href="https://brasilescola.uol.com.br/geografia/energia-das-mares.htm" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>    
         `
     },
     "topico2-energia-limpa-energia-geot-rmica": {
         "title": "Energia Geot\u00e9rmica",
         "body": `
             <p>Utiliza o calor do interior da Terra para aquecimento ou geração de eletricidade. É uma fonte constante e confiável, mas sua viabilidade depende da localização geográfica.</p>
+            <a href="https://brasilescola.uol.com.br/geografia/energia-geotermica-1.htm" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico2-energia-limpa-armazenamento-e-integra-o": {
         "title": "Armazenamento e Integra\u00e7\u00e3o",
         "body": `
             <p>O armazenamento de energia, principalmente através de baterias (como as de íon-lítio), é fundamental para superar a intermitência de fontes como solar e eólica. A integração dessas fontes na rede elétrica é otimizada por sistemas inteligentes que gerenciam o fluxo de energia e garantem a estabilidade do fornecimento.</p>
+            <a href="https://www.delfos.energy/pt/blog-posts/o-futuro-do-armazenamento-de-energia-quando-energia-solar-e-eolica-vao-se-tornar-constante-" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>    
         `
     },
     "topico2-energia-limpa-redes-inteligentes-smart-grids-": {
         "title": "Redes Inteligentes (Smart Grids)",
         "body": `
             <p>São redes elétricas avançadas que utilizam tecnologia digital para monitorar, controlar e gerenciar o fluxo de eletricidade de todas as fontes de geração para atender à demanda variável dos consumidores. Elas permitem uma maior integração de energias renováveis, otimizam a distribuição e aumentam a resiliência do sistema.</p>
+            <a href="https://www.atlantico.com.br/blog/smart-grids-e-a-transicao-para-energias-renovaveis/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico2-energia-limpa-dicas-para-reduzir-consumo-de-energia-solu-es-para-casa-dom-stica-": {
@@ -223,6 +251,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><strong>Isolamento Térmico:</strong> Melhorar o isolamento de residências para reduzir a necessidade de aquecimento ou refrigeração.</li>
                 <li><strong>Uso Consciente:</strong> Desligar luzes e aparelhos eletrônicos quando não estiverem em uso, tirar da tomada carregadores e dispositivos em stand-by.</li>
             </ul>
+            <a href="https://meufinanciamentosolar.com.br/dicas/para-voce/como-diminuir-conta-de-luz-com-sistema-fotovoltaico-residencial" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico2-energia-limpa-como-aplicar-automa-o-residencial-e-exemplos-": {
@@ -235,38 +266,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><strong>Tomadas Inteligentes:</strong> Permitem ligar/desligar aparelhos conectados a elas remotamente ou por programação, evitando o consumo de energia em stand-by.</li>
                 <li><strong>Sensores de Presença e Abertura:</strong> Acionam luzes ou sistemas de climatização apenas quando há pessoas no ambiente ou quando portas/janelas são abertas, evitando desperdício.</li>
             </ul>
+            <a href="https://www.3eunicamp.com/post/como-melhorar-a-seguran%C3%A7a-da-sua-casa-com-automa%C3%A7%C3%A3o-residencial-e-iot?gad_source=1&gad_campaignid=20458811698&gbraid=0AAAAADMRGQF8_ONrQim6GVjO8wa0NMAdD&gclid=Cj0KCQjwgKjHBhChARIsAPJR3xePRrPPfpqZOJzWeo7bovLXaiXHFxJa5LgDCjsOn23jO97VPdTbqOIaAnwIEALw_wcB" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico2-energia-limpa-exemplo-de-integra-o-com-api-conceitual-para-automa-o-residencial-": {
         "title": "Exemplo de Integra\u00e7\u00e3o (Conceitual para Automa\u00e7\u00e3o Residencial)",
         "body": `
             <p>Para automação residencial, muitas plataformas oferecem APIs para integração. Um exemplo notável de plataforma de código aberto é o Home Assistant, que permite um controle local e privado de dispositivos inteligentes. Abaixo, um exemplo conceitual de como você poderia interagir com um dispositivo inteligente (como uma lâmpada) via uma API hipotética, inspirada em conceitos de automação residencial:</p>
-            <p>Video de vcs apresentando e.e</p>
             <p><strong>Observação:</strong> A implementação real de controle de dispositivos inteligentes varia muito entre fabricantes e plataformas. Este é um exemplo simplificado para ilustrar o conceito de interação via API. Para um projeto real, seria necessário consultar a documentação específica da plataforma ou dos dispositivos a serem controlados. Plataformas como Home Assistant (código aberto) e Tuya (com plano gratuito para desenvolvedores) são boas opções para explorar.</p>
-            `    
+            <a href="https://www.home-assistant.io/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
+        `    
         },
     "topico3-consumo-economia-consciente-o-que-consumo-e-economia-consciente-": {
         "title": "O que \u00e9 Consumo e Economia Consciente?",
         "body": `
             <p>Consumo e economia consciente referem-se a um estilo de vida e a um conjunto de práticas que visam a utilização de recursos de forma mais responsável, minimizando o impacto ambiental e social, e otimizando o uso de bens e serviços. Isso envolve fazer escolhas informadas sobre o que comprar, como usar e como descartar, considerando a origem, o processo de produção, a durabilidade e o destino final dos produtos. O objetivo é promover um equilíbrio entre as necessidades individuais, o bem-estar social e a saúde do planeta.</p>
+            <a href="https://www2.camara.leg.br/a-camara/estruturaadm/gestao-na-camara-dos-deputados/responsabilidade-social-e-ambiental/ecocamara/consumo-consciente" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico3-consumo-economia-consciente-como-a-tecnologia-pode-ajudar-no-consumo-e-economia-consciente-": {
         "title": "Como a tecnologia pode ajudar no Consumo e Economia Consciente?",
         "body": `
             <p>A tecnologia desempenha um papel fundamental na promoção do consumo e da economia consciente, oferecendo ferramentas e soluções que capacitam os indivíduos a tomar decisões mais sustentáveis. Desde aplicativos que monitoram o consumo de energia até plataformas que facilitam a reciclagem e a compra de produtos sustentáveis, a tecnologia torna mais fácil para as pessoas entenderem seu impacto, encontrarem alternativas e adotarem hábitos mais responsáveis. Ela também permite a automação de processos que reduzem o desperdício e otimizam o uso de recursos.</p>
+            <a href="https://dialogando.com.br/sustentabilidade/consumo-consciente-ricardo-morishita/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico3-consumo-economia-consciente-solu-es-para-reduzir-custos-e-promover-o-consumo-consciente-": {
         "title": "Solu\u00e7\u00f5es para reduzir custos e promover o consumo consciente:",
         "body": `
-
-`
+            <a href="https://nossaenergia.petrobras.com.br/w/transicao-energetica/consumo-consciente-na-pratica-veja-como-aplicar-no-seu-dia-a-dia" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
+        `
     },
     "topico3-consumo-economia-consciente-ilumina-o-led": {
         "title": "Ilumina\u00e7\u00e3o LED",
         "body": `
             <p>A substituição de lâmpadas incandescentes e fluorescentes por lâmpadas LED é uma das maneiras mais eficazes de reduzir o consumo de energia em residências e empresas. As LEDs são significativamente mais eficientes, duram muito mais tempo e oferecem melhor qualidade de luz, resultando em economia na conta de luz e menor necessidade de substituição.</p>
+            <a href="https://www.glight.com.br/blog/iluminacao-eficiente-como-as-lampadas-led-podem-reduzir-os-custos-de-energia-e-melhorar-sustentabilidade/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico3-consumo-economia-consciente-tecnologia-e-automa-o": {
@@ -277,41 +324,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><strong>Assistentes Virtuais:</strong> Dispositivos como Amazon Echo ou Google Home podem ser integrados a sistemas de casa inteligente para controlar luzes, termostatos e outros aparelhos, permitindo um gerenciamento mais eficiente do consumo.</li>
                 <li><strong>Aplicativos de Monitoramento de Energia:</strong> Existem diversos aplicativos que se conectam a medidores inteligentes ou dispositivos plug-and-play para fornecer dados em tempo real sobre o consumo de energia, ajudando os usuários a identificar padrões de desperdício e a tomar medidas corretivas.</li>
             </ul>
+            <a href="https://repositorio-api.animaeducacao.com.br/server/api/core/bitstreams/e96a4465-4239-4fd9-b1ef-aa3c8c4d77e2/content" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico3-consumo-economia-consciente-tomadas-inteligentes": {
         "title": "Tomadas Inteligentes",
         "body": `
             <p>As tomadas inteligentes permitem ligar e desligar aparelhos eletrônicos remotamente ou programar seu funcionamento. Isso é particularmente útil para eliminar o consumo de energia em modo stand-by (phantom load), que pode representar uma parcela significativa do consumo total de uma residência.</p>
+            <a href="https://www.weg.net/weghome/blog/tecnologia/tomadas-inteligentes/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico3-consumo-economia-consciente-sensores-de-presen-a-ou-temporizadores": {
         "title": "Sensores de Presen\u00e7a ou Temporizadores",
         "body": `
             <p>Instalar sensores de presença em ambientes como corredores, banheiros e áreas de serviço garante que as luzes sejam acesas apenas quando necessário e desligadas automaticamente após um período de inatividade. Temporizadores podem ser usados para controlar o funcionamento de sistemas de irrigação, aquecedores de água e outros aparelhos, evitando o uso desnecessário.</p>
+            <a href="https://www.glight.com.br/blog/lampadas-com-sensores-de-presenca-uma-solucao-para-ambientes-internos-e-externos/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico3-consumo-economia-consciente-equipamentos-dom-sticos-com-selo-procel-a-energy-star": {
         "title": "Equipamentos Dom\u00e9sticos com Selo Procel A/ENERGY STAR",
         "body": `
             <p>Ao adquirir novos eletrodomésticos, é fundamental verificar os selos de eficiência energética, como o Procel A no Brasil ou o ENERGY STAR internacional. Esses selos indicam que o aparelho consome menos energia para realizar a mesma função, resultando em economia a longo prazo e menor impacto ambiental.</p>
+            <a href="https://www.epe.gov.br/pt/abcdenergia/eficiencia-energetica" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico3-consumo-economia-consciente-aplicativos-para-escanear-produtos-sugest-o-de-c-digo-para-api-": {
-        "title": "Aplicativos para Escanear produtos (Sugest\u00e3o de C\u00f3digo para API)",
+        "title": "Aplicativos para Escanear produtos",
         "body": `
             <p>Existem aplicativos que permitem escanear códigos de barras de produtos para obter informações sobre sua origem, composição, impacto ambiental e certificações de sustentabilidade. Para desenvolver uma funcionalidade similar, pode-se utilizar APIs de bancos de dados de produtos ou de organizações que fornecem dados de sustentabilidade. Um excelente exemplo é a API do Open Food Facts, que oferece dados abertos sobre produtos alimentícios.</p>
             <ul>
-                <li><a href=""></a>Aplicativo 1</li>
-                <li><a href=""></a>Aplicativo 2</li>
-                <li><a href=""></a>Aplicativo 3</li>
+                <li><a href="https://pt.openfoodfacts.org/discover?gad_source=1"></a>Open Food Facts</li>
+                <li><a href="https://play.google.com/store/apps/details?id=com.foodbarcodescanner.app&hl=pt">Ethical Food Finder</a></li>
+                <li><a href="https://play.google.com/store/apps/details?id=com.desrotulando.app&hl=pt_BR">Desrotulando</a></li>
             </ul>
+            <a href="https://www.insper.edu.br/pt/noticias/2022/4/cinco-aplicativos-que-ajudam-a-desenvolver-habitos-sustentaveis" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico4-reciclagem-inteligente-o-que-reciclagem-inteligente-": {
         "title": "O que \u00e9 Reciclagem Inteligente?",
         "body": `
             <p>Reciclagem inteligente é a aplicação de tecnologias avançadas para otimizar e tornar mais eficiente o processo de coleta, triagem e reprocessamento de resíduos. Ela vai além da reciclagem tradicional, utilizando ferramentas digitais, automação e análise de dados para melhorar a taxa de recuperação de materiais, reduzir custos operacionais, aumentar a transparência e engajar os cidadãos de forma mais eficaz. O objetivo é criar um sistema de gestão de resíduos mais sustentável e circular.</p>
+            <a href="https://convale.ce.gov.br/informa/43/inovacoes-tecnologicas-no-tratamento-e-reciclagem-" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico4-reciclagem-inteligente-como-a-tecnologia-pode-ajudar-na-reciclagem-inteligente-": {
@@ -325,48 +390,72 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><strong>Rastreabilidade:</strong> Monitorar o fluxo dos resíduos do descarte ao reprocessamento.</li>
                 <li><strong>Análise de Dados:</strong> Gerar insights para aprimorar continuamente o sistema de reciclagem.</li>
             </ul>
+            <a href="https://www.dio.me/articles/transformando-a-reciclagem-com-inteligencia-artificial-o-futuro-da-gestao-de-residuos" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico4-reciclagem-inteligente-aplicativos-para-escanear-produtos": {
         "title": "Aplicativos para Escanear produtos",
         "body": `
             <p>Assim como no consumo consciente, aplicativos podem ser usados para escanear códigos de barras de produtos e fornecer informações sobre como descartá-los corretamente, quais partes são recicláveis e onde podem ser entregues. Isso educa o consumidor e simplifica o processo de separação de resíduos em casa.</p>
+            <a href="https://ciclovivo.com.br/inovacao/negocios/5-aplicativos-para-descartar-e-reciclar-embalagens/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico4-reciclagem-inteligente-coleta-inteligente": {
         "title": "Coleta Inteligente",
         "body": `
             <p>Sistemas de coleta inteligente utilizam sensores em lixeiras e contêineres para monitorar o nível de enchimento em tempo real. Com base nesses dados, rotas de coleta são otimizadas, garantindo que os caminhões só coletem lixo quando os contêineres estão cheios, reduzindo o consumo de combustível, emissões e custos operacionais. Isso também evita o transbordamento de lixeiras e melhora a higiene urbana.</p>
+            <a href="https://bdta.abcd.usp.br/directbitstream/8fa096c9-a628-419e-8c34-e33791fe7149/PatriciaKelly.pdf" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico4-reciclagem-inteligente-triagem-automatizada": {
         "title": "Triagem Automatizada",
         "body": `
             <p>Centros de triagem modernos empregam tecnologias como inteligência artificial, visão computacional e robótica para identificar e separar diferentes tipos de materiais recicláveis (plásticos, metais, papéis, vidros) com alta velocidade e precisão. Isso minimiza a necessidade de mão de obra manual em tarefas repetitivas e perigosas, e aumenta a pureza dos materiais reciclados, tornando-os mais valiosos para a indústria.</p>
+            <a href="https://recycleye.com/ai-waste-sorting-robots-are-future/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico4-reciclagem-inteligente-cidades-inteligentes": {
         "title": "Cidades Inteligentes",
         "body": `
-            <p>No contexto de cidades inteligentes, a reciclagem inteligente é integrada a uma infraestrutura urbana mais ampla. Isso pode incluir a instalação de pontos de coleta automatizados, programas de incentivo à reciclagem baseados em recompensas digitais e a utilização de dados para planejar políticas públicas de gestão de resíduos mais eficazes.</p>
+            <p>No contexto de cidades inteligentes, a reciclagem inteligente é integrada a uma infraestrutura urbana mais ampla. Isso pode incluir a instalação de pontos de coleta automatizados, programas de incentivo à reciclagem baseados em recompensas digitais e a utilização de dados para planejar políticas públicas de gestão de resíduos mais eficazes.</p
+            <a href="https://jornal.usp.br/atualidades/cidades-inteligentes-e-sustentabilidade-caminham-juntas-e-passam-pela-questao-da-reciclagem-do-lixo/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico4-reciclagem-inteligente-locais-para-coleta-de-aparelhos-tecnol-gicos": {
         "title": "Locais para coleta de aparelhos tecnol\u00f3gicos",
         "body": `
             <p>O descarte correto de lixo eletrônico (e-lixo) é crucial devido aos componentes tóxicos e valiosos que contém. Muitos fabricantes, varejistas e municípios oferecem pontos de coleta específicos para esses materiais. A tecnologia pode ajudar a localizar esses pontos.</p>
+            <a href="https://prefeitura.sp.gov.br/w/conhe%C3%A7a-os-ecopontos-da-cidade-de-s%C3%A3o-paulo" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico5-mobilidade-sustentavel-o-que-mobilidade-sustent-vel-": {
         "title": "O que \u00e9 Mobilidade Sustent\u00e1vel?",
         "body": `
             <p>Mobilidade sustentável refere-se a um conjunto de práticas e tecnologias que visam facilitar o deslocamento de pessoas e bens de forma a minimizar os impactos ambientais, sociais e econômicos negativos. Isso inclui a promoção de meios de transporte com baixa emissão de carbono, como caminhada, ciclismo, transporte público eficiente e veículos elétricos, além do planejamento urbano que reduza a necessidade de longos deslocamentos. O objetivo é criar sistemas de transporte que sejam acessíveis, equitativos, seguros e ecologicamente responsáveis a longo prazo.</p>
+            <a href="https://revistaft.com.br/a-sustentabilidade-na-mobilidade-urbana-no-brasil/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico5-mobilidade-sustentavel-como-a-tecnologia-pode-ajudar-na-mobilidade-sustent-vel-": {
         "title": "Como a tecnologia pode ajudar na Mobilidade Sustent\u00e1vel?",
         "body": `
             <p>A tecnologia é um catalisador fundamental para a mobilidade sustentável, oferecendo soluções inovadoras para tornar o transporte mais limpo, eficiente e inteligente. Desde o desenvolvimento de veículos elétricos e infraestruturas de carregamento até aplicativos de planejamento de rotas e sistemas de gerenciamento de tráfego, a tecnologia permite otimizar o uso de recursos, reduzir a poluição e melhorar a experiência do usuário. Ela também facilita a integração de diferentes modais de transporte e a coleta de dados para aprimorar políticas públicas.</p>
+            <a href="https://optai.com.br/transporte-inteligente-e-sustentabilidade-caminhos-para-cidades-mais-verdes/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico5-mobilidade-sustentavel-tipos-de-transportes-sustent-veis-": {
@@ -484,46 +573,52 @@ document.addEventListener('DOMContentLoaded', () => {
         "title": "Transporte P\u00fablico (\u00d4nibus el\u00e9tricos, \u00f4nibus, trem, metr\u00f4)",
         "body": `
             <p>O transporte público é intrinsecamente mais sustentável do que o transporte individual, pois transporta um grande número de pessoas com menor pegada de carbono por passageiro. A eletrificação de frotas de ônibus e a expansão de redes de metrô e trem são cruciais para cidades mais verdes. Ônibus elétricos, por exemplo, eliminam emissões locais e reduzem a poluição sonora.</p>
+            <a href="https://sp.gov.br/sp/canais-comunicacao/noticias/dia-da-terra-veja-como-o-transporte-de-sp-reduz-pegada-de-carbono-com-sustentabilidade" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico5-mobilidade-sustentavel-bicicletas": {
         "title": "Bicicletas",
         "body": `
             <p>A bicicleta é um meio de transporte de emissão zero, promovendo saúde e reduzindo o congestionamento. A tecnologia contribui com bicicletas elétricas (e-bikes), sistemas de compartilhamento de bicicletas (bike-sharing) e infraestrutura cicloviária inteligente.</p>
+            <a href="https://blog.edenredmobilidade.com.br/gestao-de-abastecimento/como-a-bike-transforma-a-mobilidade-urbana-sustentavel/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico5-mobilidade-sustentavel-vantagens-e-desafios-benef-cios-a-longo-prazo-": {
         "title": "Vantagens e Desafios (Benef\u00edcios a longo prazo)",
         "body": `
             <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse; text-align:left;">
-            <thead">
-                <tr>
-                    <th>Vantagens</th>
-                    <th>Desafios</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Redução da Poluição:</strong> Menos emissões de gases de efeito estufa e poluentes atmosféricos.</td>
-                    <td><strong>Infraestrutura:</strong> Necessidade de mais estações de carregamento para EVs, ciclovias seguras e expansão do transporte público.</td>
-                </tr>
-                <tr>
-                    <td><strong>Melhora da Saúde Pública:</strong> Ar mais limpo e incentivo à atividade física.</td>
-                    <td><strong>Custo Inicial:</strong> Veículos elétricos e infraestrutura podem ter um custo inicial mais alto.</td>
-                </tr>
-                <tr>
-                    <td><strong>Economia de Recursos:</strong> Menor dependência de combustíveis fósseis.</td>
-                    <td><strong>Aceitação Cultural:</strong> Mudança de hábitos e preferência pelo carro particular.</td>
-                </tr>
-                <tr>
-                    <td><strong>Redução do Congestionamento:</strong> Cidades mais fluidas e com menos tempo perdido no trânsito.</td>
-                    <td><strong>Geração de Energia:</strong> A sustentabilidade dos EVs depende da fonte de energia utilizada para gerar a eletricidade que os alimenta.</td>
-                </tr>
-                <tr>
-                    <td><strong>Cidades Mais Habitáveis:</strong> Espaços urbanos mais agradáveis e seguros para pedestres e ciclistas.</td>
-                    <td><!-- sem desafio correspondente direto --></td>
-                </tr>
-            </tbody>
+                <thead">
+                    <tr>
+                        <th>Vantagens</th>
+                        <th>Desafios</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Redução da Poluição:</strong> Menos emissões de gases de efeito estufa e poluentes atmosféricos.</td>
+                        <td><strong>Infraestrutura:</strong> Necessidade de mais estações de carregamento para EVs, ciclovias seguras e expansão do transporte público.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Melhora da Saúde Pública:</strong> Ar mais limpo e incentivo à atividade física.</td>
+                        <td><strong>Custo Inicial:</strong> Veículos elétricos e infraestrutura podem ter um custo inicial mais alto.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Economia de Recursos:</strong> Menor dependência de combustíveis fósseis.</td>
+                        <td><strong>Aceitação Cultural:</strong> Mudança de hábitos e preferência pelo carro particular.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Redução do Congestionamento:</strong> Cidades mais fluidas e com menos tempo perdido no trânsito.</td>
+                        <td><strong>Geração de Energia:</strong> A sustentabilidade dos EVs depende da fonte de energia utilizada para gerar a eletricidade que os alimenta.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cidades Mais Habitáveis:</strong> Espaços urbanos mais agradáveis e seguros para pedestres e ciclistas.</td>
+                        <td><!-- sem desafio correspondente direto --></td>
+                    </tr>
+                </tbody>
             </table>
         `
     },
@@ -531,12 +626,18 @@ document.addEventListener('DOMContentLoaded', () => {
         "title": "O que s\u00e3o Pol\u00edticas &amp; Legisla\u00e7\u00e3o?",
         "body": `
             <p>Políticas e legislação ambiental e tecnológica referem-se ao conjunto de leis, regulamentos, normas e diretrizes estabelecidas por governos e órgãos internacionais para proteger o meio ambiente, regular o uso da tecnologia e promover o desenvolvimento sustentável. Elas servem como um arcabouço legal para a gestão de recursos naturais, controle da poluição, incentivo a práticas sustentáveis e garantia de que as inovações tecnológicas sejam utilizadas de forma ética e responsável. Essas políticas são essenciais para criar um ambiente de governança que suporte a sustentabilidade e a inovação.</p>
+            <a href="https://portalantigo.ipea.gov.br/agencia/images/stories/PDFs/livros/livros/160719_governanca_ambiental.pdf" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico6-politicas-legislacao-2": {
         "title": "Como a tecnologia pode ajudar nas Pol\u00edticas &amp; Legisla\u00e7\u00e3o?",
         "body": `
             <p>A tecnologia desempenha um papel cada vez mais importante no desenvolvimento, implementação e fiscalização de políticas e legislação. Ferramentas digitais podem auxiliar na coleta e análise de dados para informar a criação de leis, monitorar a conformidade, automatizar processos de licenciamento e fiscalização, e aumentar a transparência. Além disso, a tecnologia pode facilitar a comunicação entre cidadãos, empresas e órgãos governamentais, tornando a participação pública mais acessível e eficaz.</p>
+            <a href="https://www.ipm.com.br/como-a-tecnologia-ajuda-a-melhorar-a-transparencia-na-gestao-publica/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico6-politicas-legislacao-3": {
@@ -549,12 +650,18 @@ document.addEventListener('DOMContentLoaded', () => {
         "title": "Normas Nacionais",
         "body": `
             <p>No Brasil, a legislação ambiental é robusta e inclui marcos como a Política Nacional do Meio Ambiente (Lei nº 6.938/81), que estabelece o Sistema Nacional do Meio Ambiente (SISNAMA) e o licenciamento ambiental. Outras leis importantes abrangem a gestão de resíduos sólidos (Lei nº 12.305/10), proteção da flora e fauna, recursos hídricos e unidades de conservação. A tecnologia também é regulamentada por leis de proteção de dados (LGPD), marcos civis da internet e políticas de inovação.</p>
+            <a href="https://www.planalto.gov.br/ccivil_03/leis/l6938.htm" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico6-politicas-legislacao-normas-internacionais": {
         "title": "Normas Internacionais",
         "body": `
             <p>Em nível internacional, acordos como o Acordo de Paris sobre mudanças climáticas, a Convenção sobre Diversidade Biológica e a Agenda 2030 para o Desenvolvimento Sustentável (com seus 17 Objetivos de Desenvolvimento Sustentável - ODS) estabelecem metas e diretrizes para a ação global. Organizações como a ISO (International Organization for Standardization) também desenvolvem normas técnicas (ex: ISO 14001 para gestão ambiental) que empresas e governos podem adotar voluntariamente.</p>
+            <a href="https://brasil.un.org/pt-br/sdgs" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico6-politicas-legislacao-pol-ticas-p-blicas": {
@@ -567,30 +674,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><strong>Investimento em P&amp;D:</strong> Apoio à pesquisa e desenvolvimento de novas tecnologias verdes.</li>
                 <li><strong>Educação Ambiental:</strong> Programas para conscientizar a população sobre questões ambientais e o uso responsável da tecnologia.</li>
             </ul>
+            <a href="https://portalantigo.ipea.gov.br/agencia/images/stories/PDFs/livros/livros/160719_governanca_ambiental_cap04.pdf" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico6-politicas-legislacao-leis-ambientais-e-tecnol-gicas": {
         "title": "Leis Ambientais e Tecnol\u00f3gicas",
         "body": `
             <p>As leis ambientais visam proteger os ecossistemas e a saúde humana, enquanto as leis tecnológicas regulam o uso de novas tecnologias, garantindo a segurança, a privacidade e a ética. A interseção dessas áreas é crescente, com leis que abordam, por exemplo, a responsabilidade ambiental de empresas de tecnologia, a gestão de e-lixo e a segurança de dados em sistemas de monitoramento ambiental.</p>
+            <a href="https://www.ibflorestas.org.br/conteudo/leis-ambientais" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico6-politicas-legislacao-como-e-onde-fazer-den-ncias": {
         "title": "Como e onde fazer den\u00fancias",
         "body": `
             <p>Para denúncias relacionadas a crimes ambientais ou infrações tecnológicas, a tecnologia pode facilitar o processo. Muitos órgãos governamentais oferecem canais online para denúncias, como sites, aplicativos e ouvidorias digitais. A capacidade de anexar fotos, vídeos e geolocalização torna as denúncias mais eficazes.</p>
+            <a href="https://semil.sp.gov.br/denuncia-ambiental/#:~:text=Canais%20para%20registro%20de%20den%C3%BAncias%20ambientais%20As,Ambiental%20mais%20pr%C3%B3xima.%20Consulte%20os%20telefones%20aqui." target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico7-educacao-verde-o-que-educa-o-verde-": {
         "title": "O que \u00e9 Educa\u00e7\u00e3o Verde?",
         "body": `
             <p>Educação Verde, ou Educação Ambiental, é um processo contínuo e permanente que busca formar indivíduos conscientes e críticos sobre as questões ambientais, incentivando a participação ativa na construção de sociedades sustentáveis. Ela abrange a compreensão das inter-relações entre o ser humano e o meio ambiente, a valorização da biodiversidade, a promoção de hábitos de consumo responsáveis e a defesa da justiça socioambiental. Seu objetivo é desenvolver conhecimentos, habilidades, atitudes e valores que levem à conservação do meio ambiente e à melhoria da qualidade de vida.</p>
+            <a href="https://semil.sp.gov.br/educacaoambiental/2023/06/o-que-e-educacao-ambiental/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico7-educacao-verde-como-a-tecnologia-pode-ajudar-na-educa-o-verde-": {
         "title": "Como a tecnologia pode ajudar na Educa\u00e7\u00e3o Verde?",
         "body": `
             <p>A tecnologia é uma ferramenta poderosa para a Educação Verde, tornando o aprendizado mais acessível, interativo e engajador. Ela permite a criação de conteúdos multimídia ricos, simulações de ecossistemas, jogos educativos, plataformas de e-learning e a disseminação de informações em larga escala. Além disso, a tecnologia pode conectar estudantes e educadores de diferentes partes do mundo, facilitando a troca de experiências e a colaboração em projetos ambientais. Realidade virtual e aumentada, por exemplo, podem transportar os alunos para ambientes naturais ou cenários de impacto ambiental, proporcionando uma experiência imersiva e impactante.</p>
+            <a href="https://www.unoesc.edu.br/wp-content/uploads/2024/09/Recursos-Digitais-na-Escola-V_4-1.pdf" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico7-educacao-verde-objetivos": {
@@ -603,6 +725,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><strong>Habilidades:</strong> Desenvolver a capacidade de identificar e resolver problemas ambientais.</li>
                 <li><strong>Participação:</strong> Incentivar a ação individual e coletiva na resolução de questões ambientais.</li>
             </ul>
+            <a href="https://semil.sp.gov.br/educacaoambiental/2019/12/meio-ambiente-saude-e-educacao-ambiental/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico7-educacao-verde-m-todos": {
@@ -615,6 +740,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><strong>Gamificação:</strong> Criação de jogos e desafios que tornem o aprendizado sobre sustentabilidade divertido e competitivo.</li>
                 <li><strong>Debates e Discussões:</strong> Promover o pensamento crítico e a troca de ideias sobre temas ambientais complexos.</li>
             </ul>
+            <a href="https://semil.sp.gov.br/educacaoambiental/prateleira-ambiental/educacao-ambiental-baseada-em-projetos-uma-aplicacao-no-ensino-medio-e-fundamental/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico7-educacao-verde-projetos-hist-rias-e-workshops": {
@@ -626,6 +754,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><strong>Workshops de Reuso e Upcycling:</strong> Ensinam a transformar materiais descartados em novos produtos, reduzindo o lixo.</li>
                 <li><strong>Histórias de Sucesso:</strong> Compartilhar exemplos de comunidades ou indivíduos que fizeram a diferença na proteção ambiental.</li>
             </ul>
+            <a href="https://bvsms.saude.gov.br/bvs/publicacoes/horta.pdf" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico7-educacao-verde-benef-cios": {
@@ -638,18 +769,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><strong>Inovação:</strong> Estímulo à criatividade e ao desenvolvimento de soluções tecnológicas para desafios ambientais.</li>
                 <li><strong>Saúde e Bem-Estar:</strong> Promoção de ambientes mais saudáveis e de um estilo de vida mais equilibrado.</li>
             </ul>
+            <a href="https://klalaw.com.br/quatro-pilares-do-desenvolvimento-sustentavel-quais-sao-eles/" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico7-educacao-verde-v-deos-sobre-o-tema-conte-do-para-usu-rio-assistir-": {
         "title": "V\u00eddeos sobre o tema (conte\u00fado para usu\u00e1rio assistir)",
         "body": `
             <p>Recomenda-se a inclusão de vídeos educativos e inspiradores sobre temas como mudanças climáticas, conservação da biodiversidade, energias renováveis e consumo consciente. Esses vídeos podem ser de documentários, canais educativos no YouTube ou produções independentes que abordem a temática de forma didática e envolvente.</p>
+            <a href="https://www.iberdrola.com/cultural/documentarios-aquecimento-global" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
     "topico7-educacao-verde-api-de-quiz-para-educa-o-verde-sugest-o-de-c-digo-": {
         "title": "API de Quiz para Educa\u00e7\u00e3o Verde (Sugest\u00e3o de C\u00f3digo)",
         "body": `
             <p>Para tornar a Educação Verde mais interativa e avaliar o conhecimento dos participantes, pode-se desenvolver um quiz online. Uma API de quiz pode gerenciar perguntas, respostas e pontuações. Abaixo, um exemplo conceitual de como uma API de quiz poderia ser acessada usando Python:</p>
+            <a href="" target="_blank" rel="noopener noreferrer">
+                Saiba Mais.
+            </a>
         `
     },
 };
