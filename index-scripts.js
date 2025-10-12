@@ -36,13 +36,13 @@ let autoSlideInterval;
 // Dados do carrossel: imagens e links
 const carouselData = [
     { src: './img/img1.png', link: './servicos.html#monitoramento-ambiental', alt: 'Imagem de Monitoramento Ambiental' },
-    { src: './img/img1.png', link: './servicos.html#energia-limpa', alt: 'Imagem de Energia Sustentável e Limpa' },
-    { src: './img/img1.png', link: './servicos.html#consumo-consciente', alt: 'Imagem de Consumo e Economia Consciente' },
-    { src: './img/img1.png', link: './servicos.html#reciclagem-inteligente', alt: 'Imagem de Reciclagem Inteligente' },
-    { src: './img/img1.png', link: './servicos.html#mobilidade-sustentavel', alt: 'Imagem de Mobilidade Sustentável' },
-    { src: './img/img1.png', link: './servicos.html#politicas-legislacao', alt: 'Imagem de Políticas & Legislação' },
-    { src: './img/img1.png', link: './servicos.html#educacao-verde', alt: 'Imagem de Educação Verde' },
-    { src: './img/img1.png', link: '#carros-eletricos', alt: 'Imagem de Carros Elétricos' }
+    { src: './img/img2.png', link: './servicos.html#energia-limpa', alt: 'Imagem de Energia Sustentável e Limpa' },
+    { src: './img/img3.png', link: './servicos.html#consumo-consciente', alt: 'Imagem de Consumo e Economia Consciente' },
+    { src: './img/img4.png', link: './servicos.html#reciclagem-inteligente', alt: 'Imagem de Reciclagem Inteligente' },
+    { src: './img/img5.png', link: './servicos.html#mobilidade-sustentavel', alt: 'Imagem de Mobilidade Sustentável' },
+    { src: './img/img6.png', link: './servicos.html#politicas-legislacao', alt: 'Imagem de Políticas & Legislação' },
+    { src: './img/img7.png', link: './servicos.html#educacao-verde', alt: 'Imagem de Educação Verde' },
+    { src: './img/img8.png', link: '#carros-eletricos', alt: 'Imagem de Carros Elétricos' }
 ];
 
 // --- Funções do Carrossel ---
