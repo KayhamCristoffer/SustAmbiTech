@@ -371,6 +371,7 @@
         }
 
         @media (max-width: 600px) {
+
             .form-grid-double,
             .form-grid-triple {
                 grid-template-columns: 1fr;
@@ -378,6 +379,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 
 <body>
@@ -501,11 +503,13 @@
                         <input type="text" id="edit-cep" placeholder="Ex: 00000-000">
                     </div>
                 </div>
-<div class="form-group">
-    <label>Localização no Mapa:</label>
-    <div id="mapaEdicao" style="height: 300px; border: 1px solid #ccc; border-radius: 4px; margin-top: 10px;"></div>
-    <small style="display: block; margin-top: 5px; color: #008000; font-weight: bold;">Arraste o marcador azul para reposicionar. As coordenadas serão atualizadas automaticamente.</small>
-</div>
+                <div class="form-group">
+                    <label>Localização no Mapa:</label>
+                    <div id="mapaEdicao"
+                        style="height: 300px; border: 1px solid #ccc; border-radius: 4px; margin-top: 10px;"></div>
+                    <small style="display: block; margin-top: 5px; color: #008000; font-weight: bold;">Arraste o
+                        marcador azul para reposicionar. As coordenadas serão atualizadas automaticamente.</small>
+                </div>
                 <div class="form-grid-double">
                     <div class="form-group">
                         <label for="edit-latitude">Latitude (Bloqueado):</label>
@@ -564,6 +568,7 @@
     <br><br><br><br><br><br><br>
 
     <div id="footer-container"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script src="main.js" type="module"></script>
     <script>

@@ -312,6 +312,20 @@ async function openEditSection(pointData = null, id = null, mode = 'edit') {
     // NOVO: Inicializa o mapa com as coordenadas
     // -----------------------------------------------------------------
     inicializarMapaEdicao(lat, lon, { nome: pointName });
+    editSection.style.display = 'block';
+    editSection.scrollIntoView({ behavior: 'smooth' });
+    
+    // =================================================================
+    // CORREÇÃO ESSENCIAL PARA O LEAFLET!
+    // Força o mapa a recalcular seu tamanho e renderizar corretamente.
+    // Isso deve ser feito APÓS a div do mapa se tornar visível ('block').
+    // =================================================================
+    if (mapaEdicao) {
+        // Usa um pequeno timeout para garantir que o navegador completou o layout
+        setTimeout(() => {
+            mapaEdicao.invalidateSize();
+        }, 100); 
+    }
 }
 
 /**
