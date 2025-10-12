@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "title": "Tipos de sensores e suas aplica\u00e7\u00f5es:",
         "body": `
             <p>Diversos tipos de sensores são utilizados para coletar dados ambientais, cada um com aplicações específicas:</p>
-            <a href="https://nybsys.com/types-of-sensors/" target="_blank" rel="noopener noreferrer">
+            <a href="https://blog.cpetecnologia.com.br/desenvolvimento-em-sensores-remotos-para-monitoramento-ambiental/" target="_blank" rel="noopener noreferrer">
                 Saima Mais.
             </a>
         `
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "title": "Sensores de Temperatura e Umidade",
         "body": `
             <p>Monitoram as condições climáticas, sendo fundamentais para estudos meteorológicos, agricultura de precisão, previsão de eventos extremos e avaliação das mudanças climáticas. Podem ser encontrados em estações meteorológicas, dispositivos IoT e sistemas de automação.</p>
-            <a href="" target="_blank" rel="noopener noreferrer">
+            <a href="https://useconectividade.com.br/10-vantagens-do-monitoramento-climatico-para-a-agricultura-de-precisao/" target="_blank" rel="noopener noreferrer">
                 Saima Mais.
             </a>
         `
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "title": "Sensores de Gases de Efeito Estufa",
         "body": `
             <p>Focados na medição de gases como metano (CH4) e dióxido de carbono (CO2) para entender suas concentrações na atmosfera e seu impacto no aquecimento global. São usados em pesquisas climáticas e no monitoramento de emissões industriais.</p>
-            <a href="" target="_blank" rel="noopener noreferrer">
+            <a href="https://oeco.org.br/dicionario-ambiental/28261-gases-do-efeito-estufa-dioxido-de-carbono-co2-e-metano-ch4/" target="_blank" rel="noopener noreferrer">
                 Saima Mais.
             </a>
         `
@@ -96,24 +96,36 @@ document.addEventListener('DOMContentLoaded', () => {
         "title": "Outros Sensores",
         "body": `
             <p>Incluem sensores de solo (umidade, nutrientes), radiação solar (para energia solar e agricultura) e ruído (para monitoramento da poluição sonora em cidades).</p>
+            <a href="https://www.grupobravomt.com.br/5-post-o-que-sao-e-como-funcionam-os-sensores-de-solo-para-a-agricultura-de-precisao-sorriso-mt" target="_blank" rel="noopener noreferrer">
+                Saima Mais.
+            </a>
         `
     },
     "topico1-monitoramento-ambiental-outros-sensores-1": {
         "title": "Como funciona, onde pode se encontrar",
         "body": `
             <p>Sensores ambientais podem ser encontrados em estações de monitoramento fixas, dispositivos móveis, drones e satélites. Em cidades como São Paulo, redes de sensores são instaladas em pontos estratégicos para fornecer dados em tempo real. Aplicativos móveis e plataformas web integram esses dados, permitindo que cidadãos e autoridades visualizem a qualidade do ar, da água e outras informações ambientais. Muitos desses sistemas utilizam APIs para compartilhar dados e integrar-se com outras plataformas.</p>
+            <a href="https://cetesb.sp.gov.br/ar/redes-de-monitoramento/" target="_blank" rel="noopener noreferrer">
+                Saima Mais.
+            </a>
         `
     },
     "topico1-monitoramento-ambiental-outros-sensores-2": {
         "title": "Alertas e Notificações",
         "body": `
             <p>Sistemas de monitoramento ambiental frequentemente incluem funcionalidades de alerta e notificação, que informam usuários e autoridades sobre condições ambientais que excedem limites seguros ou indicam eventos críticos. Isso permite uma resposta rápida a emergências e a implementação de medidas de mitigação.</p>
+            <a href="https://www.gov.br/mdr/pt-br/noticias/defesa-civil-alerta-saiba-como-funciona-o-novo-sistema-de-alertas-de-desastres-do-governo-federal" target="_blank" rel="noopener noreferrer">
+                Saima Mais.
+            </a>
         `
     },
     "topico1-monitoramento-ambiental-impacto-e-solu-es-tecnol-gicas": {
         "title": "Impacto e Solu\u00e7\u00f5es Tecnol\u00f3gicas",
         "body": `
             <p>O monitoramento ambiental tecnológico tem um impacto significativo na capacidade de proteger o planeta. Por exemplo, em diversas cidades, a instalação de redes de sensores de qualidade do ar permitiu identificar fontes de poluição e implementar restrições de tráfego, resultando em melhorias na saúde respiratória da população. A detecção precoce de vazamentos em oleodutos por sensores de solo também evitou desastres ecológicos maiores.</p>
+            <a href="https://www.verx.com.br/tecnologia-para-o-meio-ambiente-como-a-tecnologia-pode-ajudar-a-salvar-o-planeta/" target="_blank" rel="noopener noreferrer">
+                Saima Mais.
+            </a>
         `
     },
     "topico1-monitoramento-ambiental-fatos-reais-em-que-os-sensores-ajudaram-": {
@@ -134,12 +146,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="index.html#clima-index">
                     Veja o Clima em sua região</a></li>
             </ul>
+            <a href="" target="_blank" rel="noopener noreferrer">
+                Saima Mais.
+            </a>
         `
     },
     "topico2-energia-limpa-o-que-energia-limpa-": {
         "title": "O que \u00e9 Energia Limpa?",
         "body": `
             <p>Energia limpa, também conhecida como energia renovável, refere-se a fontes de energia que não liberam poluentes na atmosfera ou que têm um impacto ambiental mínimo. Ao contrário dos combustíveis fósseis, que são finitos e contribuem para as mudanças climáticas, as fontes de energia limpa são naturalmente reabastecidas e sustentáveis a longo prazo. Elas são cruciais para a transição energética global e para a redução da pegada de carbono.</p>
+            <a href="" target="_blank" rel="noopener noreferrer">
+                Saima Mais.
+            </a>
         `
     },
     "topico2-energia-limpa-como-a-tecnologia-pode-ajudar-na-energia-limpa-": {
