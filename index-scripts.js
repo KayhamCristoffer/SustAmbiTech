@@ -102,7 +102,7 @@ function startAutoSlide() {
     stopAutoSlide(); // Garante que apenas um intervalo esteja ativo
     autoSlideInterval = setInterval(() => {
         nextSlide();
-    }, 15000); // 15 segundos
+    }, 10000); // 15 segundos
 }
 
 function stopAutoSlide() {
