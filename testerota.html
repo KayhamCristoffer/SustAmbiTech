@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Minha Rota com Leaflet e Botão de Localização</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/SVRMgki+jGD/Sevdg=" crossorigin="" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
+    <style>
+        /* ESTILO CRUCIAL: O mapa precisa de uma altura */
+        #map {
+            height: 500px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        /* Estilos do Painel de Controle */
+        #control-panel {
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        /* Estiliza o agrupamento do Ponto de Partida e Botão */
+        .origin-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Estilo genérico de inputs e botões */
+        input[type="text"],
+        button {
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        /* Estilo específico para o campo de input de origem */
+        #origin-input {
+            flex-grow: 1;
+            /* Ocupa o espaço restante ao lado do botão */
+        }
+
+        /* Estilo para o botão de localização */
+        .origin-group button {
+            width: 120px;
+            min-width: 120px;
+            margin: 5px 0;
+            background-color: #3b5998;
+        }
+
+        /* Estilo para o botão de calcular rota */
+        #control-panel>button {
+            width: 100%;
+            background-color: #0078A8;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #control-panel>button:hover {
+            background-color: #005f88;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body onload="initMap()">
+
+    <div id="control-panel">
+        <label for="origin-input">Ponto de Partida:</label>
+
+        <div class="origin-group">
+            <input id="origin-input" type="text" placeholder="Digite o endereço de partida" value="">
+
+            <button onclick="triggerGeolocation()">&#x1F4CD; Localizar</button>
+        </div>
+
+        <label for="destination-input">Ponto de Destino:</label>
+        <input id="destination-input" type="text" placeholder="Digite o destino (Ex: Avenida Paulista, São Paulo)">
+
+        <button onclick="calculateRoute()">Calcular Rota</button>
+
+        <p id="error-message" class="error"></p>
+    </div>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-2P3z0UfXq1T7y6z7B0p7x6U8rBf9i3yF2e+F2r2V1c=" crossorigin=""></script>
+
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+    <script>
+        const DEFAULT_COORDS = [-23.5505, -46.6333]; // Centro de São Paulo
+        let map;
+        let routingControl = null;
+        let userLocation = null;
+        let userMarker = null;
+
+        /**
+         * Inicializa o mapa com Leaflet.
+         */
+        function initMap() {
+            map = L.map('map').setView(DEFAULT_COORDS, 13);
+
+            // Adiciona a camada de mapa (Tiles da OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors | Roteamento: OSRM',
+                maxZoom: 19,
+            }).addTo(map);
+
+            // O mapa é iniciado, mas a localização do usuário só é acionada pelo botão.
+        }
+
+        /**
+         * Tenta obter a localização do usuário via Geolocation API.
+         * Chamada pelo botão "Localizar".
+         */
+        function triggerGeolocation() {
+            const originInput = document.getElementById("origin-input");
+            const errorMessage = document.getElementById("error-message");
+            errorMessage.textContent = "";
+
+            // 1. Limpa o estado anterior e indica espera
+            originInput.value = "Aguardando Localização...";
+            originInput.readOnly = true; // Bloqueia temporariamente
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        // Sucesso: armazena e exibe a localização
+                        userLocation = [position.coords.latitude, position.coords.longitude];
+                        map.setView(userLocation, 14);
+
+                        originInput.value = "Sua Localização Atual (Coordenadas Obtidas)";
+                        originInput.readOnly = true; // Mantém bloqueado após sucesso
+
+                        // Adiciona ou move o marcador do usuário
+                        const markerIcon = L.icon({
+                            iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+                            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 41],
+                            popupAnchor: [1, -34],
+                            shadowSize: [41, 41]
+                        });
+
+                        if (userMarker) {
+                            userMarker.setLatLng(userLocation);
+                        } else {
+                            userMarker = L.marker(userLocation, { icon: markerIcon }).addTo(map)
+                                .bindPopup("Sua Localização").openPopup();
+                        }
+                    },
+                    (error) => {
+                        // Erro: permite entrada manual
+                        errorMessage.textContent = "📍 Erro (Código " + error.code + "): Digite o endereço ou tente novamente.";
+                        originInput.value = "";
+                        originInput.readOnly = false; // Permite digitar após falha
+                        userLocation = null; // Zera a localização
+                    },
+                    { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+                );
+            } else {
+                // Navegador não suporta
+                errorMessage.textContent = "⚠️ Seu navegador não suporta Geolocation. Por favor, digite o ponto de partida.";
+                originInput.value = "";
+                originInput.readOnly = false;
+            }
+        }
+
+        /**
+         * Calcula e exibe a rota usando Leaflet Routing Machine (OSRM).
+         */
+        function calculateRoute() {
+            const originInput = document.getElementById("origin-input").value;
+            const destinationInput = document.getElementById("destination-input").value;
+            const errorMessage = document.getElementById("error-message");
+            errorMessage.textContent = "";
+
+            if (!destinationInput) {
+                errorMessage.textContent = "Por favor, digite um ponto de destino.";
+                return;
+            }
+
+            // 1. Limpa o controle de rota anterior
+            if (routingControl) {
+                map.removeControl(routingControl);
+            }
+
+            // 2. Define a Origem: prioriza as coordenadas obtidas (se o botão foi usado) ou o texto.
+            let originWaypoint;
+
+            if (userLocation && originInput.startsWith("Sua Localização Atual")) {
+                // Usa a coordenada GPS obtida
+                originWaypoint = L.latLng(userLocation[0], userLocation[1]);
+            } else if (originInput) {
+                // Usa o texto digitado (para geocodificação)
+                originWaypoint = originInput;
+            } else {
+                errorMessage.textContent = "Ponto de partida não pode estar vazio.";
+                return;
+            }
+
+            // 3. Cria e adiciona o controle de roteamento
+            routingControl = L.Routing.control({
+                waypoints: [
+                    originWaypoint,
+                    destinationInput
+                ],
+                routeWhileDragging: true,
+                router: L.Routing.osrmv1(),
+                lineOptions: {
+                    styles: [{ color: '#242424', weight: 8, opacity: 0.8 }, { color: '#00ccff', weight: 4, opacity: 1 }]
+                },
+                language: 'pt',
+                show: true,
+            }).addTo(map);
+
+            // 4. Adiciona um listener para erros
+            routingControl.on('routingerror', function (e) {
+                errorMessage.textContent = "❌ Erro ao calcular rota: " + (e.error.message || "Verifique os endereços.");
+                console.error("Erro no roteamento:", e.error);
+            });
+
+            // 5. Adiciona um listener para sucesso
+            routingControl.on('routesfound', function (e) {
+                errorMessage.textContent = "✅ Rota calculada com sucesso.";
+            });
+        }
+    </script>
+
+</body>
+
+</html>
