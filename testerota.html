@@ -1,232 +1,243 @@
-<!doctype html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mapa OSRM - Visualizador</title>
-  <style>
-    :root{
-      --bg:#0f1720;
-      --card:#0b1220;
-      --accent:#22c55e;
-      --muted:#9aa6b2;
-      --glass: rgba(255,255,255,0.03);
-    }
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-    body{background:linear-gradient(180deg,#071021 0%, #071827 100%);color:#e6eef6;display:flex;flex-direction:column;gap:12px;padding:18px;}
-    header{display:flex;gap:12px;align-items:center;justify-content:space-between;}
-    h1{font-size:18px;margin:0;}
-    .container{display:flex;flex:1;gap:16px;min-height:0;}
-    .panel{width:360px;max-width:40%;background:var(--card);padding:14px;border-radius:12px;box-shadow:0 6px 24px rgba(2,6,23,0.6);overflow:auto;}
-    .mapwrap{flex:1;background:var(--glass);border-radius:12px;padding:8px;display:flex;flex-direction:column;min-height:0;}
-    label{display:block;font-size:13px;color:var(--muted);margin-top:10px;}
-    input[type="text"], input[type="number"], select{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;box-sizing:border-box;}
-    button{margin-top:10px;padding:10px 12px;border-radius:10px;border:0;background:var(--accent);color:#042014;font-weight:600;cursor:pointer;}
-    small{color:var(--muted);}
-    .iframe-container{flex:1;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);background:white;}
-    iframe{width:100%;height:100%;border:0;min-height:480px;display:block;}
-    .row{display:flex;gap:8px;}
-    .row > *{flex:1;}
-    .controls{display:flex;align-items:center;gap:8px;margin-top:8px;}
-    .status{font-size:13px;color:var(--muted);margin-top:8px;}
-    footer{font-size:13px;color:var(--muted);text-align:center;}
-    @media(max-width:900px){
-      .container{flex-direction:column;}
-      .panel{width:100%;max-width:100%;}
-    }
-  </style>
+    <title>Mapa de Rotas - Partida na Localização Atual ou Endereço</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/SVRMgki+jGD/Sevdg="
+        crossorigin=""/>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
+    <style>
+        /* ESTILO CRUCIAL: O mapa precisa de uma altura */
+        #map {
+            height: 500px; 
+            width: 100%; 
+            z-index: 1; 
+        }
+        
+        /* Estilos do Painel de Controle */
+        #control-panel {
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        
+        .origin-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="text"], button {
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        #origin-input {
+            flex-grow: 1; 
+        }
+
+        .origin-group button {
+            width: 180px; /* Largura ajustada para o texto */
+            min-width: 180px;
+            margin: 5px 0;
+            background-color: #3b5998;
+            color: white;
+            cursor: pointer;
+        }
+        
+        #control-panel > button {
+            width: 100%;
+            background-color: #0078A8;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        #control-panel > button:hover {
+            opacity: 0.9;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+    </style>
 </head>
-<body>
+<body onload="initMap()">
 
-  <header>
-    <h1>Visualizador Map — OSRM (project-osrm.org)</h1>
-    <div style="text-align:right">
-      <small>Cole o HTML e abra no navegador — sem API key.</small>
+    <div id="control-panel">
+        <label for="origin-input">Ponto de Partida:</label>
+        
+        <div class="origin-group">
+            <input id="origin-input" type="text" placeholder="Digite o endereço de partida, ou use o botão ao lado" value="">
+            
+            <button onclick="startRouteAtLocation()">&#x1F4CD; Usar Minha Localização</button>
+        </div>
+        
+        <label for="destination-input">Ponto de Destino:</label>
+        <input id="destination-input" type="text" placeholder="Digite o endereço de destino (Ex: Avenida Paulista, São Paulo)">
+
+        <button onclick="calculateRoute()">Calcular Rota</button>
+        
+        <p id="error-message" class="error"></p>
     </div>
-  </header>
+    
+    <div id="map"></div>
 
-  <div class="container">
-    <aside class="panel" aria-label="Controles do mapa">
-      <label for="center">Centro (lat,lon)</label>
-      <input id="center" type="text" value="-23.505441,-46.565552" placeholder="-23.505441,-46.565552" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-2P3z0UfXq1T7y6z7B0p7x6U8rBf9tD/SVRMgki+jGD/Sevdg="
+        crossorigin=""></script>
+    
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
-      <label for="locs">Marcadores / locais (cada linha: lat,lon)</label>
-      <textarea id="locs" rows="5" style="width:100%;padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit;box-sizing:border-box;">-23.550732,-46.562805
--23.629335,-46.463585</textarea>
+    <script>
+        // Coordenadas padrão: São Paulo
+        const DEFAULT_COORDS = [-23.5505, -46.6333]; 
+        const DEFAULT_ZOOM = 12;
+        let map;
+        let routingControl = null;
+        let userLocation = null;
+        let userMarker = null; 
 
-      <label for="zoom">Zoom (número, ex: 10)</label>
-      <input id="zoom" type="number" value="10" min="1" max="20" />
+        /**
+         * Inicializa o mapa com Leaflet (centralizado em São Paulo).
+         */
+        function initMap() {
+            if (typeof L === 'undefined') {
+                document.getElementById("error-message").textContent = "Erro: Biblioteca Leaflet não carregada.";
+                return;
+            }
 
-      <div class="row" style="margin-top:8px;">
-        <button id="updateBtn">Atualizar mapa</button>
-        <button id="openBtn" style="background:#1e90ff;color:white">Abrir em nova aba</button>
-      </div>
+            // Inicializa o mapa com a centralização em São Paulo
+            map = L.map('map').setView(DEFAULT_COORDS, DEFAULT_ZOOM);
 
-      <label style="margin-top:12px">Atualização automática</label>
-      <div class="row">
-        <input id="autoReload" type="number" min="0" value="0" />
-        <small style="align-self:center">segundos (0 = desligado)</small>
-      </div>
+            // Adiciona a camada de mapa (Tiles padrão do OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors | Roteamento: OSRM'
+            }).addTo(map);
+        }
 
-      <div class="controls">
-        <button id="startAuto" style="background:#ef9a9a">Iniciar/Aplicar</button>
-        <button id="stopAuto" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)">Parar</button>
-      </div>
+        /**
+         * Tenta obter a localização do usuário (chamado pelo botão).
+         */
+        function startRouteAtLocation() {
+            const originInput = document.getElementById("origin-input");
+            const errorMessage = document.getElementById("error-message");
+            errorMessage.textContent = "";
 
-      <div class="status" id="status">
-        <div>URL atual: <span id="currentUrl" style="word-break:break-all"></span></div>
-        <div id="iframeMsg" style="margin-top:6px;color:var(--muted)"></div>
-      </div>
+            originInput.value = "Aguardando Localização...";
+            originInput.readOnly = true; 
+            userLocation = null; // Limpa o estado anterior
 
-      <hr style="margin-top:12px;border:none;border-top:1px solid rgba(255,255,255,0.04)" />
-      <small>
-        Dica: o formato do URL usado é o mesmo do project-osrm: <br>
-        <code>https://map.project-osrm.org/?z=ZOOM&center=LAT%2CLON&loc=LAT1%2CLON1&loc=LAT2%2CLON2&hl=en&alt=0&srv=0</code>
-      </small>
-    </aside>
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        // Sucesso: armazena coordenadas
+                        userLocation = [position.coords.latitude, position.coords.longitude];
+                        map.setView(userLocation, 14); 
+                        
+                        originInput.value = "Minha Localização Atual (GPS)";
+                        originInput.readOnly = true; 
+                        
+                        // Ícone para o marcador do usuário
+                        const markerIcon = L.icon({
+                            iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+                            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 41],
+                            popupAnchor: [1, -34],
+                            shadowSize: [41, 41]
+                        });
 
-    <main class="mapwrap">
-      <div class="iframe-container" id="iframeContainer" style="flex:1;min-height:480px;">
-        <iframe id="osrmFrame" src="" title="map.project-osrm.org"></iframe>
-      </div>
-      <div style="margin-top:8px">
-        <small style="color:var(--muted)">Se o mapa não carregar dentro do iframe pode ser bloqueio do site (X-Frame-Options). Use "Abrir em nova aba" para visualizar direto no site.</small>
-      </div>
-    </main>
-  </div>
+                        if (userMarker) {
+                            userMarker.setLatLng(userLocation);
+                        } else {
+                            userMarker = L.marker(userLocation, { icon: markerIcon }).addTo(map)
+                            .bindPopup("Sua Localização").openPopup();
+                        }
+                    },
+                    (error) => {
+                        // Erro: volta ao estado inicial (edição manual)
+                        errorMessage.textContent = "📍 Erro ao obter localização. Digite o endereço de partida.";
+                        originInput.value = "";
+                        originInput.readOnly = false; 
+                        userLocation = null;
+                        if(userMarker) map.removeLayer(userMarker);
+                    },
+                    { enableHighAccuracy: true, timeout: 7000, maximumAge: 0 } 
+                );
+            } else {
+                errorMessage.textContent = "⚠️ Seu navegador não suporta Geolocation. Por favor, digite o ponto de partida.";
+                originInput.value = "";
+                originInput.readOnly = false; 
+            }
+        }
 
-  <footer>
-    <small>Feito para você — atualiza o mapa junto com a página.</small>
-  </footer>
+        /**
+         * Calcula e exibe a rota.
+         */
+        function calculateRoute() {
+            const originInput = document.getElementById("origin-input").value;
+            const destinationInput = document.getElementById("destination-input").value;
+            const errorMessage = document.getElementById("error-message");
+            errorMessage.textContent = "";
 
-<script>
-(function(){
-  const frame = document.getElementById('osrmFrame');
-  const centerEl = document.getElementById('center');
-  const locsEl = document.getElementById('locs');
-  const zoomEl = document.getElementById('zoom');
-  const updateBtn = document.getElementById('updateBtn');
-  const openBtn = document.getElementById('openBtn');
-  const currentUrlEl = document.getElementById('currentUrl');
-  const autoReloadEl = document.getElementById('autoReload');
-  const startAuto = document.getElementById('startAuto');
-  const stopAuto = document.getElementById('stopAuto');
-  const iframeMsg = document.getElementById('iframeMsg');
+            if (!originInput || !destinationInput) {
+                errorMessage.textContent = "Por favor, preencha o Ponto de Partida e o Ponto de Destino.";
+                return;
+            }
 
-  // Construir URL do project-osrm com base nos inputs
-  function buildOsrmUrl(){
-    const base = 'https://map.project-osrm.org/';
-    const centerRaw = centerEl.value.trim();
-    const zoom = parseInt(zoomEl.value) || 10;
+            // 1. Limpa o controle de rota anterior
+            if (routingControl) {
+                map.removeControl(routingControl);
+            }
+            
+            let originWaypoint;
+            
+            // 2. Define a origem: se for o texto "Minha Localização Atual (GPS)", usa as coordenadas armazenadas.
+            if (userLocation && originInput === "Minha Localização Atual (GPS)") {
+                originWaypoint = L.latLng(userLocation[0], userLocation[1]);
+            } else {
+                // Caso contrário, usa o texto digitado (para geocodificação)
+                originWaypoint = originInput;
+            }
 
-    // Normalize center: "lat,lon" -> "lat%2Clon"
-    let centerParam = '';
-    if(centerRaw){
-      const c = centerRaw.replace(/\s+/g,'');
-      centerParam = '&center=' + encodeURIComponent(c);
-    }
+            // 3. Cria e adiciona o controle de roteamento
+            routingControl = L.Routing.control({
+                waypoints: [
+                    originWaypoint,
+                    destinationInput 
+                ],
+                routeWhileDragging: true,
+                router: L.Routing.osrmv1(), // Usa o serviço OSRM
+                lineOptions: {
+                    styles: [{ color: '#242424', weight: 8, opacity: 0.8 }, { color: '#00ccff', weight: 4, opacity: 1 }]
+                },
+                language: 'pt',
+                show: true, 
+            }).addTo(map);
 
-    // locs: cada linha "lat,lon"
-    const locLines = locsEl.value.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
-    const locParams = locLines.map(l => '&loc=' + encodeURIComponent(l)).join('');
+            // 4. Adiciona um listener para erros de roteamento
+            routingControl.on('routingerror', function(e) {
+                errorMessage.textContent = "❌ Erro ao calcular rota: Verifique se os endereços são válidos.";
+                console.error("Erro no roteamento:", e.error);
+            });
 
-    // ensure z param
-    const zParam = '?z=' + encodeURIComponent(zoom);
-
-    // final URL with other defaults from example
-    const url = base + zParam + centerParam + locParams + '&hl=en&alt=0&srv=0';
-    return url;
-  }
-
-  function updateIframe(doForceReload=false){
-    const url = buildOsrmUrl();
-    currentUrlEl.textContent = url;
-    try {
-      // attach timestamp to force reload if needed
-      const finalUrl = doForceReload ? url + (url.includes('?') ? '&_t=' + Date.now() : '?_t=' + Date.now()) : url;
-      // set src only if changed to avoid unnecessary reload blink
-      if(frame.src !== finalUrl){
-        frame.src = finalUrl;
-      }
-      iframeMsg.textContent = '';
-    } catch(err) {
-      iframeMsg.textContent = 'Erro definindo iframe src: ' + err.message;
-    }
-  }
-
-  // Initial load using default values
-  updateIframe(true);
-
-  // Update on button click
-  updateBtn.addEventListener('click', function(){
-    updateIframe(true);
-  });
-
-  // Open in new tab (use current built URL)
-  openBtn.addEventListener('click', function(){
-    const url = buildOsrmUrl();
-    window.open(url, '_blank', 'noopener');
-  });
-
-  // Auto reload logic
-  let intervalId = null;
-  function startAutoReload(){
-    stopAutoReload(); // clear existing
-    const sec = Math.max(0, parseInt(autoReloadEl.value) || 0);
-    if(sec <= 0){ iframeMsg.textContent = 'Atualização automática desligada (0 segundos).'; return; }
-    updateIframe(true);
-    intervalId = setInterval(() => {
-      // reload iframe by forcing a timestamp param
-      updateIframe(true);
-    }, sec * 1000);
-    iframeMsg.textContent = 'Atualização automática: a cada ' + sec + 's.';
-  }
-  function stopAutoReload(){
-    if(intervalId){ clearInterval(intervalId); intervalId = null; }
-    iframeMsg.textContent = 'Atualização automática parada.';
-  }
-
-  startAuto.addEventListener('click', startAutoReload);
-  stopAuto.addEventListener('click', stopAutoReload);
-
-  // Also update iframe when user presses Enter inside inputs for convenience
-  [centerEl, locsEl, zoomEl].forEach(el=>{
-    el.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' && !e.shiftKey){
-        e.preventDefault();
-        updateIframe(true);
-      }
-    });
-  });
-
-  // If the iframe refuses to load due to X-Frame-Options, show helpful message
-  frame.addEventListener('load', function(){
-    // try to detect blocked iframe: browsers won't let us inspect cross-origin content,
-    // but we can check if the iframe has a non-empty contentDocument title (only works if same-origin).
-    // We'll instead set a generic success message; if contentWindow is null, maybe blocked.
-    try {
-      if(frame.contentWindow){
-        iframeMsg.textContent = '';
-      }
-    } catch(e){
-      // ignore cross-origin access error
-    }
-  });
-
-  // Optional: update map automatically when page becomes visible again (useful if user switched tabs)
-  document.addEventListener('visibilitychange', function(){
-    if(document.visibilityState === 'visible'){
-      // force update to make sure map reflects page's current inputs
-      updateIframe(true);
-    }
-  });
-
-  // expose for console debugging
-  window.osrmViewer = {
-    buildOsrmUrl, updateIframe, startAutoReload, stopAutoReload
-  };
-})();
-</script>
+            routingControl.on('routesfound', function(e) {
+                errorMessage.textContent = "✅ Rota calculada com sucesso. Distância: " + e.routes[0].summary.totalDistance + ", Duração: " + e.routes[0].summary.totalTime;
+            });
+        }
+        
+    </script>
 
 </body>
 </html>
