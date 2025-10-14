@@ -13,10 +13,9 @@
 
     <!-- Inclua o Leaflet CSS para o mapa -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<div style="z-index: 9999; position: absolute;" id="menu-container"></div>
 
 </head>
-<div id="menu-container"></div>
-
 <body>
 
     <main class="main-content">
@@ -46,7 +45,7 @@
             </div>
         </section>
 
-        <section class="map-section">
+        <section style="z-index: 500;" class="map-section">
             <h2 style="text-align: center; color: #f0f0f0;">Ecopontos Próximos de Você</h2>
             <div class="map-display-container">
                 <button id="btnLocateUserMap" class="map-action-button locate-user"
@@ -1274,7 +1273,6 @@
             <p class="nota">*Valores de economia são estimativas e podem variar.</p>
         </section>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-
         <script>
             // --- Configurações de Cores e Estilo (baseado no seu tema) ---
             const COR_GASOLINA = '#42a5f5';  // Azul
@@ -1564,9 +1562,8 @@
 
         </section>
 
-
     </main>
-    <br><br><br>
+    <br><br><br><br><br>
 
     <div id="footer-container"></div>
 
@@ -1591,6 +1588,7 @@
                     setupClimaForm(); // Chama a função setupClimaForm APÓS o HTML ser inserido
                 })
                 .catch(error => console.error('Erro ao carregar o Formulário de clima:', error));
+            
         });
     </script>
 
@@ -1680,3 +1678,4 @@
 </body>
 
 </html>
+

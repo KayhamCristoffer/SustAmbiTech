@@ -60,10 +60,11 @@
     overflow-x: hidden;
     align-items: center;
     justify-content: center;
+    padding: 1%;
   }
 
   main, .main-content {
-    padding: 3rem;
+    padding: 3rem 2rem 3rem 1rem;
     min-height: calc(100vh - 80px);
   }
 
@@ -241,8 +242,7 @@
     height: calc(100vh - 80px);
     background-color: rgba(59, 87, 4, 0.85);
     transition: left 0.4s ease;
-    z-index: 1000;
-    padding: 2rem 1rem;
+    padding: 1.2rem 1rem;
     display: none;
   }
 
@@ -547,9 +547,8 @@
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     align-items: center;
-    padding: 2rem;
-    margin-top: -60px;
-    margin: 20px;
+    padding: 1rem;
+    margin-top: 20px;
   }
 
   .hero-text h1 {

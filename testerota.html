@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Rota — SustAmbiTech</title>
+<title>Rotas — SustAmbiTech</title>
 
 <!-- Leaflet CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -16,14 +16,18 @@
   h1{ margin:0; font-size:16px; color:#22c55e }
   .controls { display:flex; gap:8px; align-items:center; flex-wrap:wrap }
   input[type="text"]{ padding:8px; border-radius:6px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:inherit; min-width:260px }
+  input[type="text"]::placeholder {color: #aaa; opacity: 1.5;}
   button{ padding:8px 10px; border-radius:6px; border:0; cursor:pointer; font-weight:600 }
   #locateBtn{ background:#22c55e; color:#042014 }
   #routeBtn{ background:#3b82f6; color:white }
   #clearBtn{ background:#ef4444; color:white }
-  select{ padding:8px; border-radius:6px; background:black; color:inherit; border:1px solid rgba(255,255,255,0.04) }
+  select{ padding:8px; border-radius:6px; background:#3b5704; color:inherit; border:1px solid rgba(255,255,255,0.04) }
   #map{ height:84vh; width:100% }
   #status{ color:#94a3b8; font-size:13px; margin-left:6px; }
   .small{ font-size:12px; color:#94a3b8 }
+  .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar{
+    padding: 6px; border: 0px solid rgba(0, 0, 0, 0.2);
+  }
   @media(max-width:900px){ input[type="text"]{ min-width:140px } }
 </style>
 </head>
@@ -47,17 +51,13 @@
 
 <div id="map" style="margin-bottom: -700px;"></div>
 
-<!-- Leaflet & Geocoder -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
 <script>
-/* ---------- Variáveis globais ---------- */
 let map, userMarker, destMarker, routeLayer;
-let userCoords = null;   // [lat, lon]
-let destCoords = null;   // [lat, lon]
-
-/* ---------- Inicializa mapa centrado em São Paulo ---------- */
+let userCoords = null;
+let destCoords = null;
 function initMap() {
   map = L.map('map').setView([-23.5505, -46.6333], 12);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -65,19 +65,16 @@ function initMap() {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  // Clique no mapa para escolher destino
   map.on('click', (e) => {
     setDestination([e.latlng.lat, e.latlng.lng], 'Destino selecionado por clique');
   });
 }
 
-/* ---------- Utilitários: Gerenciar marcadores e rota ---------- */
 function setDestination(coords, title) {
   destCoords = coords;
   if (destMarker) map.removeLayer(destMarker);
   destMarker = L.marker(destCoords, { title: title || 'Destino' }).addTo(map);
   document.getElementById('status').textContent = title || 'Destino definido';
-  // centralizar levemente
   map.setView(destCoords, Math.max(map.getZoom(), 13));
 }
 
@@ -89,7 +86,6 @@ function clearDestination() {
   document.getElementById('status').textContent = 'Destino limpo.';
 }
 
-/* ---------- Localização do usuário ---------- */
 function getUserLocation() {
   const status = document.getElementById('status');
   if (!navigator.geolocation) {
@@ -108,18 +104,15 @@ function getUserLocation() {
   }, { enableHighAccuracy: true, timeout:10000 });
 }
 
-/* ---------- Geocoding: Nominatim (com filtro BR) ---------- */
 async function geocodeAddress(address) {
   const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&countrycodes=br&limit=5&addressdetails=1`;
   const res = await fetch(url, { headers: { 'Accept-Language':'pt-BR,pt' } });
   if (!res.ok) throw new Error('Erro ao consultar geocoding');
   const data = await res.json();
   if (!data || !data.length) throw new Error('Endereço não encontrado.');
-  // escolher melhor resultado: priorizar match com número/rua/cidade se possível (usamos primeiro por simplicidade)
   return { coords: [parseFloat(data[0].lat), parseFloat(data[0].lon)], display: data[0].display_name, details: data[0].address };
 }
 
-/* ---------- ViaCEP para CEPs BR ---------- */
 async function fetchAddressByCep(cepRaw) {
   const cep = cepRaw.replace(/\D/g,'');
   if (cep.length !== 8) throw new Error('CEP inválido.');
@@ -127,7 +120,6 @@ async function fetchAddressByCep(cepRaw) {
   if (!res.ok) throw new Error('Erro ao consultar CEP.');
   const data = await res.json();
   if (data.erro) throw new Error('CEP não encontrado.');
-  // montar string de busca: logradouro + bairro + localidade + uf
   const parts = [];
   if (data.logradouro) parts.push(data.logradouro);
   if (data.bairro) parts.push(data.bairro);
@@ -136,9 +128,6 @@ async function fetchAddressByCep(cepRaw) {
   return parts.join(', ');
 }
 
-/* ---------- Traçar rota com OSRM (profile: driving, cycling, walking) ----------
-   Nota: "Ônibus" usa driving como aproximação porque não há perfil público de transporte coletivo no OSRM.
----------------------------------------------- */
 async function traceRoute() {
   const statusEl = document.getElementById('status');
   statusEl.textContent = '';
@@ -148,11 +137,9 @@ async function traceRoute() {
     return;
   }
 
-  // Se usuário digitou um endereço no campo, respeitar e sobrescrever destCoords
   const destInput = document.getElementById('destInput').value.trim();
   if (destInput) {
     try {
-      // Se parece CEP, usar ViaCEP primeiro
       if (/^\d{5}-?\d{3}$/.test(destInput)) {
         statusEl.textContent = 'Consultando CEP...';
         const addr = await fetchAddressByCep(destInput);
@@ -175,15 +162,12 @@ async function traceRoute() {
     return;
   }
 
-  // Escolher profile
   const profileSel = document.getElementById('profileSelect').value;
   let profile = 'driving';
   if (profileSel === 'cycling') profile = 'cycling';
   else if (profileSel === 'walking') profile = 'walking';
-
   statusEl.textContent = 'Calculando rota (' + profile + ')...';
 
-  // Monta URL OSRM
   const osrmUrl = `https://router.project-osrm.org/route/v1/${profile}/${userCoords[1]},${userCoords[0]};${destCoords[1]},${destCoords[0]}?overview=full&geometries=geojson&steps=false`;
 
   try {
@@ -193,17 +177,12 @@ async function traceRoute() {
     if (data.code !== 'Ok' || !data.routes || !data.routes.length) throw new Error('Rota não encontrada');
 
     const geom = data.routes[0].geometry;
-
-    // Limpar rota anterior
     if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
 
-    // Desenhar nova rota
     routeLayer = L.geoJSON(geom, { style: { color: '#3b82f6', weight: 5 } }).addTo(map);
 
-    // Ajustar bounds
     map.fitBounds(routeLayer.getBounds(), { padding: [40,40] });
 
-    // mostrar distância/tempo (se disponível)
     const distKm = (data.routes[0].distance / 1000).toFixed(2);
     let summary = `Distância: ${distKm} km`;
     if (data.routes[0].duration) {
@@ -216,10 +195,6 @@ async function traceRoute() {
   }
 }
 
-/* ---------- Autocomplete: Leaflet Control Geocoder (Photon) ----------
-   Quando usuário selecionar uma sugestão, definimos destCoords (mas não traçamos rota automaticamente).
-   Usuário pode clicar "Traçar rota" ou pressionar Enter.
----------------------------------------------- */
 function setupAutocomplete() {
   const geoControl = L.Control.geocoder({
     collapsed: false,
@@ -231,27 +206,20 @@ function setupAutocomplete() {
     const c = e.geocode.center;
     setDestination([c.lat, c.lng], e.geocode.name || e.geocode.properties.name || e.geocode.display_name);
   }).addTo(map);
-
-  // Move o input criado pelo control geocoder para o nosso campo de texto principal (sincronizar)
-  // Nota: Control.Geocoder cria seu próprio input; para simplicidade usaremos o campo nativo para receber Enter.
 }
 
-/* ---------- Eventos UI ---------- */
 document.addEventListener('DOMContentLoaded', () => {
   initMap();
   setupAutocomplete();
 
   document.getElementById('locateBtn').addEventListener('click', getUserLocation);
   document.getElementById('routeBtn').addEventListener('click', traceRoute);
-
-  // Enter no campo principal também traça rota
   document.getElementById('destInput').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       traceRoute();
     }
   });
-
   document.getElementById('clearBtn').addEventListener('click', () => {
     clearDestination();
   });

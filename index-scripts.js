@@ -1,20 +1,16 @@
-// index-scripts.js
-
-// --- Importações de Módulos Firebase ---
-import { auth, database } from './main.js'; // Importa as instâncias de auth e database do seu main.js
+import { auth, database } from './main.js';
 import { get, ref, query, orderByChild, equalTo } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js';
 import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js';
 
-// --- Variáveis Globais para o Mapa ---
 let mapaIndex = null;
-let marcadorLocalizacaoUsuarioIndex = null; // Marcador para a localização do usuário no mapa do index
-let currentUserIndex = null; // Para armazenar o usuário logado para o botão dinâmico
+let marcadorLocalizacaoUsuarioIndex = null; 
+let currentUserIndex = null;
 
-const DEFAULT_LAT_INDEX = -23.5505; // Centro padrão para São Paulo
+const DEFAULT_LAT_INDEX = -23.5505; 
 const DEFAULT_LON_INDEX = -46.6333;
 const DEFAULT_ZOOM_INDEX = 13;
 
-const tipoParaCorIndex = { // Cores para os tipos de pontos (reutilizado do formulario.html)
+const tipoParaCorIndex = { 
     'Posto Eletro': '#FF0000',
     'Eco Posto': '#008000',
     'Descarte de Pilha': '#800080',
@@ -25,7 +21,6 @@ const tipoParaCorIndex = { // Cores para os tipos de pontos (reutilizado do form
     'Outros': '#000000'
 };
 
-// --- Variáveis Globais para o Carrossel ---
 const carouselSlide = document.getElementById('carouselSlide');
 const carouselPrevBtn = document.getElementById('carouselPrevBtn');
 const carouselNextBtn = document.getElementById('carouselNextBtn');
@@ -33,7 +28,6 @@ const carouselNextBtn = document.getElementById('carouselNextBtn');
 let currentSlideIndex = 0;
 let autoSlideInterval;
 
-// Dados do carrossel: imagens e links
 const carouselData = [
     { src: './img/img1.png', link: './servicos.html#monitoramento-ambiental', alt: 'Imagem de Monitoramento Ambiental' },
     { src: './img/img2.png', link: './servicos.html#energia-limpa', alt: 'Imagem de Energia Sustentável e Limpa' },
@@ -45,20 +39,14 @@ const carouselData = [
     { src: './img/img8.png', link: '#carros-eletricos', alt: 'Imagem de Carros Elétricos' }
 ];
 
-// --- Funções do Carrossel ---
-// Função loadCarouselImages original (ajustada para esta etapa)
-// --- Funções do Carrossel ---
 function loadCarouselImages() {
-    carouselSlide.innerHTML = ''; // Limpa qualquer conteúdo pré-existente
+    carouselSlide.innerHTML = '';
     
     carouselData.forEach(item => {
         const img = document.createElement('img');
         img.src = item.src;
         img.alt = item.alt;
         
-        // 🔑 AJUSTE PRINCIPAL: Define a largura de cada imagem para que caiba no slide principal.
-        // O valor é 100% dividido pelo número total de slides, garantindo que o conjunto (carouselSlide)
-        // se estenda para a largura correta (ex: 500% para 5 imagens).
         img.style.width = (100 / carouselData.length) + '%'; 
         
         img.addEventListener('click', () => {
@@ -67,12 +55,10 @@ function loadCarouselImages() {
         carouselSlide.appendChild(img);
     });
     
-    // ESSENCIAL: A largura TOTAL do carouselSlide é a soma de todas as imagens lado a lado (ex: 500%)
     carouselSlide.style.width = (carouselData.length * 100) + '%';
 }
 
 function showSlide(index) {
-    // ... (O restante da função showSlide permanece o mesmo) ...
     if (index >= carouselData.length) {
         currentSlideIndex = 0;
     } else if (index < 0) {
@@ -81,12 +67,9 @@ function showSlide(index) {
         currentSlideIndex = index;
     }
     
-    // Calcula o deslocamento em porcentagem
     const offset = -currentSlideIndex * (100 / carouselData.length);
     carouselSlide.style.transform = `translateX(${offset}%)`;
 }
-
-
 
 function nextSlide() {
     showSlide(currentSlideIndex + 1);
@@ -99,10 +82,10 @@ function prevSlide() {
 }
 
 function startAutoSlide() {
-    stopAutoSlide(); // Garante que apenas um intervalo esteja ativo
+    stopAutoSlide();
     autoSlideInterval = setInterval(() => {
         nextSlide();
-    }, 10000); // 15 segundos
+    }, 7000);
 }
 
 function stopAutoSlide() {
@@ -114,9 +97,6 @@ function resetAutoSlide() {
     startAutoSlide();
 }
 
-// --- Funções do Mapa ---
-
-// Função para criar ícones coloridos no mapa (reutilizado do formulario.html)
 function criarIconeColoridoIndex(tipo, cor) {
     return L.divIcon({
         className: 'custom-div-icon',
@@ -127,7 +107,6 @@ function criarIconeColoridoIndex(tipo, cor) {
     });
 }
 
-// Função para preencher a legenda do mapa (reutilizado do formulario.html)
 function preencherLegendaIndex() {
     const legendaDiv = document.getElementById('mapIndexLegend');
     let html = '<h4>Legenda de Pontos</h4>';
@@ -144,12 +123,11 @@ function preencherLegendaIndex() {
     legendaDiv.innerHTML = html;
 }
 
-// Inicializar Mapa e carregar pontos ATIVOS
 async function inicializarMapaIndex(lat, lon, zoom = DEFAULT_ZOOM_INDEX) {
     const center = [lat || DEFAULT_LAT_INDEX, lon || DEFAULT_LON_INDEX];
 
     if (mapaIndex) {
-        mapaIndex.remove(); // Remove o mapa existente se já estiver inicializado
+        mapaIndex.remove();
     }
 
     mapaIndex = L.map('mapaIndex').setView(center, zoom);
@@ -173,7 +151,6 @@ async function inicializarMapaIndex(lat, lon, zoom = DEFAULT_ZOOM_INDEX) {
                 if (typeof ponto.latitude === 'number' && typeof ponto.longitude === 'number') {
                     L.marker([ponto.latitude, ponto.longitude], { icon: icone })
                         .addTo(mapaIndex)
-                        // AQUI ESTÁ A LINHA MODIFICADA PARA INCLUIR O CEP E FORMATAR O ENDEREÇO
                         .bindPopup(`
                             <b>${ponto.nome}</b><br>
                             Tipo: ${ponto.tipoPonto}<br>
@@ -193,15 +170,14 @@ async function inicializarMapaIndex(lat, lon, zoom = DEFAULT_ZOOM_INDEX) {
         console.error("Erro ao carregar ecopontos para o mapa do Index:", error);
     }
 
-    mapaIndex.invalidateSize(); // Garante que o mapa renderize corretamente
+    mapaIndex.invalidateSize();
     preencherLegendaIndex();
 }
 
-// Função para localizar usuário no mapa do index
 function localizarUsuarioNoMapaIndex() {
     const btnLocateUserMap = document.getElementById('btnLocateUserMap');
     const originalText = 'Localizar Minha Posição';
-    const msgElement = document.getElementById('mapIndexLegend'); // Usar a legenda para mensagens temporárias
+    const msgElement = document.getElementById('mapIndexLegend');
 
     btnLocateUserMap.textContent = 'Localizando...';
 
@@ -211,17 +187,15 @@ function localizarUsuarioNoMapaIndex() {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
                 
-                // Centraliza o mapa na localização do usuário
                 mapaIndex.setView([lat, lon], 15); 
 
-                // Adiciona um marcador de localização do usuário
                 if (marcadorLocalizacaoUsuarioIndex) {
                     mapaIndex.removeLayer(marcadorLocalizacaoUsuarioIndex);
                 }
                 marcadorLocalizacaoUsuarioIndex = L.marker([lat, lon], {
                     icon: L.divIcon({
                         className: 'custom-user-icon',
-                        html: `<div style="font-size: 1.5em; color: #ff0000;">📍</div>`, // Ícone vermelho
+                        html: `<div style="font-size: 1.5em; color: #ff0000;">📍</div>`,
                         iconSize: [25, 25],
                         iconAnchor: [12, 25]
                     })
@@ -244,48 +218,38 @@ function localizarUsuarioNoMapaIndex() {
     }
 }
 
-// Função para atualizar o botão de "Adicionar Ponto" dinamicamente
 function updateAddPointCallToAction(user) {
     const addPointCallToAction = document.getElementById('addPointCallToAction');
     const addPointHeader = document.getElementById('addPointHeader');
 
     if (user) {
-        // Usuário logado
         addPointHeader.textContent = "Participe! Adicione um novo ponto:";
         addPointCallToAction.textContent = "Acessar Formulário de Contribuição";
         addPointCallToAction.href = "formulario.html";
     } else {
-        // Usuário não logado
         addPointHeader.textContent = "Quer adicionar um novo ponto?";
         addPointCallToAction.textContent = "Login ou Cadastre-se para Contribuir";
-        addPointCallToAction.href = "login.html"; // Redireciona para login
+        addPointCallToAction.href = "login.html";
     }
 }
 
-
-// --- Lógica Principal: DOMContentLoaded ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Carrossel
     loadCarouselImages();
     showSlide(currentSlideIndex);
-    startAutoSlide(); // Inicia o carrossel automático
+    startAutoSlide();
 
     carouselPrevBtn.addEventListener('click', prevSlide);
     carouselNextBtn.addEventListener('click', nextSlide);
 
-    // Mapa
-    inicializarMapaIndex(); // Inicializa o mapa com a posição padrão
+    inicializarMapaIndex();
 
-    // Localizar Usuário no Mapa
     const btnLocateUserMap = document.getElementById('btnLocateUserMap');
     if (btnLocateUserMap) {
         btnLocateUserMap.addEventListener('click', localizarUsuarioNoMapaIndex);
     }
 
-    // Gerenciar o botão de "Adicionar Ponto" com base no status de autenticação
     onAuthStateChanged(auth, (user) => {
-        currentUserIndex = user; // Atualiza a variável global do usuário
+        currentUserIndex = user;
         updateAddPointCallToAction(user);
     });
 });
-
