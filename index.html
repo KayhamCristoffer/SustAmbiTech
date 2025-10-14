@@ -430,7 +430,7 @@
                 .map-info-and-climate-wrapper .climate-content-container {
                     flex: 1;
                     /* Permite que ambos cresçam e diminuam */
-                    min-width: 280px;
+                    min-width: 40%;
                     /* Largura mínima para cada item */
                     background-color: #587029;
                     border-radius: 8px;
@@ -526,7 +526,7 @@
                 }
 
                 /* Responsividade para o novo layout de legenda/clima */
-                @media (max-width: 768px) {
+                @media (max-width: 900px) {
                     .map-info-and-climate-wrapper {
                         flex-direction: column;
                         /* Empilha a legenda e o clima verticalmente em telas menores */
@@ -535,17 +535,15 @@
                     .map-info-and-climate-wrapper .map-legend,
                     .map-info-and-climate-wrapper .climate-content-container {
                         min-width: unset;
-                        /* Remove o min-width quando empilhado */
-                        width: 100%;
-                        /* Ocupa 100% da largura quando empilhado */
+                        width: 95%;
+                        margin: 0 auto;
                     }
 
                     .carousel-slide img {
                         height: 300px;
-                        /* Ajusta altura do carrossel para telas menores */
                     }
                     .map-info-and-climate-wrapper .map-legend, .map-info-and-climate-wrapper .climate-content-container {
-                     background-color: #697f3f;
+                        padding: 2rem 2rem 2rem 2rem;
                     }
                     
                 }
@@ -553,7 +551,6 @@
                 @media (max-width: 480px) {
                     .carousel-slide img {
                         height: 200px;
-                        /* Ajusta altura do carrossel para telas muito pequenas */
                     }
                     .map-display-container{
                         padding: 0;
