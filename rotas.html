@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rotas — SustAmbiTech</title>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <link rel="stylesheet" href="style.css">
+
+<style>
+  html, body { height:100%; margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial; color:#e6eef6 }
+  header { padding:10px 12px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.03) }
+  h1{ margin:0; font-size:16px; color:#22c55e }
+  .controls { display:flex; gap:8px; align-items:center; flex-wrap:wrap }
+  input[type="text"]{ padding:8px; border-radius:6px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:inherit; min-width:260px }
+  input[type="text"]::placeholder {color: #aaa; opacity: 1.5;}
+  button{ padding:8px 10px; border-radius:6px; border:0; cursor:pointer; font-weight:600 }
+  #locateBtn{ background:#22c55e; color:#042014 }
+  #routeBtn{ background:#3b82f6; color:white }
+  #clearBtn{ background:#ef4444; color:white }
+  select{ padding:8px; border-radius:6px; background:#3b5704; color:inherit; border:1px solid rgba(255,255,255,0.04) }
+  #map{ height:84vh; width:95%; margin:0 auto;}
+  #status{ color:#94a3b8; font-size:13px; margin-left:6px; }
+  .small{ font-size:12px; color:#94a3b8 }
+  .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar{
+    padding: 6px; border: 0px solid rgba(0, 0, 0, 0.2);
+  }
+  @media(max-width:900px){ input[type="text"]{ min-width:140px } }
+</style>
+</head>
+<body>
+
+<header style="margin-top: 80px;">
+  <h1>Começe sua Rota — São Paulo</h1>
+  <div class="controls">
+    <button id="locateBtn" title="Usar minha localização">📍 Minha localização</button>
+    <input id="destInput" type="text" placeholder="Digite endereço ou CEP (ou clique no mapa)" />
+    <select id="profileSelect" title="Modo de transporte">
+      <option value="driving">Carro</option>
+      <option value="cycling">Bicicleta</option>
+      <option value="walking">Andar</option>
+    </select>
+    <button id="routeBtn" title="Traçar rota">🚗 Traçar rota</button>
+    <button id="clearBtn" title="Limpar destino e rota">✖ Limpar</button>
+    <span id="status" class="small"></span>
+  </div>
+</header>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+<script>
+let map, userMarker, destMarker, routeLayer;
+let userCoords = null;
+let destCoords = null;
+function initMap() {
+  map = L.map('map').setView([-23.5505, -46.6333], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  map.on('click', (e) => {
+    setDestination([e.latlng.lat, e.latlng.lng], 'Destino selecionado por clique');
+  });
+}
+
+function setDestination(coords, title) {
+  destCoords = coords;
+  if (destMarker) map.removeLayer(destMarker);
+  destMarker = L.marker(destCoords, { title: title || 'Destino' }).addTo(map);
+  document.getElementById('status').textContent = title || 'Destino definido';
+  map.setView(destCoords, Math.max(map.getZoom(), 13));
+}
+
+function clearDestination() {
+  destCoords = null;
+  if (destMarker) { map.removeLayer(destMarker); destMarker = null; }
+  if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
+  document.getElementById('destInput').value = '';
+  document.getElementById('status').textContent = 'Destino limpo.';
+}
+
+function getUserLocation() {
+  const status = document.getElementById('status');
+  if (!navigator.geolocation) {
+    status.textContent = 'Geolocalização não suportada.';
+    return;
+  }
+  status.textContent = 'Obtendo localização...';
+  navigator.geolocation.getCurrentPosition(pos => {
+    userCoords = [pos.coords.latitude, pos.coords.longitude];
+    if (userMarker) map.removeLayer(userMarker);
+    userMarker = L.marker(userCoords, { title: 'Você está aqui' }).addTo(map);
+    map.setView(userCoords, 14);
+    status.textContent = 'Localização obtida.';
+  }, err => {
+    status.textContent = 'Erro geolocalização: ' + err.message;
+  }, { enableHighAccuracy: true, timeout:10000 });
+}
+
+async function geocodeAddress(address) {
+  const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&countrycodes=br&limit=5&addressdetails=1`;
+  const res = await fetch(url, { headers: { 'Accept-Language':'pt-BR,pt' } });
+  if (!res.ok) throw new Error('Erro ao consultar geocoding');
+  const data = await res.json();
+  if (!data || !data.length) throw new Error('Endereço não encontrado.');
+  return { coords: [parseFloat(data[0].lat), parseFloat(data[0].lon)], display: data[0].display_name, details: data[0].address };
+}
+
+async function fetchAddressByCep(cepRaw) {
+  const cep = cepRaw.replace(/\D/g,'');
+  if (cep.length !== 8) throw new Error('CEP inválido.');
+  const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+  if (!res.ok) throw new Error('Erro ao consultar CEP.');
+  const data = await res.json();
+  if (data.erro) throw new Error('CEP não encontrado.');
+  const parts = [];
+  if (data.logradouro) parts.push(data.logradouro);
+  if (data.bairro) parts.push(data.bairro);
+  if (data.localidade) parts.push(data.localidade);
+  if (data.uf) parts.push(data.uf);
+  return parts.join(', ');
+}
+
+async function traceRoute() {
+  const statusEl = document.getElementById('status');
+  statusEl.textContent = '';
+
+  if (!userCoords) {
+    statusEl.textContent = 'Primeiro use "Minha localização".';
+    return;
+  }
+
+  const destInput = document.getElementById('destInput').value.trim();
+  if (destInput) {
+    try {
+      if (/^\d{5}-?\d{3}$/.test(destInput)) {
+        statusEl.textContent = 'Consultando CEP...';
+        const addr = await fetchAddressByCep(destInput);
+        statusEl.textContent = 'Geocoding do endereço do CEP...';
+        const geo = await geocodeAddress(addr);
+        setDestination(geo.coords, geo.display);
+      } else {
+        statusEl.textContent = 'Geocoding do endereço...';
+        const geo = await geocodeAddress(destInput);
+        setDestination(geo.coords, geo.display);
+      }
+    } catch (err) {
+      statusEl.textContent = 'Erro no endereço: ' + err.message;
+      return;
+    }
+  }
+
+  if (!destCoords) {
+    statusEl.textContent = 'Escolha um destino (digitando, usando autocomplete, ou clicando no mapa).';
+    return;
+  }
+
+  const profileSel = document.getElementById('profileSelect').value;
+  let profile = 'driving';
+  if (profileSel === 'cycling') profile = 'cycling';
+  else if (profileSel === 'walking') profile = 'walking';
+  statusEl.textContent = 'Calculando rota (' + profile + ')...';
+
+  const osrmUrl = `https://router.project-osrm.org/route/v1/${profile}/${userCoords[1]},${userCoords[0]};${destCoords[1]},${destCoords[0]}?overview=full&geometries=geojson&steps=false`;
+
+  try {
+    const res = await fetch(osrmUrl);
+    if (!res.ok) throw new Error('Erro ao consultar OSRM');
+    const data = await res.json();
+    if (data.code !== 'Ok' || !data.routes || !data.routes.length) throw new Error('Rota não encontrada');
+
+    const geom = data.routes[0].geometry;
+    if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
+
+    routeLayer = L.geoJSON(geom, { style: { color: '#3b82f6', weight: 5 } }).addTo(map);
+
+    map.fitBounds(routeLayer.getBounds(), { padding: [40,40] });
+
+    const distKm = (data.routes[0].distance / 1000).toFixed(2);
+    let summary = `Distância: ${distKm} km`;
+    if (data.routes[0].duration) {
+      const mins = Math.round(data.routes[0].duration / 60);
+      summary += ` · Aproximado: ${mins} min`;
+    }
+    statusEl.textContent = 'Rota traçada. ' + summary;
+  } catch (err) {
+    statusEl.textContent = 'Erro ao traçar rota: ' + err.message;
+  }
+}
+
+function setupAutocomplete() {
+  const geoControl = L.Control.geocoder({
+    collapsed: false,
+    placeholder: 'Pesquisar endereço (autocomplete)',
+    defaultMarkGeocode: false,
+    showResultIcons: true,
+    geocoder: L.Control.Geocoder.photon()
+  }).on('markgeocode', function(e) {
+    const c = e.geocode.center;
+    setDestination([c.lat, c.lng], e.geocode.name || e.geocode.properties.name || e.geocode.display_name);
+  }).addTo(map);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initMap();
+  setupAutocomplete();
+
+  document.getElementById('locateBtn').addEventListener('click', getUserLocation);
+  document.getElementById('routeBtn').addEventListener('click', traceRoute);
+  document.getElementById('destInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      traceRoute();
+    }
+  });
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    clearDestination();
+  });
+});
+</script>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotas - SustAmbiTech</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div style="z-index: 9999; position: absolute;" id="menu-container"></div>
+    <br><br><br><br>
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="footer-container"></div>
+
+    <script src="main.js" type="module"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+                })
+                .catch(error => console.error('Erro ao carregar o rodapé:', error));
+        });
+    </script>
+</body>
+
+</html>
