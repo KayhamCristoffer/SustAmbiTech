@@ -58,6 +58,189 @@
               Concordo com os <a href="#" style="text-decoration: none; color: #aeea00;">Termos de Uso</a> e <a href="#" style="text-decoration: none; color: #aeea00;">Política de Privacidade</a>
             </label>
           </div>
+          <!-- === TERMOS DE USO === -->
+<div id="modalTermos" class="terms-modal">
+  <div class="terms-content">
+    <h2>Termos de Uso</h2>
+    <p>
+      Ao criar ou acessar uma conta nesta plataforma, você concorda com as condições de uso descritas neste documento.
+    </p>
+
+    <h3>1. Objetivo</h3>
+    <p>
+      Esta plataforma tem como objetivo promover o uso sustentável de tecnologias e facilitar o acesso a informações ambientais.
+    </p>
+
+    <h3>2. Responsabilidades do usuário</h3>
+    <p>
+      O usuário compromete-se a fornecer informações verdadeiras e a utilizar os serviços de forma ética e responsável.
+    </p>
+
+    <h3>3. Limitações</h3>
+    <p>
+      A plataforma não se responsabiliza por perdas decorrentes de uso indevido, falhas externas ou fornecimento incorreto de dados.
+    </p>
+
+    <h3>4. Alterações</h3>
+    <p>
+      Os Termos de Uso podem ser atualizados a qualquer momento, sendo responsabilidade do usuário verificá-los periodicamente.
+    </p>
+
+    <button class="close-btn">Fechar</button>
+  </div>
+</div>
+
+<!-- === POLÍTICA DE PRIVACIDADE === -->
+<div id="modalPrivacidade" class="terms-modal">
+  <div class="terms-content">
+    <h2>Política de Privacidade</h2>
+    <p>
+      Sua privacidade é importante para nós. Este documento descreve como coletamos, usamos e protegemos seus dados pessoais.
+    </p>
+
+    <h3>1. Coleta de dados</h3>
+    <p>
+      Coletamos informações como nome, e-mail e senha por meio do <strong>Firebase Authentication</strong>, usado para autenticação segura.
+      Outras informações, como preferências ou interações, podem ser armazenadas no <strong>Firebase Realtime Database</strong>.
+    </p>
+
+    <h3>2. Proteção e segurança</h3>
+    <p>
+      Todos os dados são armazenados em servidores do Google Firebase, com criptografia e protocolos de segurança que impedem acesso não autorizado.
+    </p>
+
+    <h3>3. Compartilhamento de dados</h3>
+    <p>
+      Nenhuma informação pessoal é vendida, divulgada ou compartilhada com terceiros sem seu consentimento expresso.
+    </p>
+
+    <h3>4. Seus direitos</h3>
+    <p>
+      Você pode solicitar a exclusão dos seus dados ou revisar suas informações a qualquer momento, conforme previsto na LGPD.
+    </p>
+
+    <button class="close-btn">Fechar</button>
+  </div>
+</div>
+
+<style>
+  /* === ESTILO DOS MODAIS === */
+  .terms-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+  }
+
+  .terms-content {
+    background: #fff;
+    color: #333;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+    line-height: 1.5;
+    animation: showModal 0.3s ease;
+    margin-top: 85px;
+  }
+
+  .terms-content h2 {
+    margin-top: 0;
+    color: #2a4d14;
+  }
+
+  .terms-content h3 {
+    margin-top: 1.2rem;
+    color: #3b5704;
+  }
+
+  .terms-content p {
+    margin-bottom: 1rem;
+  }
+
+  .close-btn {
+    background-color: #3b5704;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: 0.3s;
+  }
+
+  .close-btn:hover {
+    background-color: #4c6f05;
+  }
+
+  @keyframes showModal {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Links dentro do label */
+  .terms-box a {
+    text-decoration: none;
+    color: #aeea00;
+    cursor: pointer;
+  }
+
+  .terms-box a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const linkTermos = document.querySelector(".terms-box a:nth-of-type(1)");
+    const linkPrivacidade = document.querySelector(".terms-box a:nth-of-type(2)");
+
+    const modalTermos = document.getElementById("modalTermos");
+    const modalPrivacidade = document.getElementById("modalPrivacidade");
+
+    const closeButtons = document.querySelectorAll(".close-btn");
+
+    // Abre os modais ao clicar nos links
+    linkTermos.addEventListener("click", (e) => {
+      e.preventDefault();
+      modalTermos.style.display = "flex";
+    });
+
+    linkPrivacidade.addEventListener("click", (e) => {
+      e.preventDefault();
+      modalPrivacidade.style.display = "flex";
+    });
+
+    // Fecha o modal ao clicar em "Fechar" ou fora do conteúdo
+    closeButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        btn.closest(".terms-modal").style.display = "none";
+      });
+    });
+
+    window.addEventListener("click", (e) => {
+      if (e.target.classList.contains("terms-modal")) {
+        e.target.style.display = "none";
+      }
+    });
+  });
+</script>
+
 
           <div class="terms-box">
             <label>
